@@ -1,4 +1,3 @@
-import Navbar from "./components/Navbar/Navbar";
 import Hero from "./components/Hero/Hero";
 import BusinessBenefits from "./components/BusinessBenefits/BusinessBenefits";
 import EverythingNeeded from "./components/EverythingNeeded/EverythingNeeded";
@@ -11,7 +10,6 @@ import FinalCTA from "./components/FinalCTA/FinalCTA";
 function App() {
   return (
     <div className="min-h-screen bg-[#FAF9F7] font-sans">
-      <Navbar />
       <Hero />
       <BusinessBenefits />
       <EverythingNeeded />
