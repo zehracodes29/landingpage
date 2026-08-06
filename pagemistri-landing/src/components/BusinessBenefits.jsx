@@ -101,58 +101,6 @@ const BusinessBenefits = () => {
               <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#FAF9F7] via-transparent to-transparent w-[30%]" />
               <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#FAF9F7] via-transparent to-transparent h-full" />
               <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-[#FAF9F7] via-transparent to-transparent h-[15%]" />
-
-              {/* Floating Overlays */}
-              
-              {/* Top-Left: Website Preview */}
-              <motion.div 
-                animate={{ y: [0, -4, 0] }}
-                transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
-                className="absolute top-4 md:top-12 left-4 md:left-[15%] w-[280px] md:w-[340px] bg-white rounded-xl shadow-[0_15px_40px_-10px_rgba(0,0,0,0.1)] border border-slate-100 overflow-hidden z-20"
-              >
-                {/* Fake Browser Header */}
-                <div className="bg-white border-b border-slate-100 p-2.5 flex items-center gap-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400" />
-                </div>
-                {/* Fake Website Content */}
-                <div className="p-4 bg-[#F8F9FA] h-[160px] relative overflow-hidden">
-                  <div className="flex justify-between items-center mb-4">
-                    <div className="w-6 h-6 rounded-full bg-[#E5E7EB]" />
-                    <div className="flex gap-2">
-                      <div className="w-8 h-1.5 rounded-full bg-slate-300" />
-                      <div className="w-8 h-1.5 rounded-full bg-slate-300" />
-                      <div className="w-8 h-1.5 rounded-full bg-slate-300" />
-                    </div>
-                  </div>
-                  <div className="w-2/3 h-3 bg-slate-200 rounded-full mb-2" />
-                  <div className="w-1/2 h-3 bg-slate-200 rounded-full mb-4" />
-                  <div className="w-16 h-6 bg-[#111827] rounded-full" />
-                  
-                  {/* Fake floral decorative shape */}
-                  <div className="absolute -right-6 -bottom-6 w-32 h-32 bg-[#E2E8F0] rounded-full opacity-50" />
-                </div>
-              </motion.div>
-
-              {/* Top-Right: Notification Card */}
-              <motion.div 
-                animate={{ y: [0, 4, 0] }}
-                transition={{ repeat: Infinity, duration: 4.5, ease: "easeInOut", delay: 1 }}
-                className="absolute top-28 md:top-40 right-2 md:right-[5%] w-[260px] md:w-[280px] bg-white rounded-[16px] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.12)] border border-slate-100 p-4 z-30 flex gap-3.5 items-start"
-              >
-                <div className="w-8 h-8 shrink-0 rounded-full bg-[#22C55E] flex items-center justify-center mt-0.5">
-                  <CheckCircle2 className="w-5 h-5 text-white" />
-                </div>
-                <div className="flex-1">
-                  <div className="flex justify-between items-center mb-0.5">
-                    <h4 className="text-[13px] font-bold text-[#111827]">New Enquiry Received!</h4>
-                    <span className="text-[10px] font-bold text-[#4400AF]">NOW</span>
-                  </div>
-                  <p className="text-[12px] text-[#4B5563] leading-snug">Someone just submitted the contact form.</p>
-                </div>
-              </motion.div>
-
             </div>
           </motion.div>
 
