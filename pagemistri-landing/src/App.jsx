@@ -7,7 +7,6 @@ import DomainCTA from "./components/DomainCTA/DomainCTA";
 import Pricing from "./components/Pricing/Pricing";
 import FAQ from "./components/FAQ/FAQ";
 import FinalCTA from "./components/FinalCTA/FinalCTA";
-import Footer from "./components/Footer/Footer";
 
 function App() {
   return (
@@ -21,7 +20,6 @@ function App() {
       <Pricing />
       <FAQ />
       <FinalCTA />
-      <Footer />
     </div>
   );
 }
