@@ -157,7 +157,9 @@ const Hero = () => {
               </div>
             </div>
 
-            <button className="mt-4 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300">
+            <button 
+              onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="mt-4 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300">
               See What's Included &rarr;
             </button>
           </motion.div>
@@ -172,7 +174,7 @@ const Hero = () => {
             {/* Background Blob / Glow for premium feel */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-full blur-[120px] opacity-80 -z-10 pointer-events-none" />
 
-            <div className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(68,0,175,0.1)] border border-[#DCCEFF]/60 p-8 sm:p-10 w-full relative z-10 transition-shadow hover:shadow-[0_25px_65px_-15px_rgba(68,0,175,0.15)] overflow-hidden min-h-[600px]">
+            <div id="lead-form" className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(68,0,175,0.1)] border border-[#DCCEFF]/60 p-8 sm:p-10 w-full relative z-10 transition-shadow hover:shadow-[0_25px_65px_-15px_rgba(68,0,175,0.15)] overflow-hidden min-h-[600px]">
               
               {/* Step Indicators */}
               <div className="flex items-center justify-center gap-2.5 mb-10 relative z-20">

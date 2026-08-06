@@ -98,6 +98,7 @@ const Pricing = () => {
               </ul>
 
               <button 
+                onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
                 className={`w-full py-4 rounded-xl font-bold text-[15px] transition-all duration-300 ${
                   plan.buttonVariant === 'primary' 
                     ? 'bg-[#4400AF] text-white hover:bg-[#35008a] hover:shadow-xl hover:shadow-[#4400AF]/20' 

@@ -18,10 +18,14 @@ const DomainCTA = () => {
             Already have one? We'll connect it. Don't have one yet? We'll guide you through buying the right domain for your business.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="w-full sm:w-auto px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-xl hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+            <button 
+              onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-xl hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
               Let's Build My Website
             </button>
-            <button className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-[#4400AF]/30 text-[#4400AF] font-bold text-[14px] rounded-xl hover:bg-[#4400AF]/5 transition-all duration-300 flex items-center justify-center gap-2">
+            <button 
+              onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full sm:w-auto px-8 py-3.5 bg-transparent border border-[#4400AF]/30 text-[#4400AF] font-bold text-[14px] rounded-xl hover:bg-[#4400AF]/5 transition-all duration-300 flex items-center justify-center gap-2">
               See Pricing <span aria-hidden="true">&rarr;</span>
             </button>
           </div>

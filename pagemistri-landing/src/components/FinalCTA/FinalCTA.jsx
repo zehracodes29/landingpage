@@ -10,7 +10,9 @@ const FinalCTA = () => {
         <p className="text-[#4B5563] text-[15px] md:text-[16px] max-w-xl mx-auto mb-8 leading-relaxed">
           Tell us about your business today. We'll take care of the website so you can focus on what you do best.
         </p>
-        <button className="px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-xl hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+        <button 
+          onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+          className="px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-xl hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
           Let's Build Your Business Website
         </button>
       </div>

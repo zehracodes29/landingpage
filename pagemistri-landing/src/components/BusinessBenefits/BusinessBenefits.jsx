@@ -76,7 +76,9 @@ const BusinessBenefits = () => {
             </div>
 
             {/* CTA Button */}
-            <button className="mt-4 h-[48px] px-[24px] bg-[#F4EEFF] text-[#111827] font-semibold text-[15px] rounded-lg flex items-center justify-center gap-2 hover:bg-[#EBE6F5] hover:shadow-md transition-all duration-300 transform hover:-translate-y-[2px]">
+            <button 
+              onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="mt-4 h-[48px] px-[24px] bg-[#F4EEFF] text-[#111827] font-semibold text-[15px] rounded-lg flex items-center justify-center gap-2 hover:bg-[#EBE6F5] hover:shadow-md transition-all duration-300 transform hover:-translate-y-[2px]">
               See What's Included &rarr;
             </button>
           </motion.div>

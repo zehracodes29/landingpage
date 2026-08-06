@@ -72,7 +72,9 @@ const EverythingNeeded = () => {
         </div>
 
         <div className="mt-16 text-center">
-          <button className="px-8 py-4 bg-[#4400AF] text-white font-bold text-[15px] rounded-xl hover:bg-[#35008a] hover:shadow-xl hover:shadow-[#4400AF]/20 hover:-translate-y-0.5 transition-all duration-300">
+          <button 
+            onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-8 py-4 bg-[#4400AF] text-white font-bold text-[15px] rounded-xl hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
             Get Started Today &rarr;
           </button>
         </div>
