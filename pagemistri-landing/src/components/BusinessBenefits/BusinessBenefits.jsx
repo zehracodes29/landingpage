@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, LayoutGrid, Sparkles, CheckCircle2 } from 'lucide-react';
-import image1 from '../assets/images/image1.png';
+import image1 from '../../assets/images/image1.png';
 
 const BusinessBenefits = () => {
   return (
