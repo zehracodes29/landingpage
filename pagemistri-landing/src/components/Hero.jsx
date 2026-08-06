@@ -114,64 +114,50 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-start gap-10 sticky top-32"
+            className="flex flex-col items-start gap-8 sticky top-32"
           >
             <div className="flex flex-col gap-6">
               <div className="inline-flex">
-                <span className="inline-flex items-center px-4 py-2 rounded-full bg-[#F4EEFF] border border-[#DCCEFF] text-[#4400AF] text-[13px] font-bold uppercase tracking-[0.12em] shadow-sm">
-                  Professional Website Setup • Starting at ₹5,000
+                <span className="inline-flex items-center px-4 py-2 rounded-full border border-[#DCCEFF] bg-transparent text-[#4400AF] text-[11px] font-bold uppercase tracking-[0.1em]">
+                  PROFESSIONAL WEBSITE SETUP • STARTING AT ₹5,000
                 </span>
               </div>
-              <h1 className="text-5xl lg:text-6xl font-bold text-[#111827] tracking-tight leading-[1.15]">
-                Your Professional Business Website, Ready in Just 3-5 Days
+              <h1 className="text-[44px] lg:text-[56px] font-[800] text-[#111827] tracking-tight leading-[1.1]">
+                Your Professional<br />Business Website,<br />Ready in Just 3-5 Days
               </h1>
-              <p className="text-lg lg:text-xl text-[#4B5563] leading-relaxed max-w-xl">
-                Get a completely done-for-you, mobile-friendly, and lead-optimized website without lifting a finger. You run your business, we build your brand online.
+              <p className="text-[19px] text-[#4B5563] leading-[1.6] max-w-[500px]">
+                From design and setup to lead collection and analytics, we build everything for you - so you can focus on growing your business, not building your website.
               </p>
             </div>
 
-            <div className="flex flex-col gap-7 w-full">
-              <motion.div 
-                whileHover={{ x: 4 }}
-                className="flex gap-5 items-start transition-transform"
-              >
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F4EEFF] text-[#4400AF] shadow-sm">
-                  <Clock className="w-6 h-6" />
-                </div>
-                <div className="pt-1">
-                  <h3 className="text-xl font-bold text-[#111827]">Save Your Time</h3>
-                  <p className="text-[16px] text-[#4B5563] mt-1.5 leading-snug">We handle all the technical heavy lifting.</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ x: 4 }}
-                className="flex gap-5 items-start transition-transform"
-              >
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F4EEFF] text-[#4400AF] shadow-sm">
-                  <Blocks className="w-6 h-6" />
-                </div>
-                <div className="pt-1">
-                  <h3 className="text-xl font-bold text-[#111827]">Complete Website Setup</h3>
-                  <p className="text-[16px] text-[#4B5563] mt-1.5 leading-snug">From domain connection to mobile optimization.</p>
-                </div>
-              </motion.div>
-
-              <motion.div 
-                whileHover={{ x: 4 }}
-                className="flex gap-5 items-start transition-transform"
-              >
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#F4EEFF] text-[#4400AF] shadow-sm">
-                  <Sparkles className="w-6 h-6" />
-                </div>
-                <div className="pt-1">
-                  <h3 className="text-xl font-bold text-[#111827]">Ready in Just 3-5 Days</h3>
-                  <p className="text-[16px] text-[#4B5563] mt-1.5 leading-snug">Fast delivery without compromising on quality.</p>
-                </div>
-              </motion.div>
+            <div className="flex flex-col gap-3 w-full mt-2">
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
+                </svg>
+                <span className="text-[16px] font-bold text-[#4400AF]">Starting at ₹5,000</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
+                </svg>
+                <span className="text-[16px] font-bold text-[#4400AF]">Delivered in 3–5 Working Days</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
+                </svg>
+                <span className="text-[16px] font-bold text-[#4400AF]">Lead Collection Included</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
+                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
+                </svg>
+                <span className="text-[16px] font-bold text-[#4400AF]">Mobile-Friendly</span>
+              </div>
             </div>
 
-            <button className="mt-2 px-8 py-4 bg-[#F4EEFF] text-[#111827] font-semibold text-[15px] rounded-xl hover:bg-[#DCCEFF] shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1 border border-[#DCCEFF]/50">
+            <button className="mt-4 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300">
               See What's Included &rarr;
             </button>
           </motion.div>
