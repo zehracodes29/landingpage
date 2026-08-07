@@ -2814,33 +2814,33 @@ const Pricing = ()=>{
             name: 'Hosted by Pagemistri',
             price: '₹99',
             period: '/month',
-            description: 'Pagemistri Subdomain',
             features: [
+                'Pagemistri Subdomain',
                 '50 Leads/month',
                 'Secure Hosting',
                 'Lead Dashboard',
                 'Basic Analytics',
                 'SEO Integration',
-                'Payment Gateway Integration'
+                'Payment Gateway integration'
             ],
-            buttonText: 'Get Started',
-            popular: true
+            buttonText: 'Get started',
+            popular: false
         },
         {
             name: 'Hosted on Your Brand',
             price: '₹349',
             period: '/month',
-            description: 'Custom Domain',
             features: [
+                'Custom Domain',
                 '350 Leads/month',
                 'Secure Hosting',
                 'Lead Dashboard',
                 'Basic Analytics',
                 'SEO Integration',
-                'Payment Gateway Integration'
+                'Payment Gateway integration'
             ],
-            buttonText: 'Get Started',
-            popular: false
+            buttonText: 'Get started',
+            popular: true
         }
     ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -2851,151 +2851,205 @@ const Pricing = ()=>{
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "mb-24",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "text-center md:text-left max-w-2xl mb-12",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "mb-4 inline-flex md:flex md:justify-start justify-center w-full",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                        children: "PRICING"
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "order-2 md:order-1 text-center md:text-left flex flex-col gap-6",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "inline-flex justify-center md:justify-start",
+                                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e$jsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                            children: "Step 1: One-Time Setup"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                            lineNumber: 68,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                        lineNumber: 65,
+                                        lineNumber: 67,
                                         columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 64,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-[32px] md:text-[38px] font-[800] text-[#111827] tracking-tight leading-tight mb-4",
-                                    children: "Setup Cost"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 67,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-[#4B5563] text-[16px] md:text-[18px] leading-relaxed",
-                                    children: "Everything you need to get your professional business website."
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 70,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                            lineNumber: 63,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0)),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "order-2 md:order-1",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                                        className: "grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6",
-                                        children: setupFeatures.map((feature, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                className: "flex items-start gap-3",
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "text-[36px] md:text-[44px] lg:text-[48px] font-[800] text-[#111827] tracking-tight leading-[1.15]",
+                                        children: "Setup Cost"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                        lineNumber: 70,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-[#4B5563] text-[16px] md:text-[18px] leading-[1.6] max-w-lg mx-auto md:mx-0",
+                                        children: "We take care of the entire design, build, and setup process from scratch so you don't have to spend hours trying to build a website yourself. Get a complete, fully functional, and high-converting professional business website built specifically for your brand."
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                        lineNumber: 73,
+                                        columnNumber: 15
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "mt-2 flex flex-col gap-3 text-slate-700 font-bold text-[15px]",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "flex items-center justify-center md:justify-start gap-2.5",
                                                 children: [
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
-                                                        className: "w-5 h-5 text-[#4400AF] shrink-0 mt-0.5",
-                                                        strokeWidth: 2.5
+                                                        className: "w-5 h-5 text-[#4400AF]",
+                                                        strokeWidth: 3
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                        lineNumber: 81,
-                                                        columnNumber: 21
+                                                        lineNumber: 78,
+                                                        columnNumber: 19
                                                     }, ("TURBOPACK compile-time value", void 0)),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-[#4B5563] text-[15px] font-medium leading-snug",
-                                                        children: feature
+                                                    "Zero tech hassle"
+                                                ]
+                                            }, void 0, true, {
+                                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                lineNumber: 77,
+                                                columnNumber: 17
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "flex items-center justify-center md:justify-start gap-2.5",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
+                                                        className: "w-5 h-5 text-[#4400AF]",
+                                                        strokeWidth: 3
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Pricing/Pricing.jsx",
                                                         lineNumber: 82,
-                                                        columnNumber: 21
-                                                    }, ("TURBOPACK compile-time value", void 0))
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    "Fully managed setup"
                                                 ]
-                                            }, i, true, {
+                                            }, void 0, true, {
                                                 fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                lineNumber: 80,
-                                                columnNumber: 19
-                                            }, ("TURBOPACK compile-time value", void 0)))
-                                    }, void 0, false, {
-                                        fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                        lineNumber: 78,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 77,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "order-1 md:order-2",
-                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "bg-[#4400AF] text-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden transform transition-all hover:scale-[1.02]",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-white opacity-5 rounded-full blur-2xl pointer-events-none"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                lineNumber: 91,
+                                                lineNumber: 81,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                className: "text-[20px] font-bold text-white/90 mb-2",
-                                                children: "One-Time Payment"
-                                            }, void 0, false, {
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "flex items-center justify-center md:justify-start gap-2.5",
+                                                children: [
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
+                                                        className: "w-5 h-5 text-[#4400AF]",
+                                                        strokeWidth: 3
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                        lineNumber: 86,
+                                                        columnNumber: 19
+                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                    "Ready to collect leads from Day 1"
+                                                ]
+                                            }, void 0, true, {
                                                 fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                lineNumber: 93,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "mb-8",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "text-[48px] md:text-[56px] font-extrabold tracking-tight",
-                                                    children: "₹5,000"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                    lineNumber: 95,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                lineNumber: 94,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                onClick: scrollToLeadForm,
-                                                className: "w-full py-4 rounded-xl font-bold text-[16px] shadow-lg active:scale-95 transition-all bg-white text-[#4400AF] hover:bg-slate-50",
-                                                children: "Let's Build My Website"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                lineNumber: 98,
+                                                lineNumber: 85,
                                                 columnNumber: 17
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                        lineNumber: 90,
+                                        lineNumber: 76,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
-                                }, void 0, false, {
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                lineNumber: 66,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "order-1 md:order-2",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                    className: "bg-[#4400AF] text-white rounded-3xl p-8 md:p-10 shadow-2xl relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02]",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-white opacity-5 rounded-full blur-2xl pointer-events-none"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                            lineNumber: 95,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                            className: "text-[22px] font-bold text-white/90 mb-2",
+                                            children: "One-Time Payment"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                            lineNumber: 97,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                            className: "mb-8",
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                className: "text-[48px] md:text-[56px] font-extrabold tracking-tight",
+                                                children: "₹5,000"
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                lineNumber: 99,
+                                                columnNumber: 19
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                            lineNumber: 98,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                            className: "space-y-4 mb-8",
+                                            children: setupFeatures.map((feature, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                    className: "flex items-start gap-3",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
+                                                            className: "w-5 h-5 text-purple-200 shrink-0 mt-[1px]",
+                                                            strokeWidth: 3
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                            lineNumber: 105,
+                                                            columnNumber: 23
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-white/90 text-[15px] font-medium leading-snug",
+                                                            children: feature
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                            lineNumber: 106,
+                                                            columnNumber: 23
+                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                    ]
+                                                }, i, true, {
+                                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                    lineNumber: 104,
+                                                    columnNumber: 21
+                                                }, ("TURBOPACK compile-time value", void 0)))
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                            lineNumber: 102,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                            onClick: scrollToLeadForm,
+                                            className: "w-full bg-white text-[#4400AF] font-bold py-3.5 px-6 rounded-xl hover:bg-[#F4EEFF] transition-all shadow-md mt-6 active:scale-95",
+                                            children: "Let's Build My Website"
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                            lineNumber: 111,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    ]
+                                }, void 0, true, {
                                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 89,
-                                    columnNumber: 13
+                                    lineNumber: 94,
+                                    columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                            lineNumber: 75,
-                            columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
-                    ]
-                }, void 0, true, {
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                lineNumber: 93,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                        lineNumber: 63,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0))
+                }, void 0, false, {
                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
                     lineNumber: 62,
                     columnNumber: 9
@@ -3004,83 +3058,63 @@ const Pricing = ()=>{
                     className: "w-full h-px bg-slate-200 mb-20"
                 }, void 0, false, {
                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                    lineNumber: 110,
+                    lineNumber: 123,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "text-center max-w-3xl mx-auto mb-16",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "text-[32px] md:text-[36px] font-[800] text-[#111827] tracking-tight leading-tight mb-4",
-                                    children: "Monthly Hosting & Platform Plans"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 115,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-[#4B5563] text-[16px] md:text-[18px] leading-relaxed",
-                                    children: "Select a package based on your domain and monthly lead requirements."
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 118,
-                                    columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
+                            className: "text-center max-w-3xl mx-auto mb-12",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                className: "text-[32px] md:text-[36px] font-[800] text-[#111827] tracking-tight leading-tight mb-4",
+                                children: "Choose Your Monthly Plan"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                lineNumber: 128,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        }, void 0, false, {
                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                            lineNumber: 114,
+                            lineNumber: 127,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto",
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12",
                             children: subPlans.map((plan, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: `flex flex-col bg-white border ${plan.popular ? 'border-[#4400AF] ring-2 ring-[#4400AF]/20 shadow-xl' : 'border-slate-200 shadow-sm'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`,
+                                    className: `flex flex-col bg-white border ${plan.popular ? 'border-[#4400AF] border-2 shadow-[0_15px_40px_-10px_rgba(68,0,175,0.15)] ring-2 ring-purple-600/10' : 'border-slate-200 shadow-sm'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`,
                                     children: [
                                         plan.popular && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#4400AF] text-white px-5 py-1.5 rounded-full text-[12px] font-bold tracking-wide uppercase shadow-sm whitespace-nowrap",
                                             children: "Most Popular"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                            lineNumber: 130,
+                                            lineNumber: 140,
                                             columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "text-center mb-6 mt-2",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                                    className: "text-[22px] font-bold text-[#111827] mb-2",
-                                                    children: plan.name
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                    lineNumber: 136,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-[#6B7280] text-[15px] px-2",
-                                                    children: plan.description
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                    lineNumber: 137,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, void 0, true, {
+                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                className: "text-[22px] font-bold text-[#111827] mb-2",
+                                                children: plan.name
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Pricing/Pricing.jsx",
+                                                lineNumber: 146,
+                                                columnNumber: 19
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        }, void 0, false, {
                                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                            lineNumber: 135,
+                                            lineNumber: 145,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "text-center mb-8 flex items-baseline justify-center gap-1",
+                                            className: "text-center mb-10 flex items-baseline justify-center gap-1",
                                             children: [
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                    className: "text-[40px] md:text-[44px] font-extrabold text-[#111827] tracking-tight",
+                                                    className: "text-[44px] md:text-[48px] font-extrabold text-[#111827] tracking-tight",
                                                     children: plan.price
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                    lineNumber: 141,
+                                                    lineNumber: 150,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3088,13 +3122,13 @@ const Pricing = ()=>{
                                                     children: plan.period
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                    lineNumber: 142,
+                                                    lineNumber: 151,
                                                     columnNumber: 19
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                            lineNumber: 140,
+                                            lineNumber: 149,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -3109,7 +3143,7 @@ const Pricing = ()=>{
                                                                 strokeWidth: 2.5
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                                lineNumber: 149,
+                                                                lineNumber: 158,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0)),
                                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -3117,49 +3151,49 @@ const Pricing = ()=>{
                                                                 children: feature
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                                lineNumber: 150,
+                                                                lineNumber: 159,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         ]
                                                     }, i, true, {
                                                         fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                        lineNumber: 148,
+                                                        lineNumber: 157,
                                                         columnNumber: 23
                                                     }, ("TURBOPACK compile-time value", void 0)))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                                lineNumber: 146,
+                                                lineNumber: 155,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                            lineNumber: 145,
+                                            lineNumber: 154,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             onClick: scrollToLeadForm,
-                                            className: `w-full py-4 rounded-xl font-bold text-[15px] shadow-sm active:scale-95 transition-all ${plan.popular ? 'bg-[#4400AF] text-white hover:bg-[#310080]' : 'bg-white text-[#4400AF] border-2 border-[#4400AF] hover:bg-[#F4EEFF]'}`,
+                                            className: `w-full py-3.5 rounded-xl font-bold text-[15px] shadow-sm active:scale-95 transition-all ${plan.popular ? 'bg-[#4400AF] text-white hover:bg-[#310080]' : 'bg-white text-[#4400AF] border border-[#4400AF]/30 hover:bg-[#F4EEFF]'}`,
                                             children: plan.buttonText
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                            lineNumber: 156,
+                                            lineNumber: 165,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, index, true, {
                                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                                    lineNumber: 125,
+                                    lineNumber: 135,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0)))
                         }, void 0, false, {
                             fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                            lineNumber: 123,
+                            lineNumber: 133,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Pricing/Pricing.jsx",
-                    lineNumber: 113,
+                    lineNumber: 126,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             ]
