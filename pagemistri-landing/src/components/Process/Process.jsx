@@ -29,8 +29,8 @@ const steps = [
 const Process = () => {
   return (
     <section className="py-24 bg-white relative overflow-hidden">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-20">
+      <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
+        <div className="text-center mb-16 md:mb-24">
           <div className="mb-6">
             <SectionBadge>HOW IT WORKS</SectionBadge>
           </div>
@@ -40,31 +40,34 @@ const Process = () => {
         </div>
 
         <div className="relative">
-          {/* Vertical Line */}
-          <div className="absolute left-[27px] top-0 bottom-0 w-[2px] bg-[#F4EEFF] md:left-1/2 md:-ml-[1px]" />
+          {/* Mobile Vertical Line */}
+          <div className="absolute left-[27px] top-0 bottom-0 w-[2px] bg-[#F4EEFF] md:hidden" />
+          
+          {/* Desktop Horizontal Line */}
+          <div className="hidden md:block absolute top-[27px] left-[10%] right-[10%] h-[2px] bg-[#F4EEFF]" />
 
-          <div className="space-y-16">
+          <div className="flex flex-col md:flex-row md:items-stretch space-y-12 md:space-y-0 md:gap-6 relative z-10">
             {steps.map((step, index) => (
               <motion.div 
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6 }}
-                className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row-reverse' : 'md:flex-row'} flex-col md:justify-between`}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="relative flex flex-row md:flex-col items-start w-full md:flex-1"
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-0 md:left-1/2 w-14 h-14 rounded-full bg-white border-4 border-[#F4EEFF] flex items-center justify-center -ml-[0px] md:-ml-7 shadow-sm z-10">
+                <div className="w-14 h-14 shrink-0 rounded-full bg-white border-4 border-[#F4EEFF] flex items-center justify-center z-10 md:mx-auto mr-6 md:mr-0 md:mb-8 shadow-sm">
                   <div className="w-5 h-5 rounded-full bg-[#4400AF]" />
                 </div>
 
                 {/* Content Card */}
-                <div className={`w-full md:w-[45%] pl-20 md:pl-0 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                  <div className="bg-white rounded-2xl p-8 shadow-[0_4px_20px_-5px_rgba(68,0,175,0.05)] border border-slate-100 hover:shadow-[0_15px_35px_-5px_rgba(68,0,175,0.1)] transition-all duration-300 hover:-translate-y-1">
-                    <h3 className="text-[22px] font-bold text-[#111827] mb-3">
+                <div className="w-full flex-1 flex">
+                  <div className="w-full bg-white rounded-2xl p-6 shadow-[0_4px_20px_-5px_rgba(68,0,175,0.05)] border border-slate-100 hover:shadow-[0_15px_35px_-5px_rgba(68,0,175,0.1)] transition-all duration-300 hover:-translate-y-1 flex flex-col md:text-center">
+                    <h3 className="text-[18px] xl:text-[20px] font-bold text-[#111827] mb-3">
                       {step.title}
                     </h3>
-                    <p className="text-[#4B5563] leading-relaxed text-[15px]">
+                    <p className="text-[#4B5563] leading-relaxed text-[14px]">
                       {step.description}
                     </p>
                   </div>
