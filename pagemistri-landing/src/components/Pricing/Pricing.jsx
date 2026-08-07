@@ -88,7 +88,7 @@ const Pricing = () => {
                 onClick={() => setActiveTab(index)}
                 className={`flex-1 px-4 py-3 text-[14px] font-semibold rounded-full transition-all duration-300 ${activeTab === index ? 'bg-[#4400AF] text-white shadow-md' : 'text-slate-600 hover:text-slate-900'}`}
               >
-                {index === 0 ? 'Starter' : index === 1 ? 'Hosted' : 'Custom'}
+                {index === 0 ? 'One-Time' : index === 1 ? 'Hosted' : 'Custom'}
               </button>
             ))}
           </div>
