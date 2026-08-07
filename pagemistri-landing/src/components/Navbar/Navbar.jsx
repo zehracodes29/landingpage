@@ -1,3 +1,4 @@
+// Navbar component
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import logo from '../../assets/images/pagemistri-logo.png';
