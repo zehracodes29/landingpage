@@ -538,6 +538,10 @@
     margin-left: 0;
   }
 
+  .block {
+    display: block;
+  }
+
   .flex {
     display: flex;
   }
@@ -1729,6 +1733,10 @@
 
     .md\:hidden {
       display: none;
+    }
+
+    .md\:h-10 {
+      height: calc(var(--spacing) * 10);
     }
 
     .md\:h-\[600px\] {

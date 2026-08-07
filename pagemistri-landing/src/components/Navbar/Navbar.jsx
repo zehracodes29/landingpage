@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import logo from '../../assets/images/pagemistri-logo.png';
 
 const navLinks = [
   { name: 'How It Works', href: '#how-it-works' },
@@ -39,8 +40,8 @@ export default function Navbar() {
           
           {/* Logo */}
           <div className="flex-shrink-0">
-            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="text-2xl font-black tracking-tighter text-[#111827]">
-              PageMistri<span className="text-[#4400AF]">.</span>
+            <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="block">
+              <img src={logo.src} alt="PageMistri Logo" className="h-8 md:h-10 w-auto" />
             </a>
           </div>
 
