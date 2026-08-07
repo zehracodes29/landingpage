@@ -4,6 +4,7 @@ import BusinessBenefits from "./components/BusinessBenefits/BusinessBenefits";
 import EverythingNeeded from "./components/EverythingNeeded/EverythingNeeded";
 import Process from "./components/Process/Process";
 import DomainCTA from "./components/DomainCTA/DomainCTA";
+import LeadForm from "./components/LeadForm/LeadForm";
 import Pricing from "./components/Pricing/Pricing";
 import FAQ from "./components/FAQ/FAQ";
 import FinalCTA from "./components/FinalCTA/FinalCTA";
@@ -17,6 +18,7 @@ function App() {
       <EverythingNeeded />
       <Process />
       <DomainCTA />
+      <LeadForm />
       <Pricing />
       <FAQ />
       <FinalCTA />
