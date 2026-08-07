@@ -1,131 +1,136 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import SectionBadge from '../../ui/SectionBadge';
-import SectionTitle from '../../ui/SectionTitle';
 
 const steps = [
   {
-    num: '01',
+    num: '1',
     title: 'Tell Us About Your Business',
-    description: 'Fill out a quick form with your business name, services, and brand details.'
+    description: 'Clarify the offer, audience, goals, and must-have page sections before design starts.'
   },
   {
-    num: '02',
-    title: 'Custom Website Build',
-    description: 'We design and build your high-converting landing page in 3–5 working days.'
+    num: '2',
+    title: 'Share Your Content',
+    description: "Send your logo, photos and business details. Don't have everything ready? We'll guide you."
   },
   {
-    num: '03',
-    title: 'Domain & Gateway Setup',
-    description: 'We connect your custom domain or subdomain & configure payment gateways.'
+    num: '3',
+    title: 'We Build Your Website',
+    description: 'Our team designs and develops your business website based on your requirements.'
   },
   {
-    num: '04',
-    title: 'Review & Refine',
-    description: 'Review your complete website and request feedback adjustments with 2 included revision rounds.'
+    num: '4',
+    title: 'Review & Approve',
+    description: "We'll share the first version with you. Two revisions are included to make sure everything looks perfect."
   },
   {
-    num: '05',
-    title: 'Launch & Collect Leads',
-    description: 'Your site goes live—start collecting enquiry leads instantly on your dashboard.'
+    num: '5',
+    title: 'Go Live',
+    description: 'Your website is published and ready to receive enquiries from your customers.'
   }
 ];
 
 const Process = () => {
-  const [activeStep, setActiveStep] = useState(0);
+  const containerRef = useRef(null);
+  
+  // For the animated line
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start 80%", "end 50%"]
+  });
+  
+  const lineScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
   return (
-    <section id="how-it-works" className="py-24 md:py-32 bg-[#FAF9F7] font-sans">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section id="how-it-works" className="py-24 md:py-32 bg-[#FAF9F7] font-sans overflow-hidden">
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
         
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
           <div className="mb-6 inline-flex">
-            <SectionBadge>How It Works</SectionBadge>
+            <SectionBadge>Simple 5-Step Process</SectionBadge>
           </div>
           <h2 className="text-[32px] md:text-[44px] font-[800] text-[#111827] tracking-tight leading-[1.15] mb-6">
-            Simple 5-Step Process
+            Getting Your Business Online Is Easier Than You Think
           </h2>
           <p className="text-[17px] text-[#4B5563] leading-[1.6]">
-            From initial details to launch day—we handle all the technical heavy lifting.
+            From your first enquiry to a live website, we've made the entire process simple, transparent and stress-free.
           </p>
         </div>
 
-        {/* Desktop Layout (Horizontal Timeline + Content Card) */}
-        <div className="hidden md:block max-w-5xl mx-auto">
-          {/* Horizontal Step Bar */}
-          <div className="relative flex justify-between items-center mb-16 px-4">
-            {/* Connecting Line */}
-            <div className="absolute top-1/2 left-8 right-8 h-[2px] bg-slate-200 -z-10 -translate-y-1/2" />
+        {/* Timeline Container */}
+        <div ref={containerRef} className="relative max-w-6xl mx-auto">
+          
+          {/* Desktop/Tablet View (Horizontal Grid) */}
+          <div className="hidden md:block relative pt-8">
+            {/* Background Line */}
+            <div className="absolute top-[58px] left-[10%] right-[10%] h-0.5 bg-slate-200 dark:bg-slate-800" />
             
-            {steps.map((step, index) => {
-              const isActive = activeStep === index;
-              return (
-                <button
+            {/* Animated Progress Line */}
+            <motion.div 
+              className="absolute top-[58px] left-[10%] right-[10%] h-0.5 bg-gradient-to-r from-purple-600 to-indigo-600 origin-left"
+              style={{ scaleX: lineScaleX }}
+            />
+
+            <div className="grid grid-cols-5 gap-4">
+              {steps.map((step, index) => (
+                <motion.div 
                   key={index}
-                  onClick={() => setActiveStep(index)}
-                  onMouseEnter={() => setActiveStep(index)}
-                  className={`w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 relative z-10 ${
-                    isActive 
-                      ? 'bg-[#4400AF] text-white shadow-lg shadow-purple-500/25 ring-4 ring-[#FAF9F7] scale-110' 
-                      : 'bg-slate-100 text-slate-600 border-2 border-slate-200 hover:border-[#4400AF]/50 hover:text-[#4400AF]'
-                  }`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-50px" }}
+                  transition={{ duration: 0.5, delay: index * 0.15 }}
+                  className="flex flex-col items-center text-center relative z-10 group"
                 >
-                  {step.num}
-                </button>
-              );
-            })}
+                  {/* Node */}
+                  <div className="w-14 h-14 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-lg font-bold text-slate-700 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-purple-500/20 group-hover:border-purple-500 mb-6 relative z-10">
+                    <span className="group-hover:text-purple-600 transition-colors">{step.num}</span>
+                  </div>
+                  
+                  {/* Content */}
+                  <div className="px-2">
+                    <h3 className="text-base font-bold text-slate-900 mb-2 leading-tight">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
-          {/* Active Card Preview */}
-          <div className="relative h-[240px] max-w-4xl mx-auto mt-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeStep}
-                initial={{ opacity: 0, y: 15 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -15 }}
-                transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="max-w-3xl mx-auto rounded-3xl bg-white border border-slate-200/80 p-8 shadow-xl absolute inset-0 flex flex-col justify-center items-center text-center"
-              >
-                <span className="text-[#4400AF] font-bold tracking-[0.15em] text-[13px] mb-4 uppercase">
-                  Step {steps[activeStep].num}
-                </span>
-                <h3 className="text-2xl md:text-3xl font-[800] text-[#111827] mb-4 tracking-tight">
-                  {steps[activeStep].title}
-                </h3>
-                <p className="text-[17px] text-[#4B5563] leading-relaxed max-w-2xl mx-auto">
-                  {steps[activeStep].description}
-                </p>
-              </motion.div>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Mobile Layout (Vertical Timeline) */}
-        <div className="md:hidden max-w-md mx-auto">
-          <div className="relative pl-6 ml-4 border-l-2 border-[#4400AF]/20 space-y-12 py-4">
+          {/* Mobile View (Horizontal Carousel) */}
+          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 py-4 -mx-4 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {steps.map((step, index) => (
-              <div key={index} className="relative group">
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.1 }}
+                className="snap-center shrink-0 w-[280px] flex flex-col bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative group"
+              >
                 {/* Node */}
-                <div className="absolute -left-[45px] top-0 w-10 h-10 rounded-full bg-white border-2 border-[#4400AF] flex items-center justify-center text-sm font-bold text-[#4400AF] shadow-sm z-10 transition-transform group-hover:scale-110">
+                <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-base font-bold text-purple-600 mb-5">
                   {step.num}
                 </div>
                 
                 {/* Content */}
-                <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm transition-all duration-300 group-hover:border-[#4400AF]/30 group-hover:shadow-md">
-                  <h3 className="text-[19px] font-bold text-[#111827] mb-3 leading-tight">
+                <div>
+                  <h3 className="text-base font-bold text-slate-900 mb-2">
                     {step.title}
                   </h3>
-                  <p className="text-[15px] text-[#4B5563] leading-relaxed">
+                  <p className="text-xs text-slate-600 leading-relaxed">
                     {step.description}
                   </p>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
 
+        </div>
       </div>
     </section>
   );
