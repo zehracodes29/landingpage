@@ -94,7 +94,7 @@ const BusinessBenefits = () => {
             {/* Image Container with seamless fade masks */}
             <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
               <img 
-                src={image1} 
+                src={image1.src} 
                 alt="Business Owner working" 
                 className="w-full h-full object-cover rounded-3xl lg:rounded-none lg:rounded-l-3xl"
                 style={{ objectPosition: '70% center' }}
