@@ -114,11 +114,11 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-start gap-8 sticky top-32"
+            className="flex flex-col items-start gap-8 mt-0 pt-0"
           >
-            <div className="flex flex-col gap-6">
-              <div className="inline-flex">
-                <span className="inline-flex items-center px-4 py-2 rounded-full border border-[#DCCEFF] bg-transparent text-[#4400AF] text-[11px] font-bold uppercase tracking-[0.1em]">
+            <div className="flex flex-col gap-6 mt-0 pt-0">
+              <div className="inline-flex mt-0 pt-0">
+                <span className="inline-flex items-center px-4 py-2 rounded-full border border-[#DCCEFF] bg-transparent text-[#4400AF] text-[11px] font-bold uppercase tracking-[0.1em] mt-0 pt-0">
                   PROFESSIONAL WEBSITE SETUP • STARTING AT ₹5,000
                 </span>
               </div>
