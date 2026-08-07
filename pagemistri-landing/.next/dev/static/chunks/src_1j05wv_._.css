@@ -1430,6 +1430,12 @@
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
 
+  .transition-opacity {
+    transition-property: opacity;
+    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
+    transition-duration: var(--tw-duration, var(--default-transition-duration));
+  }
+
   .transition-shadow {
     transition-property: box-shadow;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -1481,6 +1487,10 @@
       background-color: #35008a;
     }
 
+    .hover\:bg-\[\#310080\]:hover {
+      background-color: #310080;
+    }
+
     .hover\:bg-\[\#DCCEFF\]:hover {
       background-color: #dcceff;
     }
@@ -1507,6 +1517,10 @@
 
     .hover\:text-gray-600:hover {
       color: var(--color-gray-600);
+    }
+
+    .hover\:opacity-80:hover {
+      opacity: .8;
     }
 
     .hover\:shadow-\[0_15px_35px_-5px_rgba\(68\,0\,175\,0\.1\)\]:hover {

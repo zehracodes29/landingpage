@@ -53,7 +53,7 @@ export default function Navbar() {
                 key={link.name}
                 href={link.href}
                 onClick={(e) => scrollToSection(e, link.href)}
-                className="text-[15px] font-semibold text-[#4B5563] hover:text-[#111827] transition-colors"
+                className="text-[15px] font-semibold text-[#4400AF] hover:opacity-80 transition-opacity"
               >
                 {link.name}
               </a>
@@ -64,7 +64,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center">
             <button 
               onClick={scrollToHero}
-              className="px-5 py-2.5 bg-[#111827] text-white text-[15px] font-semibold rounded-lg hover:bg-gray-800 transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-[1px]"
+              className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-[1px]"
             >
               Start building my website
             </button>
@@ -90,14 +90,14 @@ export default function Navbar() {
               key={link.name}
               href={link.href}
               onClick={(e) => scrollToSection(e, link.href)}
-              className="text-[16px] font-semibold text-[#4B5563] py-2 border-b border-gray-50"
+              className="text-[16px] font-semibold text-[#4400AF] py-2 border-b border-gray-50"
             >
               {link.name}
             </a>
           ))}
           <button 
             onClick={scrollToHero}
-            className="w-full mt-4 px-5 py-3 bg-[#111827] text-white text-[16px] font-semibold rounded-lg text-center"
+            className="w-full mt-4 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center"
           >
             Start building my website
           </button>
