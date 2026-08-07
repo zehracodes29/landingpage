@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import SectionBadge from '../../ui/SectionBadge';
+import SectionTitle from '../../ui/SectionTitle';
 
 const steps = [
   {
     num: '01',
     title: 'Tell Us About Your Business',
-    description: 'Fill out a quick form with your business name, services, and logo.'
+    description: 'Fill out a quick form with your business name, services, and brand details.'
   },
   {
     num: '02',
     title: 'Custom Website Build',
-    description: 'We design and build your high-converting landing page in 3–5 days.'
+    description: 'We design and build your high-converting landing page in 3–5 working days.'
   },
   {
     num: '03',
@@ -21,12 +22,12 @@ const steps = [
   {
     num: '04',
     title: 'Review & Refine',
-    description: 'Provide feedback with two included rounds of revisions.'
+    description: 'Review your complete website and request feedback adjustments with 2 included revision rounds.'
   },
   {
     num: '05',
     title: 'Launch & Collect Leads',
-    description: 'Your site goes live—start receiving lead notifications instantly on your dashboard.'
+    description: 'Your site goes live—start collecting enquiry leads instantly on your dashboard.'
   }
 ];
 
@@ -43,14 +44,14 @@ const Process = () => {
             <SectionBadge>How It Works</SectionBadge>
           </div>
           <h2 className="text-[32px] md:text-[44px] font-[800] text-[#111827] tracking-tight leading-[1.15] mb-6">
-            Simple 5-Step Process to Get Your Website Live
+            Simple 5-Step Process
           </h2>
           <p className="text-[17px] text-[#4B5563] leading-[1.6]">
-            From initial details to launch day—we handle the technical heavy lifting.
+            From initial details to launch day—we handle all the technical heavy lifting.
           </p>
         </div>
 
-        {/* Desktop Layout (Tabs + Content Card) */}
+        {/* Desktop Layout (Horizontal Timeline + Content Card) */}
         <div className="hidden md:block max-w-5xl mx-auto">
           {/* Horizontal Step Bar */}
           <div className="relative flex justify-between items-center mb-16 px-4">
@@ -63,10 +64,11 @@ const Process = () => {
                 <button
                   key={index}
                   onClick={() => setActiveStep(index)}
+                  onMouseEnter={() => setActiveStep(index)}
                   className={`w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 relative z-10 ${
                     isActive 
-                      ? 'bg-[#4400AF] text-white shadow-xl shadow-purple-500/30 ring-4 ring-[#FAF9F7] scale-110' 
-                      : 'bg-white text-slate-500 border-2 border-slate-200 hover:border-[#4400AF]/50 hover:text-[#4400AF] hover:shadow-md'
+                      ? 'bg-[#4400AF] text-white shadow-lg shadow-purple-500/25 ring-4 ring-[#FAF9F7] scale-110' 
+                      : 'bg-slate-100 text-slate-600 border-2 border-slate-200 hover:border-[#4400AF]/50 hover:text-[#4400AF]'
                   }`}
                 >
                   {step.num}
@@ -76,7 +78,7 @@ const Process = () => {
           </div>
 
           {/* Active Card Preview */}
-          <div className="relative h-[240px] max-w-4xl mx-auto">
+          <div className="relative h-[240px] max-w-4xl mx-auto mt-8">
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeStep}
@@ -84,7 +86,7 @@ const Process = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -15 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
-                className="rounded-3xl bg-white border border-slate-200 p-10 shadow-[0_20px_60px_-15px_rgba(68,0,175,0.08)] absolute inset-0 flex flex-col justify-center items-center text-center"
+                className="max-w-3xl mx-auto rounded-3xl bg-white border border-slate-200/80 p-8 shadow-xl absolute inset-0 flex flex-col justify-center items-center text-center"
               >
                 <span className="text-[#4400AF] font-bold tracking-[0.15em] text-[13px] mb-4 uppercase">
                   Step {steps[activeStep].num}
@@ -101,7 +103,7 @@ const Process = () => {
         </div>
 
         {/* Mobile Layout (Vertical Timeline) */}
-        <div className="md:hidden">
+        <div className="md:hidden max-w-md mx-auto">
           <div className="relative pl-6 ml-4 border-l-2 border-[#4400AF]/20 space-y-12 py-4">
             {steps.map((step, index) => (
               <div key={index} className="relative group">
@@ -111,7 +113,7 @@ const Process = () => {
                 </div>
                 
                 {/* Content */}
-                <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm transition-all duration-300 group-hover:border-[#4400AF]/30 group-hover:shadow-md">
+                <div className="bg-white rounded-2xl border border-slate-200/80 p-6 shadow-sm transition-all duration-300 group-hover:border-[#4400AF]/30 group-hover:shadow-md">
                   <h3 className="text-[19px] font-bold text-[#111827] mb-3 leading-tight">
                     {step.title}
                   </h3>
