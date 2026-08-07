@@ -797,6 +797,10 @@
     min-height: 120vh;
   }
 
+  .min-h-\[500px\] {
+    min-height: 500px;
+  }
+
   .min-h-\[600px\] {
     min-height: 600px;
   }
@@ -1609,6 +1613,10 @@
 
   .pt-8 {
     padding-top: calc(var(--spacing) * 8);
+  }
+
+  .pt-20 {
+    padding-top: calc(var(--spacing) * 20);
   }
 
   .pt-24 {
@@ -2476,6 +2484,10 @@
       margin-inline: auto;
     }
 
+    .md\:mt-4 {
+      margin-top: calc(var(--spacing) * 4);
+    }
+
     .md\:mr-0 {
       margin-right: 0;
     }
@@ -2575,6 +2587,10 @@
 
     .md\:py-32 {
       padding-block: calc(var(--spacing) * 32);
+    }
+
+    .md\:pt-24 {
+      padding-top: calc(var(--spacing) * 24);
     }
 
     .md\:pb-16 {

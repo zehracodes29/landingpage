@@ -107,8 +107,8 @@ const Hero = () => {
   const direction = step === 2 ? 1 : -1;
 
   return (
-    <section className="relative bg-[#FAF9F7] pt-32 pb-12 md:pb-16 overflow-hidden font-sans">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full mt-8">
+    <section className="relative bg-[#FAF9F7] pt-20 md:pt-24 pb-12 md:pb-16 overflow-hidden font-sans">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 w-full mt-2 md:mt-4">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           
           {/* Left Column: Copy & Checklist */}
@@ -116,7 +116,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-start gap-8 mt-0 pt-0"
+            className="flex flex-col items-start gap-6 mt-0 pt-0"
           >
             <div className="flex flex-col gap-6 mt-0 pt-0">
               <div className="inline-flex mt-0 pt-0">
@@ -134,7 +134,7 @@ const Hero = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mb-8 mt-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mb-6 mt-2"
             >
               {[
                 { text: <>Starting at ₹<CountUp end={5000} duration={2.5} separator="," /></> },
@@ -159,7 +159,7 @@ const Hero = () => {
 
             <button 
               onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
-              className="mt-4 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300">
+              className="mt-2 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300">
               See What's Included &rarr;
             </button>
           </motion.div>
@@ -174,7 +174,7 @@ const Hero = () => {
             {/* Background Blob / Glow for premium feel */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-full blur-[120px] opacity-80 -z-10 pointer-events-none" />
 
-            <div id="lead-form" className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(68,0,175,0.1)] border border-[#DCCEFF]/60 p-8 sm:p-10 w-full relative z-10 transition-shadow hover:shadow-[0_25px_65px_-15px_rgba(68,0,175,0.15)] overflow-hidden min-h-[600px]">
+            <div id="lead-form" className="bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(68,0,175,0.1)] border border-[#DCCEFF]/60 p-6 sm:p-8 w-full relative z-10 transition-shadow hover:shadow-[0_25px_65px_-15px_rgba(68,0,175,0.15)] overflow-hidden min-h-[500px]">
               
               {/* Step Indicators */}
               <div className="flex items-center justify-center gap-2.5 mb-10 relative z-20">

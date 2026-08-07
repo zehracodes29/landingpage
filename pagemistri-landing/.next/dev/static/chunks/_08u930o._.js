@@ -1360,9 +1360,9 @@ const Hero = ()=>{
     // Direction: 1 for forward, -1 for backward
     const direction = step === 2 ? 1 : -1;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-        className: "relative bg-[#FAF9F7] pt-32 pb-12 md:pb-16 overflow-hidden font-sans",
+        className: "relative bg-[#FAF9F7] pt-20 md:pt-24 pb-12 md:pb-16 overflow-hidden font-sans",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-7xl mx-auto px-6 lg:px-8 w-full mt-8",
+            className: "max-w-7xl mx-auto px-6 lg:px-8 w-full mt-2 md:mt-4",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-start",
                 children: [
@@ -1378,7 +1378,7 @@ const Hero = ()=>{
                         transition: {
                             duration: 0.6
                         },
-                        className: "flex flex-col items-start gap-8 mt-0 pt-0",
+                        className: "flex flex-col items-start gap-6 mt-0 pt-0",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col gap-6 mt-0 pt-0",
@@ -1446,7 +1446,7 @@ const Hero = ()=>{
                                     delay: 0.2,
                                     duration: 0.5
                                 },
-                                className: "grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mb-8 mt-4",
+                                className: "grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mb-6 mt-2",
                                 children: [
                                     {
                                         text: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1551,7 +1551,7 @@ const Hero = ()=>{
                                 onClick: ()=>document.getElementById('lead-form')?.scrollIntoView({
                                         behavior: 'smooth'
                                     }),
-                                className: "mt-4 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300",
+                                className: "mt-2 px-5 py-2.5 bg-[#F4EEFF] text-[#111827] font-bold text-[14px] rounded hover:bg-[#DCCEFF] transition-all duration-300",
                                 children: "See What's Included →"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Hero/Hero.jsx",
@@ -1588,7 +1588,7 @@ const Hero = ()=>{
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 id: "lead-form",
-                                className: "bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(68,0,175,0.1)] border border-[#DCCEFF]/60 p-8 sm:p-10 w-full relative z-10 transition-shadow hover:shadow-[0_25px_65px_-15px_rgba(68,0,175,0.15)] overflow-hidden min-h-[600px]",
+                                className: "bg-white rounded-[2rem] shadow-[0_20px_60px_-15px_rgba(68,0,175,0.1)] border border-[#DCCEFF]/60 p-6 sm:p-8 w-full relative z-10 transition-shadow hover:shadow-[0_25px_65px_-15px_rgba(68,0,175,0.15)] overflow-hidden min-h-[500px]",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                         className: "flex items-center justify-center gap-2.5 mb-10 relative z-20",
@@ -3301,44 +3301,51 @@ __turbopack_context__.s([
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/ui/SectionBadge.jsx [app-client] (ecmascript)");
-var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionTitle$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/src/ui/SectionTitle.jsx [app-client] (ecmascript)");
 ;
-;
+var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
 const steps = [
     {
-        title: 'Step 1: Tell Us About Your Business',
-        description: 'Clarify the offer, audience, goals, and must-have page sections before design starts.'
+        num: '01',
+        title: 'Tell Us About Your Business',
+        description: 'Fill out a quick form with your business name, services, and logo.'
     },
     {
-        title: 'Step 2: Share Your Content',
-        description: "Send your logo, photos and business details. Don't have everything ready? We'll guide you."
+        num: '02',
+        title: 'Custom Website Build',
+        description: 'We design and build your high-converting landing page in 3–5 days.'
     },
     {
-        title: 'Step 3: We Build Your Website',
-        description: 'Our team designs and develops your business website based on your requirements.'
+        num: '03',
+        title: 'Domain & Gateway Setup',
+        description: 'We connect your custom domain or subdomain & configure payment gateways.'
     },
     {
-        title: 'Step 4: Review & Approve',
+        num: '04',
+        title: 'Review & Refine',
         description: 'Provide feedback with two included rounds of revisions.'
     },
     {
-        title: 'Step 5: Launch & Collect Leads',
+        num: '05',
+        title: 'Launch & Collect Leads',
         description: 'Your site goes live—start receiving lead notifications instantly on your dashboard.'
     }
 ];
 const Process = ()=>{
+    _s();
+    const [activeStep, setActiveStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(0);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "how-it-works",
-        className: "py-24 bg-[#FAF9F7]",
+        className: "py-24 md:py-32 bg-[#FAF9F7] font-sans",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-7xl mx-auto px-6 lg:px-8",
+            className: "max-w-6xl mx-auto px-6 lg:px-8",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "text-center mb-16",
+                    className: "text-center max-w-3xl mx-auto mb-16 md:mb-24",
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "mb-6 inline-flex",
@@ -3346,93 +3353,208 @@ const Process = ()=>{
                                 children: "How It Works"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Process/Process.jsx",
-                                lineNumber: 35,
+                                lineNumber: 43,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
-                            lineNumber: 34,
+                            lineNumber: 42,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionTitle$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                            children: "Simple 5-Step Process"
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                            className: "text-[32px] md:text-[44px] font-[800] text-[#111827] tracking-tight leading-[1.15] mb-6",
+                            children: "Simple 5-Step Process to Get Your Website Live"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
-                            lineNumber: 37,
+                            lineNumber: 45,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-[17px] text-[#4B5563] leading-[1.6]",
+                            children: "From initial details to launch day—we handle the technical heavy lifting."
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Process/Process.jsx",
+                            lineNumber: 48,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Process/Process.jsx",
-                    lineNumber: 33,
+                    lineNumber: 41,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "grid grid-cols-1 md:grid-cols-3 gap-8",
-                    children: steps.map((step, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
-                            initial: {
-                                opacity: 0,
-                                y: 20
-                            },
-                            whileInView: {
-                                opacity: 1,
-                                y: 0
-                            },
-                            viewport: {
-                                once: true
-                            },
-                            transition: {
-                                delay: index * 0.1
-                            },
-                            className: "bg-white p-8 rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow",
+                    className: "hidden md:block max-w-5xl mx-auto",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "relative flex justify-between items-center mb-16 px-4",
                             children: [
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-12 h-12 bg-[#4400AF] text-white rounded-full flex items-center justify-center font-bold text-xl mb-6 shadow-sm",
-                                    children: index + 1
+                                    className: "absolute top-1/2 left-8 right-8 h-[2px] bg-slate-200 -z-10 -translate-y-1/2"
                                 }, void 0, false, {
                                     fileName: "[project]/src/components/Process/Process.jsx",
-                                    lineNumber: 52,
-                                    columnNumber: 15
+                                    lineNumber: 58,
+                                    columnNumber: 13
                                 }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
-                                    className: "text-[19px] font-bold text-[#111827] mb-3",
-                                    children: step.title
-                                }, void 0, false, {
+                                steps.map((step, index)=>{
+                                    const isActive = activeStep === index;
+                                    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: ()=>setActiveStep(index),
+                                        className: `w-14 h-14 rounded-full flex items-center justify-center text-lg font-bold transition-all duration-300 relative z-10 ${isActive ? 'bg-[#4400AF] text-white shadow-xl shadow-purple-500/30 ring-4 ring-[#FAF9F7] scale-110' : 'bg-white text-slate-500 border-2 border-slate-200 hover:border-[#4400AF]/50 hover:text-[#4400AF] hover:shadow-md'}`,
+                                        children: step.num
+                                    }, index, false, {
+                                        fileName: "[project]/src/components/Process/Process.jsx",
+                                        lineNumber: 63,
+                                        columnNumber: 17
+                                    }, ("TURBOPACK compile-time value", void 0));
+                                })
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/src/components/Process/Process.jsx",
+                            lineNumber: 56,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                            className: "relative h-[240px] max-w-4xl mx-auto",
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                                mode: "wait",
+                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                    initial: {
+                                        opacity: 0,
+                                        y: 15
+                                    },
+                                    animate: {
+                                        opacity: 1,
+                                        y: 0
+                                    },
+                                    exit: {
+                                        opacity: 0,
+                                        y: -15
+                                    },
+                                    transition: {
+                                        duration: 0.3,
+                                        ease: "easeInOut"
+                                    },
+                                    className: "rounded-3xl bg-white border border-slate-200 p-10 shadow-[0_20px_60px_-15px_rgba(68,0,175,0.08)] absolute inset-0 flex flex-col justify-center items-center text-center",
+                                    children: [
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                            className: "text-[#4400AF] font-bold tracking-[0.15em] text-[13px] mb-4 uppercase",
+                                            children: [
+                                                "Step ",
+                                                steps[activeStep].num
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/Process/Process.jsx",
+                                            lineNumber: 89,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                            className: "text-2xl md:text-3xl font-[800] text-[#111827] mb-4 tracking-tight",
+                                            children: steps[activeStep].title
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Process/Process.jsx",
+                                            lineNumber: 92,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0)),
+                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                            className: "text-[17px] text-[#4B5563] leading-relaxed max-w-2xl mx-auto",
+                                            children: steps[activeStep].description
+                                        }, void 0, false, {
+                                            fileName: "[project]/src/components/Process/Process.jsx",
+                                            lineNumber: 95,
+                                            columnNumber: 17
+                                        }, ("TURBOPACK compile-time value", void 0))
+                                    ]
+                                }, activeStep, true, {
                                     fileName: "[project]/src/components/Process/Process.jsx",
-                                    lineNumber: 55,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-[15px] text-[#4B5563] leading-relaxed",
-                                    children: step.description
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/Process/Process.jsx",
-                                    lineNumber: 56,
+                                    lineNumber: 81,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, index, true, {
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/Process/Process.jsx",
+                                lineNumber: 80,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
-                            lineNumber: 44,
-                            columnNumber: 13
-                        }, ("TURBOPACK compile-time value", void 0)))
+                            lineNumber: 79,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0))
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/components/Process/Process.jsx",
+                    lineNumber: 54,
+                    columnNumber: 9
+                }, ("TURBOPACK compile-time value", void 0)),
+                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                    className: "md:hidden",
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "relative pl-6 ml-4 border-l-2 border-[#4400AF]/20 space-y-12 py-4",
+                        children: steps.map((step, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "relative group",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "absolute -left-[45px] top-0 w-10 h-10 rounded-full bg-white border-2 border-[#4400AF] flex items-center justify-center text-sm font-bold text-[#4400AF] shadow-sm z-10 transition-transform group-hover:scale-110",
+                                        children: step.num
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/Process/Process.jsx",
+                                        lineNumber: 109,
+                                        columnNumber: 17
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "bg-white rounded-2xl border border-slate-200 p-6 shadow-sm transition-all duration-300 group-hover:border-[#4400AF]/30 group-hover:shadow-md",
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
+                                                className: "text-[19px] font-bold text-[#111827] mb-3 leading-tight",
+                                                children: step.title
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Process/Process.jsx",
+                                                lineNumber: 115,
+                                                columnNumber: 19
+                                            }, ("TURBOPACK compile-time value", void 0)),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                className: "text-[15px] text-[#4B5563] leading-relaxed",
+                                                children: step.description
+                                            }, void 0, false, {
+                                                fileName: "[project]/src/components/Process/Process.jsx",
+                                                lineNumber: 118,
+                                                columnNumber: 19
+                                            }, ("TURBOPACK compile-time value", void 0))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/src/components/Process/Process.jsx",
+                                        lineNumber: 114,
+                                        columnNumber: 17
+                                    }, ("TURBOPACK compile-time value", void 0))
+                                ]
+                            }, index, true, {
+                                fileName: "[project]/src/components/Process/Process.jsx",
+                                lineNumber: 107,
+                                columnNumber: 15
+                            }, ("TURBOPACK compile-time value", void 0)))
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/Process/Process.jsx",
+                        lineNumber: 105,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0))
                 }, void 0, false, {
                     fileName: "[project]/src/components/Process/Process.jsx",
-                    lineNumber: 42,
+                    lineNumber: 104,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Process/Process.jsx",
-            lineNumber: 32,
+            lineNumber: 38,
             columnNumber: 7
         }, ("TURBOPACK compile-time value", void 0))
     }, void 0, false, {
         fileName: "[project]/src/components/Process/Process.jsx",
-        lineNumber: 31,
+        lineNumber: 37,
         columnNumber: 5
     }, ("TURBOPACK compile-time value", void 0));
 };
+_s(Process, "cJXWosTT0XUh3gGn3cCcv/Y+Hws=");
 _c = Process;
 const __TURBOPACK__default__export__ = Process;
 var _c;
