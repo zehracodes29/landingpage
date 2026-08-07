@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import SectionBadge from '../../ui/SectionBadge';
 
 const DomainCTA = () => {
   return (
@@ -11,6 +12,9 @@ const DomainCTA = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
+          <div className="mb-4 inline-flex">
+            <SectionBadge>Domain Setup</SectionBadge>
+          </div>
           <h2 className="text-[32px] md:text-[40px] font-bold text-[#111827] tracking-tight leading-tight mb-4">
             Need a Custom Domain?
           </h2>

@@ -42,10 +42,8 @@ const EverythingNeeded = () => {
     <section id="whats-included" className="py-24 bg-[#FAF9F7]">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="text-center max-w-4xl mx-auto mb-16">
-          <div className="mb-4">
-            <span className="text-[#4400AF] text-[14px] font-bold tracking-wide">
-              Complete Business Website Setup
-            </span>
+          <div className="mb-4 inline-flex">
+            <SectionBadge>Complete Business Website Setup</SectionBadge>
           </div>
           <h2 className="text-[32px] md:text-[40px] font-[800] text-[#111827] tracking-tight leading-tight mb-4">
             Everything Your Business Needs to Get Online

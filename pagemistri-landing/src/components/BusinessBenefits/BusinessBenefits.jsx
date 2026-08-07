@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, LayoutGrid, Sparkles, CheckCircle2 } from 'lucide-react';
 import image1 from '../../assets/images/image1.png';
+import SectionBadge from '../../ui/SectionBadge';
 
 const BusinessBenefits = () => {
   return (
@@ -19,9 +20,9 @@ const BusinessBenefits = () => {
           >
             {/* Header Content */}
             <div className="flex flex-col gap-4 w-full">
-              <span className="text-[#4400AF] text-[16px] font-bold">
-                Built for Busy Business Owners
-              </span>
+              <div className="inline-flex mb-2">
+                <SectionBadge>Built for Busy Business Owners</SectionBadge>
+              </div>
               <h2 className="text-[36px] md:text-[46px] lg:text-[48px] xl:text-[52px] font-[800] text-[#111827] leading-[1.15] tracking-tight">
                 Your Business Needs Your Time.<br />Your Website Doesn't.
               </h2>

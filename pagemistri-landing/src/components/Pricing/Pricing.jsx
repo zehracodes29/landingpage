@@ -1,5 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
+import SectionBadge from '../../ui/SectionBadge';
 
 const Pricing = () => {
   const scrollToLeadForm = () => {
@@ -60,6 +61,9 @@ const Pricing = () => {
         {/* SECTION 1: SETUP COST */}
         <div className="mb-24">
           <div className="text-center md:text-left max-w-2xl mb-12">
+            <div className="mb-4 inline-flex md:flex md:justify-start justify-center w-full">
+              <SectionBadge>PRICING</SectionBadge>
+            </div>
             <h2 className="text-[32px] md:text-[38px] font-[800] text-[#111827] tracking-tight leading-tight mb-4">
               Setup Cost
             </h2>

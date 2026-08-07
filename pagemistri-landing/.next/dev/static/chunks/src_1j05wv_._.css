@@ -2158,6 +2158,10 @@
       align-items: stretch;
     }
 
+    .md\:justify-start {
+      justify-content: flex-start;
+    }
+
     .md\:gap-6 {
       gap: calc(var(--spacing) * 6);
     }

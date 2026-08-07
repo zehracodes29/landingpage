@@ -5,7 +5,7 @@ const FinalCTA = () => {
     <section className="py-24 bg-[#FAF9F7] font-sans">
       <div className="max-w-5xl mx-auto px-6 lg:px-8">
         <div className="bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-8 md:p-14 shadow-2xl relative overflow-hidden text-center flex flex-col items-center">
-          
+
           {/* Ambient Glow */}
           <div className="absolute -top-24 -right-24 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
           <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
@@ -27,13 +27,13 @@ const FinalCTA = () => {
 
           {/* CTA Buttons */}
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-3xl mx-auto">
-            <button 
+            <button
               onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full md:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
             >
               Get Your Website Built <span>&rarr;</span>
             </button>
-            <button 
+            <button
               onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
               className="w-full md:w-auto border border-purple-400/40 hover:bg-purple-500/10 text-purple-200 font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
             >

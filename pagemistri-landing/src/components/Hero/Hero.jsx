@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Blocks, Sparkles, CheckCircle2 } from 'lucide-react';
 import CountUp from 'react-countup';
+import SectionBadge from '../../ui/SectionBadge';
 
 const Hero = () => {
   const [step, setStep] = useState(1);
@@ -119,9 +120,7 @@ const Hero = () => {
           >
             <div className="flex flex-col gap-6 mt-0 pt-0">
               <div className="inline-flex mt-0 pt-0">
-                <span className="inline-flex items-center px-4 py-2 rounded-full border border-[#DCCEFF] bg-transparent text-[#4400AF] text-[11px] font-bold uppercase tracking-[0.1em] mt-0 pt-0">
-                  PROFESSIONAL WEBSITE SETUP • STARTING AT ₹5,000
-                </span>
+                <SectionBadge>PROFESSIONAL WEBSITE SETUP • STARTING AT ₹5,000</SectionBadge>
               </div>
               <h1 className="text-[44px] lg:text-[56px] font-[800] text-[#111827] tracking-tight leading-[1.1]">
                 Your Professional<br />Business Website,<br />Ready in Just 3-5 Days
