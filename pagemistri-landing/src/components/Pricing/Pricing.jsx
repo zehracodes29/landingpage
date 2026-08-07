@@ -65,7 +65,7 @@ const Pricing = () => {
             {/* Left Column: Description */}
             <div className="order-2 md:order-1 text-center md:text-left flex flex-col gap-6">
               <div className="inline-flex justify-center md:justify-start">
-                <SectionBadge>Step 1: One-Time Setup</SectionBadge>
+                <SectionBadge>One-Time Setup</SectionBadge>
               </div>
               <h2 className="text-[36px] md:text-[44px] lg:text-[48px] font-[800] text-[#111827] tracking-tight leading-[1.15]">
                 Setup Cost
