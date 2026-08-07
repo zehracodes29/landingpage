@@ -1634,7 +1634,7 @@ const LeadForm = ()=>{
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                         id: "lead-form",
-                        className: "bg-white rounded-[2rem] shadow-2xl border border-slate-200 p-6 sm:p-10 w-full relative z-10 transition-shadow overflow-hidden min-h-[500px]",
+                        className: "bg-white rounded-none shadow-2xl border border-slate-200 p-6 sm:p-10 w-full relative z-10 transition-shadow overflow-hidden min-h-[500px]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-center justify-center gap-2.5 mb-10 relative z-20",

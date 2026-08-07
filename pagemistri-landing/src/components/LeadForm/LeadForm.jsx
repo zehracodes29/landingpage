@@ -114,7 +114,7 @@ const LeadForm = () => {
       <div className="w-full relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-[3rem] blur-[80px] opacity-70 -z-10 pointer-events-none" />
 
-        <div id="lead-form" className="bg-white rounded-[2rem] shadow-2xl border border-slate-200 p-6 sm:p-10 w-full relative z-10 transition-shadow overflow-hidden min-h-[500px]">
+        <div id="lead-form" className="bg-white rounded-none shadow-2xl border border-slate-200 p-6 sm:p-10 w-full relative z-10 transition-shadow overflow-hidden min-h-[500px]">
           
           {/* Step Indicators */}
           <div className="flex items-center justify-center gap-2.5 mb-10 relative z-20">

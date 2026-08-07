@@ -1139,6 +1139,10 @@
     border-radius: var(--radius-lg);
   }
 
+  .rounded-none {
+    border-radius: 0;
+  }
+
   .rounded-xl {
     border-radius: var(--radius-xl);
   }
