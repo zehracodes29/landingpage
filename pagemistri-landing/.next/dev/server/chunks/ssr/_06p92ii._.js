@@ -2460,12 +2460,12 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$images$2f$p
 ;
 const navLinks = [
     {
-        name: 'How It Works',
-        href: '#how-it-works'
-    },
-    {
         name: "What's Included",
         href: '#whats-included'
+    },
+    {
+        name: 'How It Works',
+        href: '#how-it-works'
     },
     {
         name: 'Pricing',

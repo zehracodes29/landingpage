@@ -2521,12 +2521,12 @@ var _s = __turbopack_context__.k.signature();
 ;
 const navLinks = [
     {
-        name: 'How It Works',
-        href: '#how-it-works'
-    },
-    {
         name: "What's Included",
         href: '#whats-included'
+    },
+    {
+        name: 'How It Works',
+        href: '#how-it-works'
     },
     {
         name: 'Pricing',

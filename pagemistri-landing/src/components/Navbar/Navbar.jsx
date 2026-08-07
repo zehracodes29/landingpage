@@ -4,8 +4,8 @@ import { Menu, X } from 'lucide-react';
 import logo from '../../assets/images/pagemistri-logo.png';
 
 const navLinks = [
-  { name: 'How It Works', href: '#how-it-works' },
   { name: "What's Included", href: '#whats-included' },
+  { name: 'How It Works', href: '#how-it-works' },
   { name: 'Pricing', href: '#pricing' },
   { name: 'FAQ', href: '#faq' },
 ];
