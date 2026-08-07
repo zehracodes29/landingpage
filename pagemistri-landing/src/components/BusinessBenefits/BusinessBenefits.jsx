@@ -7,7 +7,7 @@ const BusinessBenefits = () => {
   return (
     <section className="relative bg-[#FAF9F7] py-16 md:py-24 overflow-hidden font-sans">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
-        <div className="flex flex-col lg:flex-row items-center">
+        <div className="flex flex-col lg:flex-row items-center justify-between lg:gap-12">
           
           {/* Left Column */}
           <motion.div 
@@ -89,7 +89,7 @@ const BusinessBenefits = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="w-full lg:w-[60%] relative mt-16 lg:mt-0 lg:-ml-[5%]"
+            className="w-full lg:w-[50%] relative mt-16 lg:mt-0"
           >
             {/* Image Container with seamless fade masks */}
             <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">

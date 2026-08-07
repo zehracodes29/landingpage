@@ -1636,6 +1636,10 @@
       width: 45%;
     }
 
+    .lg\:w-\[50\%\] {
+      width: 50%;
+    }
+
     .lg\:w-\[60\%\] {
       width: 60%;
     }
@@ -1654,6 +1658,10 @@
 
     .lg\:flex-row {
       flex-direction: row;
+    }
+
+    .lg\:gap-12 {
+      gap: calc(var(--spacing) * 12);
     }
 
     .lg\:gap-20 {
