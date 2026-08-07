@@ -1,22 +1,33 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Clock, LayoutGrid, Sparkles, CheckCircle2 } from 'lucide-react';
-import image1 from '../../assets/images/image1.png';
+import { Clock, LayoutGrid, Sparkles } from 'lucide-react';
 import SectionBadge from '../../ui/SectionBadge';
+import LeadForm from '../LeadForm/LeadForm';
 
 const BusinessBenefits = () => {
   return (
     <section className="relative bg-[#FAF9F7] py-16 md:py-24 overflow-hidden font-sans">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
           
-          {/* Left Column */}
+          {/* Left Column (Form) */}
+          <motion.div 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="w-full lg:col-span-7 relative z-20"
+          >
+            <LeadForm />
+          </motion.div>
+
+          {/* Right Column (Text Content) */}
           <motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="w-full lg:col-span-5 flex flex-col items-start gap-8 z-20 relative"
+            className="w-full lg:col-span-5 flex flex-col items-start gap-8 z-20 relative lg:pl-4"
           >
             {/* Header Content */}
             <div className="flex flex-col gap-4 w-full">
@@ -76,31 +87,7 @@ const BusinessBenefits = () => {
               </motion.div>
             </div>
 
-            {/* CTA Button */}
-            <button 
-              onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
-              className="mt-4 h-[48px] px-[24px] bg-[#F4EEFF] text-[#111827] font-semibold text-[15px] rounded-lg flex items-center justify-center gap-2 hover:bg-[#EBE6F5] hover:shadow-md transition-all duration-300 transform hover:-translate-y-[2px]">
-              See What's Included &rarr;
-            </button>
-          </motion.div>
-
-          {/* Right Column (Image + Cards) */}
-          <motion.div 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="w-full lg:col-span-6 lg:col-start-7 relative mt-16 lg:mt-0 overflow-hidden lg:rounded-l-2xl"
-          >
-            {/* Image Container */}
-            <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
-              <img 
-                src={image1.src} 
-                alt="Business Owner working" 
-                className="w-full h-full object-cover rounded-3xl lg:rounded-none lg:rounded-l-2xl"
-                style={{ objectPosition: '70% center' }}
-              />
-            </div>
+            {/* CTA Button removed since the form is right there! */}
           </motion.div>
 
         </div>

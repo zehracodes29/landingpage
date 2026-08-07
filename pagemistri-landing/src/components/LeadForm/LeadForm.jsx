@@ -101,20 +101,20 @@ const LeadForm = () => {
   const direction = step === 2 ? 1 : -1;
 
   return (
-    <section className="py-20 md:py-32 bg-[#FAF9F7] font-sans">
-      <div className="max-w-3xl mx-auto px-6 lg:px-8 text-center mb-10">
-        <h2 className="text-[32px] md:text-[40px] font-extrabold text-[#111827] tracking-tight leading-tight mb-4">
+    <div className="w-full font-sans">
+      <div className="text-center mb-8">
+        <h2 className="text-[28px] md:text-[32px] font-extrabold text-[#111827] tracking-tight leading-tight mb-3">
           Tell Us About Your Business
         </h2>
-        <p className="text-[16px] text-[#4B5563] leading-relaxed max-w-2xl mx-auto">
+        <p className="text-[15px] text-[#4B5563] leading-relaxed max-w-xl mx-auto">
           Fill out the quick form below to start your custom website build.
         </p>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 md:px-0 mb-16 relative">
+      <div className="w-full relative">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-[3rem] blur-[80px] opacity-70 -z-10 pointer-events-none" />
 
-        <div id="lead-form" className="bg-white rounded-[2rem] shadow-2xl border border-slate-200 p-8 sm:p-12 w-full relative z-10 transition-shadow overflow-hidden min-h-[500px]">
+        <div id="lead-form" className="bg-white rounded-[2rem] shadow-2xl border border-slate-200 p-6 sm:p-10 w-full relative z-10 transition-shadow overflow-hidden min-h-[500px]">
           
           {/* Step Indicators */}
           <div className="flex items-center justify-center gap-2.5 mb-10 relative z-20">
@@ -437,7 +437,7 @@ const LeadForm = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
