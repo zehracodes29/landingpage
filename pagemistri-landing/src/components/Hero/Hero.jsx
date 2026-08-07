@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Clock, Blocks, Sparkles } from 'lucide-react';
+import { Clock, Blocks, Sparkles, CheckCircle2 } from 'lucide-react';
 
 const Hero = () => {
   const [step, setStep] = useState(1);
@@ -130,32 +130,24 @@ const Hero = () => {
               </p>
             </div>
 
-            <div className="flex flex-col gap-3 w-full mt-2">
-              <div className="flex items-center gap-2">
-                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-[16px] font-bold text-[#4400AF]">Starting at ₹5,000</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-[16px] font-bold text-[#4400AF]">Delivered in 3–5 Working Days</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-[16px] font-bold text-[#4400AF]">Lead Collection Included</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <svg className="w-6 h-6 text-[#9CA3AF]" viewBox="0 0 24 24" fill="currentColor">
-                  <path fillRule="evenodd" d="M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z" clipRule="evenodd" />
-                </svg>
-                <span className="text-[16px] font-bold text-[#4400AF]">Mobile-Friendly</span>
-              </div>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mb-6 mt-4"
+            >
+              {[
+                "Starting at ₹5,000",
+                "Delivered in 3–5 Working Days",
+                "Lead Collection Included",
+                "Mobile-Friendly"
+              ].map((text, i) => (
+                <div key={i} className="p-3 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/40 flex items-center gap-2.5 transition-all duration-300 hover:scale-[1.02] hover:bg-purple-100/80 hover:border-purple-300 hover:shadow-md hover:shadow-purple-500/10 cursor-default">
+                  <CheckCircle2 className="w-5 h-5 text-[#4400AF] shrink-0" strokeWidth={2.5} />
+                  <span className="text-[14px] font-semibold text-slate-800 dark:text-slate-200">{text}</span>
+                </div>
+              ))}
+            </motion.div>
 
             <button 
               onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}

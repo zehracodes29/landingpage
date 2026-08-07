@@ -1226,6 +1226,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/render/components/motion/proxy.mjs [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/framer-motion/dist/es/components/AnimatePresence/index.mjs [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircle2$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-check.mjs [app-client] (ecmascript) <export default as CheckCircle2>");
 ;
 var _s = __turbopack_context__.k.signature();
 ;
@@ -1406,151 +1407,51 @@ const Hero = ()=>{
                                 lineNumber: 119,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
-                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col gap-3 w-full mt-2",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                                initial: {
+                                    opacity: 0,
+                                    y: 15
+                                },
+                                animate: {
+                                    opacity: 1,
+                                    y: 0
+                                },
+                                transition: {
+                                    delay: 0.2,
+                                    duration: 0.5
+                                },
+                                className: "grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mb-6 mt-4",
                                 children: [
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-center gap-2",
+                                    "Starting at ₹5,000",
+                                    "Delivered in 3–5 Working Days",
+                                    "Lead Collection Included",
+                                    "Mobile-Friendly"
+                                ].map((text, i)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "p-3 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/40 flex items-center gap-2.5 transition-all duration-300 hover:scale-[1.02] hover:bg-purple-100/80 hover:border-purple-300 hover:shadow-md hover:shadow-purple-500/10 cursor-default",
                                         children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                className: "w-6 h-6 text-[#9CA3AF]",
-                                                viewBox: "0 0 24 24",
-                                                fill: "currentColor",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                    fillRule: "evenodd",
-                                                    d: "M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z",
-                                                    clipRule: "evenodd"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 136,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__CheckCircle2$3e$__["CheckCircle2"], {
+                                                className: "w-5 h-5 text-[#4400AF] shrink-0",
+                                                strokeWidth: 2.5
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 135,
-                                                columnNumber: 17
+                                                lineNumber: 146,
+                                                columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0)),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-[16px] font-bold text-[#4400AF]",
-                                                children: "Starting at ₹5,000"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 138,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/Hero/Hero.jsx",
-                                        lineNumber: 134,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-center gap-2",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                className: "w-6 h-6 text-[#9CA3AF]",
-                                                viewBox: "0 0 24 24",
-                                                fill: "currentColor",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                    fillRule: "evenodd",
-                                                    d: "M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z",
-                                                    clipRule: "evenodd"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 142,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 141,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-[16px] font-bold text-[#4400AF]",
-                                                children: "Delivered in 3–5 Working Days"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 144,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/Hero/Hero.jsx",
-                                        lineNumber: 140,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-center gap-2",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                className: "w-6 h-6 text-[#9CA3AF]",
-                                                viewBox: "0 0 24 24",
-                                                fill: "currentColor",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                    fillRule: "evenodd",
-                                                    d: "M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z",
-                                                    clipRule: "evenodd"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 148,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
+                                                className: "text-[14px] font-semibold text-slate-800 dark:text-slate-200",
+                                                children: text
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Hero/Hero.jsx",
                                                 lineNumber: 147,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-[16px] font-bold text-[#4400AF]",
-                                                children: "Lead Collection Included"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 150,
-                                                columnNumber: 17
+                                                columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         ]
-                                    }, void 0, true, {
+                                    }, i, true, {
                                         fileName: "[project]/src/components/Hero/Hero.jsx",
-                                        lineNumber: 146,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0)),
-                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                        className: "flex items-center gap-2",
-                                        children: [
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
-                                                className: "w-6 h-6 text-[#9CA3AF]",
-                                                viewBox: "0 0 24 24",
-                                                fill: "currentColor",
-                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
-                                                    fillRule: "evenodd",
-                                                    d: "M3 5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2V5zm13.707 5.707a1 1 0 00-1.414-1.414L10 14.586 7.707 12.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l6-6z",
-                                                    clipRule: "evenodd"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 154,
-                                                    columnNumber: 19
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 153,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0)),
-                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                className: "text-[16px] font-bold text-[#4400AF]",
-                                                children: "Mobile-Friendly"
-                                            }, void 0, false, {
-                                                fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                lineNumber: 156,
-                                                columnNumber: 17
-                                            }, ("TURBOPACK compile-time value", void 0))
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "[project]/src/components/Hero/Hero.jsx",
-                                        lineNumber: 152,
-                                        columnNumber: 15
-                                    }, ("TURBOPACK compile-time value", void 0))
-                                ]
-                            }, void 0, true, {
+                                        lineNumber: 145,
+                                        columnNumber: 17
+                                    }, ("TURBOPACK compile-time value", void 0)))
+                            }, void 0, false, {
                                 fileName: "[project]/src/components/Hero/Hero.jsx",
                                 lineNumber: 133,
                                 columnNumber: 13
@@ -1563,7 +1464,7 @@ const Hero = ()=>{
                                 children: "See What's Included →"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Hero/Hero.jsx",
-                                lineNumber: 160,
+                                lineNumber: 152,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
@@ -1591,7 +1492,7 @@ const Hero = ()=>{
                                 className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[130%] h-[130%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-full blur-[120px] opacity-80 -z-10 pointer-events-none"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Hero/Hero.jsx",
-                                lineNumber: 175,
+                                lineNumber: 167,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1609,11 +1510,48 @@ const Hero = ()=>{
                                                             className: "h-3 w-3 rounded-full bg-[#4400AF] ring-4 ring-[#F4EEFF]"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 184,
+                                                            lineNumber: 176,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                             className: "h-1 w-10 rounded-full bg-[#F4EEFF]"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Hero/Hero.jsx",
+                                                            lineNumber: 177,
+                                                            columnNumber: 23
+                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                    ]
+                                                }, void 0, true, {
+                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
+                                                    lineNumber: 175,
+                                                    columnNumber: 21
+                                                }, ("TURBOPACK compile-time value", void 0)),
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "h-2.5 w-2.5 rounded-full bg-slate-200"
+                                                }, void 0, false, {
+                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
+                                                    lineNumber: 179,
+                                                    columnNumber: 21
+                                                }, ("TURBOPACK compile-time value", void 0))
+                                            ]
+                                        }, void 0, true, {
+                                            fileName: "[project]/src/components/Hero/Hero.jsx",
+                                            lineNumber: 174,
+                                            columnNumber: 19
+                                        }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                            children: [
+                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "flex items-center gap-2.5",
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "h-2.5 w-2.5 rounded-full bg-[#4400AF]"
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/src/components/Hero/Hero.jsx",
+                                                            lineNumber: 184,
+                                                            columnNumber: 23
+                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "h-1 w-10 rounded-full bg-[#4400AF]"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
                                                             lineNumber: 185,
@@ -1626,7 +1564,7 @@ const Hero = ()=>{
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "h-2.5 w-2.5 rounded-full bg-slate-200"
+                                                    className: "h-3 w-3 rounded-full bg-[#4400AF] ring-4 ring-[#F4EEFF]"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
                                                     lineNumber: 187,
@@ -1637,47 +1575,10 @@ const Hero = ()=>{
                                             fileName: "[project]/src/components/Hero/Hero.jsx",
                                             lineNumber: 182,
                                             columnNumber: 19
-                                        }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "flex items-center gap-2.5",
-                                                    children: [
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "h-2.5 w-2.5 rounded-full bg-[#4400AF]"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 192,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0)),
-                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "h-1 w-10 rounded-full bg-[#4400AF]"
-                                                        }, void 0, false, {
-                                                            fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 193,
-                                                            columnNumber: 23
-                                                        }, ("TURBOPACK compile-time value", void 0))
-                                                    ]
-                                                }, void 0, true, {
-                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 191,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0)),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "h-3 w-3 rounded-full bg-[#4400AF] ring-4 ring-[#F4EEFF]"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 195,
-                                                    columnNumber: 21
-                                                }, ("TURBOPACK compile-time value", void 0))
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/src/components/Hero/Hero.jsx",
-                                            lineNumber: 190,
-                                            columnNumber: 19
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Hero/Hero.jsx",
-                                        lineNumber: 180,
+                                        lineNumber: 172,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0)),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1704,12 +1605,12 @@ const Hero = ()=>{
                                                                 children: "TELL US ABOUT YOUR BUSINESS"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                lineNumber: 213,
+                                                                lineNumber: 205,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 212,
+                                                            lineNumber: 204,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1731,13 +1632,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 221,
+                                                                                    lineNumber: 213,
                                                                                     columnNumber: 39
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 220,
+                                                                            lineNumber: 212,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1749,7 +1650,7 @@ const Hero = ()=>{
                                                                             className: `w-full px-5 py-4 rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF]`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 223,
+                                                                            lineNumber: 215,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.fullName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1757,13 +1658,13 @@ const Hero = ()=>{
                                                                             children: errors.fullName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 231,
+                                                                            lineNumber: 223,
                                                                             columnNumber: 47
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 219,
+                                                                    lineNumber: 211,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1778,13 +1679,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 236,
+                                                                                    lineNumber: 228,
                                                                                     columnNumber: 43
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 235,
+                                                                            lineNumber: 227,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1796,7 +1697,7 @@ const Hero = ()=>{
                                                                             className: `w-full px-5 py-4 rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF]`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 238,
+                                                                            lineNumber: 230,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.businessName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1804,13 +1705,13 @@ const Hero = ()=>{
                                                                             children: errors.businessName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 246,
+                                                                            lineNumber: 238,
                                                                             columnNumber: 51
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 234,
+                                                                    lineNumber: 226,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1828,13 +1729,13 @@ const Hero = ()=>{
                                                                                             children: "*"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 252,
+                                                                                            lineNumber: 244,
                                                                                             columnNumber: 37
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 251,
+                                                                                    lineNumber: 243,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1846,7 +1747,7 @@ const Hero = ()=>{
                                                                                     className: `w-full px-5 py-4 rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF]`
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 254,
+                                                                                    lineNumber: 246,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1854,13 +1755,13 @@ const Hero = ()=>{
                                                                                     children: errors.email
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 262,
+                                                                                    lineNumber: 254,
                                                                                     columnNumber: 46
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 250,
+                                                                            lineNumber: 242,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1875,13 +1776,13 @@ const Hero = ()=>{
                                                                                             children: "*"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 267,
+                                                                                            lineNumber: 259,
                                                                                             columnNumber: 44
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 266,
+                                                                                    lineNumber: 258,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1893,7 +1794,7 @@ const Hero = ()=>{
                                                                                     className: `w-full px-5 py-4 rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF]`
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 269,
+                                                                                    lineNumber: 261,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 errors.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1901,19 +1802,19 @@ const Hero = ()=>{
                                                                                     children: errors.phone
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 277,
+                                                                                    lineNumber: 269,
                                                                                     columnNumber: 46
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 265,
+                                                                            lineNumber: 257,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 249,
+                                                                    lineNumber: 241,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1928,13 +1829,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 283,
+                                                                                    lineNumber: 275,
                                                                                     columnNumber: 47
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 282,
+                                                                            lineNumber: 274,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -1955,7 +1856,7 @@ const Hero = ()=>{
                                                                                     children: "Select category"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 292,
+                                                                                    lineNumber: 284,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1963,7 +1864,7 @@ const Hero = ()=>{
                                                                                     children: "Coach / Consultant"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 293,
+                                                                                    lineNumber: 285,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1971,7 +1872,7 @@ const Hero = ()=>{
                                                                                     children: "Healthcare"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 294,
+                                                                                    lineNumber: 286,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1979,7 +1880,7 @@ const Hero = ()=>{
                                                                                     children: "Real Estate"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 295,
+                                                                                    lineNumber: 287,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1987,7 +1888,7 @@ const Hero = ()=>{
                                                                                     children: "Restaurant / Café"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 296,
+                                                                                    lineNumber: 288,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1995,7 +1896,7 @@ const Hero = ()=>{
                                                                                     children: "Salon / Spa"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 297,
+                                                                                    lineNumber: 289,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2003,7 +1904,7 @@ const Hero = ()=>{
                                                                                     children: "Education"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 298,
+                                                                                    lineNumber: 290,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2011,7 +1912,7 @@ const Hero = ()=>{
                                                                                     children: "Retail Store"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 299,
+                                                                                    lineNumber: 291,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2019,13 +1920,13 @@ const Hero = ()=>{
                                                                                     children: "Other"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 300,
+                                                                                    lineNumber: 292,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 285,
+                                                                            lineNumber: 277,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2033,13 +1934,13 @@ const Hero = ()=>{
                                                                             children: errors.category
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 302,
+                                                                            lineNumber: 294,
                                                                             columnNumber: 47
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 281,
+                                                                    lineNumber: 273,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2054,13 +1955,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 307,
+                                                                                    lineNumber: 299,
                                                                                     columnNumber: 48
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 306,
+                                                                            lineNumber: 298,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2072,7 +1973,7 @@ const Hero = ()=>{
                                                                             className: `w-full px-5 py-4 rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF]`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 309,
+                                                                            lineNumber: 301,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.offering && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2080,13 +1981,13 @@ const Hero = ()=>{
                                                                             children: errors.offering
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 317,
+                                                                            lineNumber: 309,
                                                                             columnNumber: 47
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 305,
+                                                                    lineNumber: 297,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2097,24 +1998,24 @@ const Hero = ()=>{
                                                                         children: "Next"
                                                                     }, void 0, false, {
                                                                         fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                        lineNumber: 321,
+                                                                        lineNumber: 313,
                                                                         columnNumber: 27
                                                                     }, ("TURBOPACK compile-time value", void 0))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 320,
+                                                                    lineNumber: 312,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 218,
+                                                            lineNumber: 210,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, "step1", true, {
                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 203,
+                                                    lineNumber: 195,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 step === 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -2135,12 +2036,12 @@ const Hero = ()=>{
                                                                 children: "WEBSITE REQUIREMENTS"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                lineNumber: 343,
+                                                                lineNumber: 335,
                                                                 columnNumber: 25
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 342,
+                                                            lineNumber: 334,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -2159,13 +2060,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 352,
+                                                                                    lineNumber: 344,
                                                                                     columnNumber: 60
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 351,
+                                                                            lineNumber: 343,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2183,7 +2084,7 @@ const Hero = ()=>{
                                                                                             className: "w-4 h-4 text-[#4400AF] border-slate-300 focus:ring-[#4400AF]"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 356,
+                                                                                            lineNumber: 348,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2191,13 +2092,13 @@ const Hero = ()=>{
                                                                                             children: "Yes"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 364,
+                                                                                            lineNumber: 356,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 355,
+                                                                                    lineNumber: 347,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2212,7 +2113,7 @@ const Hero = ()=>{
                                                                                             className: "w-4 h-4 text-[#4400AF] border-slate-300 focus:ring-[#4400AF]"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 367,
+                                                                                            lineNumber: 359,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2220,19 +2121,19 @@ const Hero = ()=>{
                                                                                             children: "No"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 375,
+                                                                                            lineNumber: 367,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 366,
+                                                                                    lineNumber: 358,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 354,
+                                                                            lineNumber: 346,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.hasWebsite && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2240,13 +2141,13 @@ const Hero = ()=>{
                                                                             children: errors.hasWebsite
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 378,
+                                                                            lineNumber: 370,
                                                                             columnNumber: 49
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 350,
+                                                                    lineNumber: 342,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2261,13 +2162,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 383,
+                                                                                    lineNumber: 375,
                                                                                     columnNumber: 59
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 382,
+                                                                            lineNumber: 374,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2285,7 +2186,7 @@ const Hero = ()=>{
                                                                                             className: "w-4 h-4 text-[#4400AF] border-slate-300 focus:ring-[#4400AF]"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 387,
+                                                                                            lineNumber: 379,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2293,13 +2194,13 @@ const Hero = ()=>{
                                                                                             children: "Yes"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 395,
+                                                                                            lineNumber: 387,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 386,
+                                                                                    lineNumber: 378,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2314,7 +2215,7 @@ const Hero = ()=>{
                                                                                             className: "w-4 h-4 text-[#4400AF] border-slate-300 focus:ring-[#4400AF]"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 398,
+                                                                                            lineNumber: 390,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2322,19 +2223,19 @@ const Hero = ()=>{
                                                                                             children: "No"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 406,
+                                                                                            lineNumber: 398,
                                                                                             columnNumber: 31
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, void 0, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 397,
+                                                                                    lineNumber: 389,
                                                                                     columnNumber: 29
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 385,
+                                                                            lineNumber: 377,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.hasDomain && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2342,13 +2243,13 @@ const Hero = ()=>{
                                                                             children: errors.hasDomain
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 409,
+                                                                            lineNumber: 401,
                                                                             columnNumber: 48
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 381,
+                                                                    lineNumber: 373,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2363,13 +2264,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 414,
+                                                                                    lineNumber: 406,
                                                                                     columnNumber: 56
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 413,
+                                                                            lineNumber: 405,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2391,7 +2292,7 @@ const Hero = ()=>{
                                                                                             className: "w-4 h-4 text-[#4400AF] border-slate-300 rounded focus:ring-[#4400AF]"
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 419,
+                                                                                            lineNumber: 411,
                                                                                             columnNumber: 33
                                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2399,18 +2300,18 @@ const Hero = ()=>{
                                                                                             children: goal
                                                                                         }, void 0, false, {
                                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                            lineNumber: 427,
+                                                                                            lineNumber: 419,
                                                                                             columnNumber: 33
                                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                                     ]
                                                                                 }, goal, true, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 418,
+                                                                                    lineNumber: 410,
                                                                                     columnNumber: 31
                                                                                 }, ("TURBOPACK compile-time value", void 0)))
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 416,
+                                                                            lineNumber: 408,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.websiteGoals && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2418,13 +2319,13 @@ const Hero = ()=>{
                                                                             children: errors.websiteGoals
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 431,
+                                                                            lineNumber: 423,
                                                                             columnNumber: 51
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 412,
+                                                                    lineNumber: 404,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2435,7 +2336,7 @@ const Hero = ()=>{
                                                                             children: "If you have a website - Enter your URL:"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 435,
+                                                                            lineNumber: 427,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2447,13 +2348,13 @@ const Hero = ()=>{
                                                                             className: "w-full px-5 py-4 rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all shadow-sm hover:border-[#DCCEFF]"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 438,
+                                                                            lineNumber: 430,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 434,
+                                                                    lineNumber: 426,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2468,13 +2369,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 450,
+                                                                                    lineNumber: 442,
                                                                                     columnNumber: 56
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 449,
+                                                                            lineNumber: 441,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2486,7 +2387,7 @@ const Hero = ()=>{
                                                                             className: `w-full px-5 py-4 rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF] resize-none`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 452,
+                                                                            lineNumber: 444,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.websiteDescription && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2494,13 +2395,13 @@ const Hero = ()=>{
                                                                             children: errors.websiteDescription
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 460,
+                                                                            lineNumber: 452,
                                                                             columnNumber: 57
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 448,
+                                                                    lineNumber: 440,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2515,13 +2416,13 @@ const Hero = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                                    lineNumber: 465,
+                                                                                    lineNumber: 457,
                                                                                     columnNumber: 37
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 464,
+                                                                            lineNumber: 456,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2533,7 +2434,7 @@ const Hero = ()=>{
                                                                             className: `w-full px-5 py-4 rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-[#4400AF] focus:ring-[#4400AF]/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all shadow-sm hover:border-[#DCCEFF] resize-none`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 467,
+                                                                            lineNumber: 459,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2541,13 +2442,13 @@ const Hero = ()=>{
                                                                             children: errors.message
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 475,
+                                                                            lineNumber: 467,
                                                                             columnNumber: 46
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 463,
+                                                                    lineNumber: 455,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2560,7 +2461,7 @@ const Hero = ()=>{
                                                                             children: "Back"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 479,
+                                                                            lineNumber: 471,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2569,48 +2470,48 @@ const Hero = ()=>{
                                                                             children: "Let's Build"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                            lineNumber: 486,
+                                                                            lineNumber: 478,
                                                                             columnNumber: 27
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                                    lineNumber: 478,
+                                                                    lineNumber: 470,
                                                                     columnNumber: 25
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                            lineNumber: 348,
+                                                            lineNumber: 340,
                                                             columnNumber: 23
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, "step2", true, {
                                                     fileName: "[project]/src/components/Hero/Hero.jsx",
-                                                    lineNumber: 333,
+                                                    lineNumber: 325,
                                                     columnNumber: 21
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/Hero/Hero.jsx",
-                                            lineNumber: 201,
+                                            lineNumber: 193,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0))
                                     }, void 0, false, {
                                         fileName: "[project]/src/components/Hero/Hero.jsx",
-                                        lineNumber: 200,
+                                        lineNumber: 192,
                                         columnNumber: 15
                                     }, ("TURBOPACK compile-time value", void 0))
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/components/Hero/Hero.jsx",
-                                lineNumber: 177,
+                                lineNumber: 169,
                                 columnNumber: 13
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/Hero/Hero.jsx",
-                        lineNumber: 168,
+                        lineNumber: 160,
                         columnNumber: 11
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
