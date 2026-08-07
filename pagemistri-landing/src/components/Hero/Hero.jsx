@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Clock, Blocks, Sparkles, CheckCircle2 } from 'lucide-react';
+import CountUp from 'react-countup';
 
 const Hero = () => {
   const [step, setStep] = useState(1);
@@ -134,17 +135,25 @@ const Hero = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.5 }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3 max-w-lg mb-6 mt-4"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-lg mb-8 mt-4"
             >
               {[
-                "Starting at ₹5,000",
-                "Delivered in 3–5 Working Days",
-                "Lead Collection Included",
-                "Mobile-Friendly"
-              ].map((text, i) => (
-                <div key={i} className="p-3 rounded-xl bg-purple-50/70 dark:bg-purple-950/30 border border-purple-100 dark:border-purple-900/40 flex items-center gap-2.5 transition-all duration-300 hover:scale-[1.02] hover:bg-purple-100/80 hover:border-purple-300 hover:shadow-md hover:shadow-purple-500/10 cursor-default">
-                  <CheckCircle2 className="w-5 h-5 text-[#4400AF] shrink-0" strokeWidth={2.5} />
-                  <span className="text-[14px] font-semibold text-slate-800 dark:text-slate-200">{text}</span>
+                { text: <>Starting at ₹<CountUp end={5000} duration={2.5} separator="," /></> },
+                { text: <>Delivered in 3–<CountUp end={5} duration={2.5} /> Working Days</> },
+                { text: "Lead Collection Included" },
+                { text: "Mobile-Friendly" }
+              ].map((item, i) => (
+                <div key={i} className="group p-4 rounded-2xl bg-white/70 dark:bg-slate-950/20 backdrop-blur-sm border border-slate-100 dark:border-slate-800 shadow-sm flex items-center gap-3.5 transition-all duration-300 relative overflow-hidden hover:scale-[1.03] hover:-translate-y-1 hover:shadow-xl hover:shadow-purple-500/10 cursor-default">
+                  {/* Top Edge Glow */}
+                  <div className="absolute top-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-purple-400 to-indigo-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  {/* Icon Container with Pulse */}
+                  <div className="relative w-7 h-7 rounded-full bg-purple-50 flex items-center justify-center border border-purple-200 shrink-0">
+                    <div className="absolute inset-0 rounded-full border-2 border-purple-400 opacity-0 group-hover:animate-ping" />
+                    <CheckCircle2 className="w-4 h-4 text-[#4400AF] relative z-10" strokeWidth={3} />
+                  </div>
+                  
+                  <span className="text-[14px] font-semibold text-slate-800 dark:text-slate-200 relative z-10">{item.text}</span>
                 </div>
               ))}
             </motion.div>
