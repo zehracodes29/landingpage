@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/index.css"],"sourcesContent":["@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');\r\n\r\n@import \"tailwindcss\";\r\n\r\n@theme {\r\n  --font-sans: 'Inter', sans-serif;\r\n}\r\n\r\n/* \r\n  Removed the default Vite CSS template styles that were forcing #root to be a flex column, \r\n  restricting width, and applying global text-align: center. These were breaking the Tailwind \r\n  layout and causing the Hero components to stack vertically and overlap.\r\n*/\r\n"],"names":[],"mappings":"AAIA"}}]
+}
