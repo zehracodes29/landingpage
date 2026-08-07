@@ -6,23 +6,23 @@ import SectionTitle from '../../ui/SectionTitle';
 const steps = [
   {
     title: 'Step 1: Tell Us About Your Business',
-    description: 'Fill out our simple enquiry form with your business details, goals, and any specific requirements you have for your new website.'
+    description: 'Clarify the offer, audience, goals, and must-have page sections before design starts.'
   },
   {
     title: 'Step 2: Share Your Content',
-    description: 'Provide us with your logo, images, and any text you want to include. If you don\'t have professional photos, we can provide high-quality stock images.'
+    description: "Send your logo, photos and business details. Don't have everything ready? We'll guide you."
   },
   {
     title: 'Step 3: We Build Your Website',
-    description: 'Our team gets to work designing and developing your website. We ensure it looks professional, works perfectly on mobile, and is optimized for search engines.'
+    description: 'Our team designs and develops your business website based on your requirements.'
   },
   {
     title: 'Step 4: Review & Approve',
-    description: 'We share a preview link with you. You can review the website and request any minor adjustments before we make it live to the public.'
+    description: "We'll share the first version with you. Two revisions are included to make sure everything looks perfect."
   },
   {
     title: 'Step 5: Go Live',
-    description: 'Once you approve, we launch your website! You can start sharing it with customers and collecting leads through your new dashboard.'
+    description: 'Your website is published and ready to receive enquiries from your customers.'
   }
 ];
 
@@ -32,11 +32,14 @@ const Process = () => {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16 md:mb-24">
           <div className="mb-6">
-            <SectionBadge>HOW IT WORKS</SectionBadge>
+            <SectionBadge>Simple 5-Step Process</SectionBadge>
           </div>
           <SectionTitle>
-            Simple 5-Step Process
+            Getting Your Business Online Is Easier Than You Think
           </SectionTitle>
+          <p className="text-[17px] text-[#4B5563] leading-[1.6] max-w-2xl mx-auto mt-6">
+            From your first enquiry to a live website, we've made the entire process simple, transparent and stress-free.
+          </p>
         </div>
 
         <div className="relative">

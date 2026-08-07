@@ -2721,23 +2721,23 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionTitle$2e
 const steps = [
     {
         title: 'Step 1: Tell Us About Your Business',
-        description: 'Fill out our simple enquiry form with your business details, goals, and any specific requirements you have for your new website.'
+        description: 'Clarify the offer, audience, goals, and must-have page sections before design starts.'
     },
     {
         title: 'Step 2: Share Your Content',
-        description: 'Provide us with your logo, images, and any text you want to include. If you don\'t have professional photos, we can provide high-quality stock images.'
+        description: "Send your logo, photos and business details. Don't have everything ready? We'll guide you."
     },
     {
         title: 'Step 3: We Build Your Website',
-        description: 'Our team gets to work designing and developing your website. We ensure it looks professional, works perfectly on mobile, and is optimized for search engines.'
+        description: 'Our team designs and develops your business website based on your requirements.'
     },
     {
         title: 'Step 4: Review & Approve',
-        description: 'We share a preview link with you. You can review the website and request any minor adjustments before we make it live to the public.'
+        description: "We'll share the first version with you. Two revisions are included to make sure everything looks perfect."
     },
     {
         title: 'Step 5: Go Live',
-        description: 'Once you approve, we launch your website! You can start sharing it with customers and collecting leads through your new dashboard.'
+        description: 'Your website is published and ready to receive enquiries from your customers.'
     }
 ];
 const Process = ()=>{
@@ -2752,7 +2752,7 @@ const Process = ()=>{
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "mb-6",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                                children: "HOW IT WORKS"
+                                children: "Simple 5-Step Process"
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Process/Process.jsx",
                                 lineNumber: 35,
@@ -2764,10 +2764,18 @@ const Process = ()=>{
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionTitle$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
-                            children: "Simple 5-Step Process"
+                            children: "Getting Your Business Online Is Easier Than You Think"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
                             lineNumber: 37,
+                            columnNumber: 11
+                        }, ("TURBOPACK compile-time value", void 0)),
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                            className: "text-[17px] text-[#4B5563] leading-[1.6] max-w-2xl mx-auto mt-6",
+                            children: "From your first enquiry to a live website, we've made the entire process simple, transparent and stress-free."
+                        }, void 0, false, {
+                            fileName: "[project]/src/components/Process/Process.jsx",
+                            lineNumber: 40,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
@@ -2783,14 +2791,14 @@ const Process = ()=>{
                             className: "absolute left-[27px] top-0 bottom-0 w-[2px] bg-[#F4EEFF] md:hidden"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
-                            lineNumber: 44,
+                            lineNumber: 47,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "hidden md:block absolute top-[27px] left-[10%] right-[10%] h-[2px] bg-[#F4EEFF]"
                         }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
-                            lineNumber: 47,
+                            lineNumber: 50,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2820,12 +2828,12 @@ const Process = ()=>{
                                                 className: "w-5 h-5 rounded-full bg-[#4400AF]"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/components/Process/Process.jsx",
-                                                lineNumber: 61,
+                                                lineNumber: 64,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Process/Process.jsx",
-                                            lineNumber: 60,
+                                            lineNumber: 63,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2838,7 +2846,7 @@ const Process = ()=>{
                                                         children: step.title
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Process/Process.jsx",
-                                                        lineNumber: 67,
+                                                        lineNumber: 70,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0)),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2846,35 +2854,35 @@ const Process = ()=>{
                                                         children: step.description
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/Process/Process.jsx",
-                                                        lineNumber: 70,
+                                                        lineNumber: 73,
                                                         columnNumber: 21
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/components/Process/Process.jsx",
-                                                lineNumber: 66,
+                                                lineNumber: 69,
                                                 columnNumber: 19
                                             }, ("TURBOPACK compile-time value", void 0))
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Process/Process.jsx",
-                                            lineNumber: 65,
+                                            lineNumber: 68,
                                             columnNumber: 17
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, index, true, {
                                     fileName: "[project]/src/components/Process/Process.jsx",
-                                    lineNumber: 51,
+                                    lineNumber: 54,
                                     columnNumber: 15
                                 }, ("TURBOPACK compile-time value", void 0)))
                         }, void 0, false, {
                             fileName: "[project]/src/components/Process/Process.jsx",
-                            lineNumber: 49,
+                            lineNumber: 52,
                             columnNumber: 11
                         }, ("TURBOPACK compile-time value", void 0))
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Process/Process.jsx",
-                    lineNumber: 42,
+                    lineNumber: 45,
                     columnNumber: 9
                 }, ("TURBOPACK compile-time value", void 0))
             ]
