@@ -59,7 +59,7 @@ const plans = [
 
 const Pricing = () => {
   return (
-    <section className="py-24 bg-[#FAF9F7] font-sans">
+    <section id="pricing" className="py-24 bg-[#FAF9F7] font-sans">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-16 flex flex-col items-center">
           <h2 className="text-[32px] md:text-[36px] font-[800] text-[#111827] tracking-tight leading-tight mb-4">
