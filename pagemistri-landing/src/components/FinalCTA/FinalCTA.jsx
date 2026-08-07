@@ -25,16 +25,29 @@ const FinalCTA = () => {
             Tell us about your business today and get a custom, high-converting website delivered in 3–5 days.
           </p>
 
-          {/* CTA Button */}
-          <button 
-            onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
-            className="relative z-10 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2"
-          >
-            Get Your Website Built <span>&rarr;</span>
-          </button>
+          {/* CTA Buttons */}
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-3xl mx-auto">
+            <button 
+              onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full md:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
+            >
+              Get Your Website Built <span>&rarr;</span>
+            </button>
+            <button 
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="w-full md:w-auto border border-purple-400/40 hover:bg-purple-500/10 text-purple-200 font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
+            >
+              Explore Self-Serve Packages <span>&rarr;</span>
+            </button>
+          </div>
+
+          {/* DIY Note */}
+          <p className="text-[13.5px] text-purple-200/70 max-w-2xl mx-auto mt-6 text-center relative z-10 leading-relaxed">
+            Prefer a DIY approach? If you don't need our one-time website delivery service, you can also build your landing page yourself using our two self-serve package options.
+          </p>
 
           {/* Trust Badges */}
-          <div className="flex flex-wrap justify-center gap-6 text-[13px] font-medium text-slate-300 mt-8 relative z-10">
+          <div className="flex flex-wrap justify-center gap-6 text-[13px] font-medium text-slate-300 mt-6 relative z-10">
             <span className="flex items-center gap-1.5"><span className="text-purple-400">✓</span> Quick 3-5 Day Delivery</span>
             <span className="flex items-center gap-1.5"><span className="text-purple-400">✓</span> Mobile & SEO Optimized</span>
             <span className="flex items-center gap-1.5"><span className="text-purple-400">✓</span> No Hidden Charges</span>
