@@ -34,7 +34,7 @@ const Pricing = () => {
         'Payment Gateway integration'
       ],
       buttonText: 'Get started',
-      popular: false,
+      popular: true,
     },
     {
       name: 'Hosted on Your Brand',
@@ -50,7 +50,7 @@ const Pricing = () => {
         'Payment Gateway integration'
       ],
       buttonText: 'Get started',
-      popular: true,
+      popular: false,
     }
   ];
 
