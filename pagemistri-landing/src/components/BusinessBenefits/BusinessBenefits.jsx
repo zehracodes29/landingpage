@@ -89,7 +89,7 @@ const BusinessBenefits = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="w-full lg:w-[65%] relative mt-16 lg:mt-0 lg:-ml-[10%]"
+            className="w-full lg:w-[60%] relative mt-16 lg:mt-0 lg:-ml-[5%]"
           >
             {/* Image Container with seamless fade masks */}
             <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
