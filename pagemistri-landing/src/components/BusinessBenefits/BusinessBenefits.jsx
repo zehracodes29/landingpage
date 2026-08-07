@@ -7,7 +7,7 @@ const BusinessBenefits = () => {
   return (
     <section className="relative bg-[#FAF9F7] py-16 md:py-24 overflow-hidden font-sans">
       <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
-        <div className="flex flex-col lg:flex-row items-center justify-between lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
           
           {/* Left Column */}
           <motion.div 
@@ -15,7 +15,7 @@ const BusinessBenefits = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.7, ease: "easeOut" }}
-            className="w-full lg:w-[45%] flex flex-col items-start gap-8 z-20 relative"
+            className="w-full lg:col-span-5 flex flex-col items-start gap-8 z-20 relative"
           >
             {/* Header Content */}
             <div className="flex flex-col gap-4 w-full">
@@ -89,7 +89,7 @@ const BusinessBenefits = () => {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="w-full lg:w-[50%] relative mt-16 lg:mt-0"
+            className="w-full lg:col-span-6 lg:col-start-7 relative mt-16 lg:mt-0 overflow-hidden lg:rounded-l-2xl"
           >
             {/* Image Container with seamless fade masks */}
             <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">

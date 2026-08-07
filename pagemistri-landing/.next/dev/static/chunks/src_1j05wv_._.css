@@ -805,6 +805,10 @@
     gap: calc(var(--spacing) * 8);
   }
 
+  .gap-12 {
+    gap: calc(var(--spacing) * 12);
+  }
+
   .gap-16 {
     gap: calc(var(--spacing) * 16);
   }
@@ -1699,6 +1703,18 @@
   }
 
   @media (min-width: 64rem) {
+    .lg\:col-span-5 {
+      grid-column: span 5 / span 5;
+    }
+
+    .lg\:col-span-6 {
+      grid-column: span 6 / span 6;
+    }
+
+    .lg\:col-start-7 {
+      grid-column-start: 7;
+    }
+
     .lg\:mt-0 {
       margin-top: 0;
     }
@@ -1743,12 +1759,20 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .lg\:grid-cols-12 {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
     .lg\:flex-row {
       flex-direction: row;
     }
 
     .lg\:gap-12 {
       gap: calc(var(--spacing) * 12);
+    }
+
+    .lg\:gap-16 {
+      gap: calc(var(--spacing) * 16);
     }
 
     .lg\:gap-20 {
@@ -1759,9 +1783,19 @@
       border-radius: 0;
     }
 
+    .lg\:rounded-l-2xl {
+      border-top-left-radius: var(--radius-2xl);
+      border-bottom-left-radius: var(--radius-2xl);
+    }
+
     .lg\:rounded-l-3xl {
       border-top-left-radius: var(--radius-3xl);
       border-bottom-left-radius: var(--radius-3xl);
+    }
+
+    .lg\:rounded-l-xl {
+      border-top-left-radius: var(--radius-xl);
+      border-bottom-left-radius: var(--radius-xl);
     }
 
     .lg\:px-8 {
