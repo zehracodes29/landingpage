@@ -1026,39 +1026,140 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 ;
 const FinalCTA = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-        className: "py-24 bg-[#F4EEFF]",
+        className: "py-24 bg-[#FAF9F7] font-sans",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-3xl mx-auto px-6 lg:px-8 text-center",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                    className: "text-[32px] md:text-[40px] font-bold text-[#111827] tracking-tight leading-tight mb-4",
-                    children: "Let's Build Your Business Website"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
-                    lineNumber: 7,
-                    columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0)),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                    className: "text-[#4B5563] text-[15px] md:text-[16px] max-w-xl mx-auto mb-8 leading-relaxed",
-                    children: "Tell us about your business today. We'll take care of the website so you can focus on what you do best."
-                }, void 0, false, {
-                    fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
-                    lineNumber: 10,
-                    columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0)),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                    onClick: ()=>document.getElementById('lead-form')?.scrollIntoView({
-                            behavior: 'smooth'
-                        }),
-                    className: "px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-xl hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300",
-                    children: "Let's Build Your Business Website"
-                }, void 0, false, {
-                    fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
-                    lineNumber: 13,
-                    columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0))
-            ]
-        }, void 0, true, {
+            className: "max-w-5xl mx-auto px-6 lg:px-8",
+            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-8 md:p-14 shadow-2xl relative overflow-hidden text-center flex flex-col items-center",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "absolute -top-24 -right-24 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 10,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "absolute -bottom-24 -left-24 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 11,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                        className: "px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 mb-6 inline-block relative z-10",
+                        children: "⚡ Ready to get started?"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 14,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                        className: "text-[32px] md:text-[44px] font-extrabold tracking-tight leading-tight mb-6 relative z-10 max-w-3xl",
+                        children: "Ready to Transform Your Online Presence?"
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 19,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "text-[16px] md:text-[18px] text-slate-300 max-w-2xl mx-auto mb-10 leading-relaxed relative z-10",
+                        children: "Tell us about your business today and get a custom, high-converting website delivered in 3–5 days."
+                    }, void 0, false, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 24,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                        onClick: ()=>document.getElementById('lead-form')?.scrollIntoView({
+                                behavior: 'smooth'
+                            }),
+                        className: "relative z-10 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2",
+                        children: [
+                            "Get Your Website Built ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                children: "→"
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                lineNumber: 33,
+                                columnNumber: 36
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 29,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex flex-wrap justify-center gap-6 text-[13px] font-medium text-slate-300 mt-8 relative z-10",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "flex items-center gap-1.5",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-purple-400",
+                                        children: "✓"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                        lineNumber: 38,
+                                        columnNumber: 57
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    " Quick 3-5 Day Delivery"
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                lineNumber: 38,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "flex items-center gap-1.5",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-purple-400",
+                                        children: "✓"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                        lineNumber: 39,
+                                        columnNumber: 57
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    " Mobile & SEO Optimized"
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                lineNumber: 39,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0)),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "flex items-center gap-1.5",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                        className: "text-purple-400",
+                                        children: "✓"
+                                    }, void 0, false, {
+                                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                        lineNumber: 40,
+                                        columnNumber: 57
+                                    }, ("TURBOPACK compile-time value", void 0)),
+                                    " No Hidden Charges"
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                                lineNumber: 40,
+                                columnNumber: 13
+                            }, ("TURBOPACK compile-time value", void 0))
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                        lineNumber: 37,
+                        columnNumber: 11
+                    }, ("TURBOPACK compile-time value", void 0))
+                ]
+            }, void 0, true, {
+                fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
+                lineNumber: 7,
+                columnNumber: 9
+            }, ("TURBOPACK compile-time value", void 0))
+        }, void 0, false, {
             fileName: "[project]/src/components/FinalCTA/FinalCTA.jsx",
             lineNumber: 6,
             columnNumber: 7
