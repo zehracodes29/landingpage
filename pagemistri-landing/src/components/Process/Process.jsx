@@ -61,8 +61,8 @@ const Process = () => {
         {/* Timeline Container */}
         <div ref={containerRef} className="relative max-w-6xl mx-auto">
           
-          {/* Desktop View (Horizontal Grid - lg and up) */}
-          <div className="hidden lg:block relative pt-8">
+          {/* Desktop View (Horizontal Grid - md and up) */}
+          <div className="hidden md:block relative pt-8">
             {/* Background Line */}
             <div className="absolute top-[58px] left-[10%] right-[10%] h-0.5 bg-slate-200 dark:bg-slate-800" />
             
@@ -101,33 +101,37 @@ const Process = () => {
             </div>
           </div>
 
-          {/* Mobile & Tablet View (Horizontal Carousel - below lg) */}
-          <div className="lg:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 py-4 -mx-4 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
-            {steps.map((step, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="snap-center shrink-0 w-[280px] flex flex-col bg-white p-6 rounded-2xl border border-slate-200 shadow-sm relative group"
-              >
-                {/* Node */}
-                <div className="w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-base font-bold text-purple-600 mb-5">
-                  {step.num}
-                </div>
-                
-                {/* Content */}
-                <div>
-                  <h3 className="text-base font-bold text-slate-900 mb-2">
-                    {step.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
+          {/* Mobile View (Vertical Timeline - below md) */}
+          <div className="md:hidden block relative mt-2 mb-4 px-2">
+            <div className="absolute left-[23px] top-6 bottom-6 w-0.5 bg-gradient-to-b from-purple-600 via-indigo-500 to-purple-300" />
+            
+            <div className="flex flex-col gap-5 relative">
+              {steps.map((step, index) => (
+                <motion.div 
+                  key={index}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: index * 0.1 }}
+                  className="flex items-start gap-4 relative group"
+                >
+                  {/* Node */}
+                  <div className="flex items-center justify-center w-8 h-8 shrink-0 bg-white dark:bg-slate-900 border-2 border-purple-600 p-1.5 rounded-full shadow-md z-10 mt-2">
+                    <span className="text-xs font-bold text-purple-600">{step.num}</span>
+                  </div>
+                  
+                  {/* Content Card */}
+                  <div className="bg-slate-50 dark:bg-slate-900/60 p-4 rounded-2xl border border-slate-200/60 dark:border-slate-800 shadow-sm flex-1">
+                    <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-1.5">
+                      {step.title}
+                    </h3>
+                    <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+                      {step.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
 
         </div>
