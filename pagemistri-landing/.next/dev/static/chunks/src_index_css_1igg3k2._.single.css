@@ -2398,6 +2398,14 @@
       margin-top: 0;
     }
 
+    .lg\:block {
+      display: block;
+    }
+
+    .lg\:hidden {
+      display: none;
+    }
+
     .lg\:h-\[700px\] {
       height: 700px;
     }

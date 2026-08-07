@@ -61,8 +61,8 @@ const Process = () => {
         {/* Timeline Container */}
         <div ref={containerRef} className="relative max-w-6xl mx-auto">
           
-          {/* Desktop/Tablet View (Horizontal Grid) */}
-          <div className="hidden md:block relative pt-8">
+          {/* Desktop View (Horizontal Grid - lg and up) */}
+          <div className="hidden lg:block relative pt-8">
             {/* Background Line */}
             <div className="absolute top-[58px] left-[10%] right-[10%] h-0.5 bg-slate-200 dark:bg-slate-800" />
             
@@ -101,8 +101,8 @@ const Process = () => {
             </div>
           </div>
 
-          {/* Mobile View (Horizontal Carousel) */}
-          <div className="md:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 py-4 -mx-4 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
+          {/* Mobile & Tablet View (Horizontal Carousel - below lg) */}
+          <div className="lg:hidden flex overflow-x-auto snap-x snap-mandatory gap-6 px-4 py-4 -mx-4 pb-8" style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}>
             {steps.map((step, index) => (
               <motion.div 
                 key={index}
