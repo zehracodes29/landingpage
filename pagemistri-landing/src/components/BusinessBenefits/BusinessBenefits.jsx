@@ -6,8 +6,8 @@ import image1 from '../../assets/images/image1.png';
 const BusinessBenefits = () => {
   return (
     <section className="relative bg-[#FAF9F7] py-16 md:py-24 overflow-hidden font-sans">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
+        <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-24">
           
           {/* Left Column */}
           <motion.div 
@@ -91,18 +91,14 @@ const BusinessBenefits = () => {
             transition={{ duration: 1, ease: "easeOut" }}
             className="w-full lg:col-span-6 lg:col-start-7 relative mt-16 lg:mt-0 overflow-hidden lg:rounded-l-2xl"
           >
-            {/* Image Container with seamless fade masks */}
+            {/* Image Container */}
             <div className="relative w-full h-[500px] md:h-[600px] lg:h-[700px]">
               <img 
                 src={image1.src} 
                 alt="Business Owner working" 
-                className="w-full h-full object-cover rounded-3xl lg:rounded-none lg:rounded-l-3xl"
+                className="w-full h-full object-cover rounded-3xl lg:rounded-none lg:rounded-l-2xl"
                 style={{ objectPosition: '70% center' }}
               />
-              {/* Fade masks to blend into background on desktop */}
-              <div className="hidden lg:block absolute inset-0 bg-gradient-to-r from-[#FAF9F7] via-transparent to-transparent w-[30%]" />
-              <div className="hidden lg:block absolute inset-0 bg-gradient-to-t from-[#FAF9F7] via-transparent to-transparent h-full" />
-              <div className="hidden lg:block absolute inset-0 bg-gradient-to-b from-[#FAF9F7] via-transparent to-transparent h-[15%]" />
             </div>
           </motion.div>
 

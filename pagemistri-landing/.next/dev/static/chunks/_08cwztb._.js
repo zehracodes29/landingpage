@@ -156,9 +156,9 @@ const BusinessBenefits = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         className: "relative bg-[#FAF9F7] py-16 md:py-24 overflow-hidden font-sans",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-[1280px] mx-auto px-6 md:px-8 lg:px-[32px] w-full",
+            className: "max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16",
+                className: "grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-24",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                         initial: {
@@ -416,42 +416,19 @@ const BusinessBenefits = ()=>{
                         className: "w-full lg:col-span-6 lg:col-start-7 relative mt-16 lg:mt-0 overflow-hidden lg:rounded-l-2xl",
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "relative w-full h-[500px] md:h-[600px] lg:h-[700px]",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                                    src: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$images$2f$image1$2e$png$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$src$2f$assets$2f$images$2f$image1$2e$png__$28$static__in__ecmascript$2c$__tag__client$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object__with__data__url$2c$__ecmascript$29$__["default"].src,
-                                    alt: "Business Owner working",
-                                    className: "w-full h-full object-cover rounded-3xl lg:rounded-none lg:rounded-l-3xl",
-                                    style: {
-                                        objectPosition: '70% center'
-                                    }
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/BusinessBenefits/BusinessBenefits.jsx",
-                                    lineNumber: 96,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "hidden lg:block absolute inset-0 bg-gradient-to-r from-[#FAF9F7] via-transparent to-transparent w-[30%]"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/BusinessBenefits/BusinessBenefits.jsx",
-                                    lineNumber: 103,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "hidden lg:block absolute inset-0 bg-gradient-to-t from-[#FAF9F7] via-transparent to-transparent h-full"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/BusinessBenefits/BusinessBenefits.jsx",
-                                    lineNumber: 104,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0)),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "hidden lg:block absolute inset-0 bg-gradient-to-b from-[#FAF9F7] via-transparent to-transparent h-[15%]"
-                                }, void 0, false, {
-                                    fileName: "[project]/src/components/BusinessBenefits/BusinessBenefits.jsx",
-                                    lineNumber: 105,
-                                    columnNumber: 15
-                                }, ("TURBOPACK compile-time value", void 0))
-                            ]
-                        }, void 0, true, {
+                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                                src: __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$assets$2f$images$2f$image1$2e$png$2e$mjs__$7b$__IMAGE__$3d3e$__$225b$project$5d2f$src$2f$assets$2f$images$2f$image1$2e$png__$28$static__in__ecmascript$2c$__tag__client$2922$__$7d$__$5b$app$2d$client$5d$__$28$structured__image__object__with__data__url$2c$__ecmascript$29$__["default"].src,
+                                alt: "Business Owner working",
+                                className: "w-full h-full object-cover rounded-3xl lg:rounded-none lg:rounded-l-2xl",
+                                style: {
+                                    objectPosition: '70% center'
+                                }
+                            }, void 0, false, {
+                                fileName: "[project]/src/components/BusinessBenefits/BusinessBenefits.jsx",
+                                lineNumber: 96,
+                                columnNumber: 15
+                            }, ("TURBOPACK compile-time value", void 0))
+                        }, void 0, false, {
                             fileName: "[project]/src/components/BusinessBenefits/BusinessBenefits.jsx",
                             lineNumber: 95,
                             columnNumber: 13

@@ -703,6 +703,10 @@
     max-width: 1400px;
   }
 
+  .max-w-\[1440px\] {
+    max-width: 1440px;
+  }
+
   .max-w-xl {
     max-width: var(--container-xl);
   }
@@ -1777,6 +1781,10 @@
 
     .lg\:gap-20 {
       gap: calc(var(--spacing) * 20);
+    }
+
+    .lg\:gap-24 {
+      gap: calc(var(--spacing) * 24);
     }
 
     .lg\:rounded-none {
