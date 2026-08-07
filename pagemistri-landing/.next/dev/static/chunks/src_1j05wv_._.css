@@ -1437,8 +1437,16 @@
     padding-top: calc(var(--spacing) * 24);
   }
 
+  .pt-32 {
+    padding-top: calc(var(--spacing) * 32);
+  }
+
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
+  }
+
+  .pb-12 {
+    padding-bottom: calc(var(--spacing) * 12);
   }
 
   .pb-20 {
@@ -2189,6 +2197,10 @@
 
     .md\:py-28 {
       padding-block: calc(var(--spacing) * 28);
+    }
+
+    .md\:pb-16 {
+      padding-bottom: calc(var(--spacing) * 16);
     }
 
     .md\:text-center {
