@@ -786,6 +786,10 @@
     min-height: 500px;
   }
 
+  .min-h-screen {
+    min-height: 100vh;
+  }
+
   .w-0\.5 {
     width: calc(var(--spacing) * .5);
   }

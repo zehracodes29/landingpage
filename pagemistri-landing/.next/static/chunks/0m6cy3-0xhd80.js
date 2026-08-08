@@ -1,1 +1,0 @@
-(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,76325,o=>{"use strict";o.i(70644);let t=Error("Cannot find module '../src/App'");throw t.code="MODULE_NOT_FOUND",t}]);

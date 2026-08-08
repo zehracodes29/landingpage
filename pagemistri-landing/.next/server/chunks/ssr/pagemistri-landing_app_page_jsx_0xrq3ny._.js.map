@@ -1,1 +1,0 @@
-{"version":3,"sources":["../../../../../pagemistri-landing/app/page.jsx"],"sourcesContent":["'use client';\n\nimport App from '../src/App';\n\nexport default function Page() {\n  return <App />;\n}\n"],"names":["Page","App"],"mappings":""}
