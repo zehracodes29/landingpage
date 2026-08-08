@@ -1180,6 +1180,10 @@
     border-color: var(--color-gray-100);
   }
 
+  .border-purple-100 {
+    border-color: var(--color-purple-100);
+  }
+
   .border-purple-400\/40 {
     border-color: #c07eff66;
   }
@@ -1268,6 +1272,10 @@
     .bg-indigo-500\/20 {
       background-color: color-mix(in oklab, var(--color-indigo-500) 20%, transparent);
     }
+  }
+
+  .bg-purple-50 {
+    background-color: var(--color-purple-50);
   }
 
   .bg-purple-100 {
@@ -1864,6 +1872,10 @@
 
   .opacity-5 {
     opacity: .05;
+  }
+
+  .opacity-50 {
+    opacity: .5;
   }
 
   .opacity-70 {
@@ -2649,6 +2661,11 @@
 
 html {
   scroll-behavior: smooth;
+}
+
+body {
+  color: #0f172a;
+  background-color: #f8fafc;
 }
 
 @property --tw-translate-x {

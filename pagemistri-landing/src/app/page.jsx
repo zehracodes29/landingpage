@@ -11,17 +11,17 @@ import FAQ from '../components/FAQ/FAQ';
 import Footer from '../components/Footer';
 
 export default function Home() {
-  return (
-    <main className="min-h-screen bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-50">
-      <Navbar/>
-      <Hero/>
-      <WhatsIncluded/>
-      <DomainCTA/>
-      <HowItWorks/>
-      <BusinessBenefits/>
-      <Pricing/>
-      <FAQ/>
-      <Footer/>
-    </main>
-  );
+ return (
+ <main className="min-h-screen bg-slate-50 text-slate-900 ">
+ <Navbar/>
+ <Hero/>
+ <WhatsIncluded/>
+ <DomainCTA/>
+ <HowItWorks/>
+ <BusinessBenefits/>
+ <Pricing/>
+ <FAQ/>
+ <Footer/>
+ </main>
+ );
 }

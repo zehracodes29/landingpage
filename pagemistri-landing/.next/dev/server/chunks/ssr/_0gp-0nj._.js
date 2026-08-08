@@ -28,12 +28,12 @@ function RootLayout({ children }) {
         }, void 0, false, {
             fileName: "[project]/src/app/layout.jsx",
             lineNumber: 11,
-            columnNumber: 7
+            columnNumber: 2
         }, this)
     }, void 0, false, {
         fileName: "[project]/src/app/layout.jsx",
         lineNumber: 10,
-        columnNumber: 5
+        columnNumber: 2
     }, this);
 }
 }),
