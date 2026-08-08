@@ -105,7 +105,7 @@
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\bintezehra\\Documents\\landingpage",
+    "outputFileTracingRoot": "C:\\Users\\bintezehra\\Documents\\landingpage\\pagemistri-landing",
     "enablePrerenderSourceMaps": true,
     "cacheComponents": false,
     "cacheLife": {
@@ -320,14 +320,14 @@
     "htmlLimitedBots": "[\\w-]+-Google|Google-[\\w-]+|Chrome-Lighthouse|Slurp|DuckDuckBot|baiduspider|yandex|sogou|bitlybot|tumblr|vkShare|quora link preview|redditbot|ia_archiver|Bingbot|BingPreview|applebot|facebookexternalhit|facebookcatalog|Twitterbot|LinkedInBot|Slackbot|Discordbot|WhatsApp|SkypeUriPreview|Yeti|googleweblight",
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.mjs",
-    "repoRoot": "C:\\Users\\bintezehra\\Documents\\landingpage",
     "turbopack": {
-      "root": "C:\\Users\\bintezehra\\Documents\\landingpage"
+      "root": "C:\\Users\\bintezehra\\Documents\\landingpage\\pagemistri-landing"
     },
+    "repoRoot": "C:\\Users\\bintezehra\\Documents\\landingpage\\pagemistri-landing",
     "distDirRoot": ".next"
   },
   "appDir": "C:\\Users\\bintezehra\\Documents\\landingpage\\pagemistri-landing",
-  "relativeAppDir": "pagemistri-landing",
+  "relativeAppDir": "",
   "files": [
     ".next\\package.json",
     ".next\\routes-manifest.json",
