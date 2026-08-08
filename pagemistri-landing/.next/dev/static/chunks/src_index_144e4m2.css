@@ -1765,6 +1765,10 @@
     color: #9ca3af;
   }
 
+  .text-\[\#25D366\] {
+    color: #25d366;
+  }
+
   .text-\[\#4400AF\] {
     color: #4400af;
   }
@@ -2149,6 +2153,14 @@
       --tw-gradient-stops: var(--tw-gradient-via-stops, var(--tw-gradient-position), var(--tw-gradient-from) var(--tw-gradient-from-position), var(--tw-gradient-to) var(--tw-gradient-to-position));
     }
 
+    .hover\:text-\[\#1ebd5a\]:hover {
+      color: #1ebd5a;
+    }
+
+    .hover\:text-\[\#4B5563\]:hover {
+      color: #4b5563;
+    }
+
     .hover\:text-\[\#4400AF\]:hover {
       color: #4400af;
     }
@@ -2309,6 +2321,10 @@
 
     .md\:justify-start {
       justify-content: flex-start;
+    }
+
+    .md\:gap-8 {
+      gap: calc(var(--spacing) * 8);
     }
 
     .md\:p-10 {
