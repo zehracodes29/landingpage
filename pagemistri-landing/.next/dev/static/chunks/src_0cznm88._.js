@@ -1609,6 +1609,9 @@ const LeadForm = ()=>{
         message: ""
     });
     const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
+    const [isSubmitting, setIsSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [submitStatus, setSubmitStatus] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(null);
+    const [submitMessage, setSubmitMessage] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])("");
     const handleInputChange = (e)=>{
         const { name, value, type, checked } = e.target;
         if (type === 'checkbox') {
@@ -1667,10 +1670,46 @@ const LeadForm = ()=>{
     const handleBack = ()=>{
         setStep(1);
     };
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
         if (validateStep2()) {
-            console.log(formData);
+            setIsSubmitting(true);
+            setSubmitStatus(null);
+            const payload = {
+                full_name: formData.fullName,
+                business_name: formData.businessName,
+                email: formData.email,
+                phone_number: formData.phone,
+                business_category: formData.category,
+                what_do_you_offer: formData.offering,
+                has_website: formData.hasWebsite,
+                has_domain: formData.hasDomain,
+                reasons_for_website: formData.websiteGoals,
+                existing_website_url: formData.websiteUrl,
+                website_description: formData.websiteDescription,
+                message: formData.message
+            };
+            try {
+                const response = await fetch('https://pagemistri.in/submit-lead.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                if (response.ok) {
+                    setSubmitStatus('success');
+                    setSubmitMessage("Thank you! Your inquiry has been submitted. We'll be in touch soon.");
+                } else {
+                    setSubmitStatus('error');
+                    setSubmitMessage("Something went wrong. Please try again later.");
+                }
+            } catch (error) {
+                setSubmitStatus('error');
+                setSubmitMessage("Failed to submit. Please check your connection and try again.");
+            } finally{
+                setIsSubmitting(false);
+            }
         }
     };
     const slideVariants = {
@@ -1699,7 +1738,7 @@ const LeadForm = ()=>{
                         children: "Tell Us About Your Business"
                     }, void 0, false, {
                         fileName: "[project]/src/components/LeadForm.jsx",
-                        lineNumber: 106,
+                        lineNumber: 148,
                         columnNumber: 2
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1707,13 +1746,13 @@ const LeadForm = ()=>{
                         children: "Fill out the quick form below to start your custom website build."
                     }, void 0, false, {
                         fileName: "[project]/src/components/LeadForm.jsx",
-                        lineNumber: 109,
+                        lineNumber: 151,
                         columnNumber: 2
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/LeadForm.jsx",
-                lineNumber: 105,
+                lineNumber: 147,
                 columnNumber: 2
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1723,7 +1762,7 @@ const LeadForm = ()=>{
                         className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-[3rem] blur-[80px] opacity-70 -z-10 pointer-events-none"
                     }, void 0, false, {
                         fileName: "[project]/src/components/LeadForm.jsx",
-                        lineNumber: 115,
+                        lineNumber: 157,
                         columnNumber: 2
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1740,33 +1779,33 @@ const LeadForm = ()=>{
                                                     className: "h-3 w-3 rounded-full bg-purple-600 ring-4 ring-purple-100 "
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 124,
+                                                    lineNumber: 166,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "h-1 w-10 rounded-full bg-purple-100 "
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 125,
+                                                    lineNumber: 167,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                            lineNumber: 123,
+                                            lineNumber: 165,
                                             columnNumber: 2
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "h-2.5 w-2.5 rounded-full bg-slate-200 "
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                            lineNumber: 127,
+                                            lineNumber: 169,
                                             columnNumber: 2
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                    lineNumber: 122,
+                                    lineNumber: 164,
                                     columnNumber: 2
                                 }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
                                     children: [
@@ -1777,38 +1816,38 @@ const LeadForm = ()=>{
                                                     className: "h-2.5 w-2.5 rounded-full bg-purple-600"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 132,
+                                                    lineNumber: 174,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                                     className: "h-1 w-10 rounded-full bg-purple-600"
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 133,
+                                                    lineNumber: 175,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                            lineNumber: 131,
+                                            lineNumber: 173,
                                             columnNumber: 2
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "h-3 w-3 rounded-full bg-purple-600 ring-4 ring-purple-100 "
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                            lineNumber: 135,
+                                            lineNumber: 177,
                                             columnNumber: 2
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                    lineNumber: 130,
+                                    lineNumber: 172,
                                     columnNumber: 2
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/LeadForm.jsx",
-                                lineNumber: 120,
+                                lineNumber: 162,
                                 columnNumber: 2
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1835,12 +1874,12 @@ const LeadForm = ()=>{
                                                         children: "TELL US ABOUT YOUR BUSINESS"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/LeadForm.jsx",
-                                                        lineNumber: 153,
+                                                        lineNumber: 195,
                                                         columnNumber: 2
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 152,
+                                                    lineNumber: 194,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -1864,13 +1903,13 @@ const LeadForm = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 162,
+                                                                                    lineNumber: 204,
                                                                                     columnNumber: 12
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 161,
+                                                                            lineNumber: 203,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1882,7 +1921,7 @@ const LeadForm = ()=>{
                                                                             className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 164,
+                                                                            lineNumber: 206,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.fullName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1890,13 +1929,13 @@ const LeadForm = ()=>{
                                                                             children: errors.fullName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 172,
+                                                                            lineNumber: 214,
                                                                             columnNumber: 22
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 160,
+                                                                    lineNumber: 202,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1910,13 +1949,13 @@ const LeadForm = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 177,
+                                                                                    lineNumber: 219,
                                                                                     columnNumber: 16
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 176,
+                                                                            lineNumber: 218,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1928,7 +1967,7 @@ const LeadForm = ()=>{
                                                                             className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 179,
+                                                                            lineNumber: 221,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.businessName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1936,19 +1975,19 @@ const LeadForm = ()=>{
                                                                             children: errors.businessName
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 187,
+                                                                            lineNumber: 229,
                                                                             columnNumber: 26
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 175,
+                                                                    lineNumber: 217,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 159,
+                                                            lineNumber: 201,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1965,13 +2004,13 @@ const LeadForm = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 194,
+                                                                                    lineNumber: 236,
                                                                                     columnNumber: 8
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 193,
+                                                                            lineNumber: 235,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -1983,7 +2022,7 @@ const LeadForm = ()=>{
                                                                             className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 196,
+                                                                            lineNumber: 238,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.email && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -1991,13 +2030,13 @@ const LeadForm = ()=>{
                                                                             children: errors.email
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 204,
+                                                                            lineNumber: 246,
                                                                             columnNumber: 19
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 192,
+                                                                    lineNumber: 234,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2011,13 +2050,13 @@ const LeadForm = ()=>{
                                                                                     children: "*"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 209,
+                                                                                    lineNumber: 251,
                                                                                     columnNumber: 15
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 208,
+                                                                            lineNumber: 250,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2029,7 +2068,7 @@ const LeadForm = ()=>{
                                                                             className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 211,
+                                                                            lineNumber: 253,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         errors.phone && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2037,19 +2076,19 @@ const LeadForm = ()=>{
                                                                             children: errors.phone
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 219,
+                                                                            lineNumber: 261,
                                                                             columnNumber: 19
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 207,
+                                                                    lineNumber: 249,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 191,
+                                                            lineNumber: 233,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2063,13 +2102,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 225,
+                                                                            lineNumber: 267,
                                                                             columnNumber: 20
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 224,
+                                                                    lineNumber: 266,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
@@ -2090,7 +2129,7 @@ const LeadForm = ()=>{
                                                                             children: "Select category"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 234,
+                                                                            lineNumber: 276,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2098,7 +2137,7 @@ const LeadForm = ()=>{
                                                                             children: "Coach / Consultant"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 235,
+                                                                            lineNumber: 277,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2106,7 +2145,7 @@ const LeadForm = ()=>{
                                                                             children: "Healthcare"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 236,
+                                                                            lineNumber: 278,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2114,7 +2153,7 @@ const LeadForm = ()=>{
                                                                             children: "Real Estate"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 237,
+                                                                            lineNumber: 279,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2122,7 +2161,7 @@ const LeadForm = ()=>{
                                                                             children: "Restaurant / Café"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 238,
+                                                                            lineNumber: 280,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2130,7 +2169,7 @@ const LeadForm = ()=>{
                                                                             children: "Salon / Spa"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 239,
+                                                                            lineNumber: 281,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2138,7 +2177,7 @@ const LeadForm = ()=>{
                                                                             children: "Education"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 240,
+                                                                            lineNumber: 282,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2146,7 +2185,7 @@ const LeadForm = ()=>{
                                                                             children: "Retail Store"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 241,
+                                                                            lineNumber: 283,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2154,13 +2193,13 @@ const LeadForm = ()=>{
                                                                             children: "Other"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 242,
+                                                                            lineNumber: 284,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 227,
+                                                                    lineNumber: 269,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.category && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2168,13 +2207,13 @@ const LeadForm = ()=>{
                                                                     children: errors.category
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 244,
+                                                                    lineNumber: 286,
                                                                     columnNumber: 22
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 223,
+                                                            lineNumber: 265,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2188,13 +2227,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 249,
+                                                                            lineNumber: 291,
                                                                             columnNumber: 21
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 248,
+                                                                    lineNumber: 290,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2206,7 +2245,7 @@ const LeadForm = ()=>{
                                                                     className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 251,
+                                                                    lineNumber: 293,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.offering && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2214,13 +2253,13 @@ const LeadForm = ()=>{
                                                                     children: errors.offering
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 259,
+                                                                    lineNumber: 301,
                                                                     columnNumber: 22
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 247,
+                                                            lineNumber: 289,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2231,24 +2270,24 @@ const LeadForm = ()=>{
                                                                 children: "Next"
                                                             }, void 0, false, {
                                                                 fileName: "[project]/src/components/LeadForm.jsx",
-                                                                lineNumber: 263,
+                                                                lineNumber: 305,
                                                                 columnNumber: 2
                                                             }, ("TURBOPACK compile-time value", void 0))
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 262,
+                                                            lineNumber: 304,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 158,
+                                                    lineNumber: 200,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, "step1", true, {
                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                            lineNumber: 143,
+                                            lineNumber: 185,
                                             columnNumber: 2
                                         }, ("TURBOPACK compile-time value", void 0)),
                                         step === 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -2269,12 +2308,12 @@ const LeadForm = ()=>{
                                                         children: "WEBSITE REQUIREMENTS"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/components/LeadForm.jsx",
-                                                        lineNumber: 285,
+                                                        lineNumber: 327,
                                                         columnNumber: 2
                                                     }, ("TURBOPACK compile-time value", void 0))
                                                 }, void 0, false, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 284,
+                                                    lineNumber: 326,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("form", {
@@ -2292,13 +2331,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 294,
+                                                                            lineNumber: 336,
                                                                             columnNumber: 33
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 293,
+                                                                    lineNumber: 335,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2316,7 +2355,7 @@ const LeadForm = ()=>{
                                                                                     className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 298,
+                                                                                    lineNumber: 340,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2324,13 +2363,13 @@ const LeadForm = ()=>{
                                                                                     children: "Yes"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 306,
+                                                                                    lineNumber: 348,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 297,
+                                                                            lineNumber: 339,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2345,7 +2384,7 @@ const LeadForm = ()=>{
                                                                                     className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 309,
+                                                                                    lineNumber: 351,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2353,19 +2392,19 @@ const LeadForm = ()=>{
                                                                                     children: "No"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 317,
+                                                                                    lineNumber: 359,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 308,
+                                                                            lineNumber: 350,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 296,
+                                                                    lineNumber: 338,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.hasWebsite && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2373,13 +2412,13 @@ const LeadForm = ()=>{
                                                                     children: errors.hasWebsite
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 320,
+                                                                    lineNumber: 362,
                                                                     columnNumber: 24
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 292,
+                                                            lineNumber: 334,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2393,13 +2432,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 325,
+                                                                            lineNumber: 367,
                                                                             columnNumber: 32
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 324,
+                                                                    lineNumber: 366,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2417,7 +2456,7 @@ const LeadForm = ()=>{
                                                                                     className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 329,
+                                                                                    lineNumber: 371,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2425,13 +2464,13 @@ const LeadForm = ()=>{
                                                                                     children: "Yes"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 337,
+                                                                                    lineNumber: 379,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 328,
+                                                                            lineNumber: 370,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
@@ -2446,7 +2485,7 @@ const LeadForm = ()=>{
                                                                                     className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 340,
+                                                                                    lineNumber: 382,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2454,19 +2493,19 @@ const LeadForm = ()=>{
                                                                                     children: "No"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 348,
+                                                                                    lineNumber: 390,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 339,
+                                                                            lineNumber: 381,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 327,
+                                                                    lineNumber: 369,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.hasDomain && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2474,13 +2513,13 @@ const LeadForm = ()=>{
                                                                     children: errors.hasDomain
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 351,
+                                                                    lineNumber: 393,
                                                                     columnNumber: 23
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 323,
+                                                            lineNumber: 365,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2494,13 +2533,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 356,
+                                                                            lineNumber: 398,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 355,
+                                                                    lineNumber: 397,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2522,7 +2561,7 @@ const LeadForm = ()=>{
                                                                                     className: "w-3.5 h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 361,
+                                                                                    lineNumber: 403,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2530,18 +2569,18 @@ const LeadForm = ()=>{
                                                                                     children: goal
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                                    lineNumber: 369,
+                                                                                    lineNumber: 411,
                                                                                     columnNumber: 2
                                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                                             ]
                                                                         }, goal, true, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 360,
+                                                                            lineNumber: 402,
                                                                             columnNumber: 2
                                                                         }, ("TURBOPACK compile-time value", void 0)))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 358,
+                                                                    lineNumber: 400,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.websiteGoals && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2549,13 +2588,13 @@ const LeadForm = ()=>{
                                                                     children: errors.websiteGoals
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 373,
+                                                                    lineNumber: 415,
                                                                     columnNumber: 26
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 354,
+                                                            lineNumber: 396,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2565,7 +2604,7 @@ const LeadForm = ()=>{
                                                                     children: "If you have a website - Enter your URL:"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 377,
+                                                                    lineNumber: 419,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2577,13 +2616,13 @@ const LeadForm = ()=>{
                                                                     className: "w-full py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 380,
+                                                                    lineNumber: 422,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 376,
+                                                            lineNumber: 418,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2597,13 +2636,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 392,
+                                                                            lineNumber: 434,
                                                                             columnNumber: 29
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 391,
+                                                                    lineNumber: 433,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2615,7 +2654,7 @@ const LeadForm = ()=>{
                                                                     className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 394,
+                                                                    lineNumber: 436,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.websiteDescription && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2623,13 +2662,13 @@ const LeadForm = ()=>{
                                                                     children: errors.websiteDescription
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 402,
+                                                                    lineNumber: 444,
                                                                     columnNumber: 32
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 390,
+                                                            lineNumber: 432,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2643,13 +2682,13 @@ const LeadForm = ()=>{
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                                            lineNumber: 407,
+                                                                            lineNumber: 449,
                                                                             columnNumber: 10
                                                                         }, ("TURBOPACK compile-time value", void 0))
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 406,
+                                                                    lineNumber: 448,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2661,7 +2700,7 @@ const LeadForm = ()=>{
                                                                     className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 409,
+                                                                    lineNumber: 451,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
                                                                 errors.message && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2669,86 +2708,189 @@ const LeadForm = ()=>{
                                                                     children: errors.message
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 417,
+                                                                    lineNumber: 459,
                                                                     columnNumber: 21
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 405,
+                                                            lineNumber: 447,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0)),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                            className: "pt-2 flex justify-between items-center",
+                                                            className: "pt-2 flex flex-col gap-3",
                                                             children: [
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                    type: "button",
-                                                                    onClick: handleBack,
-                                                                    className: "py-2.5 px-6 rounded-xl font-bold text-sm bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 :bg-slate-700 transition-all shadow-sm",
-                                                                    children: "Back"
-                                                                }, void 0, false, {
+                                                                submitStatus && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: `p-3 rounded-xl text-sm font-medium flex items-center gap-2 ${submitStatus === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`,
+                                                                    children: [
+                                                                        submitStatus === 'success' ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                            className: "w-5 h-5 shrink-0",
+                                                                            fill: "none",
+                                                                            stroke: "currentColor",
+                                                                            viewBox: "0 0 24 24",
+                                                                            xmlns: "http://www.w3.org/2000/svg",
+                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                                strokeLinecap: "round",
+                                                                                strokeLinejoin: "round",
+                                                                                strokeWidth: "2",
+                                                                                d: "M5 13l4 4L19 7"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/LeadForm.jsx",
+                                                                                lineNumber: 466,
+                                                                                columnNumber: 125
+                                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/LeadForm.jsx",
+                                                                            lineNumber: 466,
+                                                                            columnNumber: 2
+                                                                        }, ("TURBOPACK compile-time value", void 0)) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                            className: "w-5 h-5 shrink-0",
+                                                                            fill: "none",
+                                                                            stroke: "currentColor",
+                                                                            viewBox: "0 0 24 24",
+                                                                            xmlns: "http://www.w3.org/2000/svg",
+                                                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                                strokeLinecap: "round",
+                                                                                strokeLinejoin: "round",
+                                                                                strokeWidth: "2",
+                                                                                d: "M6 18L18 6M6 6l12 12"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/components/LeadForm.jsx",
+                                                                                lineNumber: 468,
+                                                                                columnNumber: 125
+                                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/LeadForm.jsx",
+                                                                            lineNumber: 468,
+                                                                            columnNumber: 2
+                                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                                        submitMessage
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 421,
+                                                                    lineNumber: 464,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0)),
-                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                    type: "submit",
-                                                                    className: "py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md shadow-purple-500/20",
-                                                                    children: "Let's Build"
-                                                                }, void 0, false, {
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                    className: "flex justify-between items-center w-full",
+                                                                    children: [
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                            type: "button",
+                                                                            onClick: handleBack,
+                                                                            disabled: isSubmitting,
+                                                                            className: "py-2.5 px-6 rounded-xl font-bold text-sm bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 transition-all shadow-sm disabled:opacity-50",
+                                                                            children: "Back"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/LeadForm.jsx",
+                                                                            lineNumber: 474,
+                                                                            columnNumber: 2
+                                                                        }, ("TURBOPACK compile-time value", void 0)),
+                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                            type: "submit",
+                                                                            disabled: isSubmitting,
+                                                                            className: `py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 text-white transition-all shadow-md flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-purple-700 shadow-purple-500/20'}`,
+                                                                            children: isSubmitting ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
+                                                                                children: [
+                                                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("svg", {
+                                                                                        className: "animate-spin h-4 w-4 text-white",
+                                                                                        xmlns: "http://www.w3.org/2000/svg",
+                                                                                        fill: "none",
+                                                                                        viewBox: "0 0 24 24",
+                                                                                        children: [
+                                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("circle", {
+                                                                                                className: "opacity-25",
+                                                                                                cx: "12",
+                                                                                                cy: "12",
+                                                                                                r: "10",
+                                                                                                stroke: "currentColor",
+                                                                                                strokeWidth: "4"
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/src/components/LeadForm.jsx",
+                                                                                                lineNumber: 489,
+                                                                                                columnNumber: 118
+                                                                                            }, ("TURBOPACK compile-time value", void 0)),
+                                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("path", {
+                                                                                                className: "opacity-75",
+                                                                                                fill: "currentColor",
+                                                                                                d: "M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/src/components/LeadForm.jsx",
+                                                                                                lineNumber: 489,
+                                                                                                columnNumber: 219
+                                                                                            }, ("TURBOPACK compile-time value", void 0))
+                                                                                        ]
+                                                                                    }, void 0, true, {
+                                                                                        fileName: "[project]/src/components/LeadForm.jsx",
+                                                                                        lineNumber: 489,
+                                                                                        columnNumber: 2
+                                                                                    }, ("TURBOPACK compile-time value", void 0)),
+                                                                                    "Submitting..."
+                                                                                ]
+                                                                            }, void 0, true, {
+                                                                                fileName: "[project]/src/components/LeadForm.jsx",
+                                                                                lineNumber: 488,
+                                                                                columnNumber: 2
+                                                                            }, ("TURBOPACK compile-time value", void 0)) : "Let's Build"
+                                                                        }, void 0, false, {
+                                                                            fileName: "[project]/src/components/LeadForm.jsx",
+                                                                            lineNumber: 482,
+                                                                            columnNumber: 2
+                                                                        }, ("TURBOPACK compile-time value", void 0))
+                                                                    ]
+                                                                }, void 0, true, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                                    lineNumber: 428,
+                                                                    lineNumber: 473,
                                                                     columnNumber: 2
                                                                 }, ("TURBOPACK compile-time value", void 0))
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                                            lineNumber: 420,
+                                                            lineNumber: 462,
                                                             columnNumber: 2
                                                         }, ("TURBOPACK compile-time value", void 0))
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                                    lineNumber: 290,
+                                                    lineNumber: 332,
                                                     columnNumber: 2
                                                 }, ("TURBOPACK compile-time value", void 0))
                                             ]
                                         }, "step2", true, {
                                             fileName: "[project]/src/components/LeadForm.jsx",
-                                            lineNumber: 275,
+                                            lineNumber: 317,
                                             columnNumber: 2
                                         }, ("TURBOPACK compile-time value", void 0))
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/components/LeadForm.jsx",
-                                    lineNumber: 141,
+                                    lineNumber: 183,
                                     columnNumber: 2
                                 }, ("TURBOPACK compile-time value", void 0))
                             }, void 0, false, {
                                 fileName: "[project]/src/components/LeadForm.jsx",
-                                lineNumber: 140,
+                                lineNumber: 182,
                                 columnNumber: 2
                             }, ("TURBOPACK compile-time value", void 0))
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/components/LeadForm.jsx",
-                        lineNumber: 117,
+                        lineNumber: 159,
                         columnNumber: 2
                     }, ("TURBOPACK compile-time value", void 0))
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/components/LeadForm.jsx",
-                lineNumber: 114,
+                lineNumber: 156,
                 columnNumber: 2
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/src/components/LeadForm.jsx",
-        lineNumber: 104,
+        lineNumber: 146,
         columnNumber: 2
     }, ("TURBOPACK compile-time value", void 0));
 };
-_s(LeadForm, "rl5wK3LJoatP2NYT5mh8vdNDLPs=");
+_s(LeadForm, "d2i0pQfxTjqwYe+jUSGxuDzXRVM=");
 _c = LeadForm;
 const __TURBOPACK__default__export__ = LeadForm;
 var _c;

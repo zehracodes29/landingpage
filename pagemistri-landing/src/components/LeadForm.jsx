@@ -19,6 +19,9 @@ const LeadForm = () => {
  });
 
  const [errors, setErrors] = useState({});
+ const [isSubmitting, setIsSubmitting] = useState(false);
+ const [submitStatus, setSubmitStatus] = useState(null);
+ const [submitMessage, setSubmitMessage] = useState("");
 
  const handleInputChange = (e) => {
  const { name, value, type, checked } = e.target;
@@ -76,10 +79,49 @@ const LeadForm = () => {
  setStep(1);
  };
 
- const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
  e.preventDefault();
  if (validateStep2()) {
- console.log(formData);
+ setIsSubmitting(true);
+ setSubmitStatus(null);
+ 
+ const payload = {
+ full_name: formData.fullName,
+ business_name: formData.businessName,
+ email: formData.email,
+ phone_number: formData.phone,
+ business_category: formData.category,
+ what_do_you_offer: formData.offering,
+ has_website: formData.hasWebsite,
+ has_domain: formData.hasDomain,
+ reasons_for_website: formData.websiteGoals,
+ existing_website_url: formData.websiteUrl,
+ website_description: formData.websiteDescription,
+ message: formData.message
+ };
+
+ try {
+ const response = await fetch('https://pagemistri.in/submit-lead.php', {
+ method: 'POST',
+ headers: {
+ 'Content-Type': 'application/json',
+ },
+ body: JSON.stringify(payload)
+ });
+
+ if (response.ok) {
+ setSubmitStatus('success');
+ setSubmitMessage("Thank you! Your inquiry has been submitted. We'll be in touch soon.");
+ } else {
+ setSubmitStatus('error');
+ setSubmitMessage("Something went wrong. Please try again later.");
+ }
+ } catch (error) {
+ setSubmitStatus('error');
+ setSubmitMessage("Failed to submit. Please check your connection and try again.");
+ } finally {
+ setIsSubmitting(false);
+ }
  }
  };
 
@@ -417,20 +459,39 @@ const LeadForm = () => {
  {errors.message && <p className="text-red-500 text-[10px] mt-1">{errors.message}</p>}
  </div>
 
- <div className="pt-2 flex justify-between items-center">
+ <div className="pt-2 flex flex-col gap-3">
+ {submitStatus && (
+ <div className={`p-3 rounded-xl text-sm font-medium flex items-center gap-2 ${submitStatus === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+ {submitStatus === 'success' ? (
+ <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+ ) : (
+ <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+ )}
+ {submitMessage}
+ </div>
+ )}
+ <div className="flex justify-between items-center w-full">
  <button 
  type="button" 
  onClick={handleBack}
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 :bg-slate-700 transition-all shadow-sm"
+ disabled={isSubmitting}
+ className="py-2.5 px-6 rounded-xl font-bold text-sm bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 transition-all shadow-sm disabled:opacity-50"
  >
  Back
  </button>
  <button 
  type="submit" 
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md shadow-purple-500/20"
+ disabled={isSubmitting}
+ className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 text-white transition-all shadow-md flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-purple-700 shadow-purple-500/20'}`}
  >
- Let's Build
+ {isSubmitting ? (
+ <>
+ <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+ Submitting...
+ </>
+ ) : "Let's Build"}
  </button>
+ </div>
  </div>
  </form>
  </motion.div>
