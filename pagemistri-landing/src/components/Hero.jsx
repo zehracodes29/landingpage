@@ -84,7 +84,7 @@ const Hero = () => {
             <div className="absolute -bottom-6 -right-2 md:-right-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 flex items-center gap-3 z-20">
               <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)] animate-pulse" />
               <span className="text-xl">🎉</span>
-              <span className="font-semibold text-sm text-slate-800 dark:text-slate-200">New Enquiry Received!</span>
+              <span className="font-semibold text-sm text-slate-800 dark:text-slate-200">Leads Managed Effortlessly</span>
             </div>
 
             {/* Modern Browser Mockup Window */}
