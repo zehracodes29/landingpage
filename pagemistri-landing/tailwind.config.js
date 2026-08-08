@@ -1,6 +1,8 @@
+import plugin from 'tailwindcss/plugin';
+
 /** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class', // Disable automatic media query dark mode
+  darkMode: 'class',
   content: [
     "./app/**/*.{js,ts,jsx,tsx}",
     "./src/**/*.{js,ts,jsx,tsx}",
@@ -8,5 +10,9 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    plugin(function({ addVariant }) {
+      addVariant('dark', '&:is(.dark *)');
+    })
+  ],
 }
