@@ -2537,6 +2537,18 @@
       grid-column: span 7 / span 7;
     }
 
+    .lg\:mx-0 {
+      margin-inline: 0;
+    }
+
+    .lg\:mt-0 {
+      margin-top: 0;
+    }
+
+    .lg\:block {
+      display: block;
+    }
+
     .lg\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
@@ -2547,6 +2559,14 @@
 
     .lg\:grid-cols-12 {
       grid-template-columns: repeat(12, minmax(0, 1fr));
+    }
+
+    .lg\:items-start {
+      align-items: flex-start;
+    }
+
+    .lg\:justify-start {
+      justify-content: flex-start;
     }
 
     .lg\:gap-16 {
@@ -2565,8 +2585,16 @@
       padding-inline: 32px;
     }
 
+    .lg\:py-32 {
+      padding-block: calc(var(--spacing) * 32);
+    }
+
     .lg\:pl-4 {
       padding-left: calc(var(--spacing) * 4);
+    }
+
+    .lg\:text-left {
+      text-align: left;
     }
 
     .lg\:text-5xl {
@@ -2589,6 +2617,11 @@
   }
 
   @media (min-width: 80rem) {
+    .xl\:text-6xl {
+      font-size: var(--text-6xl);
+      line-height: var(--tw-leading, var(--text-6xl--line-height));
+    }
+
     .xl\:text-\[52px\] {
       font-size: 52px;
     }
