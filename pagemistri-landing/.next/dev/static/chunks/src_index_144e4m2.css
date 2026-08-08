@@ -639,10 +639,6 @@
     margin-right: calc(var(--spacing) * 4);
   }
 
-  .mr-6 {
-    margin-right: calc(var(--spacing) * 6);
-  }
-
   .mb-1 {
     margin-bottom: var(--spacing);
   }
@@ -2646,10 +2642,6 @@
 
       .dark\:hover\:bg-slate-800:hover {
         background-color: var(--color-slate-800);
-      }
-
-      .dark\:hover\:text-\[\#4400AF\]:hover {
-        color: #4400af;
       }
     }
   }
