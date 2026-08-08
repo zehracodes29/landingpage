@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import SectionBadge from '../../ui/SectionBadge';
 
-const DomainCTA = () => {
+export default function DomainCTA() {
   return (
     <section className="py-24 bg-[#F4EEFF]">
       <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
@@ -37,6 +37,4 @@ const DomainCTA = () => {
       </div>
     </section>
   );
-};
-
-export default DomainCTA;
+}

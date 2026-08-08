@@ -3,6 +3,7 @@
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import WhatsIncluded from '../components/EverythingNeeded/EverythingNeeded';
+import DomainCTA from '../components/DomainCTA/DomainCTA';
 import HowItWorks from '../components/Process/Process';
 import BusinessBenefits from '../components/BusinessBenefits';
 import Pricing from '../components/Pricing';
@@ -15,6 +16,7 @@ export default function Home() {
       <Navbar/>
       <Hero/>
       <WhatsIncluded/>
+      <DomainCTA/>
       <HowItWorks/>
       <BusinessBenefits/>
       <Pricing/>
