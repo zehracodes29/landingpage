@@ -2,20 +2,24 @@
 
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
+import WhatsIncluded from '../components/EverythingNeeded/EverythingNeeded';
+import HowItWorks from '../components/Process/Process';
 import BusinessBenefits from '../components/BusinessBenefits';
 import LeadForm from '../components/LeadForm';
 import Pricing from '../components/Pricing';
 import Footer from '../components/Footer';
 
-export default function Page() {
+export default function Home() {
   return (
-    <main className="min-h-screen bg-white">
-      <Navbar />
-      <Hero />
-      <BusinessBenefits />
-      <LeadForm />
-      <Pricing />
-      <Footer />
+    <main className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <Navbar/>
+      <Hero/>
+      <WhatsIncluded/>
+      <HowItWorks/>
+      <BusinessBenefits/>
+      <LeadForm/>
+      <Pricing/>
+      <Footer/>
     </main>
   );
 }

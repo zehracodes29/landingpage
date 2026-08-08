@@ -6,7 +6,7 @@ import LeadForm from '@/components/LeadForm';
 
 const BusinessBenefits = () => {
   return (
-    <section className="relative bg-[#FAF9F7] py-16 md:py-24 overflow-hidden font-sans">
+    <section className="relative bg-[#FAF9F7] py-16 md:py-24 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
           
@@ -86,8 +86,6 @@ const BusinessBenefits = () => {
                 </div>
               </motion.div>
             </div>
-
-            {/* CTA Button removed since the form is right there! */}
           </motion.div>
 
         </div>

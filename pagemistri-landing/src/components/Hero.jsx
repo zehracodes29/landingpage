@@ -6,7 +6,7 @@ import SectionBadge from '@/ui/SectionBadge';
 
 const Hero = () => {
   return (
-    <section className="bg-gradient-to-b from-purple-50/60 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative overflow-hidden py-16 md:py-24 lg:py-32 w-full font-sans min-h-[90vh] flex flex-col justify-center">
+    <section className="bg-gradient-to-b from-purple-50/60 via-white to-slate-50 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 relative py-16 md:py-24 lg:py-32 w-full font-sans min-h-[90vh] flex flex-col justify-center">
       {/* Radial Gradient Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/15 rounded-full blur-3xl pointer-events-none" />
 
