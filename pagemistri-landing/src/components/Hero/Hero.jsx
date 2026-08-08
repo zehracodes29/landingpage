@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import CountUp from 'react-countup';
 import SectionBadge from '../../ui/SectionBadge';
-import heroImg from '../../assets/images/image1.png';
 
 const Hero = () => {
   return (
@@ -107,7 +106,7 @@ const Hero = () => {
               
               {/* Actual Local Image */}
               <img 
-                src={typeof heroImg === 'string' ? heroImg : (heroImg?.src || heroImg)} 
+                src="/image1.png" 
                 alt="Hero Preview" 
                 className="w-full h-auto object-cover max-h-[480px]"
               />
