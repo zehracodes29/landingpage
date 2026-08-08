@@ -799,6 +799,10 @@
     min-height: 90vh;
   }
 
+  .min-h-\[320px\] {
+    min-height: 320px;
+  }
+
   .min-h-\[500px\] {
     min-height: 500px;
   }
@@ -2547,6 +2551,10 @@
 
     .lg\:block {
       display: block;
+    }
+
+    .lg\:max-w-none {
+      max-width: none;
     }
 
     .lg\:grid-cols-2 {

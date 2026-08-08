@@ -89,7 +89,7 @@ const Hero = () => {
             </div>
 
             {/* Modern Browser Mockup Window */}
-            <div className="rounded-2xl border-2 border-purple-100 dark:border-slate-800 shadow-2xl overflow-hidden bg-white dark:bg-slate-900 relative">
+            <div className="w-full max-w-xl lg:max-w-none min-h-[320px] rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl bg-white dark:bg-slate-900 overflow-hidden relative">
               {/* Browser Header Bar */}
               <div className="bg-slate-100 dark:bg-slate-800/50 px-4 py-3 flex items-center border-b border-slate-200 dark:border-slate-700">
                 <div className="flex gap-2 mr-4">
@@ -107,7 +107,7 @@ const Hero = () => {
               
               {/* Actual Local Image */}
               <img 
-                src={heroImg} 
+                src={typeof heroImg === 'string' ? heroImg : (heroImg?.src || heroImg)} 
                 alt="Hero Preview" 
                 className="w-full h-auto object-cover max-h-[480px]"
               />
