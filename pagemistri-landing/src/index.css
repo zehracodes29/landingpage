@@ -13,3 +13,7 @@
   restricting width, and applying global text-align: center. These were breaking the Tailwind 
   layout and causing the Hero components to stack vertically and overlap.
 */
+
+html {
+  scroll-behavior: smooth;
+}

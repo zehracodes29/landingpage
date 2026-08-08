@@ -988,6 +988,10 @@
     resize: none;
   }
 
+  .scroll-mt-20 {
+    scroll-margin-top: calc(var(--spacing) * 20);
+  }
+
   .appearance-none {
     appearance: none;
   }
@@ -2626,6 +2630,10 @@
       }
     }
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 @property --tw-translate-x {
