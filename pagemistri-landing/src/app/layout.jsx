@@ -1,4 +1,4 @@
-import '../src/index.css';
+import '../index.css';
 
 export const metadata = {
   title: 'PageMistri Landing',

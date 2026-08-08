@@ -1,11 +1,11 @@
 'use client';
 
-import Navbar from '../src/components/Navbar/Navbar';
-import Hero from '../src/components/Hero/Hero';
-import BusinessBenefits from '../src/components/BusinessBenefits/BusinessBenefits';
-import LeadForm from '../src/components/LeadForm/LeadForm';
-import Pricing from '../src/components/Pricing/Pricing';
-import Footer from '../src/components/Footer/Footer';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import BusinessBenefits from '@/components/BusinessBenefits';
+import LeadForm from '@/components/LeadForm';
+import Pricing from '@/components/Pricing';
+import Footer from '@/components/Footer';
 
 export default function Page() {
   return (
