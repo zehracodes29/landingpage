@@ -810,13 +810,13 @@ if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelper
 
 __turbopack_context__.s([
     "default",
-    ()=>__TURBOPACK__default__export__
+    ()=>Footer
 ]);
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 ;
 ;
-const Footer = ()=>{
+function Footer() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("footer", {
         className: "bg-white border-t border-slate-100 py-12",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -835,7 +835,7 @@ const Footer = ()=>{
                                     fileName: "[project]/src/components/Footer.jsx",
                                     lineNumber: 9,
                                     columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                     className: "text-[#111827] font-bold text-xl tracking-tight",
                                     children: "Pagemistri"
@@ -843,13 +843,13 @@ const Footer = ()=>{
                                     fileName: "[project]/src/components/Footer.jsx",
                                     lineNumber: 12,
                                     columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
+                                }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Footer.jsx",
                             lineNumber: 8,
                             columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0)),
+                        }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                             className: "flex gap-8",
                             children: [
@@ -861,7 +861,7 @@ const Footer = ()=>{
                                     fileName: "[project]/src/components/Footer.jsx",
                                     lineNumber: 18,
                                     columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: "#",
                                     className: "text-[#4B5563] hover:text-[#4400AF] transition-colors text-[14px] font-medium",
@@ -870,7 +870,7 @@ const Footer = ()=>{
                                     fileName: "[project]/src/components/Footer.jsx",
                                     lineNumber: 19,
                                     columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0)),
+                                }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
                                     href: "#",
                                     className: "text-[#4B5563] hover:text-[#4400AF] transition-colors text-[14px] font-medium",
@@ -879,19 +879,19 @@ const Footer = ()=>{
                                     fileName: "[project]/src/components/Footer.jsx",
                                     lineNumber: 20,
                                     columnNumber: 13
-                                }, ("TURBOPACK compile-time value", void 0))
+                                }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/components/Footer.jsx",
                             lineNumber: 17,
                             columnNumber: 11
-                        }, ("TURBOPACK compile-time value", void 0))
+                        }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/components/Footer.jsx",
                     lineNumber: 7,
                     columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0)),
+                }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "mt-8 pt-8 border-t border-slate-100 text-center md:text-left text-[#9CA3AF] text-[13px]",
                     children: [
@@ -903,21 +903,20 @@ const Footer = ()=>{
                     fileName: "[project]/src/components/Footer.jsx",
                     lineNumber: 24,
                     columnNumber: 9
-                }, ("TURBOPACK compile-time value", void 0))
+                }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/components/Footer.jsx",
             lineNumber: 6,
             columnNumber: 7
-        }, ("TURBOPACK compile-time value", void 0))
+        }, this)
     }, void 0, false, {
         fileName: "[project]/src/components/Footer.jsx",
         lineNumber: 5,
         columnNumber: 5
-    }, ("TURBOPACK compile-time value", void 0));
-};
+    }, this);
+}
 _c = Footer;
-const __TURBOPACK__default__export__ = Footer;
 var _c;
 __turbopack_context__.k.register(_c, "Footer");
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
