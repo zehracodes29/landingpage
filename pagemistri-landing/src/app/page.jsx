@@ -5,7 +5,6 @@ import Hero from '../components/Hero';
 import WhatsIncluded from '../components/EverythingNeeded/EverythingNeeded';
 import HowItWorks from '../components/Process/Process';
 import BusinessBenefits from '../components/BusinessBenefits';
-import LeadForm from '../components/LeadForm';
 import Pricing from '../components/Pricing';
 import FAQ from '../components/FAQ/FAQ';
 import Footer from '../components/Footer';
@@ -18,7 +17,6 @@ export default function Home() {
       <WhatsIncluded/>
       <HowItWorks/>
       <BusinessBenefits/>
-      <LeadForm/>
       <Pricing/>
       <FAQ/>
       <Footer/>
