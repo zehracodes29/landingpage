@@ -26,15 +26,9 @@ export default function Navbar() {
   }, []);
 
   const toggleTheme = () => {
-    if (theme === 'light') {
-      setTheme('dark');
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      setTheme('light');
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    setTheme(isDark ? 'dark' : 'light');
   };
 
   useEffect(() => {
@@ -58,7 +52,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${isScrolled ? 'bg-white/90 dark:bg-slate-950/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="flex items-center justify-between">
           
@@ -107,7 +101,7 @@ export default function Navbar() {
           <div className="md:hidden flex items-center">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-[#111827] hover:text-gray-600 focus:outline-none"
+              className="text-[#111827] dark:text-slate-200 hover:text-gray-600 focus:outline-none"
             >
               {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -117,7 +111,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg py-4 px-6 flex flex-col space-y-4">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-950 border-t border-gray-100 dark:border-slate-800 shadow-lg py-4 px-6 flex flex-col space-y-4">
           {navLinks.map((link) => (
             <a
               key={link.name}
