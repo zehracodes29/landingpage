@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, LayoutGrid, Sparkles } from 'lucide-react';
-import SectionBadge from '../../ui/SectionBadge';
-import LeadForm from '../LeadForm/LeadForm';
+import SectionBadge from '@/ui/SectionBadge';
+import LeadForm from '@/components/LeadForm';
 
 const BusinessBenefits = () => {
   return (

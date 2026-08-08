@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { CheckCircle2 } from 'lucide-react';
 import CountUp from 'react-countup';
-import SectionBadge from '../../ui/SectionBadge';
+import SectionBadge from '@/ui/SectionBadge';
 
 const Hero = () => {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Check } from 'lucide-react';
-import SectionBadge from '../../ui/SectionBadge';
+import SectionBadge from '@/ui/SectionBadge';
 
 const Pricing = () => {
   const scrollToLeadForm = () => {
