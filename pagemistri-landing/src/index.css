@@ -1,18 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
-@source "../app";
-@source "../src";
-@config "../tailwind.config.js";
-@theme {
-  --font-sans: 'Inter', sans-serif;
-}
 
-/* 
-  Removed the default Vite CSS template styles that were forcing #root to be a flex column, 
-  restricting width, and applying global text-align: center. These were breaking the Tailwind 
-  layout and causing the Hero components to stack vertically and overlap.
-*/
+@layer theme {
+  :root {
+    --font-sans: 'Inter', sans-serif;
+  }
+}
 
 html {
   scroll-behavior: smooth;
