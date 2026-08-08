@@ -1,6 +1,6 @@
 // Navbar component
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 const navLinks = [
   { name: "What's Included", href: '#whats-included' },
@@ -12,24 +12,6 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [theme, setTheme] = useState('light');
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'dark') {
-      setTheme('dark');
-      document.documentElement.classList.add('dark');
-    } else {
-      setTheme('light');
-      document.documentElement.classList.remove('dark');
-    }
-  }, []);
-
-  const toggleTheme = () => {
-    const isDark = document.documentElement.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'dark' : 'light');
-    setTheme(isDark ? 'dark' : 'light');
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -77,16 +59,6 @@ export default function Navbar() {
             ))}
           </div>
 
-          <div className="hidden md:flex items-center mr-6">
-            <button 
-              onClick={toggleTheme} 
-              className="text-[#111827] dark:text-slate-300 hover:text-[#4400AF] dark:hover:text-[#4400AF] transition-colors p-2"
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          </div>
-
           {/* CTA Button */}
           <div className="hidden md:flex items-center">
             <button 
@@ -122,12 +94,6 @@ export default function Navbar() {
               {link.name}
             </a>
           ))}
-          <div className="flex items-center justify-between py-2 border-b border-gray-50">
-            <span className="text-[16px] font-semibold text-[#4400AF]">Dark Mode</span>
-            <button onClick={toggleTheme} className="text-[#111827] dark:text-slate-300 p-2">
-              {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-            </button>
-          </div>
           <button 
             onClick={scrollToHero}
             className="w-full mt-4 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center"
