@@ -1,66 +1,100 @@
 "use client";
 import React from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Clock, Award, ShieldCheck } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   return (
-    <div className="min-h-screen bg-white">
-      <section className="w-full bg-gradient-to-b from-purple-50/50 via-white to-white py-12 sm:py-16 px-4 sm:px-6 lg:px-8 text-center">
+    <div className="min-h-screen bg-white relative overflow-hidden font-sans">
+      {/* Background Mesh & Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-100/80 via-white to-purple-50/40 -z-10" />
+      <div 
+        className="absolute inset-0 opacity-[0.03] -z-10" 
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236b21a8' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} 
+      />
+
+      <section className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center relative">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           
           {/* 1. TOP ANNOUNCEMENT BADGE */}
-          <span className="bg-purple-100 text-purple-700 border border-purple-200 text-xs font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider mb-6 inline-block shadow-sm">
-            PAGEMISTRI RESEARCH INITIATIVE • 2026
-          </span>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease: "easeOut" }}
+          >
+            <span className="relative inline-flex items-center justify-center bg-purple-50/80 backdrop-blur-md text-purple-700 border border-purple-300/50 text-xs sm:text-sm font-semibold px-5 py-2 rounded-full uppercase tracking-widest mb-8 shadow-[0_0_20px_rgba(168,85,247,0.15)] animate-[pulse_3s_ease-in-out_infinite]">
+              PAGEMISTRI RESEARCH INITIATIVE • 2026
+            </span>
+          </motion.div>
 
           {/* 2. MAIN HEADLINE & SUBHEADLINE */}
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight tracking-tight max-w-4xl mx-auto mb-6 text-center">
-            Share Your Business Experience. Receive Your <span className="text-purple-600">Personalised Visibility Report</span>.
-          </h1>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto mb-8 text-center leading-relaxed">
+          <motion.h1 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+            className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.15] tracking-tight max-w-4xl mx-auto mb-8 text-center"
+          >
+            Share Your Business Experience. Receive Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-500 drop-shadow-sm filter">Personalised Visibility Report</span>.
+          </motion.h1>
+          
+          <motion.p 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+            className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 text-center leading-relaxed"
+          >
             We're inviting small business owners across India to share how they attract customers, build their online presence, and grow their business. Your responses will contribute to our Business Visibility Survey 2026, and you'll receive a FREE personalised Business Visibility Report with practical recommendations for your business.
-          </p>
+          </motion.p>
 
           {/* 3. ACTION BUTTONS (CTAs) */}
-          <div className="flex flex-col sm:flex-row gap-4 items-center justify-center w-full">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.45, ease: "easeOut" }}
+            className="flex flex-col sm:flex-row gap-5 items-center justify-center w-full"
+          >
             <button
               onClick={() => {
                 const element = document.getElementById('survey-form');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-lg shadow-purple-200 transition-all cursor-pointer text-base w-full sm:w-auto"
+              className="group relative bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-purple-500/40 hover:-translate-y-0.5 cursor-pointer text-base sm:text-lg w-full sm:w-auto overflow-hidden flex items-center justify-center"
             >
-              Get My Visibility Report
+              <span className="relative z-10 flex items-center">
+                Get My Visibility Report
+                <ArrowRight className="w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
             </button>
             <button
-              className="text-gray-700 hover:text-purple-600 font-semibold px-6 py-3.5 rounded-xl transition-all text-base cursor-pointer hover:bg-gray-100/60 w-full sm:w-auto"
+              className="group relative text-gray-700 hover:text-purple-700 font-semibold px-6 py-4 rounded-2xl transition-colors duration-300 text-base sm:text-lg cursor-pointer w-full sm:w-auto"
             >
               Why Should I Participate?
+              <span className="absolute bottom-3 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-[calc(100%-3rem)] rounded-full opacity-0 group-hover:opacity-100"></span>
             </button>
-          </div>
+          </motion.div>
 
           {/* 4. TRUST BADGES / HIGHLIGHT STRIP */}
-          <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500 font-medium mt-8 pt-6 border-t border-gray-100 w-full">
-            <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="flex flex-wrap items-center justify-center gap-4 sm:gap-6 text-sm text-gray-500 font-medium mt-16 pt-8 border-t border-gray-200/60 w-full max-w-3xl"
+          >
+            <div className="flex items-center gap-2 hover:scale-105 hover:text-purple-600 transition-all cursor-default">
+              <Clock className="w-4 h-4 text-purple-500" />
               <span>Less than 2 minutes</span>
             </div>
             <span className="hidden sm:inline-block text-gray-300">•</span>
-            <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
+            <div className="flex items-center gap-2 hover:scale-105 hover:text-purple-600 transition-all cursor-default">
+              <Award className="w-4 h-4 text-purple-500" />
               <span>FREE Business Visibility Report</span>
             </div>
             <span className="hidden sm:inline-block text-gray-300">•</span>
-            <div className="flex items-center gap-1.5">
-              <svg className="w-4 h-4 text-purple-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-              </svg>
+            <div className="flex items-center gap-2 hover:scale-105 hover:text-purple-600 transition-all cursor-default">
+              <ShieldCheck className="w-4 h-4 text-purple-500" />
               <span>Your responses remain confidential</span>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </section>
