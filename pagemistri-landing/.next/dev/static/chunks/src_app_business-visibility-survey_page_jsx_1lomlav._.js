@@ -27,6 +27,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$re
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$user$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__User$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/user.mjs [app-client] (ecmascript) <export default as User>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$mail$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Mail$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/mail.mjs [app-client] (ecmascript) <export default as Mail>");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$phone$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Phone$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/phone.mjs [app-client] (ecmascript) <export default as Phone>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$alert$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertCircle$3e$__ = __turbopack_context__.i("[project]/node_modules/lucide-react/dist/esm/icons/circle-alert.mjs [app-client] (ecmascript) <export default as AlertCircle>");
 ;
 var _s = __turbopack_context__.k.signature();
 "use client";
@@ -38,6 +39,8 @@ function BusinessVisibilitySurvey() {
     const [currentStep, setCurrentStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(1);
     const [isSubmitting, setIsSubmitting] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [isSuccess, setIsSuccess] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [errors, setErrors] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({});
+    const [showErrorToast, setShowErrorToast] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
     const [formData, setFormData] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])({
         businessName: '',
         businessType: '',
@@ -69,6 +72,12 @@ function BusinessVisibilitySurvey() {
                 ...prev,
                 [field]: value
             }));
+        if (errors[field]) {
+            setErrors((prev)=>({
+                    ...prev,
+                    [field]: null
+                }));
+        }
     };
     const toggleArrayData = (field, value)=>{
         setFormData((prev)=>{
@@ -88,35 +97,86 @@ function BusinessVisibilitySurvey() {
                 };
             }
         });
+        if (errors[field]) {
+            setErrors((prev)=>({
+                    ...prev,
+                    [field]: null
+                }));
+        }
+    };
+    const triggerError = (newErrors)=>{
+        setErrors(newErrors);
+        setShowErrorToast(true);
+        setTimeout(()=>setShowErrorToast(false), 3000);
+        const firstErrorField = Object.keys(newErrors)[0];
+        setTimeout(()=>{
+            document.getElementById(firstErrorField)?.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        }, 100);
+    };
+    const validateStep = (step)=>{
+        const newErrors = {};
+        if (step === 1) {
+            if (!formData.businessName) newErrors.businessName = "Business name is required";
+            if (!formData.businessType) newErrors.businessType = "Please select your business type";
+            if (!formData.city) newErrors.city = "City is required";
+            if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Please select how long you've been in business";
+            if (!formData.employees) newErrors.employees = "Please select employee count";
+            if (!formData.monthlyEnquiries) newErrors.monthlyEnquiries = "Please select monthly enquiries";
+        }
+        if (step === 2) {
+            if (formData.activePlatforms.length === 0) newErrors.activePlatforms = "Please select at least one platform";
+            if (!formData.customerSource) newErrors.customerSource = "Please select your primary customer source";
+            if (!formData.leadImportance) newErrors.leadImportance = "Please select the importance of leads";
+            if (!formData.paidAds) newErrors.paidAds = "Please select your paid advertising status";
+            if (!formData.hasWebsite) newErrors.hasWebsite = "Please select if you have a website";
+            if (formData.hasWebsite === 'Yes') {
+                if (formData.websiteUse.length === 0) newErrors.websiteUse = "Please select how you use your website";
+                if (!formData.websiteSatisfaction) newErrors.websiteSatisfaction = "Please select your website satisfaction";
+            }
+            if (formData.hasWebsite === 'No') {
+                if (!formData.noWebsiteReason) newErrors.noWebsiteReason = "Please select why you don't have a website";
+            }
+            if (formData.enquiryProcess.length === 0) newErrors.enquiryProcess = "Please select your enquiry process";
+            if (!formData.responseSpeed) newErrors.responseSpeed = "Please select your average response speed";
+        }
+        if (step === 3) {
+            if (formData.biggestChallenge.length === 0) newErrors.biggestChallenge = "Please select your biggest challenge";
+            if (formData.improvements.length === 0) newErrors.improvements = "Please select what you'd like to improve";
+            if (!formData.onlinePresenceRating) newErrors.onlinePresenceRating = "Please rate your online presence";
+        }
+        if (step === 4) {
+            if (!formData.fullName) newErrors.fullName = "Full name is required";
+            if (!formData.email) {
+                newErrors.email = "Email address is required";
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+                newErrors.email = "Please enter a valid email address";
+            }
+            if (!formData.phoneNumber) {
+                newErrors.phoneNumber = "Phone number is required";
+            } else if (formData.phoneNumber.replace(/\D/g, '').length < 10) {
+                newErrors.phoneNumber = "Please enter a valid phone number (min 10 digits)";
+            }
+        }
+        if (Object.keys(newErrors).length > 0) {
+            triggerError(newErrors);
+            return false;
+        }
+        return true;
     };
     const handleNext = ()=>{
-        if (currentStep === 1) {
-            if (!formData.businessName || !formData.businessType || !formData.city || !formData.yearsInBusiness || !formData.employees || !formData.monthlyEnquiries) {
-                alert("Please fill in all required fields to proceed.");
-                return;
-            }
+        if (validateStep(currentStep)) {
+            setCurrentStep((prev)=>Math.min(prev + 1, 4));
         }
-        if (currentStep === 2) {
-            if (formData.activePlatforms.length === 0 || !formData.customerSource || !formData.leadImportance || !formData.paidAds || !formData.hasWebsite || formData.enquiryProcess.length === 0 || !formData.responseSpeed) {
-                alert("Please answer all questions to proceed.");
-                return;
-            }
-        }
-        if (currentStep === 3) {
-            if (formData.biggestChallenge.length === 0 || formData.improvements.length === 0 || !formData.onlinePresenceRating) {
-                alert("Please answer all questions to proceed.");
-                return;
-            }
-        }
-        setCurrentStep((prev)=>Math.min(prev + 1, 4));
     };
     const handleBack = ()=>{
         setCurrentStep((prev)=>Math.max(prev - 1, 1));
     };
     const handleSubmit = async (e)=>{
         e.preventDefault();
-        if (!formData.fullName || !formData.email || !formData.phoneNumber) {
-            alert("Please fill in all required contact fields before submitting.");
+        if (!validateStep(4)) {
             return;
         }
         setIsSubmitting(true);
@@ -154,20 +214,20 @@ function BusinessVisibilitySurvey() {
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 113,
+                            lineNumber: 168,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                             children: currentStep === 1 ? "Business Identity" : currentStep === 2 ? "Online Reach" : "Contact & Goals"
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 114,
+                            lineNumber: 169,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                    lineNumber: 112,
+                    lineNumber: 167,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -179,29 +239,64 @@ function BusinessVisibilitySurvey() {
                         }
                     }, void 0, false, {
                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                        lineNumber: 117,
+                        lineNumber: 172,
                         columnNumber: 11
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                    lineNumber: 116,
+                    lineNumber: 171,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-            lineNumber: 111,
+            lineNumber: 166,
             columnNumber: 7
         }, this);
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         className: "min-h-screen bg-white relative overflow-hidden font-sans",
         children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
+                children: showErrorToast && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
+                    initial: {
+                        opacity: 0,
+                        y: -50
+                    },
+                    animate: {
+                        opacity: 1,
+                        y: 0
+                    },
+                    exit: {
+                        opacity: 0,
+                        y: -50
+                    },
+                    className: "fixed top-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3.5 bg-red-50 border border-red-200 text-red-800 rounded-2xl shadow-xl flex items-center gap-3 font-semibold text-sm animate-bounce",
+                    children: [
+                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$circle$2d$alert$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__AlertCircle$3e$__["AlertCircle"], {
+                            className: "w-5 h-5 text-red-600 shrink-0"
+                        }, void 0, false, {
+                            fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                            lineNumber: 192,
+                            columnNumber: 13
+                        }, this),
+                        "Please complete all required fields before proceeding."
+                    ]
+                }, void 0, true, {
+                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                    lineNumber: 186,
+                    columnNumber: 11
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                lineNumber: 184,
+                columnNumber: 7
+            }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-100/80 via-white to-purple-50/40 -z-10"
             }, void 0, false, {
                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                lineNumber: 129,
+                lineNumber: 198,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -211,7 +306,7 @@ function BusinessVisibilitySurvey() {
                 }
             }, void 0, false, {
                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                lineNumber: 130,
+                lineNumber: 199,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -237,12 +332,12 @@ function BusinessVisibilitySurvey() {
                                 children: "PAGEMISTRI RESEARCH INITIATIVE • 2026"
                             }, void 0, false, {
                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                lineNumber: 144,
+                                lineNumber: 213,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 139,
+                            lineNumber: 208,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].h1, {
@@ -267,14 +362,14 @@ function BusinessVisibilitySurvey() {
                                     children: "Personalised Visibility Report"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 156,
+                                    lineNumber: 225,
                                     columnNumber: 58
                                 }, this),
                                 "."
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 150,
+                            lineNumber: 219,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].p, {
@@ -295,7 +390,7 @@ function BusinessVisibilitySurvey() {
                             children: "We're inviting small business owners across India to share how they attract customers, build their online presence, and grow their business. Your responses will contribute to our Business Visibility Survey 2026, and you'll receive a FREE personalised Business Visibility Report with practical recommendations for your business."
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 159,
+                            lineNumber: 228,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -330,18 +425,18 @@ function BusinessVisibilitySurvey() {
                                                 className: "w-5 h-5 ml-2 transition-transform duration-300 group-hover:translate-x-1"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 184,
+                                                lineNumber: 253,
                                                 columnNumber: 17
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 182,
+                                        lineNumber: 251,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 175,
+                                    lineNumber: 244,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -352,19 +447,19 @@ function BusinessVisibilitySurvey() {
                                             className: "absolute bottom-3 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-purple-600 transition-all duration-300 group-hover:w-[calc(100%-3rem)] rounded-full opacity-0 group-hover:opacity-100"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 191,
+                                            lineNumber: 260,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 187,
+                                    lineNumber: 256,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 169,
+                            lineNumber: 238,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -387,20 +482,20 @@ function BusinessVisibilitySurvey() {
                                             className: "w-4 h-4 text-purple-500"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 203,
+                                            lineNumber: 272,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "Less than 2 minutes"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 204,
+                                            lineNumber: 273,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 202,
+                                    lineNumber: 271,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -408,7 +503,7 @@ function BusinessVisibilitySurvey() {
                                     children: "•"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 206,
+                                    lineNumber: 275,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -418,20 +513,20 @@ function BusinessVisibilitySurvey() {
                                             className: "w-4 h-4 text-purple-500"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 208,
+                                            lineNumber: 277,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "FREE Business Visibility Report"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 209,
+                                            lineNumber: 278,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 207,
+                                    lineNumber: 276,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -439,7 +534,7 @@ function BusinessVisibilitySurvey() {
                                     children: "•"
                                 }, void 0, false, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 211,
+                                    lineNumber: 280,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -449,37 +544,37 @@ function BusinessVisibilitySurvey() {
                                             className: "w-4 h-4 text-purple-500"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 213,
+                                            lineNumber: 282,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             children: "Your responses remain confidential"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 214,
+                                            lineNumber: 283,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 212,
+                                    lineNumber: 281,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 196,
+                            lineNumber: 265,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                    lineNumber: 136,
+                    lineNumber: 205,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                lineNumber: 135,
+                lineNumber: 204,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -492,7 +587,7 @@ function BusinessVisibilitySurvey() {
                             children: "What You'll Receive"
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 224,
+                            lineNumber: 293,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -500,7 +595,7 @@ function BusinessVisibilitySurvey() {
                             children: "Complete the survey to receive a personalised Business Visibility Report with insights and recommendations tailored to your business."
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 227,
+                            lineNumber: 296,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -513,7 +608,7 @@ function BusinessVisibilitySurvey() {
                                             className: "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 234,
+                                            lineNumber: 303,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -522,12 +617,12 @@ function BusinessVisibilitySurvey() {
                                                 className: "w-6 h-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 236,
+                                                lineNumber: 305,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 235,
+                                            lineNumber: 304,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -535,7 +630,7 @@ function BusinessVisibilitySurvey() {
                                             children: "Business Visibility Score"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 238,
+                                            lineNumber: 307,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -543,13 +638,13 @@ function BusinessVisibilitySurvey() {
                                             children: "Get a simple score that reflects your business's current online visibility."
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 239,
+                                            lineNumber: 308,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 233,
+                                    lineNumber: 302,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -559,7 +654,7 @@ function BusinessVisibilitySurvey() {
                                             className: "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 246,
+                                            lineNumber: 315,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -568,12 +663,12 @@ function BusinessVisibilitySurvey() {
                                                 className: "w-6 h-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 248,
+                                                lineNumber: 317,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 247,
+                                            lineNumber: 316,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -581,7 +676,7 @@ function BusinessVisibilitySurvey() {
                                             children: "Personalised Recommendations"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 250,
+                                            lineNumber: 319,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -589,13 +684,13 @@ function BusinessVisibilitySurvey() {
                                             children: "Get tailored recommendations to improve your online visibility and business growth."
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 251,
+                                            lineNumber: 320,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 245,
+                                    lineNumber: 314,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -605,7 +700,7 @@ function BusinessVisibilitySurvey() {
                                             className: "absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 258,
+                                            lineNumber: 327,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -614,12 +709,12 @@ function BusinessVisibilitySurvey() {
                                                 className: "w-6 h-6"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 260,
+                                                lineNumber: 329,
                                                 columnNumber: 17
                                             }, this)
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 259,
+                                            lineNumber: 328,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -627,7 +722,7 @@ function BusinessVisibilitySurvey() {
                                             children: "Business Visibility Report"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 262,
+                                            lineNumber: 331,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -635,19 +730,19 @@ function BusinessVisibilitySurvey() {
                                             children: "A report highlighting your responses, key insights, and opportunities for improvement."
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 263,
+                                            lineNumber: 332,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                    lineNumber: 257,
+                                    lineNumber: 326,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 231,
+                            lineNumber: 300,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -655,18 +750,18 @@ function BusinessVisibilitySurvey() {
                             children: "Every Business Visibility Report is personalised using your survey responses - no two reports are the same."
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 269,
+                            lineNumber: 338,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                    lineNumber: 223,
+                    lineNumber: 292,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                lineNumber: 222,
+                lineNumber: 291,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -677,7 +772,7 @@ function BusinessVisibilitySurvey() {
                         children: "Why Your Experience Matters"
                     }, void 0, false, {
                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                        lineNumber: 277,
+                        lineNumber: 346,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -690,7 +785,7 @@ function BusinessVisibilitySurvey() {
                                         className: "absolute -top-10 -left-10 w-40 h-40 bg-purple-200/30 blur-2xl rounded-full pointer-events-none"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 286,
+                                        lineNumber: 355,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -700,14 +795,14 @@ function BusinessVisibilitySurvey() {
                                                 children: "Every business grows differently."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 289,
+                                                lineNumber: 358,
                                                 columnNumber: 15
                                             }, this),
                                             " Some rely on referrals, others on social media, Google Search, paid advertising, or years of trust within their community."
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 288,
+                                        lineNumber: 357,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -715,7 +810,7 @@ function BusinessVisibilitySurvey() {
                                         children: "Yet much of the advice available online assumes every business should follow the same strategy."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 291,
+                                        lineNumber: 360,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -723,7 +818,7 @@ function BusinessVisibilitySurvey() {
                                         children: "That's why we're conducting the Business Visibility Survey 2026 - to learn directly from business owners instead of making assumptions."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 294,
+                                        lineNumber: 363,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -731,13 +826,13 @@ function BusinessVisibilitySurvey() {
                                         children: "Your experience helps us build a clearer understanding of how small businesses build visibility and grow online."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 297,
+                                        lineNumber: 366,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                lineNumber: 284,
+                                lineNumber: 353,
                                 columnNumber: 11
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -748,7 +843,7 @@ function BusinessVisibilitySurvey() {
                                         children: "Every response helps us:"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 304,
+                                        lineNumber: 373,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -763,12 +858,12 @@ function BusinessVisibilitySurvey() {
                                                             className: "w-6 h-6"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 312,
+                                                            lineNumber: 381,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 311,
+                                                        lineNumber: 380,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -776,13 +871,13 @@ function BusinessVisibilitySurvey() {
                                                         children: "Understand how businesses attract customers"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 314,
+                                                        lineNumber: 383,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 310,
+                                                lineNumber: 379,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -794,12 +889,12 @@ function BusinessVisibilitySurvey() {
                                                             className: "w-6 h-6"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 322,
+                                                            lineNumber: 391,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 321,
+                                                        lineNumber: 390,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -807,13 +902,13 @@ function BusinessVisibilitySurvey() {
                                                         children: "Identify common visibility challenges"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 324,
+                                                        lineNumber: 393,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 320,
+                                                lineNumber: 389,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -825,12 +920,12 @@ function BusinessVisibilitySurvey() {
                                                             className: "w-6 h-6"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 332,
+                                                            lineNumber: 401,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 331,
+                                                        lineNumber: 400,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -838,13 +933,13 @@ function BusinessVisibilitySurvey() {
                                                         children: "Publish meaningful research and insights"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 334,
+                                                        lineNumber: 403,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 330,
+                                                lineNumber: 399,
                                                 columnNumber: 15
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -856,12 +951,12 @@ function BusinessVisibilitySurvey() {
                                                             className: "w-6 h-6"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 342,
+                                                            lineNumber: 411,
                                                             columnNumber: 19
                                                         }, this)
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 341,
+                                                        lineNumber: 410,
                                                         columnNumber: 17
                                                     }, this),
                                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -869,19 +964,19 @@ function BusinessVisibilitySurvey() {
                                                         children: "Develop practical resources for small businesses"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 344,
+                                                        lineNumber: 413,
                                                         columnNumber: 17
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 340,
+                                                lineNumber: 409,
                                                 columnNumber: 15
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 308,
+                                        lineNumber: 377,
                                         columnNumber: 13
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -895,25 +990,25 @@ function BusinessVisibilitySurvey() {
                                         children: "Get My Visibility Report"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 350,
+                                        lineNumber: 419,
                                         columnNumber: 13
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                lineNumber: 303,
+                                lineNumber: 372,
                                 columnNumber: 11
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                        lineNumber: 281,
+                        lineNumber: 350,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                lineNumber: 276,
+                lineNumber: 345,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
@@ -924,7 +1019,7 @@ function BusinessVisibilitySurvey() {
                         className: "absolute inset-0 bg-purple-200/20 blur-3xl pointer-events-none"
                     }, void 0, false, {
                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                        lineNumber: 366,
+                        lineNumber: 435,
                         columnNumber: 9
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -941,7 +1036,7 @@ function BusinessVisibilitySurvey() {
                                                 children: "Business Visibility Survey 2026"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 374,
+                                                lineNumber: 443,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -949,13 +1044,13 @@ function BusinessVisibilitySurvey() {
                                                 children: "Share your experience in this 2-minute survey and receive a personalised Business Visibility Report with insights and recommendations tailored to your business."
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 375,
+                                                lineNumber: 444,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 373,
+                                        lineNumber: 442,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -972,12 +1067,12 @@ function BusinessVisibilitySurvey() {
                                                         className: `rounded-full h-2.5 transition-all duration-500 ${currentStep >= step ? 'w-8 bg-purple-600' : 'w-2.5 bg-gray-200'}`
                                                     }, step, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 384,
+                                                        lineNumber: 453,
                                                         columnNumber: 23
                                                     }, this))
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 382,
+                                                lineNumber: 451,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -990,13 +1085,13 @@ function BusinessVisibilitySurvey() {
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 390,
+                                                lineNumber: 459,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 381,
+                                        lineNumber: 450,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1027,10 +1122,12 @@ function BusinessVisibilitySurvey() {
                                                             children: "TELL US ABOUT YOUR BUSINESS"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 410,
+                                                            lineNumber: 479,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "businessName",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-2",
@@ -1041,33 +1138,43 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 414,
+                                                                            lineNumber: 483,
                                                                             columnNumber: 115
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 414,
+                                                                    lineNumber: 483,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                     type: "text",
-                                                                    className: "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 shadow-sm focus:scale-[1.01]",
+                                                                    className: `w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.businessName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`,
                                                                     placeholder: "Enter name",
                                                                     value: formData.businessName,
                                                                     onChange: (e)=>updateFormData('businessName', e.target.value)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 415,
+                                                                    lineNumber: 484,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.businessName && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-1 font-medium",
+                                                                    children: errors.businessName
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 491,
+                                                                    columnNumber: 51
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 413,
+                                                            lineNumber: 482,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "businessType",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1078,17 +1185,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 426,
+                                                                            lineNumber: 496,
                                                                             columnNumber: 127
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 426,
+                                                                    lineNumber: 496,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6",
+                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3",
                                                                     children: [
                                                                         'Coach / Consultant',
                                                                         'Freelancer',
@@ -1106,34 +1213,44 @@ function BusinessVisibilitySurvey() {
                                                                         'Other'
                                                                     ].map((type)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>updateFormData('businessType', type),
-                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium ${formData.businessType === type ? 'border-purple-600 bg-purple-50/80 text-purple-950 shadow-sm font-semibold' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium ${formData.businessType === type ? 'border-purple-600 bg-purple-50/80 text-purple-950 shadow-sm font-semibold' : errors.businessType ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: [
                                                                                 type,
                                                                                 formData.businessType === type && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                     className: "w-4 h-4 text-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 444,
+                                                                                    lineNumber: 516,
                                                                                     columnNumber: 68
                                                                                 }, this)
                                                                             ]
                                                                         }, type, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 434,
+                                                                            lineNumber: 504,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 427,
+                                                                    lineNumber: 497,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.businessType && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.businessType
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 520,
+                                                                    columnNumber: 51
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 425,
+                                                            lineNumber: 495,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "city",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-2",
@@ -1144,49 +1261,59 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 452,
+                                                                            lineNumber: 525,
                                                                             columnNumber: 125
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 452,
+                                                                    lineNumber: 525,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "relative mb-6",
+                                                                    className: "relative",
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$map$2d$pin$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MapPin$3e$__["MapPin"], {
                                                                             className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 454,
+                                                                            lineNumber: 527,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
                                                                             type: "text",
-                                                                            className: "w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]",
+                                                                            className: `w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.city ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`,
                                                                             placeholder: "Location",
                                                                             value: formData.city,
                                                                             onChange: (e)=>updateFormData('city', e.target.value)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 455,
+                                                                            lineNumber: 528,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 453,
+                                                                    lineNumber: 526,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.city && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-1 font-medium",
+                                                                    children: errors.city
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 536,
+                                                                    columnNumber: 43
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 451,
+                                                            lineNumber: 524,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "yearsInBusiness",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-2",
@@ -1197,17 +1324,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 467,
+                                                                            lineNumber: 541,
                                                                             columnNumber: 139
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 467,
+                                                                    lineNumber: 541,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                                    className: "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]",
+                                                                    className: `w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.yearsInBusiness ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`,
                                                                     value: formData.yearsInBusiness,
                                                                     onChange: (e)=>updateFormData('yearsInBusiness', e.target.value),
                                                                     children: [
@@ -1216,7 +1343,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Enter select"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 473,
+                                                                            lineNumber: 547,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1224,7 +1351,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Less than 1 year"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 474,
+                                                                            lineNumber: 548,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1232,7 +1359,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "1 - 3 years"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 475,
+                                                                            lineNumber: 549,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1240,7 +1367,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "3 - 5 years"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 476,
+                                                                            lineNumber: 550,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1248,22 +1375,32 @@ function BusinessVisibilitySurvey() {
                                                                             children: "5+ years"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 477,
+                                                                            lineNumber: 551,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 468,
+                                                                    lineNumber: 542,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.yearsInBusiness && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-1 font-medium",
+                                                                    children: errors.yearsInBusiness
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 553,
+                                                                    columnNumber: 54
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 466,
+                                                            lineNumber: 540,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "employees",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-2",
@@ -1274,17 +1411,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 483,
+                                                                            lineNumber: 558,
                                                                             columnNumber: 142
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 483,
+                                                                    lineNumber: 558,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                                    className: "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]",
+                                                                    className: `w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.employees ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`,
                                                                     value: formData.employees,
                                                                     onChange: (e)=>updateFormData('employees', e.target.value),
                                                                     children: [
@@ -1293,7 +1430,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Enter select"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 489,
+                                                                            lineNumber: 564,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1301,7 +1438,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Just me (1)"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 490,
+                                                                            lineNumber: 565,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1309,7 +1446,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "2 - 5 employees"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 491,
+                                                                            lineNumber: 566,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1317,7 +1454,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "6 - 10 employees"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 492,
+                                                                            lineNumber: 567,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1325,7 +1462,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "11 - 25 employees"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 493,
+                                                                            lineNumber: 568,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1333,22 +1470,32 @@ function BusinessVisibilitySurvey() {
                                                                             children: "25+ employees"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 494,
+                                                                            lineNumber: 569,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 484,
+                                                                    lineNumber: 559,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.employees && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-1 font-medium",
+                                                                    children: errors.employees
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 571,
+                                                                    columnNumber: 48
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 482,
+                                                            lineNumber: 557,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "monthlyEnquiries",
+                                                            className: "mb-8",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-2",
@@ -1359,17 +1506,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 500,
+                                                                            lineNumber: 576,
                                                                             columnNumber: 166
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 500,
+                                                                    lineNumber: 576,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                                    className: "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]",
+                                                                    className: `w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.monthlyEnquiries ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`,
                                                                     value: formData.monthlyEnquiries,
                                                                     onChange: (e)=>updateFormData('monthlyEnquiries', e.target.value),
                                                                     children: [
@@ -1378,7 +1525,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Enter select"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 506,
+                                                                            lineNumber: 582,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1386,7 +1533,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "0 - 10 enquiries"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 507,
+                                                                            lineNumber: 583,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1394,7 +1541,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "10 - 50 enquiries"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 508,
+                                                                            lineNumber: 584,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1402,7 +1549,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "50 - 100 enquiries"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 509,
+                                                                            lineNumber: 585,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -1410,25 +1557,33 @@ function BusinessVisibilitySurvey() {
                                                                             children: "100+ enquiries"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 510,
+                                                                            lineNumber: 586,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 501,
+                                                                    lineNumber: 577,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.monthlyEnquiries && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-1 font-medium",
+                                                                    children: errors.monthlyEnquiries
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 588,
+                                                                    columnNumber: 55
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 499,
+                                                            lineNumber: 575,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, "step1", true, {
                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                    lineNumber: 402,
+                                                    lineNumber: 471,
                                                     columnNumber: 23
                                                 }, this),
                                                 currentStep === 2 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1454,10 +1609,12 @@ function BusinessVisibilitySurvey() {
                                                             children: "YOUR ONLINE PRESENCE AND CHALLENGES"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 525,
+                                                            lineNumber: 602,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "activePlatforms",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1468,17 +1625,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 529,
+                                                                            lineNumber: 606,
                                                                             columnNumber: 154
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 529,
+                                                                    lineNumber: 606,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6",
+                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3",
                                                                     children: [
                                                                         'Instagram / Facebook / LinkedIn',
                                                                         'WhatsApp',
@@ -1489,34 +1646,44 @@ function BusinessVisibilitySurvey() {
                                                                         'Other'
                                                                     ].map((platform)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>toggleArrayData('activePlatforms', platform),
-                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.activePlatforms.includes(platform) ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.activePlatforms.includes(platform) ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.activePlatforms ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: [
                                                                                 platform,
                                                                                 formData.activePlatforms.includes(platform) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 542,
+                                                                                    lineNumber: 621,
                                                                                     columnNumber: 81
                                                                                 }, this)
                                                                             ]
                                                                         }, platform, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 532,
+                                                                            lineNumber: 609,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 530,
+                                                                    lineNumber: 607,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.activePlatforms && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.activePlatforms
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 625,
+                                                                    columnNumber: 54
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 528,
+                                                            lineNumber: 605,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "customerSource",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1527,17 +1694,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 550,
+                                                                            lineNumber: 630,
                                                                             columnNumber: 142
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 550,
+                                                                    lineNumber: 630,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6",
+                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3",
                                                                     children: [
                                                                         'Instagram / Facebook / LinkedIn',
                                                                         'WhatsApp',
@@ -1548,34 +1715,44 @@ function BusinessVisibilitySurvey() {
                                                                         'Other'
                                                                     ].map((source)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>updateFormData('customerSource', source),
-                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.customerSource === source ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.customerSource === source ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.customerSource ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: [
                                                                                 source,
                                                                                 formData.customerSource === source && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 563,
+                                                                                    lineNumber: 645,
                                                                                     columnNumber: 72
                                                                                 }, this)
                                                                             ]
                                                                         }, source, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 553,
+                                                                            lineNumber: 633,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 551,
+                                                                    lineNumber: 631,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.customerSource && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.customerSource
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 649,
+                                                                    columnNumber: 53
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 549,
+                                                            lineNumber: 629,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "leadImportance",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1586,17 +1763,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 571,
+                                                                            lineNumber: 654,
                                                                             columnNumber: 157
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 571,
+                                                                    lineNumber: 654,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "space-y-2 mb-6",
+                                                                    className: "space-y-2",
                                                                     children: [
                                                                         'Extremely important',
                                                                         'Important',
@@ -1605,34 +1782,44 @@ function BusinessVisibilitySurvey() {
                                                                         'Not applicable to my business'
                                                                     ].map((importance)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>updateFormData('leadImportance', importance),
-                                                                            className: `w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.leadImportance === importance ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.leadImportance === importance ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.leadImportance ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: [
                                                                                 importance,
                                                                                 formData.leadImportance === importance && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 584,
+                                                                                    lineNumber: 669,
                                                                                     columnNumber: 76
                                                                                 }, this)
                                                                             ]
                                                                         }, importance, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 574,
+                                                                            lineNumber: 657,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 572,
+                                                                    lineNumber: 655,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.leadImportance && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.leadImportance
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 673,
+                                                                    columnNumber: 53
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 570,
+                                                            lineNumber: 653,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "paidAds",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1643,17 +1830,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 592,
+                                                                            lineNumber: 678,
                                                                             columnNumber: 156
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 592,
+                                                                    lineNumber: 678,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6",
+                                                                    className: "grid grid-cols-2 sm:grid-cols-4 gap-2",
                                                                     children: [
                                                                         'Yes, regularly',
                                                                         'Occasionally',
@@ -1661,25 +1848,35 @@ function BusinessVisibilitySurvey() {
                                                                         'Never'
                                                                     ].map((adStatus)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>updateFormData('paidAds', adStatus),
-                                                                            className: `p-2 sm:p-3 rounded-xl border text-center cursor-pointer transition-all text-xs sm:text-sm font-medium min-h-[48px] flex items-center justify-center ${formData.paidAds === adStatus ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `p-2 sm:p-3 rounded-xl border text-center cursor-pointer transition-all text-xs sm:text-sm font-medium min-h-[48px] flex items-center justify-center ${formData.paidAds === adStatus ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.paidAds ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: adStatus
                                                                         }, adStatus, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 595,
+                                                                            lineNumber: 681,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 593,
+                                                                    lineNumber: 679,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.paidAds && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.paidAds
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 696,
+                                                                    columnNumber: 46
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 591,
+                                                            lineNumber: 677,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "hasWebsite",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1690,38 +1887,46 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 612,
+                                                                            lineNumber: 701,
                                                                             columnNumber: 135
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 612,
+                                                                    lineNumber: 701,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "grid grid-cols-2 gap-4 mb-6",
+                                                                    className: "grid grid-cols-2 gap-4",
                                                                     children: [
                                                                         'Yes',
                                                                         'No'
                                                                     ].map((hasWeb)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>updateFormData('hasWebsite', hasWeb),
-                                                                            className: `p-4 rounded-xl border text-center cursor-pointer transition-all text-sm font-semibold min-h-[48px] ${formData.hasWebsite === hasWeb ? 'border-purple-600 bg-purple-600 text-white shadow-md' : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `p-4 rounded-xl border text-center cursor-pointer transition-all text-sm font-semibold min-h-[48px] ${formData.hasWebsite === hasWeb ? 'border-purple-600 bg-purple-600 text-white shadow-md' : errors.hasWebsite ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: hasWeb
                                                                         }, hasWeb, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 615,
+                                                                            lineNumber: 704,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 613,
+                                                                    lineNumber: 702,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.hasWebsite && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.hasWebsite
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 719,
+                                                                    columnNumber: 49
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 611,
+                                                            lineNumber: 700,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -1742,13 +1947,14 @@ function BusinessVisibilitySurvey() {
                                                                     className: "overflow-hidden mb-6 pl-4 border-l-2 border-purple-200 space-y-6",
                                                                     children: [
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                            id: "websiteUse",
                                                                             children: [
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
                                                                                     children: "What do you mainly use your website for?"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 640,
+                                                                                    lineNumber: 732,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1763,41 +1969,50 @@ function BusinessVisibilitySurvey() {
                                                                                         'Other'
                                                                                     ].map((use)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                                             onClick: ()=>toggleArrayData('websiteUse', use),
-                                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.websiteUse.includes(use) ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.websiteUse.includes(use) ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.websiteUse ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                                             children: [
                                                                                                 use,
                                                                                                 formData.websiteUse.includes(use) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                                    lineNumber: 653,
+                                                                                                    lineNumber: 747,
                                                                                                     columnNumber: 77
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, use, true, {
                                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                            lineNumber: 643,
+                                                                                            lineNumber: 735,
                                                                                             columnNumber: 37
                                                                                         }, this))
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 641,
+                                                                                    lineNumber: 733,
                                                                                     columnNumber: 33
+                                                                                }, this),
+                                                                                errors.websiteUse && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                                    children: errors.websiteUse
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                    lineNumber: 751,
+                                                                                    columnNumber: 55
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 639,
+                                                                            lineNumber: 731,
                                                                             columnNumber: 31
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                            id: "websiteSatisfaction",
                                                                             children: [
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
                                                                                     children: "Are you satisfied with your current website?"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 659,
+                                                                                    lineNumber: 754,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1809,37 +2024,45 @@ function BusinessVisibilitySurvey() {
                                                                                         'Planning to redesign'
                                                                                     ].map((sat)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                                             onClick: ()=>updateFormData('websiteSatisfaction', sat),
-                                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.websiteSatisfaction === sat ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.websiteSatisfaction === sat ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.websiteSatisfaction ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                                             children: [
                                                                                                 sat,
                                                                                                 formData.websiteSatisfaction === sat && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                                 }, void 0, false, {
                                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                                    lineNumber: 672,
+                                                                                                    lineNumber: 769,
                                                                                                     columnNumber: 80
                                                                                                 }, this)
                                                                                             ]
                                                                                         }, sat, true, {
                                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                            lineNumber: 662,
+                                                                                            lineNumber: 757,
                                                                                             columnNumber: 37
                                                                                         }, this))
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 660,
+                                                                                    lineNumber: 755,
                                                                                     columnNumber: 33
+                                                                                }, this),
+                                                                                errors.websiteSatisfaction && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                                    children: errors.websiteSatisfaction
+                                                                                }, void 0, false, {
+                                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                    lineNumber: 773,
+                                                                                    columnNumber: 64
                                                                                 }, this)
                                                                             ]
                                                                         }, void 0, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 658,
+                                                                            lineNumber: 753,
                                                                             columnNumber: 31
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 633,
+                                                                    lineNumber: 725,
                                                                     columnNumber: 29
                                                                 }, this),
                                                                 formData.hasWebsite === 'No' && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -1856,61 +2079,78 @@ function BusinessVisibilitySurvey() {
                                                                         height: 0
                                                                     },
                                                                     className: "overflow-hidden mb-6 pl-4 border-l-2 border-purple-200",
-                                                                    children: [
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
-                                                                            className: "block text-sm font-semibold text-gray-700 mb-3",
-                                                                            children: "What is stopping you from creating a website?"
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 686,
-                                                                            columnNumber: 31
-                                                                        }, this),
-                                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                            className: "space-y-2",
-                                                                            children: [
-                                                                                'Too expensive',
-                                                                                'Not sure where to start',
-                                                                                'No technical knowledge',
-                                                                                "Don't have time",
-                                                                                'Never felt the need',
-                                                                                'Already planning one',
-                                                                                'Other'
-                                                                            ].map((reason)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                                                                    onClick: ()=>updateFormData('noWebsiteReason', reason),
-                                                                                    className: `w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.noWebsiteReason === reason ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
-                                                                                    children: [
-                                                                                        reason,
-                                                                                        formData.noWebsiteReason === reason && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
-                                                                                            className: "w-4 h-4 text-purple-600 shrink-0"
-                                                                                        }, void 0, false, {
-                                                                                            fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                            lineNumber: 699,
-                                                                                            columnNumber: 77
-                                                                                        }, this)
-                                                                                    ]
-                                                                                }, reason, true, {
-                                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 689,
-                                                                                    columnNumber: 35
-                                                                                }, this))
-                                                                        }, void 0, false, {
-                                                                            fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 687,
-                                                                            columnNumber: 31
-                                                                        }, this)
-                                                                    ]
-                                                                }, void 0, true, {
+                                                                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                        id: "noWebsiteReason",
+                                                                        children: [
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
+                                                                                className: "block text-sm font-semibold text-gray-700 mb-3",
+                                                                                children: "What is stopping you from creating a website?"
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                lineNumber: 785,
+                                                                                columnNumber: 33
+                                                                            }, this),
+                                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                                                className: "space-y-2",
+                                                                                children: [
+                                                                                    'Too expensive',
+                                                                                    'Not sure where to start',
+                                                                                    'No technical knowledge',
+                                                                                    "Don't have time",
+                                                                                    'Never felt the need',
+                                                                                    'Already planning one',
+                                                                                    'Other'
+                                                                                ].map((reason)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                                                                        onClick: ()=>updateFormData('noWebsiteReason', reason),
+                                                                                        className: `w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.noWebsiteReason === reason ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.noWebsiteReason ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                                        children: [
+                                                                                            reason,
+                                                                                            formData.noWebsiteReason === reason && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
+                                                                                                className: "w-4 h-4 text-purple-600 shrink-0"
+                                                                                            }, void 0, false, {
+                                                                                                fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                                lineNumber: 800,
+                                                                                                columnNumber: 79
+                                                                                            }, this)
+                                                                                        ]
+                                                                                    }, reason, true, {
+                                                                                        fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                        lineNumber: 788,
+                                                                                        columnNumber: 37
+                                                                                    }, this))
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                lineNumber: 786,
+                                                                                columnNumber: 33
+                                                                            }, this),
+                                                                            errors.noWebsiteReason && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                                className: "text-xs text-red-500 mt-2 font-medium",
+                                                                                children: errors.noWebsiteReason
+                                                                            }, void 0, false, {
+                                                                                fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                                lineNumber: 804,
+                                                                                columnNumber: 60
+                                                                            }, this)
+                                                                        ]
+                                                                    }, void 0, true, {
+                                                                        fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                        lineNumber: 784,
+                                                                        columnNumber: 31
+                                                                    }, this)
+                                                                }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 680,
+                                                                    lineNumber: 778,
                                                                     columnNumber: 29
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 631,
+                                                            lineNumber: 723,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "enquiryProcess",
+                                                            className: "mb-6",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-3",
@@ -1921,17 +2161,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 709,
+                                                                            lineNumber: 812,
                                                                             columnNumber: 150
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 709,
+                                                                    lineNumber: 812,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6",
+                                                                    className: "grid grid-cols-1 sm:grid-cols-2 gap-3",
                                                                     children: [
                                                                         'WhatsApp',
                                                                         'Phone Call',
@@ -1943,34 +2183,44 @@ function BusinessVisibilitySurvey() {
                                                                         'Other'
                                                                     ].map((process)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                                             onClick: ()=>toggleArrayData('enquiryProcess', process),
-                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.enquiryProcess.includes(process) ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
+                                                                            className: `p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${formData.enquiryProcess.includes(process) ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' : errors.enquiryProcess ? 'border-red-500 bg-red-50/30 text-red-800' : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'}`,
                                                                             children: [
                                                                                 process,
                                                                                 formData.enquiryProcess.includes(process) && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$check$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Check$3e$__["Check"], {
                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 722,
+                                                                                    lineNumber: 827,
                                                                                     columnNumber: 79
                                                                                 }, this)
                                                                             ]
                                                                         }, process, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 712,
+                                                                            lineNumber: 815,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 710,
+                                                                    lineNumber: 813,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.enquiryProcess && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-2 font-medium",
+                                                                    children: errors.enquiryProcess
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 831,
+                                                                    columnNumber: 53
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 708,
+                                                            lineNumber: 811,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            id: "responseSpeed",
+                                                            className: "mb-8",
                                                             children: [
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("label", {
                                                                     className: "block text-sm font-semibold text-gray-700 mb-2",
@@ -1981,17 +2231,17 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 730,
+                                                                            lineNumber: 836,
                                                                             columnNumber: 150
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 730,
+                                                                    lineNumber: 836,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("select", {
-                                                                    className: "w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]",
+                                                                    className: `w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.responseSpeed ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`,
                                                                     value: formData.responseSpeed,
                                                                     onChange: (e)=>updateFormData('responseSpeed', e.target.value),
                                                                     children: [
@@ -2000,7 +2250,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Select a time..."
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 736,
+                                                                            lineNumber: 842,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2008,7 +2258,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Within 15-30 minutes"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 737,
+                                                                            lineNumber: 843,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2016,7 +2266,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Within 1 hour"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 738,
+                                                                            lineNumber: 844,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2024,7 +2274,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "Within the same day"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 739,
+                                                                            lineNumber: 845,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2032,7 +2282,7 @@ function BusinessVisibilitySurvey() {
                                                                             children: "More than a day"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 740,
+                                                                            lineNumber: 846,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("option", {
@@ -2040,25 +2290,33 @@ function BusinessVisibilitySurvey() {
                                                                             children: "It depends"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 741,
+                                                                            lineNumber: 847,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 731,
+                                                                    lineNumber: 837,
                                                                     columnNumber: 27
+                                                                }, this),
+                                                                errors.responseSpeed && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                                    className: "text-xs text-red-500 mt-1 font-medium",
+                                                                    children: errors.responseSpeed
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/src/app/business-visibility-survey/page.jsx",
+                                                                    lineNumber: 849,
+                                                                    columnNumber: 52
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 729,
+                                                            lineNumber: 835,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, "step2", true, {
                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                    lineNumber: 517,
+                                                    lineNumber: 594,
                                                     columnNumber: 23
                                                 }, this),
                                                 currentStep === 3 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -2084,7 +2342,7 @@ function BusinessVisibilitySurvey() {
                                                             children: "YOUR GROWTH GOALS"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 756,
+                                                            lineNumber: 863,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2098,13 +2356,13 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 760,
+                                                                            lineNumber: 867,
                                                                             columnNumber: 156
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 760,
+                                                                    lineNumber: 867,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2127,24 +2385,24 @@ function BusinessVisibilitySurvey() {
                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 773,
+                                                                                    lineNumber: 880,
                                                                                     columnNumber: 83
                                                                                 }, this)
                                                                             ]
                                                                         }, challenge, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 763,
+                                                                            lineNumber: 870,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 761,
+                                                                    lineNumber: 868,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 759,
+                                                            lineNumber: 866,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2158,13 +2416,13 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 781,
+                                                                            lineNumber: 888,
                                                                             columnNumber: 154
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 781,
+                                                                    lineNumber: 888,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2187,24 +2445,24 @@ function BusinessVisibilitySurvey() {
                                                                                     className: "w-4 h-4 text-purple-600 shrink-0"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 794,
+                                                                                    lineNumber: 901,
                                                                                     columnNumber: 73
                                                                                 }, this)
                                                                             ]
                                                                         }, imp, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 784,
+                                                                            lineNumber: 891,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 782,
+                                                                    lineNumber: 889,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 780,
+                                                            lineNumber: 887,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2218,13 +2476,13 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 802,
+                                                                            lineNumber: 909,
                                                                             columnNumber: 153
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 802,
+                                                                    lineNumber: 909,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2271,12 +2529,12 @@ function BusinessVisibilitySurvey() {
                                                                                             className: `w-5 h-5 transition-colors ${starIdx <= rating.stars ? 'fill-amber-400 text-amber-400 group-hover:scale-110' : 'text-gray-300'}`
                                                                                         }, starIdx, false, {
                                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                            lineNumber: 822,
+                                                                                            lineNumber: 929,
                                                                                             columnNumber: 37
                                                                                         }, this))
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 820,
+                                                                                    lineNumber: 927,
                                                                                     columnNumber: 33
                                                                                 }, this),
                                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -2284,30 +2542,30 @@ function BusinessVisibilitySurvey() {
                                                                                     children: rating.label
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                                    lineNumber: 832,
+                                                                                    lineNumber: 939,
                                                                                     columnNumber: 33
                                                                                 }, this)
                                                                             ]
                                                                         }, rating.val, true, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 811,
+                                                                            lineNumber: 918,
                                                                             columnNumber: 31
                                                                         }, this))
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 803,
+                                                                    lineNumber: 910,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 801,
+                                                            lineNumber: 908,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, "step3", true, {
                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                    lineNumber: 748,
+                                                    lineNumber: 855,
                                                     columnNumber: 23
                                                 }, this),
                                                 currentStep === 4 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -2333,7 +2591,7 @@ function BusinessVisibilitySurvey() {
                                                             children: "FINAL STEP"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 851,
+                                                            lineNumber: 958,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2347,13 +2605,13 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 854,
+                                                                            lineNumber: 961,
                                                                             columnNumber: 103
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 854,
+                                                                    lineNumber: 961,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2363,7 +2621,7 @@ function BusinessVisibilitySurvey() {
                                                                             className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 856,
+                                                                            lineNumber: 963,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2374,19 +2632,19 @@ function BusinessVisibilitySurvey() {
                                                                             onChange: (e)=>updateFormData('fullName', e.target.value)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 857,
+                                                                            lineNumber: 964,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 855,
+                                                                    lineNumber: 962,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 853,
+                                                            lineNumber: 960,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2400,13 +2658,13 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 868,
+                                                                            lineNumber: 975,
                                                                             columnNumber: 99
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 868,
+                                                                    lineNumber: 975,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2416,7 +2674,7 @@ function BusinessVisibilitySurvey() {
                                                                             className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 870,
+                                                                            lineNumber: 977,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2427,19 +2685,19 @@ function BusinessVisibilitySurvey() {
                                                                             onChange: (e)=>updateFormData('email', e.target.value)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 871,
+                                                                            lineNumber: 978,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 869,
+                                                                    lineNumber: 976,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 867,
+                                                            lineNumber: 974,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2453,13 +2711,13 @@ function BusinessVisibilitySurvey() {
                                                                             children: "*"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 882,
+                                                                            lineNumber: 989,
                                                                             columnNumber: 106
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 882,
+                                                                    lineNumber: 989,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2469,7 +2727,7 @@ function BusinessVisibilitySurvey() {
                                                                             className: "absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400"
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 884,
+                                                                            lineNumber: 991,
                                                                             columnNumber: 29
                                                                         }, this),
                                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("input", {
@@ -2480,19 +2738,19 @@ function BusinessVisibilitySurvey() {
                                                                             onChange: (e)=>updateFormData('phoneNumber', e.target.value)
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                            lineNumber: 885,
+                                                                            lineNumber: 992,
                                                                             columnNumber: 29
                                                                         }, this)
                                                                     ]
                                                                 }, void 0, true, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 883,
+                                                                    lineNumber: 990,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 881,
+                                                            lineNumber: 988,
                                                             columnNumber: 25
                                                         }, this),
                                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2502,7 +2760,7 @@ function BusinessVisibilitySurvey() {
                                                                     children: "Is there anything else you'd like to share about your business or your experience with growing online? (Optional)"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 896,
+                                                                    lineNumber: 1003,
                                                                     columnNumber: 27
                                                                 }, this),
                                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("textarea", {
@@ -2513,30 +2771,30 @@ function BusinessVisibilitySurvey() {
                                                                     onChange: (e)=>updateFormData('additionalFeedback', e.target.value)
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                                    lineNumber: 897,
+                                                                    lineNumber: 1004,
                                                                     columnNumber: 27
                                                                 }, this)
                                                             ]
                                                         }, void 0, true, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 895,
+                                                            lineNumber: 1002,
                                                             columnNumber: 25
                                                         }, this)
                                                     ]
                                                 }, "step4", true, {
                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                    lineNumber: 843,
+                                                    lineNumber: 950,
                                                     columnNumber: 23
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 400,
+                                            lineNumber: 469,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 399,
+                                        lineNumber: 468,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -2549,11 +2807,11 @@ function BusinessVisibilitySurvey() {
                                                 children: "← Back"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 912,
+                                                lineNumber: 1019,
                                                 columnNumber: 21
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {}, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 920,
+                                                lineNumber: 1027,
                                                 columnNumber: 21
                                             }, this),
                                             currentStep < 4 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -2565,13 +2823,13 @@ function BusinessVisibilitySurvey() {
                                                         className: "w-4 h-4"
                                                     }, void 0, false, {
                                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                        lineNumber: 927,
+                                                        lineNumber: 1034,
                                                         columnNumber: 28
                                                     }, this)
                                                 ]
                                             }, void 0, true, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 923,
+                                                lineNumber: 1030,
                                                 columnNumber: 21
                                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                                 onClick: handleSubmit,
@@ -2583,31 +2841,31 @@ function BusinessVisibilitySurvey() {
                                                             className: "w-4 h-4 mr-2 animate-spin"
                                                         }, void 0, false, {
                                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                            lineNumber: 937,
+                                                            lineNumber: 1044,
                                                             columnNumber: 27
                                                         }, this),
                                                         "Analyzing Visibility..."
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                    lineNumber: 936,
+                                                    lineNumber: 1043,
                                                     columnNumber: 25
                                                 }, this) : "Submit Survey"
                                             }, void 0, false, {
                                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                                lineNumber: 930,
+                                                lineNumber: 1037,
                                                 columnNumber: 21
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 910,
+                                        lineNumber: 1017,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                lineNumber: 372,
+                                lineNumber: 441,
                                 columnNumber: 15
                             }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                                 initial: {
@@ -2626,12 +2884,12 @@ function BusinessVisibilitySurvey() {
                                             className: "w-10 h-10 text-purple-600 animate-[bounce_1s_ease-in-out]"
                                         }, void 0, false, {
                                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                            lineNumber: 954,
+                                            lineNumber: 1061,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 953,
+                                        lineNumber: 1060,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
@@ -2639,7 +2897,7 @@ function BusinessVisibilitySurvey() {
                                         children: "Survey Submitted Successfully!"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 956,
+                                        lineNumber: 1063,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -2647,7 +2905,7 @@ function BusinessVisibilitySurvey() {
                                         children: "Thank you for contributing to the Business Visibility Survey 2026. Your Personalised Visibility Report will be delivered to your email shortly."
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 957,
+                                        lineNumber: 1064,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("a", {
@@ -2656,39 +2914,39 @@ function BusinessVisibilitySurvey() {
                                         children: "Return to PageMistri Home"
                                     }, void 0, false, {
                                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                        lineNumber: 960,
+                                        lineNumber: 1067,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                                lineNumber: 948,
+                                lineNumber: 1055,
                                 columnNumber: 15
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                            lineNumber: 369,
+                            lineNumber: 438,
                             columnNumber: 11
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                        lineNumber: 367,
+                        lineNumber: 436,
                         columnNumber: 9
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-                lineNumber: 365,
+                lineNumber: 434,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/src/app/business-visibility-survey/page.jsx",
-        lineNumber: 127,
+        lineNumber: 182,
         columnNumber: 5
     }, this);
 }
-_s(BusinessVisibilitySurvey, "ssarNxYY9ydF17/O+3Qmkg6hYro=");
+_s(BusinessVisibilitySurvey, "O4ePibWMlvlQJDk7SKN81VGnEL0=");
 _c = BusinessVisibilitySurvey;
 var _c;
 __turbopack_context__.k.register(_c, "BusinessVisibilitySurvey");

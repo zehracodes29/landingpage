@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [errors, setErrors] = useState({});
+  const [showErrorToast, setShowErrorToast] = useState(false);
   
   const [formData, setFormData] = useState({
     businessName: '',
@@ -37,6 +39,9 @@ export default function BusinessVisibilitySurvey() {
 
   const updateFormData = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }));
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: null }));
+    }
   };
 
   const toggleArrayData = (field, value) => {
@@ -48,28 +53,79 @@ export default function BusinessVisibilitySurvey() {
         return { ...prev, [field]: [...array, value] };
       }
     });
+    if (errors[field]) {
+      setErrors(prev => ({ ...prev, [field]: null }));
+    }
+  };
+
+  const triggerError = (newErrors) => {
+    setErrors(newErrors);
+    setShowErrorToast(true);
+    setTimeout(() => setShowErrorToast(false), 3000);
+    const firstErrorField = Object.keys(newErrors)[0];
+    setTimeout(() => {
+      document.getElementById(firstErrorField)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  };
+
+  const validateStep = (step) => {
+    const newErrors = {};
+    if (step === 1) {
+      if (!formData.businessName) newErrors.businessName = "Business name is required";
+      if (!formData.businessType) newErrors.businessType = "Please select your business type";
+      if (!formData.city) newErrors.city = "City is required";
+      if (!formData.yearsInBusiness) newErrors.yearsInBusiness = "Please select how long you've been in business";
+      if (!formData.employees) newErrors.employees = "Please select employee count";
+      if (!formData.monthlyEnquiries) newErrors.monthlyEnquiries = "Please select monthly enquiries";
+    }
+    if (step === 2) {
+      if (formData.activePlatforms.length === 0) newErrors.activePlatforms = "Please select at least one platform";
+      if (!formData.customerSource) newErrors.customerSource = "Please select your primary customer source";
+      if (!formData.leadImportance) newErrors.leadImportance = "Please select the importance of leads";
+      if (!formData.paidAds) newErrors.paidAds = "Please select your paid advertising status";
+      if (!formData.hasWebsite) newErrors.hasWebsite = "Please select if you have a website";
+      
+      if (formData.hasWebsite === 'Yes') {
+        if (formData.websiteUse.length === 0) newErrors.websiteUse = "Please select how you use your website";
+        if (!formData.websiteSatisfaction) newErrors.websiteSatisfaction = "Please select your website satisfaction";
+      }
+      if (formData.hasWebsite === 'No') {
+        if (!formData.noWebsiteReason) newErrors.noWebsiteReason = "Please select why you don't have a website";
+      }
+      
+      if (formData.enquiryProcess.length === 0) newErrors.enquiryProcess = "Please select your enquiry process";
+      if (!formData.responseSpeed) newErrors.responseSpeed = "Please select your average response speed";
+    }
+    if (step === 3) {
+      if (formData.biggestChallenge.length === 0) newErrors.biggestChallenge = "Please select your biggest challenge";
+      if (formData.improvements.length === 0) newErrors.improvements = "Please select what you'd like to improve";
+      if (!formData.onlinePresenceRating) newErrors.onlinePresenceRating = "Please rate your online presence";
+    }
+    if (step === 4) {
+      if (!formData.fullName) newErrors.fullName = "Full name is required";
+      if (!formData.email) {
+        newErrors.email = "Email address is required";
+      } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+        newErrors.email = "Please enter a valid email address";
+      }
+      if (!formData.phoneNumber) {
+        newErrors.phoneNumber = "Phone number is required";
+      } else if (formData.phoneNumber.replace(/\D/g, '').length < 10) {
+        newErrors.phoneNumber = "Please enter a valid phone number (min 10 digits)";
+      }
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      triggerError(newErrors);
+      return false;
+    }
+    return true;
   };
 
   const handleNext = () => {
-    if (currentStep === 1) {
-      if (!formData.businessName || !formData.businessType || !formData.city || !formData.yearsInBusiness || !formData.employees || !formData.monthlyEnquiries) {
-        alert("Please fill in all required fields to proceed.");
-        return;
-      }
+    if (validateStep(currentStep)) {
+      setCurrentStep(prev => Math.min(prev + 1, 4));
     }
-    if (currentStep === 2) {
-      if (formData.activePlatforms.length === 0 || !formData.customerSource || !formData.leadImportance || !formData.paidAds || !formData.hasWebsite || formData.enquiryProcess.length === 0 || !formData.responseSpeed) {
-        alert("Please answer all questions to proceed.");
-        return;
-      }
-    }
-    if (currentStep === 3) {
-      if (formData.biggestChallenge.length === 0 || formData.improvements.length === 0 || !formData.onlinePresenceRating) {
-        alert("Please answer all questions to proceed.");
-        return;
-      }
-    }
-    setCurrentStep(prev => Math.min(prev + 1, 4));
   };
 
   const handleBack = () => {
@@ -78,8 +134,7 @@ export default function BusinessVisibilitySurvey() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.fullName || !formData.email || !formData.phoneNumber) {
-      alert("Please fill in all required contact fields before submitting.");
+    if (!validateStep(4)) {
       return;
     }
     
@@ -125,6 +180,20 @@ export default function BusinessVisibilitySurvey() {
 
   return (
     <div className="min-h-screen bg-white relative overflow-hidden font-sans">
+      {/* Toast Notification */}
+      <AnimatePresence>
+        {showErrorToast && (
+          <motion.div 
+            initial={{ opacity: 0, y: -50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -50 }}
+            className="fixed top-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3.5 bg-red-50 border border-red-200 text-red-800 rounded-2xl shadow-xl flex items-center gap-3 font-semibold text-sm animate-bounce"
+          >
+            <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
+            Please complete all required fields before proceeding.
+          </motion.div>
+        )}
+      </AnimatePresence>
       {/* Background Mesh & Pattern */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-100/80 via-white to-purple-50/40 -z-10" />
       <div 
@@ -410,21 +479,22 @@ export default function BusinessVisibilitySurvey() {
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 block">TELL US ABOUT YOUR BUSINESS</span>
 
                         {/* Field 1: Name */}
-                        <div>
+                        <div id="businessName" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Name of your business <span className="text-purple-600">*</span></label>
                           <input 
                             type="text" 
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 shadow-sm focus:scale-[1.01]"
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.businessName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             placeholder="Enter name"
                             value={formData.businessName}
                             onChange={(e) => updateFormData('businessName', e.target.value)}
                           />
+                          {errors.businessName && <p className="text-xs text-red-500 mt-1 font-medium">{errors.businessName}</p>}
                         </div>
 
                         {/* Field 2: Business Type Grid */}
-                        <div>
+                        <div id="businessType" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">What type of business do you own? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {[
                               'Coach / Consultant', 'Freelancer', 'Real Estate', 'Healthcare / Clinic', 
                               'Salon / Spa', 'Gym / Fitness', 'Restaurant / Café', 'Retail Store', 
@@ -437,7 +507,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium ${
                                   formData.businessType === type 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 shadow-sm font-semibold' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.businessType
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {type}
@@ -445,28 +517,30 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.businessType && <p className="text-xs text-red-500 mt-2 font-medium">{errors.businessType}</p>}
                         </div>
 
                         {/* Field 3: City */}
-                        <div>
+                        <div id="city" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Which city do you operate from? <span className="text-purple-600">*</span></label>
-                          <div className="relative mb-6">
+                          <div className="relative">
                             <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="text" 
-                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.city ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Location"
                               value={formData.city}
                               onChange={(e) => updateFormData('city', e.target.value)}
                             />
                           </div>
+                          {errors.city && <p className="text-xs text-red-500 mt-1 font-medium">{errors.city}</p>}
                         </div>
 
                         {/* Field 4: Years in Business */}
-                        <div>
+                        <div id="yearsInBusiness" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">How long have you been running your business? <span className="text-purple-600">*</span></label>
                           <select 
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.yearsInBusiness ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.yearsInBusiness}
                             onChange={(e) => updateFormData('yearsInBusiness', e.target.value)}
                           >
@@ -476,13 +550,14 @@ export default function BusinessVisibilitySurvey() {
                             <option value="3 - 5 years">3 - 5 years</option>
                             <option value="5+ years">5+ years</option>
                           </select>
+                          {errors.yearsInBusiness && <p className="text-xs text-red-500 mt-1 font-medium">{errors.yearsInBusiness}</p>}
                         </div>
 
                         {/* Field 5: Employees */}
-                        <div>
+                        <div id="employees" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">How many people currently work in your business? <span className="text-purple-600">*</span></label>
                           <select 
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.employees ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.employees}
                             onChange={(e) => updateFormData('employees', e.target.value)}
                           >
@@ -493,13 +568,14 @@ export default function BusinessVisibilitySurvey() {
                             <option value="11 - 25 employees">11 - 25 employees</option>
                             <option value="25+ employees">25+ employees</option>
                           </select>
+                          {errors.employees && <p className="text-xs text-red-500 mt-1 font-medium">{errors.employees}</p>}
                         </div>
 
                         {/* Field 6: Monthly Enquiries */}
-                        <div>
+                        <div id="monthlyEnquiries" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Approximately how many enquiries does your business receive every month? <span className="text-purple-600">*</span></label>
                           <select 
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.monthlyEnquiries ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.monthlyEnquiries}
                             onChange={(e) => updateFormData('monthlyEnquiries', e.target.value)}
                           >
@@ -509,6 +585,7 @@ export default function BusinessVisibilitySurvey() {
                             <option value="50 - 100 enquiries">50 - 100 enquiries</option>
                             <option value="100+ enquiries">100+ enquiries</option>
                           </select>
+                          {errors.monthlyEnquiries && <p className="text-xs text-red-500 mt-1 font-medium">{errors.monthlyEnquiries}</p>}
                         </div>
                       </motion.div>
                     )}
@@ -525,9 +602,9 @@ export default function BusinessVisibilitySurvey() {
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 block">YOUR ONLINE PRESENCE AND CHALLENGES</span>
 
                         {/* Field 1: Active Platforms */}
-                        <div>
+                        <div id="activePlatforms" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">Which platforms do you actively use to market your business? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {['Instagram / Facebook / LinkedIn', 'WhatsApp', 'Google Business Profile', 'Website / Online Referrals', 'Marketplace (Justdial, IndiaMART etc.)', 'YouTube', 'Other'].map((platform) => (
                               <button
                                 key={platform}
@@ -535,7 +612,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.activePlatforms.includes(platform) 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.activePlatforms
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {platform}
@@ -543,12 +622,13 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.activePlatforms && <p className="text-xs text-red-500 mt-2 font-medium">{errors.activePlatforms}</p>}
                         </div>
 
                         {/* Field 2: Customer Source */}
-                        <div>
+                        <div id="customerSource" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">Where do most of your customers come from today? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {['Instagram / Facebook / LinkedIn', 'WhatsApp', 'Google Business Profile', 'Website / Online Referrals', 'Marketplace (Justdial, IndiaMART etc.)', 'YouTube', 'Other'].map((source) => (
                               <button
                                 key={source}
@@ -556,7 +636,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.customerSource === source 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.customerSource
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {source}
@@ -564,12 +646,13 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.customerSource && <p className="text-xs text-red-500 mt-2 font-medium">{errors.customerSource}</p>}
                         </div>
 
                         {/* Field 3: Lead Importance */}
-                        <div>
+                        <div id="leadImportance" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">How important are customer enquiries or leads to your business? <span className="text-purple-600">*</span></label>
-                          <div className="space-y-2 mb-6">
+                          <div className="space-y-2">
                             {['Extremely important', 'Important', 'Somewhat important', 'Not very important', 'Not applicable to my business'].map((importance) => (
                               <button
                                 key={importance}
@@ -577,7 +660,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.leadImportance === importance 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.leadImportance
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {importance}
@@ -585,12 +670,13 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.leadImportance && <p className="text-xs text-red-500 mt-2 font-medium">{errors.leadImportance}</p>}
                         </div>
 
                         {/* Field 4: Paid Ads */}
-                        <div>
+                        <div id="paidAds" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">Do you currently invest in paid advertising for your business? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                             {['Yes, regularly', 'Occasionally', 'I have tried it before', 'Never'].map((adStatus) => (
                               <button
                                 key={adStatus}
@@ -598,19 +684,22 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-2 sm:p-3 rounded-xl border text-center cursor-pointer transition-all text-xs sm:text-sm font-medium min-h-[48px] flex items-center justify-center ${
                                   formData.paidAds === adStatus 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.paidAds
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {adStatus}
                               </button>
                             ))}
                           </div>
+                          {errors.paidAds && <p className="text-xs text-red-500 mt-2 font-medium">{errors.paidAds}</p>}
                         </div>
 
                         {/* Field 5: Website */}
-                        <div>
+                        <div id="hasWebsite" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">Do you currently have a business website? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-2 gap-4 mb-6">
+                          <div className="grid grid-cols-2 gap-4">
                             {['Yes', 'No'].map((hasWeb) => (
                               <button
                                 key={hasWeb}
@@ -618,13 +707,16 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-4 rounded-xl border text-center cursor-pointer transition-all text-sm font-semibold min-h-[48px] ${
                                   formData.hasWebsite === hasWeb 
                                     ? 'border-purple-600 bg-purple-600 text-white shadow-md' 
-                                    : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.hasWebsite
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {hasWeb}
                               </button>
                             ))}
                           </div>
+                          {errors.hasWebsite && <p className="text-xs text-red-500 mt-2 font-medium">{errors.hasWebsite}</p>}
                         </div>
 
                         {/* Field 5 Conditional Logic */}
@@ -636,7 +728,7 @@ export default function BusinessVisibilitySurvey() {
                               exit={{ opacity: 0, height: 0 }}
                               className="overflow-hidden mb-6 pl-4 border-l-2 border-purple-200 space-y-6"
                             >
-                              <div>
+                              <div id="websiteUse">
                                 <label className="block text-sm font-semibold text-gray-700 mb-3">What do you mainly use your website for?</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                   {['Business information', 'Lead generation', 'Appointment booking', 'Selling products', 'Portfolio', 'Accepting payments', 'Other'].map((use) => (
@@ -646,7 +738,9 @@ export default function BusinessVisibilitySurvey() {
                                       className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                         formData.websiteUse.includes(use) 
                                           ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                          : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                          : errors.websiteUse
+                                            ? 'border-red-500 bg-red-50/30 text-red-800'
+                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                       }`}
                                     >
                                       {use}
@@ -654,8 +748,9 @@ export default function BusinessVisibilitySurvey() {
                                     </button>
                                   ))}
                                 </div>
+                                {errors.websiteUse && <p className="text-xs text-red-500 mt-2 font-medium">{errors.websiteUse}</p>}
                               </div>
-                              <div>
+                              <div id="websiteSatisfaction">
                                 <label className="block text-sm font-semibold text-gray-700 mb-3">Are you satisfied with your current website?</label>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                                   {['Very satisfied', 'Somewhat satisfied', 'Needs improvement', 'Planning to redesign'].map((sat) => (
@@ -665,7 +760,9 @@ export default function BusinessVisibilitySurvey() {
                                       className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                         formData.websiteSatisfaction === sat 
                                           ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                          : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                          : errors.websiteSatisfaction
+                                            ? 'border-red-500 bg-red-50/30 text-red-800'
+                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                       }`}
                                     >
                                       {sat}
@@ -673,6 +770,7 @@ export default function BusinessVisibilitySurvey() {
                                     </button>
                                   ))}
                                 </div>
+                                {errors.websiteSatisfaction && <p className="text-xs text-red-500 mt-2 font-medium">{errors.websiteSatisfaction}</p>}
                               </div>
                             </motion.div>
                           )}
@@ -683,31 +781,36 @@ export default function BusinessVisibilitySurvey() {
                               exit={{ opacity: 0, height: 0 }}
                               className="overflow-hidden mb-6 pl-4 border-l-2 border-purple-200"
                             >
-                              <label className="block text-sm font-semibold text-gray-700 mb-3">What is stopping you from creating a website?</label>
-                              <div className="space-y-2">
-                                {['Too expensive', 'Not sure where to start', 'No technical knowledge', "Don't have time", 'Never felt the need', 'Already planning one', 'Other'].map((reason) => (
-                                  <button
-                                    key={reason}
-                                    onClick={() => updateFormData('noWebsiteReason', reason)}
-                                    className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
-                                      formData.noWebsiteReason === reason 
-                                        ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                        : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
-                                    }`}
-                                  >
-                                    {reason}
-                                    {formData.noWebsiteReason === reason && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
-                                  </button>
-                                ))}
+                              <div id="noWebsiteReason">
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">What is stopping you from creating a website?</label>
+                                <div className="space-y-2">
+                                  {['Too expensive', 'Not sure where to start', 'No technical knowledge', "Don't have time", 'Never felt the need', 'Already planning one', 'Other'].map((reason) => (
+                                    <button
+                                      key={reason}
+                                      onClick={() => updateFormData('noWebsiteReason', reason)}
+                                      className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                        formData.noWebsiteReason === reason 
+                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                          : errors.noWebsiteReason
+                                            ? 'border-red-500 bg-red-50/30 text-red-800'
+                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      }`}
+                                    >
+                                      {reason}
+                                      {formData.noWebsiteReason === reason && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                                    </button>
+                                  ))}
+                                </div>
+                                {errors.noWebsiteReason && <p className="text-xs text-red-500 mt-2 font-medium">{errors.noWebsiteReason}</p>}
                               </div>
                             </motion.div>
                           )}
                         </AnimatePresence>
 
                         {/* Field 6: Enquiry Process */}
-                        <div>
+                        <div id="enquiryProcess" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">What happens after someone enquires about your business? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {['WhatsApp', 'Phone Call', 'Instagram DM', 'Facebook Messenger', 'Manual Spreadsheet', 'CRM Software', "I Don't Track Enquiries", 'Other'].map((process) => (
                               <button
                                 key={process}
@@ -715,7 +818,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.enquiryProcess.includes(process) 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.enquiryProcess
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {process}
@@ -723,13 +828,14 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.enquiryProcess && <p className="text-xs text-red-500 mt-2 font-medium">{errors.enquiryProcess}</p>}
                         </div>
 
                         {/* Field 7: Response Speed */}
-                        <div>
+                        <div id="responseSpeed" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">On average, how quickly do you respond to a new enquiry? <span className="text-purple-600">*</span></label>
                           <select 
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.responseSpeed ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.responseSpeed}
                             onChange={(e) => updateFormData('responseSpeed', e.target.value)}
                           >
@@ -740,6 +846,7 @@ export default function BusinessVisibilitySurvey() {
                             <option value="More than a day">More than a day</option>
                             <option value="It depends">It depends</option>
                           </select>
+                          {errors.responseSpeed && <p className="text-xs text-red-500 mt-1 font-medium">{errors.responseSpeed}</p>}
                         </div>
                       </motion.div>
                     )}

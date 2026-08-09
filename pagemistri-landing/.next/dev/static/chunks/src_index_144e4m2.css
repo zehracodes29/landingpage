@@ -82,7 +82,9 @@
     --color-red-200: #ffcaca;
     --color-red-400: #ff6568;
     --color-red-500: #fb2c36;
+    --color-red-600: #e40014;
     --color-red-700: #bf000f;
+    --color-red-800: #9f0712;
     --color-amber-400: #fcbb00;
     --color-yellow-400: #fac800;
     --color-green-50: #f0fdf4;
@@ -179,6 +181,7 @@
     --ease-in-out: cubic-bezier(.4, 0, .2, 1);
     --animate-spin: spin 1s linear infinite;
     --animate-pulse: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
+    --animate-bounce: bounce 1s infinite;
     --blur-md: 12px;
     --blur-2xl: 40px;
     --blur-3xl: 64px;
@@ -194,7 +197,9 @@
       --color-red-200: lab(86.017% 19.8815 7.75869);
       --color-red-400: lab(63.7053% 60.745 31.3109);
       --color-red-500: lab(55.4814% 75.0732 48.8528);
+      --color-red-600: lab(48.4493% 77.4328 61.5452);
       --color-red-700: lab(40.4273% 67.2623 53.7441);
+      --color-red-800: lab(33.7174% 55.8993 41.0293);
       --color-amber-400: lab(80.1641% 16.6016 99.2089);
       --color-yellow-400: lab(83.2664% 8.65132 106.895);
       --color-green-50: lab(98.1563% -5.60117 2.75915);
@@ -1134,6 +1139,10 @@
     animation: 3s ease-in-out infinite pulse;
   }
 
+  .animate-bounce {
+    animation: var(--animate-bounce);
+  }
+
   .animate-pulse {
     animation: var(--animate-pulse);
   }
@@ -1660,6 +1669,16 @@
 
   .bg-red-50 {
     background-color: var(--color-red-50);
+  }
+
+  .bg-red-50\/30 {
+    background-color: #fef2f24d;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-red-50\/30 {
+      background-color: color-mix(in oklab, var(--color-red-50) 30%, transparent);
+    }
   }
 
   .bg-red-400 {
@@ -2419,8 +2438,16 @@
     color: var(--color-red-500);
   }
 
+  .text-red-600 {
+    color: var(--color-red-600);
+  }
+
   .text-red-700 {
     color: var(--color-red-700);
+  }
+
+  .text-red-800 {
+    color: var(--color-red-800);
   }
 
   .text-slate-300 {
