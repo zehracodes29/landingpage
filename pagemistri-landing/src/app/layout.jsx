@@ -21,6 +21,15 @@ export default function RootLayout({ children }) {
  })(window,document,'script','dataLayer','GTM-PBG4766S');
  ` }} 
  />
+ <Script src="https://www.googletagmanager.com/gtag/js?id=G-Z08DW1BKX3" strategy="afterInteractive" />
+ <Script id="google-analytics" strategy="afterInteractive">
+   {`
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-Z08DW1BKX3');
+   `}
+ </Script>
  </head>
  <body className="overflow-x-hidden w-full max-w-[100vw]">
  <noscript>
