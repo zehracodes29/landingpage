@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle, Send, Sparkles, Lock } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle, Send, Sparkles, Lock, Quote } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -179,7 +179,7 @@ export default function BusinessVisibilitySurvey() {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-hidden font-sans">
+    <div className="min-h-screen bg-white relative overflow-x-hidden w-full font-sans">
       {/* Toast Notification */}
       <AnimatePresence>
         {showErrorToast && (
@@ -1156,6 +1156,59 @@ export default function BusinessVisibilitySurvey() {
         </div>
       </section>
 
+      {/* SECTION 1.5: Who Is Behind This Initiative? */}
+      <section className="w-full max-w-full overflow-hidden py-10 sm:py-20 bg-gradient-to-b from-white via-purple-50/20 to-white px-4 sm:px-6 lg:px-8">
+        <div className="w-full max-w-5xl mx-auto box-border overflow-hidden grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          
+          {/* Left Column - Story Content */}
+          <div className="col-span-12 lg:col-span-6">
+            <h2 className="break-words hyphens-auto text-xl sm:text-3xl md:text-4xl font-extrabold text-gray-900 tracking-tight leading-snug mb-4">
+              Who Is Behind This Initiative?
+            </h2>
+            <p className="break-words whitespace-normal max-w-full text-sm sm:text-base text-gray-700 leading-relaxed mb-4 font-medium">
+              Business Visibility Survey 2026 is an independent research initiative by SocialMistry, a company focused on building practical digital solutions for small businesses.
+            </p>
+            <p className="break-words whitespace-normal max-w-full text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
+              At SocialMistry, we believe the best products are built by <span className="text-purple-900 font-semibold">listening first</span>. Instead of relying on assumptions, we're learning directly from business owners to understand how they build visibility, attract customers, and grow.
+            </p>
+            <div className="w-full max-w-full box-border p-4 sm:p-5 rounded-2xl bg-purple-50/60 border-l-4 border-purple-600 my-6 overflow-hidden">
+              <p className="break-words whitespace-normal text-sm sm:text-base text-gray-700 leading-relaxed mb-4">
+                The insights from this survey will help shape future research, educational resources, and digital products that solve real business challenges.
+              </p>
+            </div>
+          </div>
+
+          {/* Right Column - Founder Spotlight Card */}
+          <div className="col-span-12 lg:col-span-6">
+            <div className="w-full max-w-full box-border bg-gradient-to-br from-purple-50/80 via-white to-purple-100/40 border border-purple-200/80 rounded-3xl p-4 sm:p-8 shadow-xl overflow-hidden relative transition-all duration-300 hover:shadow-2xl hover:shadow-purple-100/80 hover:-translate-y-1 group">
+              <div className="flex flex-col items-center text-center sm:text-left sm:flex-row sm:items-start gap-4 sm:gap-6 w-full max-w-full">
+                
+                {/* Founder Photo Avatar */}
+                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0 border-4 border-purple-200 shadow-md mx-auto sm:mx-0 group-hover:border-purple-400 group-hover:scale-105 transition-all duration-300 relative">
+                  <img src="/founder-avatar.jpeg" alt="Bharvi Sharma - Founder, SocialMistry" className="w-full h-full object-cover object-center rounded-full" />
+                </div>
+                
+                {/* Quote & Details */}
+                <div className="flex flex-col justify-between h-full w-full">
+                  <div>
+                    <Quote className="text-purple-300 opacity-40 text-4xl mb-2 w-10 h-10 mx-auto sm:mx-0" />
+                    <p className="italic break-words whitespace-normal max-w-full text-sm sm:text-base text-gray-800 leading-relaxed mb-4 group-hover:text-purple-950 transition-colors">
+                      "The best way to build meaningful solutions is to first understand the people they're meant to help. That's why your experience matters."
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight">Bharvi Sharma</h3>
+                    <p className="text-xs sm:text-sm font-semibold text-purple-600 tracking-wide mt-0.5">Founder, SocialMistry</p>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       {/* SECTION 2: A Message */}
       <section className="py-16 sm:py-20 bg-gradient-to-b from-white via-purple-50/40 to-purple-100/30 w-full">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
@@ -1172,6 +1225,44 @@ export default function BusinessVisibilitySurvey() {
           </div>
         </div>
       </section>
+
+      {/* SECTION 3: Footer */}
+      <footer className="w-full bg-slate-950 text-white py-12 px-4 sm:px-6 lg:px-8 mt-16 border-t border-purple-900/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 pb-8 border-b border-purple-900/40">
+            
+            {/* BRANDING & LOGO */}
+            <div className="flex flex-col">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 text-white font-extrabold flex items-center justify-center text-lg shadow-md shadow-purple-900/50">
+                  BS
+                </div>
+                <span className="text-xl font-bold text-white tracking-tight">Business Survey</span>
+              </div>
+              <p className="text-sm text-gray-400 mt-3 font-normal">
+                Copyright 2026 Business Survey. All rights reserved.
+              </p>
+            </div>
+
+            {/* QUICK NAVIGATION / CTA */}
+            <div>
+              <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="text-sm sm:text-base font-semibold text-purple-300 hover:text-white transition-colors duration-200 cursor-pointer flex items-center gap-1.5 group"
+              >
+                Get My Visibility Report 2026
+                <ArrowRight className="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" />
+              </button>
+            </div>
+
+          </div>
+
+          {/* BOTTOM CREDITS STRIP */}
+          <div className="text-center text-xs text-gray-500 pt-6 font-medium tracking-wide">
+            Built using <span className="font-bold text-purple-400 hover:text-purple-300 transition-colors">PageMistri</span>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
