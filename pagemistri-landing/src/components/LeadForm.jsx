@@ -156,7 +156,7 @@ const LeadForm = () => {
  <div className="w-full relative flex items-center justify-center">
  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-[3rem] blur-[80px] opacity-70 -z-10 pointer-events-none" />
 
- <div className="bg-white rounded-2xl px-4 py-6 sm:px-8 shadow-xl border border-slate-100 w-full max-w-lg mx-auto relative z-10 transition-shadow overflow-hidden min-h-[500px]">
+ <div className="bg-white rounded-2xl px-4 py-6 sm:px-8 shadow-xl border border-slate-100 w-full max-w-xl mx-auto relative z-10 transition-shadow overflow-hidden min-h-[500px]">
  
  {/* Step Indicators */}
  <div className="flex items-center justify-center gap-2.5 mb-3 relative z-20">
@@ -200,7 +200,7 @@ const LeadForm = () => {
  <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-xs font-semibold text-gray-800 mb-1 block">
  Full name <span className="text-red-500">*</span>
  </label>
  <input 
@@ -215,7 +215,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-xs font-semibold text-gray-800 mb-1 block">
  Business name <span className="text-red-500">*</span>
  </label>
  <input 
@@ -232,7 +232,7 @@ const LeadForm = () => {
 
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-xs font-semibold text-gray-800 mb-1 block">
  Email <span className="text-red-500">*</span>
  </label>
  <input 
@@ -247,7 +247,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-xs font-semibold text-gray-800 mb-1 block">
  Phone number <span className="text-red-500">*</span>
  </label>
  <input 
@@ -263,7 +263,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-xs font-semibold text-gray-800 mb-1 block">
  Business Category <span className="text-red-500">*</span>
  </label>
  <select 
@@ -287,7 +287,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-xs font-semibold text-gray-800 mb-1 block">
  What do you offer? <span className="text-red-500">*</span>
  </label>
  <input 
@@ -329,171 +329,177 @@ const LeadForm = () => {
  </p>
  </div>
 
- <form className="space-y-3" onSubmit={handleSubmit}>
- 
- <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
- Do you already have a website? <span className="text-red-500">*</span>
- </label>
- <div className="flex gap-4">
- <label className="flex items-center gap-2 cursor-pointer">
- <input 
- type="radio" 
- name="hasWebsite" 
- value="Yes" 
- checked={formData.hasWebsite === 'Yes'}
- onChange={handleInputChange}
- className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
- />
- <span className="text-sm text-slate-600 ">Yes</span>
- </label>
- <label className="flex items-center gap-2 cursor-pointer">
- <input 
- type="radio" 
- name="hasWebsite" 
- value="No" 
- checked={formData.hasWebsite === 'No'}
- onChange={handleInputChange}
- className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
- />
- <span className="text-sm text-slate-600 ">No</span>
- </label>
- </div>
- {errors.hasWebsite && <p className="text-red-500 text-[10px] mt-1">{errors.hasWebsite}</p>}
- </div>
+ <form className="space-y-6" onSubmit={handleSubmit}>
+  <div>
+  <label className="text-sm font-semibold text-gray-800 mb-2 block">
+  Do you already have a website? <span className="text-red-500">*</span>
+  </label>
+  <div className="grid grid-cols-2 gap-3">
+  <label className={`flex items-center justify-center py-2.5 px-4 rounded-xl border font-medium cursor-pointer transition-all ${formData.hasWebsite === 'Yes' ? 'bg-purple-50 border-purple-600 text-purple-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+  <input 
+  type="radio" 
+  name="hasWebsite" 
+  value="Yes" 
+  checked={formData.hasWebsite === 'Yes'}
+  onChange={handleInputChange}
+  className="hidden"
+  />
+  Yes
+  </label>
+  <label className={`flex items-center justify-center py-2.5 px-4 rounded-xl border font-medium cursor-pointer transition-all ${formData.hasWebsite === 'No' ? 'bg-purple-50 border-purple-600 text-purple-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+  <input 
+  type="radio" 
+  name="hasWebsite" 
+  value="No" 
+  checked={formData.hasWebsite === 'No'}
+  onChange={handleInputChange}
+  className="hidden"
+  />
+  No
+  </label>
+  </div>
+  {errors.hasWebsite && <p className="text-red-500 text-[10px] mt-1">{errors.hasWebsite}</p>}
+  </div>
 
- <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
- Do you already have a domain? <span className="text-red-500">*</span>
- </label>
- <div className="flex gap-4">
- <label className="flex items-center gap-2 cursor-pointer">
- <input 
- type="radio" 
- name="hasDomain" 
- value="Yes" 
- checked={formData.hasDomain === 'Yes'}
- onChange={handleInputChange}
- className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
- />
- <span className="text-sm text-slate-600 ">Yes</span>
- </label>
- <label className="flex items-center gap-2 cursor-pointer">
- <input 
- type="radio" 
- name="hasDomain" 
- value="No" 
- checked={formData.hasDomain === 'No'}
- onChange={handleInputChange}
- className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
- />
- <span className="text-sm text-slate-600 ">No</span>
- </label>
- </div>
- {errors.hasDomain && <p className="text-red-500 text-[10px] mt-1">{errors.hasDomain}</p>}
- </div>
+  {formData.hasWebsite === 'Yes' && (
+  <div>
+  <label className="text-sm font-semibold text-gray-800 mb-2 block">
+  Enter your URL:
+  </label>
+  <input 
+  type="url" 
+  name="websiteUrl"
+  value={formData.websiteUrl}
+  onChange={handleInputChange}
+  placeholder="https://example.com" 
+  className="w-full box-border py-2.5 px-3.5 text-sm rounded-xl border border-gray-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent transition-all"
+  />
+  </div>
+  )}
 
- <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
- Why do you want a website? <span className="text-red-500">*</span>
- </label>
- <div className="flex flex-col gap-1.5">
- {['Get More Enquiries', 'Build Trust', 'Showcase My Business', 'Replace My Current Website'].map(goal => (
- <label key={goal} className="flex items-center gap-2 cursor-pointer">
- <input 
- type="checkbox" 
- name="websiteGoals" 
- value={goal}
- checked={formData.websiteGoals.includes(goal)}
- onChange={handleInputChange}
- className="w-full box-border max-w-[14px] h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
- />
- <span className="text-sm text-slate-600 ">{goal}</span>
- </label>
- ))}
- </div>
- {errors.websiteGoals && <p className="text-red-500 text-[10px] mt-1">{errors.websiteGoals}</p>}
- </div>
+  <div>
+  <label className="text-sm font-semibold text-gray-800 mb-2 block">
+  Do you already have a domain? <span className="text-red-500">*</span>
+  </label>
+  <div className="grid grid-cols-2 gap-3">
+  <label className={`flex items-center justify-center py-2.5 px-4 rounded-xl border font-medium cursor-pointer transition-all ${formData.hasDomain === 'Yes' ? 'bg-purple-50 border-purple-600 text-purple-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+  <input 
+  type="radio" 
+  name="hasDomain" 
+  value="Yes" 
+  checked={formData.hasDomain === 'Yes'}
+  onChange={handleInputChange}
+  className="hidden"
+  />
+  Yes
+  </label>
+  <label className={`flex items-center justify-center py-2.5 px-4 rounded-xl border font-medium cursor-pointer transition-all ${formData.hasDomain === 'No' ? 'bg-purple-50 border-purple-600 text-purple-700' : 'border-gray-200 text-gray-600 hover:bg-gray-50'}`}>
+  <input 
+  type="radio" 
+  name="hasDomain" 
+  value="No" 
+  checked={formData.hasDomain === 'No'}
+  onChange={handleInputChange}
+  className="hidden"
+  />
+  No
+  </label>
+  </div>
+  {errors.hasDomain && <p className="text-red-500 text-[10px] mt-1">{errors.hasDomain}</p>}
+  </div>
 
- <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
- If you have a website - Enter your URL:
- </label>
- <input 
- type="url" 
- name="websiteUrl"
- value={formData.websiteUrl}
- onChange={handleInputChange}
- placeholder="https://example.com" 
- className="w-full box-border py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
- />
- </div>
+  <div>
+  <label className="text-sm font-semibold text-gray-800 mb-2 block">
+  Why do you want a website? <span className="text-red-500">*</span>
+  </label>
+  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+  {['Get More Enquiries', 'Build Trust', 'Showcase My Business', 'Replace My Current Website'].map(goal => (
+  <label key={goal} className={`flex items-center gap-3 py-3 px-4 rounded-xl border cursor-pointer transition-all ${formData.websiteGoals.includes(goal) ? 'bg-purple-50 border-purple-600' : 'border-gray-200 hover:bg-gray-50'}`}>
+  <div className={`w-5 h-5 rounded border flex items-center justify-center shrink-0 ${formData.websiteGoals.includes(goal) ? 'bg-purple-600 border-purple-600' : 'border-gray-300 bg-white'}`}>
+  {formData.websiteGoals.includes(goal) && (
+  <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+  )}
+  </div>
+  <input 
+  type="checkbox" 
+  name="websiteGoals" 
+  value={goal}
+  checked={formData.websiteGoals.includes(goal)}
+  onChange={handleInputChange}
+  className="hidden"
+  />
+  <span className={`text-sm font-medium ${formData.websiteGoals.includes(goal) ? 'text-purple-700' : 'text-gray-700'}`}>{goal}</span>
+  </label>
+  ))}
+  </div>
+  {errors.websiteGoals && <p className="text-red-500 text-[10px] mt-1">{errors.websiteGoals}</p>}
+  </div>
 
- <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
- Tell us about your website <span className="text-red-500">*</span>
- </label>
- <textarea 
- name="websiteDescription"
- value={formData.websiteDescription}
- onChange={handleInputChange}
- placeholder="Describe your current website..." 
- rows={2}
- className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
- />
- {errors.websiteDescription && <p className="text-red-500 text-[10px] mt-1">{errors.websiteDescription}</p>}
- </div>
+  <div>
+  <label className="text-sm font-semibold text-gray-800 mb-2 block">
+  Tell us about your website <span className="text-red-500">*</span>
+  </label>
+  <textarea 
+  name="websiteDescription"
+  value={formData.websiteDescription}
+  onChange={handleInputChange}
+  placeholder="Describe your current website..." 
+  rows={3}
+  className={`w-full box-border py-3 px-4 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:border-transparent focus:ring-purple-600'} bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-all resize-none`}
+  />
+  {errors.websiteDescription && <p className="text-red-500 text-[10px] mt-1">{errors.websiteDescription}</p>}
+  </div>
 
- <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
- Message <span className="text-red-500">*</span>
- </label>
- <textarea 
- name="message"
- value={formData.message}
- onChange={handleInputChange}
- placeholder="Anything else we should know?" 
- rows={2}
- className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
- />
- {errors.message && <p className="text-red-500 text-[10px] mt-1">{errors.message}</p>}
- </div>
+  <div>
+  <label className="text-sm font-semibold text-gray-800 mb-2 block">
+  Message <span className="text-red-500">*</span>
+  </label>
+  <textarea 
+  name="message"
+  value={formData.message}
+  onChange={handleInputChange}
+  placeholder="Anything else we should know?" 
+  rows={3}
+  className={`w-full box-border py-3 px-4 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-gray-200 focus:border-transparent focus:ring-purple-600'} bg-white text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-all resize-none`}
+  />
+  {errors.message && <p className="text-red-500 text-[10px] mt-1">{errors.message}</p>}
+  </div>
 
- <div className="pt-2 flex flex-col gap-3">
- {submitStatus && (
- <div className={`p-3 rounded-xl text-sm font-medium flex items-center gap-2 ${submitStatus === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
- {submitStatus === 'success' ? (
- <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
- ) : (
- <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
- )}
- {submitMessage}
- </div>
- )}
- <div className="flex justify-between items-center w-full">
- <button 
- type="button" 
- onClick={handleBack}
- disabled={isSubmitting}
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-white border border-slate-300 text-slate-600 hover:bg-slate-50 transition-all shadow-sm disabled:opacity-50"
- >
- Back
- </button>
- <button 
- type="submit" 
- disabled={isSubmitting}
- className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 text-white transition-all shadow-md flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-purple-700 shadow-purple-500/20'}`}
- >
- {isSubmitting ? (
- <>
- <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
- Submitting...
- </>
- ) : "Let's Build"}
- </button>
- </div>
- </div>
- </form>
+  <div className="pt-2 flex flex-col gap-3">
+  {submitStatus && (
+  <div className={`p-3 rounded-xl text-sm font-medium flex items-center gap-2 ${submitStatus === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+  {submitStatus === 'success' ? (
+  <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path></svg>
+  ) : (
+  <svg className="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+  )}
+  {submitMessage}
+  </div>
+  )}
+  <div className="flex items-center justify-between pt-4 border-t border-gray-100 mt-6">
+  <button 
+  type="button" 
+  onClick={handleBack}
+  disabled={isSubmitting}
+  className="px-6 py-3 border border-gray-300 rounded-xl hover:bg-gray-50 font-bold text-sm text-gray-600 transition-all shadow-sm disabled:opacity-50"
+  >
+  Back
+  </button>
+  <button 
+  type="submit" 
+  disabled={isSubmitting}
+  className={`px-8 py-3 rounded-xl font-semibold text-sm bg-purple-600 text-white transition-all shadow-lg flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-purple-700 shadow-purple-200'}`}
+  >
+  {isSubmitting ? (
+  <>
+  <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+  Submitting...
+  </>
+  ) : "Let's Build"}
+  </button>
+  </div>
+  </div> 
+  </form>
  </motion.div>
  )}
  </AnimatePresence>
