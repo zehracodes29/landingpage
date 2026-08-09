@@ -15,7 +15,16 @@ export default function BusinessVisibilitySurvey() {
     yearsInBusiness: '',
     employees: '',
     monthlyEnquiries: '',
+    activePlatforms: [],
     customerSource: '',
+    leadImportance: '',
+    paidAds: '',
+    hasWebsite: '',
+    websiteUse: [],
+    websiteSatisfaction: '',
+    noWebsiteReason: '',
+    enquiryProcess: [],
+    responseSpeed: '',
     marketingChallenge: '',
     fullName: '',
     email: '',
@@ -26,10 +35,27 @@ export default function BusinessVisibilitySurvey() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const toggleArrayData = (field, value) => {
+    setFormData(prev => {
+      const array = prev[field] || [];
+      if (array.includes(value)) {
+        return { ...prev, [field]: array.filter(item => item !== value) };
+      } else {
+        return { ...prev, [field]: [...array, value] };
+      }
+    });
+  };
+
   const handleNext = () => {
     if (currentStep === 1) {
       if (!formData.businessName || !formData.businessType || !formData.city || !formData.yearsInBusiness || !formData.employees || !formData.monthlyEnquiries) {
         alert("Please fill in all required fields to proceed.");
+        return;
+      }
+    }
+    if (currentStep === 2) {
+      if (formData.activePlatforms.length === 0 || !formData.customerSource || !formData.leadImportance || !formData.paidAds || !formData.hasWebsite || formData.enquiryProcess.length === 0 || !formData.responseSpeed) {
+        alert("Please answer all questions to proceed.");
         return;
       }
     }
@@ -464,16 +490,44 @@ export default function BusinessVisibilitySurvey() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="space-y-6"
+                        className="space-y-0"
                       >
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 block">YOUR ONLINE PRESENCE AND CHALLENGES</span>
+
+                        {/* Field 1: Active Platforms */}
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-3">Primary Customer Source</label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-                            {['Word of Mouth / Referrals', 'Social Media (Insta, FB, etc)', 'Google / SEO', 'Paid Ads'].map((source) => (
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">Which platforms do you actively use to market your business? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            {['Instagram / Facebook / LinkedIn', 'WhatsApp', 'Google Business Profile', 'Website / Online Referrals', 'Marketplace (Justdial, IndiaMART etc.)', 'YouTube', 'Other'].map((platform) => (
+                              <button
+                                key={platform}
+                                onClick={() => toggleArrayData('activePlatforms', platform)}
+                                className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                  formData.activePlatforms.includes(platform) 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {platform}
+                                {formData.activePlatforms.includes(platform) && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 2: Customer Source */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">Where do most of your customers come from today? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            {['Instagram / Facebook / LinkedIn', 'WhatsApp', 'Google Business Profile', 'Website / Online Referrals', 'Marketplace (Justdial, IndiaMART etc.)', 'YouTube', 'Other'].map((source) => (
                               <button
                                 key={source}
                                 onClick={() => updateFormData('customerSource', source)}
-                                className={`w-full py-3.5 px-4 rounded-xl border transition-all text-sm font-medium flex items-center justify-between text-left ${formData.customerSource === source ? 'border-purple-600 bg-purple-50 text-purple-700 shadow-sm' : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50/50'}`}
+                                className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                  formData.customerSource === source 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
                               >
                                 {source}
                                 {formData.customerSource === source && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
@@ -481,14 +535,181 @@ export default function BusinessVisibilitySurvey() {
                             ))}
                           </div>
                         </div>
+
+                        {/* Field 3: Lead Importance */}
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Biggest Marketing Challenge right now</label>
-                          <textarea 
-                            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 transition-all focus:scale-[1.01] resize-none h-28"
-                            placeholder="Briefly describe your challenge..."
-                            value={formData.marketingChallenge}
-                            onChange={(e) => updateFormData('marketingChallenge', e.target.value)}
-                          />
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">How important are customer enquiries or leads to your business? <span className="text-purple-600">*</span></label>
+                          <div className="space-y-2 mb-6">
+                            {['Extremely important', 'Important', 'Somewhat important', 'Not very important', 'Not applicable to my business'].map((importance) => (
+                              <button
+                                key={importance}
+                                onClick={() => updateFormData('leadImportance', importance)}
+                                className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                  formData.leadImportance === importance 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {importance}
+                                {formData.leadImportance === importance && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 4: Paid Ads */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">Do you currently invest in paid advertising for your business? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6">
+                            {['Yes, regularly', 'Occasionally', 'I have tried it before', 'Never'].map((adStatus) => (
+                              <button
+                                key={adStatus}
+                                onClick={() => updateFormData('paidAds', adStatus)}
+                                className={`p-2 sm:p-3 rounded-xl border text-center cursor-pointer transition-all text-xs sm:text-sm font-medium min-h-[48px] flex items-center justify-center ${
+                                  formData.paidAds === adStatus 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {adStatus}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 5: Website */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">Do you currently have a business website? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-2 gap-4 mb-6">
+                            {['Yes', 'No'].map((hasWeb) => (
+                              <button
+                                key={hasWeb}
+                                onClick={() => updateFormData('hasWebsite', hasWeb)}
+                                className={`p-4 rounded-xl border text-center cursor-pointer transition-all text-sm font-semibold min-h-[48px] ${
+                                  formData.hasWebsite === hasWeb 
+                                    ? 'border-purple-600 bg-purple-600 text-white shadow-md' 
+                                    : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {hasWeb}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 5 Conditional Logic */}
+                        <AnimatePresence>
+                          {formData.hasWebsite === 'Yes' && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="overflow-hidden mb-6 pl-4 border-l-2 border-purple-200 space-y-6"
+                            >
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">What do you mainly use your website for?</label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                  {['Business information', 'Lead generation', 'Appointment booking', 'Selling products', 'Portfolio', 'Accepting payments', 'Other'].map((use) => (
+                                    <button
+                                      key={use}
+                                      onClick={() => toggleArrayData('websiteUse', use)}
+                                      className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                        formData.websiteUse.includes(use) 
+                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                          : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      }`}
+                                    >
+                                      {use}
+                                      {formData.websiteUse.includes(use) && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                              <div>
+                                <label className="block text-sm font-semibold text-gray-700 mb-3">Are you satisfied with your current website?</label>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                  {['Very satisfied', 'Somewhat satisfied', 'Needs improvement', 'Planning to redesign'].map((sat) => (
+                                    <button
+                                      key={sat}
+                                      onClick={() => updateFormData('websiteSatisfaction', sat)}
+                                      className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                        formData.websiteSatisfaction === sat 
+                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                          : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      }`}
+                                    >
+                                      {sat}
+                                      {formData.websiteSatisfaction === sat && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                                    </button>
+                                  ))}
+                                </div>
+                              </div>
+                            </motion.div>
+                          )}
+                          {formData.hasWebsite === 'No' && (
+                            <motion.div
+                              initial={{ opacity: 0, height: 0 }}
+                              animate={{ opacity: 1, height: 'auto' }}
+                              exit={{ opacity: 0, height: 0 }}
+                              className="overflow-hidden mb-6 pl-4 border-l-2 border-purple-200"
+                            >
+                              <label className="block text-sm font-semibold text-gray-700 mb-3">What is stopping you from creating a website?</label>
+                              <div className="space-y-2">
+                                {['Too expensive', 'Not sure where to start', 'No technical knowledge', "Don't have time", 'Never felt the need', 'Already planning one', 'Other'].map((reason) => (
+                                  <button
+                                    key={reason}
+                                    onClick={() => updateFormData('noWebsiteReason', reason)}
+                                    className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                      formData.noWebsiteReason === reason 
+                                        ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                        : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    }`}
+                                  >
+                                    {reason}
+                                    {formData.noWebsiteReason === reason && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                                  </button>
+                                ))}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+
+                        {/* Field 6: Enquiry Process */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">What happens after someone enquires about your business? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            {['WhatsApp', 'Phone Call', 'Instagram DM', 'Facebook Messenger', 'Manual Spreadsheet', 'CRM Software', "I Don't Track Enquiries", 'Other'].map((process) => (
+                              <button
+                                key={process}
+                                onClick={() => toggleArrayData('enquiryProcess', process)}
+                                className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                  formData.enquiryProcess.includes(process) 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {process}
+                                {formData.enquiryProcess.includes(process) && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 7: Response Speed */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">On average, how quickly do you respond to a new enquiry? <span className="text-purple-600">*</span></label>
+                          <select 
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            value={formData.responseSpeed}
+                            onChange={(e) => updateFormData('responseSpeed', e.target.value)}
+                          >
+                            <option value="">Select a time...</option>
+                            <option value="Within 15-30 minutes">Within 15-30 minutes</option>
+                            <option value="Within 1 hour">Within 1 hour</option>
+                            <option value="Within the same day">Within the same day</option>
+                            <option value="More than a day">More than a day</option>
+                            <option value="It depends">It depends</option>
+                          </select>
                         </div>
                       </motion.div>
                     )}
@@ -542,20 +763,22 @@ export default function BusinessVisibilitySurvey() {
                   </AnimatePresence>
                 </div>
 
-                <div className="mt-8 flex justify-end w-full">
-                  {currentStep > 1 && (
+                <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-gray-100 w-full">
+                  {currentStep > 1 ? (
                     <button
                       onClick={handleBack}
-                      className="w-full sm:w-auto px-6 py-3.5 mr-4 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all flex items-center justify-center"
+                      className="px-6 py-3.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all text-sm cursor-pointer flex-1 sm:flex-none text-center"
                       disabled={isSubmitting}
                     >
-                      Back
+                      ← Back
                     </button>
+                  ) : (
+                    <div></div>
                   )}
                   {currentStep < 4 ? (
                     <button
                       onClick={handleNext}
-                      className="w-full sm:w-auto px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2"
+                      className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 flex-1 sm:flex-none"
                     >
                       Next <ArrowRight className="w-4 h-4" />
                     </button>
@@ -563,7 +786,7 @@ export default function BusinessVisibilitySurvey() {
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="w-full sm:w-auto px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70 flex-1 sm:flex-none"
                     >
                       {isSubmitting ? (
                         <>
