@@ -863,9 +863,9 @@ export default function BusinessVisibilitySurvey() {
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 block">YOUR GROWTH GOALS</span>
 
                         {/* Field 1: Biggest Challenge */}
-                        <div>
+                        <div id="biggestChallenge" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">What is your biggest challenge in growing your business today? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {['Getting more enquiries', 'Building trust', 'Managing leads', 'Getting repeat customers', 'Marketing budget', 'Taking my business online', 'Time management', 'Something else'].map((challenge) => (
                               <button
                                 key={challenge}
@@ -873,7 +873,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.biggestChallenge.includes(challenge) 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.biggestChallenge
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {challenge}
@@ -881,12 +883,13 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.biggestChallenge && <p className="text-xs text-red-500 mt-2 font-medium">{errors.biggestChallenge}</p>}
                         </div>
 
                         {/* Field 2: Improvements */}
-                        <div>
+                        <div id="improvements" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">What would you most like to improve over the next 12 months? <span className="text-purple-600">*</span></label>
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                             {['More enquiries', 'Professional online presence', 'Better lead management', 'More appointments', 'Online sales', 'Brand awareness', 'Customer trust', 'Other'].map((imp) => (
                               <button
                                 key={imp}
@@ -894,7 +897,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.improvements.includes(imp) 
                                     ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
-                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.improvements
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 {imp}
@@ -902,12 +907,13 @@ export default function BusinessVisibilitySurvey() {
                               </button>
                             ))}
                           </div>
+                          {errors.improvements && <p className="text-xs text-red-500 mt-2 font-medium">{errors.improvements}</p>}
                         </div>
 
                         {/* Field 3: Online Presence Rating */}
-                        <div>
+                        <div id="onlinePresenceRating" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-3">How would you rate your business's current online presence? <span className="text-purple-600">*</span></label>
-                          <div className="space-y-2.5 mb-8">
+                          <div className="space-y-2.5">
                             {[
                               { val: '1', label: 'Very Poor', stars: 1 },
                               { val: '2', label: 'Poor', stars: 2 },
@@ -921,7 +927,9 @@ export default function BusinessVisibilitySurvey() {
                                 className={`w-full p-4 rounded-xl border text-left cursor-pointer transition-all flex items-center gap-3 text-sm font-medium min-h-[48px] group ${
                                   formData.onlinePresenceRating === rating.val 
                                     ? 'border-purple-600 bg-purple-50/80 shadow-sm' 
-                                    : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-gray-50'
+                                    : errors.onlinePresenceRating
+                                      ? 'border-red-500 bg-red-50/30 text-red-800'
+                                      : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-gray-50'
                                 }`}
                               >
                                 <div className="flex gap-1">
@@ -936,12 +944,19 @@ export default function BusinessVisibilitySurvey() {
                                     />
                                   ))}
                                 </div>
-                                <span className={formData.onlinePresenceRating === rating.val ? 'text-purple-950 font-bold' : 'text-gray-700'}>
+                                <span className={
+                                  formData.onlinePresenceRating === rating.val 
+                                    ? 'text-purple-950 font-bold' 
+                                    : errors.onlinePresenceRating
+                                      ? 'text-red-800 font-bold'
+                                      : 'text-gray-700'
+                                }>
                                   {rating.label}
                                 </span>
                               </button>
                             ))}
                           </div>
+                          {errors.onlinePresenceRating && <p className="text-xs text-red-500 mt-2 font-medium">{errors.onlinePresenceRating}</p>}
                         </div>
                       </motion.div>
                     )}
@@ -957,53 +972,56 @@ export default function BusinessVisibilitySurvey() {
                       >
                         <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 block">FINAL STEP</span>
 
-                        <div>
+                        <div id="fullName" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name <span className="text-purple-600">*</span></label>
-                          <div className="relative mb-6">
+                          <div className="relative">
                             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="text" 
-                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.fullName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Enter name"
                               value={formData.fullName}
                               onChange={(e) => updateFormData('fullName', e.target.value)}
                             />
                           </div>
+                          {errors.fullName && <p className="text-xs text-red-500 mt-1 font-medium">{errors.fullName}</p>}
                         </div>
 
-                        <div>
+                        <div id="email" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-purple-600">*</span></label>
-                          <div className="relative mb-6">
+                          <div className="relative">
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="email" 
-                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.email ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Enter email"
                               value={formData.email}
                               onChange={(e) => updateFormData('email', e.target.value)}
                             />
                           </div>
+                          {errors.email && <p className="text-xs text-red-500 mt-1 font-medium">{errors.email}</p>}
                         </div>
 
-                        <div>
+                        <div id="phoneNumber" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Phone number <span className="text-purple-600">*</span></label>
-                          <div className="relative mb-6">
+                          <div className="relative">
                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="tel" 
-                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.phoneNumber ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Your personal number"
                               value={formData.phoneNumber}
                               onChange={(e) => updateFormData('phoneNumber', e.target.value)}
                             />
                           </div>
+                          {errors.phoneNumber && <p className="text-xs text-red-500 mt-1 font-medium">{errors.phoneNumber}</p>}
                         </div>
 
-                        <div>
+                        <div id="additionalFeedback" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Is there anything else you'd like to share about your business or your experience with growing online? (Optional)</label>
                           <textarea 
                             rows={4}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 shadow-sm resize-none focus:scale-[1.01]"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm resize-none focus:scale-[1.01]"
                             placeholder="Enter message"
                             value={formData.additionalFeedback}
                             onChange={(e) => updateFormData('additionalFeedback', e.target.value)}
