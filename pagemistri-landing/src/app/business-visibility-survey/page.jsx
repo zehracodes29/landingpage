@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle, Send, Sparkles, Lock } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -1091,6 +1091,84 @@ export default function BusinessVisibilitySurvey() {
               </motion.div>
             )}
             
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 1: What Happens Next? */}
+      <section className="py-16 sm:py-24 bg-white w-full overflow-hidden">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-4">
+            What Happens Next?
+          </h2>
+          <p className="text-base sm:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-16 leading-relaxed px-4">
+            Once you submit your responses, we'll review them and prepare your personalised Business Visibility Report. The report will be delivered to the email address you provide during the survey.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+            {/* Desktop Connector Line */}
+            <div className="hidden md:block absolute top-[3.75rem] left-[16.6%] right-[16.6%] border-t-2 border-dashed border-purple-200 z-0"></div>
+
+            {/* Card 1 */}
+            <div className="bg-gradient-to-br from-purple-50/50 via-white to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                <Send className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-950 transition-colors">
+                Step 1: Submit Your Survey
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Complete the Business Visibility Survey 2026 by answering a few questions about your business.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-gradient-to-br from-purple-50/50 via-white to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-950 transition-colors">
+                Step 2: We Prepare Your Report
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                We'll analyse your responses and generate a personalised Business Visibility Report with practical insights and recommendations.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-gradient-to-br from-purple-50/50 via-white to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+                <Sparkles className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-950 transition-colors">
+                Step 3: Receive Your Report
+              </h3>
+              <p className="text-sm text-gray-600 leading-relaxed">
+                Your report will be delivered to your email, ready for you to review and use to improve your online visibility.
+              </p>
+            </div>
+          </div>
+
+          <div className="text-xs sm:text-sm text-gray-500 font-medium text-center mt-12 tracking-wide max-w-2xl mx-auto px-4 flex items-center justify-center gap-2">
+            <Lock className="w-4 h-4 text-gray-400 shrink-0" />
+            <span>Your responses remain confidential and are used only to prepare your personalised report and generate anonymised research insights.</span>
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 2: A Message */}
+      <section className="py-16 sm:py-20 bg-gradient-to-b from-white via-purple-50/40 to-purple-100/30 w-full">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6">
+          <div className="bg-gradient-to-br from-white/90 via-purple-50/50 to-white/90 border border-purple-200/80 backdrop-blur-xl rounded-3xl p-8 sm:p-12 text-center shadow-xl shadow-purple-950/5 relative overflow-hidden transition-all duration-300 hover:border-purple-300">
+            {/* Background Glow Orb */}
+            <div className="bg-purple-300/20 blur-3xl rounded-full w-64 h-64 absolute -top-10 -right-10 pointer-events-none"></div>
+            
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight mb-4 relative z-10">
+              A message
+            </h2>
+            <p className="text-base sm:text-lg text-gray-700 max-w-2xl mx-auto leading-relaxed font-normal relative z-10">
+              Thank you for contributing to the Business Visibility Survey 2026. Your experience helps us better understand the challenges and opportunities faced by small businesses, while helping you gain valuable insights into your own business visibility.
+            </p>
           </div>
         </div>
       </section>
