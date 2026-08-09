@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3 } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   return (
@@ -150,6 +150,95 @@ export default function BusinessVisibilitySurvey() {
           <p className="text-xs sm:text-sm text-gray-500 font-medium text-center mt-10 tracking-wide">
             Every Business Visibility Report is personalised using your survey responses - no two reports are the same.
           </p>
+        </div>
+      </section>
+
+      {/* Why Your Experience Matters Section */}
+      <section className="py-12 sm:py-20 bg-gradient-to-b from-white via-purple-50/20 to-white w-full overflow-hidden">
+        <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-12">
+          Why Your Experience Matters
+        </h2>
+        
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          
+          {/* LEFT SIDE - FEATURED HIGHLIGHT CARD */}
+          <div className="col-span-12 lg:col-span-6 bg-gradient-to-br from-purple-50 via-purple-100/40 to-white border border-purple-200/60 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg shadow-purple-100/50 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-purple-300">
+            {/* Background Glow Orb */}
+            <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-200/30 blur-2xl rounded-full pointer-events-none"></div>
+            
+            <p className="text-gray-800 text-base sm:text-lg leading-relaxed mb-4 font-normal relative z-10">
+              <strong>Every business grows differently.</strong> Some rely on referrals, others on social media, Google Search, paid advertising, or years of trust within their community.
+            </p>
+            <p className="text-gray-700 text-base sm:text-lg leading-relaxed mb-6 font-normal relative z-10">
+              Yet much of the advice available online assumes every business should follow the same strategy.
+            </p>
+            <p className="text-gray-900 text-base sm:text-lg leading-relaxed mb-6 font-semibold text-purple-900 bg-purple-100/60 p-4 rounded-xl border-l-4 border-purple-600 relative z-10">
+              That's why we're conducting the Business Visibility Survey 2026 - to learn directly from business owners instead of making assumptions.
+            </p>
+            <p className="text-gray-800 text-base sm:text-lg leading-relaxed font-medium relative z-10">
+              Your experience helps us build a clearer understanding of how small businesses build visibility and grow online.
+            </p>
+          </div>
+
+          {/* RIGHT SIDE - LIST & CTA */}
+          <div className="col-span-12 lg:col-span-6">
+            <h3 className="text-xl font-bold text-gray-900 mb-6 sm:mb-8">
+              Every response helps us:
+            </h3>
+
+            <div className="flex flex-col">
+              {/* Item 1 */}
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
+                  Understand how businesses attract customers
+                </span>
+              </div>
+
+              {/* Item 2 */}
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+                  <Search className="w-6 h-6" />
+                </div>
+                <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
+                  Identify common visibility challenges
+                </span>
+              </div>
+
+              {/* Item 3 */}
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+                  <FileText className="w-6 h-6" />
+                </div>
+                <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
+                  Publish meaningful research and insights
+                </span>
+              </div>
+
+              {/* Item 4 */}
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
+                  Develop practical resources for small businesses
+                </span>
+              </div>
+            </div>
+
+            <button
+              onClick={() => {
+                const element = document.getElementById('survey-form');
+                element?.scrollIntoView({ behavior: 'smooth' });
+              }}
+              className="mt-8 inline-flex items-center justify-center w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-base"
+            >
+              Get My Visibility Report
+            </button>
+          </div>
+          
         </div>
       </section>
 
