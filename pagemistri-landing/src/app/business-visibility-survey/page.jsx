@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3 } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   return (
@@ -96,6 +96,60 @@ export default function BusinessVisibilitySurvey() {
             </div>
           </motion.div>
 
+        </div>
+      </section>
+
+      {/* What You'll Receive Section */}
+      <section className="py-12 sm:py-16 bg-white w-full relative z-10">
+        <div className="max-w-6xl mx-auto px-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-3">
+            What You'll Receive
+          </h2>
+          <p className="text-base sm:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12 leading-relaxed">
+            Complete the survey to receive a personalised Business Visibility Report with insights and recommendations tailored to your business.
+          </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Card 1 */}
+            <div className="bg-gradient-to-br from-purple-50/60 via-white to-purple-50/30 border border-purple-100 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="bg-purple-100 text-purple-600 p-3 rounded-xl inline-block mb-4">
+                <CheckCircle2 className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Business Visibility Score</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Get a simple score that reflects your business's current online visibility.
+              </p>
+            </div>
+
+            {/* Card 2 */}
+            <div className="bg-gradient-to-br from-purple-50/60 via-white to-purple-50/30 border border-purple-100 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="bg-purple-100 text-purple-600 p-3 rounded-xl inline-block mb-4">
+                <ShieldCheck className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Personalised Recommendations</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                Get tailored recommendations to improve your online visibility and business growth.
+              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-gradient-to-br from-purple-50/60 via-white to-purple-50/30 border border-purple-100 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
+              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="bg-purple-100 text-purple-600 p-3 rounded-xl inline-block mb-4">
+                <BarChart3 className="w-6 h-6" />
+              </div>
+              <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Business Visibility Report</h3>
+              <p className="text-gray-600 text-sm leading-relaxed">
+                A report highlighting your responses, key insights, and opportunities for improvement.
+              </p>
+            </div>
+          </div>
+
+          <p className="text-xs sm:text-sm text-gray-500 font-medium text-center mt-10 tracking-wide">
+            Every Business Visibility Report is personalised using your survey responses - no two reports are the same.
+          </p>
         </div>
       </section>
 
