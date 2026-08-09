@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -26,6 +26,9 @@ export default function BusinessVisibilitySurvey() {
     enquiryProcess: [],
     responseSpeed: '',
     marketingChallenge: '',
+    biggestChallenge: [],
+    improvements: [],
+    onlinePresenceRating: '',
     fullName: '',
     email: '',
     primaryGoal: ''
@@ -55,6 +58,12 @@ export default function BusinessVisibilitySurvey() {
     }
     if (currentStep === 2) {
       if (formData.activePlatforms.length === 0 || !formData.customerSource || !formData.leadImportance || !formData.paidAds || !formData.hasWebsite || formData.enquiryProcess.length === 0 || !formData.responseSpeed) {
+        alert("Please answer all questions to proceed.");
+        return;
+      }
+    }
+    if (currentStep === 3) {
+      if (formData.biggestChallenge.length === 0 || formData.improvements.length === 0 || !formData.onlinePresenceRating) {
         alert("Please answer all questions to proceed.");
         return;
       }
@@ -353,7 +362,7 @@ export default function BusinessVisibilitySurvey() {
                     {[1, 2, 3, 4].map(step => (
                       <div 
                         key={step} 
-                        className={`rounded-full h-2.5 transition-all duration-500 ${currentStep === step ? 'w-8 bg-purple-600' : currentStep > step ? 'w-8 bg-purple-300' : 'w-2.5 bg-gray-200'}`}
+                        className={`rounded-full h-2.5 transition-all duration-500 ${currentStep >= step ? 'w-8 bg-purple-600' : 'w-2.5 bg-gray-200'}`}
                       />
                     ))}
                   </div>
@@ -361,7 +370,7 @@ export default function BusinessVisibilitySurvey() {
                     Step {currentStep} of 4: {
                       currentStep === 1 ? "Tell Us About Your Business" :
                       currentStep === 2 ? "Online Reach" :
-                      currentStep === 3 ? "Contact & Goals" : "Final Step"
+                      currentStep === 3 ? "Your Growth Goals" : "Final Step"
                     }
                   </div>
                 </div>
@@ -717,6 +726,101 @@ export default function BusinessVisibilitySurvey() {
                     {currentStep === 3 && (
                       <motion.div
                         key="step3"
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.3 }}
+                        className="space-y-0"
+                      >
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 block">YOUR GROWTH GOALS</span>
+
+                        {/* Field 1: Biggest Challenge */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">What is your biggest challenge in growing your business today? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                            {['Getting more enquiries', 'Building trust', 'Managing leads', 'Getting repeat customers', 'Marketing budget', 'Taking my business online', 'Time management', 'Something else'].map((challenge) => (
+                              <button
+                                key={challenge}
+                                onClick={() => toggleArrayData('biggestChallenge', challenge)}
+                                className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                  formData.biggestChallenge.includes(challenge) 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {challenge}
+                                {formData.biggestChallenge.includes(challenge) && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 2: Improvements */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">What would you most like to improve over the next 12 months? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-8">
+                            {['More enquiries', 'Professional online presence', 'Better lead management', 'More appointments', 'Online sales', 'Brand awareness', 'Customer trust', 'Other'].map((imp) => (
+                              <button
+                                key={imp}
+                                onClick={() => toggleArrayData('improvements', imp)}
+                                className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
+                                  formData.improvements.includes(imp) 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                {imp}
+                                {formData.improvements.includes(imp) && <Check className="w-4 h-4 text-purple-600 shrink-0" />}
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Field 3: Online Presence Rating */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">How would you rate your business's current online presence? <span className="text-purple-600">*</span></label>
+                          <div className="space-y-2.5 mb-8">
+                            {[
+                              { val: '1', label: 'Very Poor', stars: 1 },
+                              { val: '2', label: 'Poor', stars: 2 },
+                              { val: '3', label: 'Average', stars: 3 },
+                              { val: '4', label: 'Good', stars: 4 },
+                              { val: '5', label: 'Excellent', stars: 5 }
+                            ].map((rating) => (
+                              <button
+                                key={rating.val}
+                                onClick={() => updateFormData('onlinePresenceRating', rating.val)}
+                                className={`w-full p-4 rounded-xl border text-left cursor-pointer transition-all flex items-center gap-3 text-sm font-medium min-h-[48px] group ${
+                                  formData.onlinePresenceRating === rating.val 
+                                    ? 'border-purple-600 bg-purple-50/80 shadow-sm' 
+                                    : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-gray-50'
+                                }`}
+                              >
+                                <div className="flex gap-1">
+                                  {[1, 2, 3, 4, 5].map((starIdx) => (
+                                    <Star 
+                                      key={starIdx} 
+                                      className={`w-5 h-5 transition-colors ${
+                                        starIdx <= rating.stars 
+                                          ? 'fill-amber-400 text-amber-400 group-hover:scale-110' 
+                                          : 'text-gray-300'
+                                      }`} 
+                                    />
+                                  ))}
+                                </div>
+                                <span className={formData.onlinePresenceRating === rating.val ? 'text-purple-950 font-bold' : 'text-gray-700'}>
+                                  {rating.label}
+                                </span>
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {currentStep === 4 && (
+                      <motion.div
+                        key="step4"
                         initial={{ opacity: 0, x: 20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}

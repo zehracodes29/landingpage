@@ -83,6 +83,7 @@
     --color-red-400: #ff6568;
     --color-red-500: #fb2c36;
     --color-red-700: #bf000f;
+    --color-amber-400: #fcbb00;
     --color-yellow-400: #fac800;
     --color-green-50: #f0fdf4;
     --color-green-100: #dcfce7;
@@ -194,6 +195,7 @@
       --color-red-400: lab(63.7053% 60.745 31.3109);
       --color-red-500: lab(55.4814% 75.0732 48.8528);
       --color-red-700: lab(40.4273% 67.2623 53.7441);
+      --color-amber-400: lab(80.1641% 16.6016 99.2089);
       --color-yellow-400: lab(83.2664% 8.65132 106.895);
       --color-green-50: lab(98.1563% -5.60117 2.75915);
       --color-green-100: lab(96.1861% -13.8464 6.52365);
@@ -1267,6 +1269,12 @@
     margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
   }
 
+  :where(.space-y-2\.5 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block-start: calc(calc(var(--spacing) * 2.5) * var(--tw-space-y-reverse));
+    margin-block-end: calc(calc(var(--spacing) * 2.5) * calc(1 - var(--tw-space-y-reverse)));
+  }
+
   :where(.space-y-3 > :not(:last-child)) {
     --tw-space-y-reverse: 0;
     margin-block-start: calc(calc(var(--spacing) * 3) * var(--tw-space-y-reverse));
@@ -1936,6 +1944,10 @@
     background-clip: text;
   }
 
+  .fill-amber-400 {
+    fill: var(--color-amber-400);
+  }
+
   .object-contain {
     object-fit: contain;
   }
@@ -2311,6 +2323,10 @@
 
   .text-\[\#111827\] {
     color: #111827;
+  }
+
+  .text-amber-400 {
+    color: var(--color-amber-400);
   }
 
   .text-gray-300 {
