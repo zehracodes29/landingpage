@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -31,7 +31,8 @@ export default function BusinessVisibilitySurvey() {
     onlinePresenceRating: '',
     fullName: '',
     email: '',
-    primaryGoal: ''
+    phoneNumber: '',
+    additionalFeedback: ''
   });
 
   const updateFormData = (field, value) => {
@@ -75,14 +76,34 @@ export default function BusinessVisibilitySurvey() {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!formData.fullName || !formData.email || !formData.phoneNumber) {
+      alert("Please fill in all required contact fields before submitting.");
+      return;
+    }
+    
     setIsSubmitting(true);
-    // Mock API submission
-    setTimeout(() => {
+    
+    try {
+      const response = await fetch('https://pagemistri.in/submit-survey.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+      
+      if (response.ok) {
+        setIsSuccess(true);
+      } else {
+        alert("There was an issue submitting your survey. Please try again.");
+      }
+    } catch (error) {
+      alert("Network error. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-      setIsSuccess(true);
-    }, 2000);
+    }
   };
 
   const renderProgressBar = () => {
@@ -370,7 +391,7 @@ export default function BusinessVisibilitySurvey() {
                     Step {currentStep} of 4: {
                       currentStep === 1 ? "Tell Us About Your Business" :
                       currentStep === 2 ? "Online Reach" :
-                      currentStep === 3 ? "Your Growth Goals" : "Final Step"
+                      currentStep === 3 ? "Your Growth Goals" : "Contact Details"
                     }
                   </div>
                 </div>
@@ -825,42 +846,61 @@ export default function BusinessVisibilitySurvey() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="space-y-6"
+                        className="space-y-0"
                       >
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-6 block">FINAL STEP</span>
+
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
-                          <input 
-                            type="text" 
-                            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 transition-all focus:scale-[1.01]"
-                            placeholder="Jane Doe"
-                            value={formData.fullName}
-                            onChange={(e) => updateFormData('fullName', e.target.value)}
-                          />
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Full Name <span className="text-purple-600">*</span></label>
+                          <div className="relative mb-6">
+                            <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input 
+                              type="text" 
+                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              placeholder="Enter name"
+                              value={formData.fullName}
+                              onChange={(e) => updateFormData('fullName', e.target.value)}
+                            />
+                          </div>
                         </div>
+
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
-                          <p className="text-xs text-gray-500 mb-2">Where should we send your personalised report?</p>
-                          <input 
-                            type="email" 
-                            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 transition-all focus:scale-[1.01]"
-                            placeholder="jane@example.com"
-                            value={formData.email}
-                            onChange={(e) => updateFormData('email', e.target.value)}
-                          />
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Email <span className="text-purple-600">*</span></label>
+                          <div className="relative mb-6">
+                            <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input 
+                              type="email" 
+                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              placeholder="Enter email"
+                              value={formData.email}
+                              onChange={(e) => updateFormData('email', e.target.value)}
+                            />
+                          </div>
                         </div>
+
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Primary Goal for 2026</label>
-                          <select 
-                            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 transition-all focus:scale-[1.01] appearance-none"
-                            value={formData.primaryGoal}
-                            onChange={(e) => updateFormData('primaryGoal', e.target.value)}
-                          >
-                            <option value="">Select a goal...</option>
-                            <option value="more_leads">Generate more leads</option>
-                            <option value="brand_awareness">Increase brand awareness</option>
-                            <option value="better_conversion">Improve conversion rates</option>
-                            <option value="expand_market">Expand into new markets</option>
-                          </select>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Phone number <span className="text-purple-600">*</span></label>
+                          <div className="relative mb-6">
+                            <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input 
+                              type="tel" 
+                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              placeholder="Your personal number"
+                              value={formData.phoneNumber}
+                              onChange={(e) => updateFormData('phoneNumber', e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Is there anything else you'd like to share about your business or your experience with growing online? (Optional)</label>
+                          <textarea 
+                            rows={4}
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 shadow-sm resize-none focus:scale-[1.01]"
+                            placeholder="Enter message"
+                            value={formData.additionalFeedback}
+                            onChange={(e) => updateFormData('additionalFeedback', e.target.value)}
+                          />
                         </div>
                       </motion.div>
                     )}
@@ -890,12 +930,12 @@ export default function BusinessVisibilitySurvey() {
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70 flex-1 sm:flex-none"
+                      className="px-10 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70 flex-1 sm:flex-none"
                     >
                       {isSubmitting ? (
                         <>
                           <Loader2 className="w-4 h-4 mr-2 animate-spin" />
-                          Calculating...
+                          Analyzing Visibility...
                         </>
                       ) : (
                         "Submit Survey"
@@ -910,19 +950,19 @@ export default function BusinessVisibilitySurvey() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex-1 flex flex-col items-center justify-center text-center py-10"
               >
-                <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mb-6">
-                  <Check className="w-10 h-10 text-green-600" />
+                <div className="w-20 h-20 bg-purple-50 rounded-full flex items-center justify-center mb-6">
+                  <CheckCircle2 className="w-10 h-10 text-purple-600 animate-[bounce_1s_ease-in-out]" />
                 </div>
-                <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">You're All Set!</h3>
-                <p className="text-gray-600 text-lg mb-8 max-w-md">
-                  Your responses have been saved. Your Visibility Score is being generated and will be sent to your email shortly.
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Survey Submitted Successfully!</h3>
+                <p className="text-sm text-gray-600 max-w-md mx-auto mb-8">
+                  Thank you for contributing to the Business Visibility Survey 2026. Your Personalised Visibility Report will be delivered to your email shortly.
                 </p>
-                <button
-                  onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                  className="px-8 py-4 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all w-full sm:w-auto"
+                <a
+                  href="/"
+                  className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all w-full sm:w-auto inline-flex justify-center"
                 >
-                  Return to Top
-                </button>
+                  Return to PageMistri Home
+                </a>
               </motion.div>
             )}
             

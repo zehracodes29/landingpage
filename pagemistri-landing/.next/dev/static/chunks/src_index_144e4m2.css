@@ -1122,6 +1122,10 @@
     transform: var(--tw-rotate-x, ) var(--tw-rotate-y, ) var(--tw-rotate-z, ) var(--tw-skew-x, ) var(--tw-skew-y, );
   }
 
+  .animate-\[bounce_1s_ease-in-out\] {
+    animation: 1s ease-in-out bounce;
+  }
+
   .animate-\[bounce_3s_infinite\] {
     animation: 3s infinite bounce;
   }
@@ -2006,6 +2010,10 @@
 
   .px-8 {
     padding-inline: calc(var(--spacing) * 8);
+  }
+
+  .px-10 {
+    padding-inline: calc(var(--spacing) * 10);
   }
 
   .py-1 {
