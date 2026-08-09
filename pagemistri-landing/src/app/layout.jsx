@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
- <html lang="en">
+ <html lang="en" className="overflow-x-hidden w-full max-w-[100vw]">
  <head>
  <Script 
  id="gtm-script" 
@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
  ` }} 
  />
  </head>
- <body>
+ <body className="overflow-x-hidden w-full max-w-[100vw]">
  <noscript>
  <iframe 
  src="https://www.googletagmanager.com/ns.html?id=GTM-PBG4766S"

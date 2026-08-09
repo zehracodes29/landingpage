@@ -29,7 +29,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Footer$
 ;
 function Home() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "min-h-screen bg-slate-50 text-slate-900 ",
+        className: "min-h-screen bg-slate-50 text-slate-900 overflow-x-hidden w-full max-w-[100vw]",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$Navbar$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {}, void 0, false, {
                 fileName: "[project]/src/app/page.jsx",
@@ -114,7 +114,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$components$2f$LeadFor
 const BusinessBenefits = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "lead-form",
-        className: "relative bg-[#FAF9F7] py-16 md:py-24 font-sans scroll-mt-20",
+        className: "relative bg-[#FAF9F7] py-16 md:py-24 font-sans scroll-mt-20 w-full px-4 sm:px-6 lg:px-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -421,7 +421,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e
 ;
 function DomainCTA() {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-        className: "py-24 bg-[#F4EEFF]",
+        className: "py-24 bg-[#F4EEFF] w-full px-4 sm:px-6 lg:px-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "max-w-4xl mx-auto px-6 lg:px-8 text-center",
             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
@@ -594,9 +594,9 @@ const features = [
 const EverythingNeeded = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "whats-included",
-        className: "py-24 bg-[#FAF9F7]",
+        className: "py-24 bg-[#FAF9F7] w-full px-4 sm:px-6 lg:px-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-7xl mx-auto px-6 lg:px-8",
+            className: "max-w-7xl mx-auto px-2 sm:px-4 lg:px-8",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "text-center max-w-4xl mx-auto mb-16",
@@ -638,9 +638,10 @@ const EverythingNeeded = ()=>{
                     columnNumber: 2
                 }, ("TURBOPACK compile-time value", void 0)),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8",
+                    className: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full",
                     children: features.map((feature, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$Card$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                             index: index,
+                            className: "w-full max-w-md mx-auto",
                             children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex flex-col h-full text-left p-2",
                                 children: [
@@ -786,7 +787,7 @@ const FAQ = ()=>{
     };
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "faq",
-        className: "py-24 bg-[#FAF9F7]",
+        className: "py-24 bg-[#FAF9F7] w-full px-4 sm:px-6 lg:px-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
             className: "max-w-3xl mx-auto px-6 lg:px-8",
             children: [
@@ -1175,7 +1176,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e
 ;
 const Hero = ()=>{
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-        className: "bg-gradient-to-b from-purple-50/60 via-white to-slate-50 relative py-16 md:py-24 lg:py-32 w-full font-sans min-h-[90vh] flex flex-col justify-center",
+        className: "bg-gradient-to-b from-purple-50/60 via-white to-slate-50 relative py-16 md:py-24 lg:py-32 w-full px-4 sm:px-6 lg:px-8 font-sans min-h-[90vh] flex flex-col justify-center",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                 className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/15 rounded-full blur-3xl pointer-events-none"
@@ -1185,7 +1186,7 @@ const Hero = ()=>{
                 columnNumber: 2
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center",
+                className: "container mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center",
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$render$2f$components$2f$motion$2f$proxy$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__["motion"].div, {
                         initial: {
@@ -1199,10 +1200,10 @@ const Hero = ()=>{
                         transition: {
                             duration: 0.6
                         },
-                        className: "flex flex-col items-center lg:items-start text-center lg:text-left w-full",
+                        className: "flex flex-col items-center sm:items-start text-center sm:text-left mx-auto sm:mx-0 w-full",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "inline-flex justify-center lg:justify-start mb-6",
+                                className: "inline-flex justify-center sm:justify-start mb-6",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$src$2f$ui$2f$SectionBadge$2e$jsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], {
                                     children: "PROFESSIONAL WEBSITE SETUP • STARTING AT ₹5,000"
                                 }, void 0, false, {
@@ -1242,7 +1243,7 @@ const Hero = ()=>{
                                 columnNumber: 2
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                className: "text-lg md:text-xl text-slate-600 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed",
+                                className: "text-lg md:text-xl text-slate-600 max-w-2xl mx-auto sm:mx-0 mb-8 leading-relaxed",
                                 children: "From design and setup to lead collection and analytics, we build everything for you - so you can focus on growing your business, not building your website."
                             }, void 0, false, {
                                 fileName: "[project]/src/components/Hero.jsx",
@@ -1262,7 +1263,7 @@ const Hero = ()=>{
                                     delay: 0.2,
                                     duration: 0.5
                                 },
-                                className: "grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-2xl mx-auto lg:mx-0 mb-8",
+                                className: "grid grid-cols-1 sm:grid-cols-2 gap-3 w-full max-w-full mx-auto sm:mx-0 mb-8",
                                 children: [
                                     {
                                         text: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Fragment"], {
@@ -1339,7 +1340,7 @@ const Hero = ()=>{
                                 columnNumber: 2
                             }, ("TURBOPACK compile-time value", void 0)),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                className: "flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto",
+                                className: "flex flex-col sm:flex-row items-center justify-center sm:justify-start gap-4 w-full sm:w-auto",
                                 children: [
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                         onClick: ()=>document.getElementById('lead-form')?.scrollIntoView({
@@ -1450,7 +1451,7 @@ const Hero = ()=>{
                                     columnNumber: 2
                                 }, ("TURBOPACK compile-time value", void 0)),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "w-full max-w-xl lg:max-w-none min-h-[320px] rounded-2xl border border-slate-200 shadow-2xl bg-white overflow-hidden relative",
+                                    className: "w-full max-w-full lg:max-w-none min-h-[320px] rounded-2xl border border-slate-200 shadow-2xl bg-white overflow-hidden relative",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "bg-slate-100 px-4 py-3 flex items-center border-b border-slate-200 ",
@@ -1532,7 +1533,7 @@ const Hero = ()=>{
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
                                             src: "/image1.png",
                                             alt: "Hero Preview",
-                                            className: "w-full h-auto object-cover max-h-[480px]"
+                                            className: "w-full max-w-full h-auto object-contain overflow-hidden max-h-[480px]"
                                         }, void 0, false, {
                                             fileName: "[project]/src/components/Hero.jsx",
                                             lineNumber: 108,
@@ -1766,7 +1767,7 @@ const LeadForm = ()=>{
                         columnNumber: 2
                     }, ("TURBOPACK compile-time value", void 0)),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "bg-white rounded-2xl p-6 sm:p-7 shadow-xl border border-slate-100 w-full max-w-lg mx-auto relative z-10 transition-shadow overflow-hidden min-h-[500px]",
+                        className: "bg-white rounded-2xl px-4 py-6 sm:px-8 shadow-xl border border-slate-100 w-full max-w-lg mx-auto relative z-10 transition-shadow overflow-hidden min-h-[500px]",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "flex items-center justify-center gap-2.5 mb-3 relative z-20",
@@ -1918,7 +1919,7 @@ const LeadForm = ()=>{
                                                                             value: formData.fullName,
                                                                             onChange: handleInputChange,
                                                                             placeholder: "Enter your full name",
-                                                                            className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
+                                                                            className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
                                                                             lineNumber: 206,
@@ -1964,7 +1965,7 @@ const LeadForm = ()=>{
                                                                             value: formData.businessName,
                                                                             onChange: handleInputChange,
                                                                             placeholder: "Enter your business name",
-                                                                            className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
+                                                                            className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
                                                                             lineNumber: 221,
@@ -2019,7 +2020,7 @@ const LeadForm = ()=>{
                                                                             value: formData.email,
                                                                             onChange: handleInputChange,
                                                                             placeholder: "you@example.com",
-                                                                            className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
+                                                                            className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
                                                                             lineNumber: 238,
@@ -2065,7 +2066,7 @@ const LeadForm = ()=>{
                                                                             value: formData.phone,
                                                                             onChange: handleInputChange,
                                                                             placeholder: "+91 XXXXX XXXXX",
-                                                                            className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
+                                                                            className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                         }, void 0, false, {
                                                                             fileName: "[project]/src/components/LeadForm.jsx",
                                                                             lineNumber: 253,
@@ -2115,7 +2116,7 @@ const LeadForm = ()=>{
                                                                     name: "category",
                                                                     value: formData.category,
                                                                     onChange: handleInputChange,
-                                                                    className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] focus:outline-none focus:ring-2 transition-all appearance-none`,
+                                                                    className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] focus:outline-none focus:ring-2 transition-all appearance-none`,
                                                                     style: {
                                                                         backgroundImage: "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\")",
                                                                         backgroundPosition: "right 0.875rem center",
@@ -2242,7 +2243,7 @@ const LeadForm = ()=>{
                                                                     value: formData.offering,
                                                                     onChange: handleInputChange,
                                                                     placeholder: "e.g. Interior Design Services, Home Bakery",
-                                                                    className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
+                                                                    className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                     lineNumber: 293,
@@ -2352,7 +2353,7 @@ const LeadForm = ()=>{
                                                                                     value: "Yes",
                                                                                     checked: formData.hasWebsite === 'Yes',
                                                                                     onChange: handleInputChange,
-                                                                                    className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+                                                                                    className: "w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                                     lineNumber: 340,
@@ -2381,7 +2382,7 @@ const LeadForm = ()=>{
                                                                                     value: "No",
                                                                                     checked: formData.hasWebsite === 'No',
                                                                                     onChange: handleInputChange,
-                                                                                    className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+                                                                                    className: "w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                                     lineNumber: 351,
@@ -2453,7 +2454,7 @@ const LeadForm = ()=>{
                                                                                     value: "Yes",
                                                                                     checked: formData.hasDomain === 'Yes',
                                                                                     onChange: handleInputChange,
-                                                                                    className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+                                                                                    className: "w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                                     lineNumber: 371,
@@ -2482,7 +2483,7 @@ const LeadForm = ()=>{
                                                                                     value: "No",
                                                                                     checked: formData.hasDomain === 'No',
                                                                                     onChange: handleInputChange,
-                                                                                    className: "w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+                                                                                    className: "w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                                     lineNumber: 382,
@@ -2558,7 +2559,7 @@ const LeadForm = ()=>{
                                                                                     value: goal,
                                                                                     checked: formData.websiteGoals.includes(goal),
                                                                                     onChange: handleInputChange,
-                                                                                    className: "w-3.5 h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
+                                                                                    className: "w-full box-border max-w-[14px] h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
                                                                                 }, void 0, false, {
                                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                                     lineNumber: 403,
@@ -2613,7 +2614,7 @@ const LeadForm = ()=>{
                                                                     value: formData.websiteUrl,
                                                                     onChange: handleInputChange,
                                                                     placeholder: "https://example.com",
-                                                                    className: "w-full py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
+                                                                    className: "w-full box-border py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                     lineNumber: 422,
@@ -2651,7 +2652,7 @@ const LeadForm = ()=>{
                                                                     onChange: handleInputChange,
                                                                     placeholder: "Describe your current website...",
                                                                     rows: 2,
-                                                                    className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`
+                                                                    className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                     lineNumber: 436,
@@ -2697,7 +2698,7 @@ const LeadForm = ()=>{
                                                                     onChange: handleInputChange,
                                                                     placeholder: "Anything else we should know?",
                                                                     rows: 2,
-                                                                    className: `w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`
+                                                                    className: `w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`
                                                                 }, void 0, false, {
                                                                     fileName: "[project]/src/components/LeadForm.jsx",
                                                                     lineNumber: 451,
@@ -3186,14 +3187,14 @@ const Pricing = ()=>{
     ];
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "pricing",
-        className: "py-20 md:py-28 bg-[#FAF9F7] font-sans",
+        className: "py-20 md:py-28 bg-[#FAF9F7] font-sans w-full px-4 sm:px-6 lg:px-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-6xl mx-auto px-6 lg:px-8",
+            className: "max-w-6xl mx-auto",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "mb-24",
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                        className: "grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center",
+                        className: "grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center w-full",
                         children: [
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "order-2 md:order-1 text-center md:text-left flex flex-col gap-6",
@@ -3300,7 +3301,7 @@ const Pricing = ()=>{
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                 className: "order-1 md:order-2",
                                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "bg-white border border-purple-100 text-[#111827] rounded-3xl p-8 md:p-10 shadow-sm relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02]",
+                                    className: "bg-white border border-purple-100 text-[#111827] rounded-3xl p-8 md:p-10 shadow-sm relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02] w-full max-w-md mx-auto",
                                     children: [
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-purple-50 opacity-50 rounded-full blur-2xl pointer-events-none"
@@ -3420,9 +3421,9 @@ const Pricing = ()=>{
                             columnNumber: 2
                         }, ("TURBOPACK compile-time value", void 0)),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12",
+                            className: "grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12 w-full",
                             children: subPlans.map((plan, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: `flex flex-col bg-white border ${plan.popular ? 'border-[#4400AF] border-2 shadow-[0_15px_40px_-10px_rgba(68,0,175,0.15)] ring-2 ring-purple-600/10' : 'border-slate-200 shadow-sm'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`,
+                                    className: `flex flex-col w-full max-w-md mx-auto bg-white border ${plan.popular ? 'border-[#4400AF] border-2 shadow-[0_15px_40px_-10px_rgba(68,0,175,0.15)] ring-2 ring-purple-600/10' : 'border-slate-200 shadow-sm'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`,
                                     children: [
                                         plan.popular && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                                             className: "absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#4400AF] text-white px-5 py-1.5 rounded-full text-[12px] font-bold tracking-wide uppercase shadow-sm whitespace-nowrap",
@@ -3622,9 +3623,9 @@ const Process = ()=>{
     ]);
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
         id: "how-it-works",
-        className: "py-24 md:py-32 bg-[#FAF9F7] font-sans overflow-hidden",
+        className: "py-24 md:py-32 bg-[#FAF9F7] font-sans overflow-hidden w-full px-4 sm:px-6 lg:px-8",
         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "max-w-[1440px] mx-auto px-6 lg:px-8",
+            className: "max-w-[1440px] mx-auto",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
                     className: "text-center max-w-3xl mx-auto mb-16 md:mb-24",

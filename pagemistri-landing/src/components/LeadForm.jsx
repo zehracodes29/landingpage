@@ -156,7 +156,7 @@ const LeadForm = () => {
  <div className="w-full relative flex items-center justify-center">
  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] bg-gradient-to-tr from-[#F4EEFF] to-transparent rounded-[3rem] blur-[80px] opacity-70 -z-10 pointer-events-none" />
 
- <div className="bg-white rounded-2xl p-6 sm:p-7 shadow-xl border border-slate-100 w-full max-w-lg mx-auto relative z-10 transition-shadow overflow-hidden min-h-[500px]">
+ <div className="bg-white rounded-2xl px-4 py-6 sm:px-8 shadow-xl border border-slate-100 w-full max-w-lg mx-auto relative z-10 transition-shadow overflow-hidden min-h-[500px]">
  
  {/* Step Indicators */}
  <div className="flex items-center justify-center gap-2.5 mb-3 relative z-20">
@@ -209,7 +209,7 @@ const LeadForm = () => {
  value={formData.fullName}
  onChange={handleInputChange}
  placeholder="Enter your full name" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.fullName && <p className="text-red-500 text-[10px] mt-1">{errors.fullName}</p>}
  </div>
@@ -224,7 +224,7 @@ const LeadForm = () => {
  value={formData.businessName}
  onChange={handleInputChange}
  placeholder="Enter your business name" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.businessName && <p className="text-red-500 text-[10px] mt-1">{errors.businessName}</p>}
  </div>
@@ -241,7 +241,7 @@ const LeadForm = () => {
  value={formData.email}
  onChange={handleInputChange}
  placeholder="you@example.com" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
  </div>
@@ -256,7 +256,7 @@ const LeadForm = () => {
  value={formData.phone}
  onChange={handleInputChange}
  placeholder="+91 XXXXX XXXXX" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.phone && <p className="text-red-500 text-[10px] mt-1">{errors.phone}</p>}
  </div>
@@ -270,7 +270,7 @@ const LeadForm = () => {
  name="category"
  value={formData.category}
  onChange={handleInputChange}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] focus:outline-none focus:ring-2 transition-all appearance-none`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] focus:outline-none focus:ring-2 transition-all appearance-none`}
  style={{ backgroundImage: "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\")", backgroundPosition: "right 0.875rem center", backgroundRepeat: "no-repeat", backgroundSize: "1em" }}
  >
  <option value="" disabled>Select category</option>
@@ -296,7 +296,7 @@ const LeadForm = () => {
  value={formData.offering}
  onChange={handleInputChange}
  placeholder="e.g. Interior Design Services, Home Bakery" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.offering && <p className="text-red-500 text-[10px] mt-1">{errors.offering}</p>}
  </div>
@@ -343,7 +343,7 @@ const LeadForm = () => {
  value="Yes" 
  checked={formData.hasWebsite === 'Yes'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
  />
  <span className="text-sm text-slate-600 ">Yes</span>
  </label>
@@ -354,7 +354,7 @@ const LeadForm = () => {
  value="No" 
  checked={formData.hasWebsite === 'No'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
  />
  <span className="text-sm text-slate-600 ">No</span>
  </label>
@@ -374,7 +374,7 @@ const LeadForm = () => {
  value="Yes" 
  checked={formData.hasDomain === 'Yes'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
  />
  <span className="text-sm text-slate-600 ">Yes</span>
  </label>
@@ -385,7 +385,7 @@ const LeadForm = () => {
  value="No" 
  checked={formData.hasDomain === 'No'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="w-full box-border max-w-[16px] h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
  />
  <span className="text-sm text-slate-600 ">No</span>
  </label>
@@ -406,7 +406,7 @@ const LeadForm = () => {
  value={goal}
  checked={formData.websiteGoals.includes(goal)}
  onChange={handleInputChange}
- className="w-3.5 h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
+ className="w-full box-border max-w-[14px] h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
  />
  <span className="text-sm text-slate-600 ">{goal}</span>
  </label>
@@ -425,7 +425,7 @@ const LeadForm = () => {
  value={formData.websiteUrl}
  onChange={handleInputChange}
  placeholder="https://example.com" 
- className="w-full py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
+ className="w-full box-border py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
  />
  </div>
 
@@ -439,7 +439,7 @@ const LeadForm = () => {
  onChange={handleInputChange}
  placeholder="Describe your current website..." 
  rows={2}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
  />
  {errors.websiteDescription && <p className="text-red-500 text-[10px] mt-1">{errors.websiteDescription}</p>}
  </div>
@@ -454,7 +454,7 @@ const LeadForm = () => {
  onChange={handleInputChange}
  placeholder="Anything else we should know?" 
  rows={2}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
+ className={`w-full box-border py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
  />
  {errors.message && <p className="text-red-500 text-[10px] mt-1">{errors.message}</p>}
  </div>

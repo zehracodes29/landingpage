@@ -55,12 +55,12 @@ const Pricing = () => {
  ];
 
  return (
- <section id="pricing" className="py-20 md:py-28 bg-[#FAF9F7] font-sans">
- <div className="max-w-6xl mx-auto px-6 lg:px-8">
+ <section id="pricing" className="py-20 md:py-28 bg-[#FAF9F7] font-sans w-full px-4 sm:px-6 lg:px-8">
+ <div className="max-w-6xl mx-auto">
  
  {/* SECTION 1: SETUP COST */}
  <div className="mb-24">
- <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center w-full">
  
  {/* Left Column: Description */}
  <div className="order-2 md:order-1 text-center md:text-left flex flex-col gap-6">
@@ -91,7 +91,7 @@ const Pricing = () => {
 
  {/* Right Column: Featured Pricing Card */}
  <div className="order-1 md:order-2">
- <div className="bg-white border border-purple-100 text-[#111827] rounded-3xl p-8 md:p-10 shadow-sm relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02]">
+ <div className="bg-white border border-purple-100 text-[#111827] rounded-3xl p-8 md:p-10 shadow-sm relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02] w-full max-w-md mx-auto">
  <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-purple-50 opacity-50 rounded-full blur-2xl pointer-events-none"></div>
  
  <h3 className="text-[22px] font-bold text-[#111827] mb-2">One-Time Payment</h3>
@@ -130,11 +130,11 @@ const Pricing = () => {
  </h2>
  </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12">
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12 w-full">
  {subPlans.map((plan, index) => (
  <div 
  key={index} 
- className={`flex flex-col bg-white border ${plan.popular ? 'border-[#4400AF] border-2 shadow-[0_15px_40px_-10px_rgba(68,0,175,0.15)] ring-2 ring-purple-600/10' : 'border-slate-200 shadow-sm'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
+ className={`flex flex-col w-full max-w-md mx-auto bg-white border ${plan.popular ? 'border-[#4400AF] border-2 shadow-[0_15px_40px_-10px_rgba(68,0,175,0.15)] ring-2 ring-purple-600/10' : 'border-slate-200 shadow-sm'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
  >
  {plan.popular && (
  <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#4400AF] text-white px-5 py-1.5 rounded-full text-[12px] font-bold tracking-wide uppercase shadow-sm whitespace-nowrap">

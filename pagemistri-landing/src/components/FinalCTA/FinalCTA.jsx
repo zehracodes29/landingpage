@@ -2,7 +2,7 @@ import React from 'react';
 
 const FinalCTA = () => {
  return (
- <section className="py-24 bg-[#FAF9F7] font-sans">
+ <section className="py-24 bg-[#FAF9F7] font-sans w-full px-4 sm:px-6 lg:px-8">
  <div className="max-w-5xl mx-auto px-6 lg:px-8">
  <div className="bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-8 md:p-14 shadow-2xl relative overflow-hidden text-center flex flex-col items-center">
 
