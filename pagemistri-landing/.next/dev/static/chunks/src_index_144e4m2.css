@@ -608,6 +608,10 @@
     left: 50%;
   }
 
+  .left-4 {
+    left: calc(var(--spacing) * 4);
+  }
+
   .left-\[10\%\] {
     left: 10%;
   }
@@ -1196,6 +1200,10 @@
     justify-content: center;
   }
 
+  .justify-end {
+    justify-content: flex-end;
+  }
+
   .gap-1 {
     gap: var(--spacing);
   }
@@ -1242,6 +1250,11 @@
 
   .gap-\[28px\] {
     gap: 28px;
+  }
+
+  :where(.space-y-0 > :not(:last-child)) {
+    --tw-space-y-reverse: 0;
+    margin-block: 0;
   }
 
   :where(.space-y-3 > :not(:last-child)) {
@@ -1502,6 +1515,10 @@
     background-color: var(--color-gray-100);
   }
 
+  .bg-gray-200 {
+    background-color: var(--color-gray-200);
+  }
+
   .bg-green-50 {
     background-color: var(--color-green-50);
   }
@@ -1584,6 +1601,10 @@
     .bg-purple-200\/30 {
       background-color: color-mix(in oklab, var(--color-purple-200) 30%, transparent);
     }
+  }
+
+  .bg-purple-300 {
+    background-color: var(--color-purple-300);
   }
 
   .bg-purple-400\/15 {
@@ -2036,8 +2057,16 @@
     padding-top: calc(var(--spacing) * 8);
   }
 
+  .pr-4 {
+    padding-right: calc(var(--spacing) * 4);
+  }
+
   .pb-5 {
     padding-bottom: calc(var(--spacing) * 5);
+  }
+
+  .pl-11 {
+    padding-left: calc(var(--spacing) * 11);
   }
 
   .text-center {
@@ -2337,6 +2366,10 @@
 
   .text-purple-900 {
     color: var(--color-purple-900);
+  }
+
+  .text-purple-950 {
+    color: var(--color-purple-950);
   }
 
   .text-red-500 {
@@ -2661,6 +2694,11 @@
     transition-timing-function: var(--ease-out);
   }
 
+  .outline-none {
+    --tw-outline-style: none;
+    outline-style: none;
+  }
+
   @media (hover: hover) {
     .group-hover\:w-\[calc\(100\%-3rem\)\]:is(:where(.group):hover *) {
       width: calc(100% - 3rem);
@@ -2933,6 +2971,10 @@
   .focus\:ring-2:focus {
     --tw-ring-shadow: var(--tw-ring-inset, ) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+
+  .focus\:ring-purple-100:focus {
+    --tw-ring-color: var(--color-purple-100);
   }
 
   .focus\:ring-purple-500\/30:focus {

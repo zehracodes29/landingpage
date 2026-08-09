@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2 } from 'lucide-react';
+import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin } from 'lucide-react';
 
 export default function BusinessVisibilitySurvey() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -10,8 +10,11 @@ export default function BusinessVisibilitySurvey() {
   
   const [formData, setFormData] = useState({
     businessName: '',
-    industry: '',
+    businessType: '',
+    city: '',
     yearsInBusiness: '',
+    employees: '',
+    monthlyEnquiries: '',
     customerSource: '',
     marketingChallenge: '',
     fullName: '',
@@ -24,7 +27,13 @@ export default function BusinessVisibilitySurvey() {
   };
 
   const handleNext = () => {
-    setCurrentStep(prev => Math.min(prev + 1, 3));
+    if (currentStep === 1) {
+      if (!formData.businessName || !formData.businessType || !formData.city || !formData.yearsInBusiness || !formData.employees || !formData.monthlyEnquiries) {
+        alert("Please fill in all required fields to proceed.");
+        return;
+      }
+    }
+    setCurrentStep(prev => Math.min(prev + 1, 4));
   };
 
   const handleBack = () => {
@@ -301,16 +310,35 @@ export default function BusinessVisibilitySurvey() {
         <div className="absolute inset-0 bg-purple-200/20 blur-3xl pointer-events-none"></div>
         <div className="max-w-3xl mx-auto px-4 relative z-10">
           
-          <div className="backdrop-blur-md bg-white/80 border border-purple-100/80 shadow-xl shadow-purple-950/5 rounded-3xl p-6 sm:p-10 md:p-12 min-h-[500px] flex flex-col relative overflow-hidden">
+          <div className="max-w-2xl mx-auto bg-white border border-purple-100/80 shadow-2xl shadow-purple-950/5 rounded-3xl p-6 sm:p-10 min-h-[500px] flex flex-col relative overflow-hidden">
             
             {!isSuccess ? (
               <>
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">Visibility Survey 2026</h2>
-                  <p className="text-gray-500">Help us understand the small business landscape</p>
+                <div className="text-center mb-2">
+                  <h2 className="text-2xl sm:text-3xl font-extrabold text-purple-950 text-center mb-2">Business Visibility Survey 2026</h2>
+                  <p className="text-xs sm:text-sm text-gray-600 text-center max-w-xl mx-auto mb-6 leading-relaxed">
+                    Share your experience in this 2-minute survey and receive a personalised Business Visibility Report with insights and recommendations tailored to your business.
+                  </p>
                 </div>
                 
-                {renderProgressBar()}
+                {/* 4-STEP PROGRESS INDICATOR */}
+                <div className="flex flex-col items-center justify-center mb-8">
+                  <div className="flex items-center gap-2 mb-2">
+                    {[1, 2, 3, 4].map(step => (
+                      <div 
+                        key={step} 
+                        className={`rounded-full h-2.5 transition-all duration-500 ${currentStep === step ? 'w-8 bg-purple-600' : currentStep > step ? 'w-8 bg-purple-300' : 'w-2.5 bg-gray-200'}`}
+                      />
+                    ))}
+                  </div>
+                  <div className="text-xs font-semibold text-purple-700 uppercase tracking-wider text-center mt-2">
+                    Step {currentStep} of 4: {
+                      currentStep === 1 ? "Tell Us About Your Business" :
+                      currentStep === 2 ? "Online Reach" :
+                      currentStep === 3 ? "Contact & Goals" : "Final Step"
+                    }
+                  </div>
+                </div>
 
                 <div className="flex-1 relative">
                   <AnimatePresence mode="wait">
@@ -321,47 +349,110 @@ export default function BusinessVisibilitySurvey() {
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: -20 }}
                         transition={{ duration: 0.3 }}
-                        className="space-y-6"
+                        className="space-y-0"
                       >
+                        <span className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 block">TELL US ABOUT YOUR BUSINESS</span>
+
+                        {/* Field 1: Name */}
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Business Name</label>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Name of your business <span className="text-purple-600">*</span></label>
                           <input 
                             type="text" 
-                            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 transition-all focus:scale-[1.01]"
-                            placeholder="e.g. Acme Corp"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 shadow-sm focus:scale-[1.01]"
+                            placeholder="Enter name"
                             value={formData.businessName}
                             onChange={(e) => updateFormData('businessName', e.target.value)}
                           />
                         </div>
+
+                        {/* Field 2: Business Type Grid */}
                         <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-2">Industry / Niche</label>
-                          <select 
-                            className="w-full px-4 py-3.5 rounded-xl border border-gray-200 bg-white focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-600 transition-all focus:scale-[1.01] appearance-none"
-                            value={formData.industry}
-                            onChange={(e) => updateFormData('industry', e.target.value)}
-                          >
-                            <option value="">Select industry...</option>
-                            <option value="retail">Retail</option>
-                            <option value="services">Professional Services</option>
-                            <option value="tech">Technology / Software</option>
-                            <option value="fnb">Food & Beverage</option>
-                            <option value="other">Other</option>
-                          </select>
-                        </div>
-                        <div>
-                          <label className="block text-sm font-semibold text-gray-700 mb-3">Years in Business</label>
-                          <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                            {['0-1 Years', '1-3 Years', '3-5 Years', '5+ Years'].map((year) => (
+                          <label className="block text-sm font-semibold text-gray-700 mb-3">What type of business do you own? <span className="text-purple-600">*</span></label>
+                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
+                            {[
+                              'Coach / Consultant', 'Freelancer', 'Real Estate', 'Healthcare / Clinic', 
+                              'Salon / Spa', 'Gym / Fitness', 'Restaurant / Café', 'Retail Store', 
+                              'Home-Based Business', 'Agency', 'Education / Training', 'E-commerce', 
+                              'Manufacturing', 'Other'
+                            ].map((type) => (
                               <button
-                                key={year}
-                                onClick={() => updateFormData('yearsInBusiness', year)}
-                                className={`w-full py-3.5 px-4 rounded-xl border transition-all text-sm font-medium flex items-center justify-between ${formData.yearsInBusiness === year ? 'border-purple-600 bg-purple-50 text-purple-700 shadow-sm' : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-purple-50/50'}`}
+                                key={type}
+                                onClick={() => updateFormData('businessType', type)}
+                                className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium ${
+                                  formData.businessType === type 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 shadow-sm font-semibold' 
+                                    : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                }`}
                               >
-                                {year}
-                                {formData.yearsInBusiness === year && <Check className="w-4 h-4 text-purple-600" />}
+                                {type}
+                                {formData.businessType === type && <Check className="w-4 h-4 text-purple-600" />}
                               </button>
                             ))}
                           </div>
+                        </div>
+
+                        {/* Field 3: City */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Which city do you operate from? <span className="text-purple-600">*</span></label>
+                          <div className="relative mb-6">
+                            <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
+                            <input 
+                              type="text" 
+                              className="w-full pl-11 pr-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm focus:scale-[1.01]"
+                              placeholder="Location"
+                              value={formData.city}
+                              onChange={(e) => updateFormData('city', e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        {/* Field 4: Years in Business */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">How long have you been running your business? <span className="text-purple-600">*</span></label>
+                          <select 
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            value={formData.yearsInBusiness}
+                            onChange={(e) => updateFormData('yearsInBusiness', e.target.value)}
+                          >
+                            <option value="">Enter select</option>
+                            <option value="Less than 1 year">Less than 1 year</option>
+                            <option value="1 - 3 years">1 - 3 years</option>
+                            <option value="3 - 5 years">3 - 5 years</option>
+                            <option value="5+ years">5+ years</option>
+                          </select>
+                        </div>
+
+                        {/* Field 5: Employees */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">How many people currently work in your business? <span className="text-purple-600">*</span></label>
+                          <select 
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-6 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            value={formData.employees}
+                            onChange={(e) => updateFormData('employees', e.target.value)}
+                          >
+                            <option value="">Enter select</option>
+                            <option value="Just me (1)">Just me (1)</option>
+                            <option value="2 - 5 employees">2 - 5 employees</option>
+                            <option value="6 - 10 employees">6 - 10 employees</option>
+                            <option value="11 - 25 employees">11 - 25 employees</option>
+                            <option value="25+ employees">25+ employees</option>
+                          </select>
+                        </div>
+
+                        {/* Field 6: Monthly Enquiries */}
+                        <div>
+                          <label className="block text-sm font-semibold text-gray-700 mb-2">Approximately how many enquiries does your business receive every month? <span className="text-purple-600">*</span></label>
+                          <select 
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none mb-8 bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01]"
+                            value={formData.monthlyEnquiries}
+                            onChange={(e) => updateFormData('monthlyEnquiries', e.target.value)}
+                          >
+                            <option value="">Enter select</option>
+                            <option value="0 - 10 enquiries">0 - 10 enquiries</option>
+                            <option value="10 - 50 enquiries">10 - 50 enquiries</option>
+                            <option value="50 - 100 enquiries">50 - 100 enquiries</option>
+                            <option value="100+ enquiries">100+ enquiries</option>
+                          </select>
                         </div>
                       </motion.div>
                     )}
@@ -451,33 +542,33 @@ export default function BusinessVisibilitySurvey() {
                   </AnimatePresence>
                 </div>
 
-                <div className="mt-10 flex gap-4 w-full">
+                <div className="mt-8 flex justify-end w-full">
                   {currentStep > 1 && (
                     <button
                       onClick={handleBack}
-                      className="w-full sm:w-1/3 px-6 py-4 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all flex items-center justify-center"
+                      className="w-full sm:w-auto px-6 py-3.5 mr-4 rounded-xl font-semibold text-gray-700 bg-gray-100 hover:bg-gray-200 transition-all flex items-center justify-center"
                       disabled={isSubmitting}
                     >
                       Back
                     </button>
                   )}
-                  {currentStep < 3 ? (
+                  {currentStep < 4 ? (
                     <button
                       onClick={handleNext}
-                      className={`w-full ${currentStep > 1 ? 'sm:w-2/3' : ''} px-6 py-4 rounded-xl font-semibold text-white bg-purple-600 hover:bg-purple-700 shadow-md shadow-purple-200 transition-all flex items-center justify-center`}
+                      className="w-full sm:w-auto px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2"
                     >
-                      Continue
+                      Next <ArrowRight className="w-4 h-4" />
                     </button>
                   ) : (
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className={`w-full ${currentStep > 1 ? 'sm:w-2/3' : ''} px-6 py-4 rounded-xl font-semibold text-white bg-purple-600 hover:bg-purple-700 shadow-md shadow-purple-200 transition-all flex items-center justify-center disabled:opacity-70`}
+                      className="w-full sm:w-auto px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70"
                     >
                       {isSubmitting ? (
                         <>
-                          <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-                          Calculating Visibility Score...
+                          <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                          Calculating...
                         </>
                       ) : (
                         "Submit Survey"
