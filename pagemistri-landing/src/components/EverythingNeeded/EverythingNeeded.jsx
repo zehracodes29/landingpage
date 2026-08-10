@@ -39,8 +39,8 @@ const features = [
 
 const EverythingNeeded = () => {
  return (
- <section id="whats-included" className="py-24 bg-[#FAF9F7] w-full px-4 sm:px-6 lg:px-8">
- <div className="max-w-7xl mx-auto px-2 sm:px-4 lg:px-8">
+ <section id="whats-included" className="py-24 bg-[#FAF9F7]">
+ <div className="max-w-7xl mx-auto px-6 lg:px-8">
  <div className="text-center max-w-4xl mx-auto mb-16">
  <div className="mb-4 inline-flex">
  <SectionBadge>Complete Business Website Setup</SectionBadge>
@@ -53,9 +53,9 @@ const EverythingNeeded = () => {
  </p>
  </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
+ <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
  {features.map((feature, index) => (
- <Card key={index} index={index} className="w-full max-w-md mx-auto">
+ <Card key={index} index={index}>
  <div className="flex flex-col h-full text-left p-2">
  <div className="w-12 h-12 bg-[#F4EEFF] rounded-lg flex items-center justify-center mb-6 text-[#4400AF]">
  <feature.icon className="w-[22px] h-[22px]" strokeWidth={2} />

@@ -4,7 +4,7 @@ import SectionBadge from '../../ui/SectionBadge';
 
 export default function DomainCTA() {
  return (
- <section className="py-24 bg-[#F4EEFF] w-full px-4 sm:px-6 lg:px-8">
+ <section className="py-24 bg-[#F4EEFF]">
  <div className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
  <motion.div 
  initial={{ opacity: 0, y: 20 }}

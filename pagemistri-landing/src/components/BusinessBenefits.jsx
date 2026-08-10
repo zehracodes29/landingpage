@@ -6,7 +6,7 @@ import LeadForm from '@/components/LeadForm';
 
 const BusinessBenefits = () => {
  return (
- <section id="lead-form" className="relative bg-[#FAF9F7] py-16 md:py-24 font-sans scroll-mt-20 w-full px-4 sm:px-6 lg:px-8">
+ <section id="lead-form" className="relative bg-[#FAF9F7] py-16 md:py-24 font-sans scroll-mt-20">
  <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
  <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
  
