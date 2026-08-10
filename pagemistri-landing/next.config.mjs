@@ -5,8 +5,10 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 /** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  trailingSlash: true,
   images: {
     unoptimized: true,
   },
@@ -14,5 +16,4 @@ const nextConfig = {
     root: __dirname,
   },
 };
-
 export default nextConfig;
