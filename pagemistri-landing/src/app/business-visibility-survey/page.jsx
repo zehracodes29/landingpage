@@ -139,23 +139,26 @@ export default function BusinessVisibilitySurvey() {
     }
     
     setIsSubmitting(true);
-    
+
     try {
-      const response = await fetch('https://pagemistri.in/submit-survey.php', {
-        method: 'POST',
+      const response = await fetch("https://pagemistri.in/api/submit-survey.php", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
-      
-      if (response.ok) {
+
+      const result = await response.json();
+
+      if (response.ok && result.status === "success") {
         setIsSuccess(true);
       } else {
-        alert("There was an issue submitting your survey. Please try again.");
+        setShowErrorToast(true);
       }
     } catch (error) {
-      alert("Network error. Please check your connection and try again.");
+      console.error("Submission error:", error);
+      setShowErrorToast(true);
     } finally {
       setIsSubmitting(false);
     }
