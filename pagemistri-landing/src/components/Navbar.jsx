@@ -1,6 +1,7 @@
 // Navbar component
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
+import Link from 'next/link';
 
 const navLinks = [
  { name: "What's Included", href: '#whats-included' },
@@ -59,8 +60,14 @@ export default function Navbar() {
  ))}
  </div>
 
- {/* CTA Button */}
- <div className="hidden md:flex items-center">
+ {/* CTA Buttons */}
+ <div className="hidden md:flex items-center space-x-3">
+ <Link 
+ href="/business-visibility-survey"
+ className="px-5 py-2.5 bg-white text-[#4400AF] text-[15px] font-semibold rounded-lg hover:bg-gray-50 border border-[#4400AF] transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-[1px]"
+ >
+ Take a Visibility Test
+ </Link>
  <button 
  onClick={scrollToHero}
  className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-[1px]"
@@ -94,9 +101,16 @@ export default function Navbar() {
  {link.name}
  </a>
  ))}
+ <Link 
+ href="/business-visibility-survey"
+ onClick={() => setMobileMenuOpen(false)}
+ className="w-full mt-4 px-5 py-3 bg-white border border-[#4400AF] text-[#4400AF] hover:bg-gray-50 transition-colors text-[16px] font-semibold rounded-lg text-center"
+ >
+ Take a Visibility Test
+ </Link>
  <button 
  onClick={scrollToHero}
- className="w-full mt-4 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center"
+ className="w-full mt-3 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center"
  >
  Start building my website
  </button>
