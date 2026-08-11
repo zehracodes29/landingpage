@@ -154,10 +154,10 @@ const LeadForm = () => {
  </div>
 
  <div className="w-full relative flex items-center justify-center">
- <div className="bg-transparent shadow-none border-none p-0 sm:p-2 w-full max-w-lg mx-auto relative z-10 overflow-hidden min-h-[500px]">
+ <div className="bg-transparent shadow-none border-none p-0 sm:p-2 w-full max-w-lg mx-auto relative z-10 overflow-visible min-h-[540px]">
  
  {/* Step Indicators */}
- <div className="flex items-center justify-center gap-2.5 mb-3 relative z-20">
+ <div className="flex items-center justify-center gap-2.5 mb-4 relative z-20 sticky top-0 bg-transparent py-2">
  {step === 1 ? (
  <>
  <div className="flex items-center gap-2.5">
@@ -195,7 +195,7 @@ const LeadForm = () => {
  </p>
  </div>
 
- <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
+ <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
  <label className="text-sm font-semibold text-slate-700 mb-2 block">
@@ -327,7 +327,7 @@ const LeadForm = () => {
  </p>
  </div>
 
- <form className="space-y-6" onSubmit={handleSubmit}>
+ <form className="space-y-4" onSubmit={handleSubmit}>
  
  <div>
  <label className="text-sm font-semibold text-slate-700 mb-2 block">
@@ -336,8 +336,8 @@ const LeadForm = () => {
  <div className="grid grid-cols-2 gap-3">
 <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasWebsite === 'Yes' 
- ? 'border-purple-600 bg-purple-50/50 text-purple-700'
- : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ ? 'border-purple-600 bg-purple-50 text-purple-700 ring-1 ring-purple-600 shadow-sm'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-400 hover:bg-slate-50 hover:shadow-sm'
  }`}>
  <input 
  type="radio" 
@@ -351,8 +351,8 @@ const LeadForm = () => {
  </label>
  <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasWebsite === 'No' 
- ? 'border-purple-600 bg-purple-50/50 text-purple-700'
- : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ ? 'border-purple-600 bg-purple-50 text-purple-700 ring-1 ring-purple-600 shadow-sm'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-400 hover:bg-slate-50 hover:shadow-sm'
  }`}>
  <input 
  type="radio" 
@@ -375,8 +375,8 @@ const LeadForm = () => {
  <div className="grid grid-cols-2 gap-3">
 <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasDomain === 'Yes' 
- ? 'border-purple-600 bg-purple-50/50 text-purple-700'
- : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ ? 'border-purple-600 bg-purple-50 text-purple-700 ring-1 ring-purple-600 shadow-sm'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-400 hover:bg-slate-50 hover:shadow-sm'
  }`}>
  <input 
  type="radio" 
@@ -390,8 +390,8 @@ const LeadForm = () => {
  </label>
  <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasDomain === 'No' 
- ? 'border-purple-600 bg-purple-50/50 text-purple-700'
- : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ ? 'border-purple-600 bg-purple-50 text-purple-700 ring-1 ring-purple-600 shadow-sm'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-400 hover:bg-slate-50 hover:shadow-sm'
  }`}>
  <input 
  type="radio" 
@@ -415,8 +415,8 @@ const LeadForm = () => {
  {['Get More Enquiries', 'Build Trust', 'Showcase My Business', 'Replace My Current Website'].map(goal => (
  <label key={goal} className={`flex items-center gap-3 p-3 border rounded-xl cursor-pointer transition-all ${
  formData.websiteGoals.includes(goal) 
- ? 'border-purple-600 bg-purple-50/50' 
- : 'border-slate-200 bg-white hover:border-purple-300'
+ ? 'border-purple-600 bg-purple-50 ring-1 ring-purple-600 shadow-sm' 
+ : 'border-slate-200 bg-white hover:border-purple-400 hover:bg-slate-50 hover:shadow-sm'
  }`}>
  <input 
  type="checkbox" 
@@ -433,6 +433,7 @@ const LeadForm = () => {
  {errors.websiteGoals && <p className="text-red-500 text-[10px] mt-1">{errors.websiteGoals}</p>}
  </div>
 
+ {formData.hasWebsite === 'Yes' && (
  <div>
  <label className="text-sm font-semibold text-slate-700 mb-2 block">
  If you have a website - Enter your URL:
@@ -446,6 +447,7 @@ const LeadForm = () => {
  className="w-full py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-purple-600/20 focus:border-purple-600 transition-all"
  />
  </div>
+ )}
 
  <div>
  <label className="text-sm font-semibold text-slate-700 mb-2 block">
@@ -457,7 +459,7 @@ const LeadForm = () => {
  onChange={handleInputChange}
  placeholder="Describe your current website..." 
  rows={2}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all max-h-32 overflow-y-auto`}
  />
  {errors.websiteDescription && <p className="text-red-500 text-[10px] mt-1">{errors.websiteDescription}</p>}
  </div>
@@ -472,7 +474,7 @@ const LeadForm = () => {
  onChange={handleInputChange}
  placeholder="Anything else we should know?" 
  rows={2}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all resize-none`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 focus:border-purple-600 focus:ring-purple-600/20'} bg-white text-[#111827] placeholder-slate-400 focus:outline-none focus:ring-2 transition-all max-h-32 overflow-y-auto`}
  />
  {errors.message && <p className="text-red-500 text-[10px] mt-1">{errors.message}</p>}
  </div>

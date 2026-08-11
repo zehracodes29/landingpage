@@ -11,7 +11,7 @@ const Hero = () => {
  {/* Radial Gradient Glow */}
  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/15 rounded-full blur-3xl pointer-events-none" />
 
- <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+ <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
  
  {/* LEFT COLUMN: Content & CTAs */}
  <motion.div 
