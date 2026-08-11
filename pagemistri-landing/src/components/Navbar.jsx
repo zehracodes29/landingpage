@@ -55,7 +55,7 @@ export default function Navbar() {
  key={link.name}
  href={link.href}
  onClick={(e) => scrollToSection(e, link.href)}
- className="text-[15px] font-semibold text-[#4400AF] hover:opacity-80 transition-opacity"
+ className="text-[15px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
  >
  {link.name}
  </a>
@@ -69,7 +69,7 @@ export default function Navbar() {
  <div className="hidden md:flex items-center space-x-3">
  <Link 
  href="/business-visibility-survey"
- className="px-5 py-2.5 bg-white text-[#4400AF] text-[15px] font-semibold rounded-lg hover:bg-gray-50 dark:bg-slate-800 border border-[#4400AF] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
+ className="px-5 py-2.5 bg-transparent border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-[15px] font-semibold rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors transform hover:-translate-y-[1px]"
  >
  Take a Visibility Test
  </Link>
@@ -104,7 +104,7 @@ export default function Navbar() {
  key={link.name}
  href={link.href}
  onClick={(e) => scrollToSection(e, link.href)}
- className="text-[16px] font-semibold text-[#4400AF] py-2 border-b border-gray-50 dark:border-slate-800"
+ className="text-[16px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
  >
  {link.name}
  </a>
