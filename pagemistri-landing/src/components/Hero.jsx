@@ -68,7 +68,7 @@ const Hero = () => {
  transition={{ delay: 0.3, duration: 0.6 }}
  className="relative w-full mt-10 lg:mt-0 order-2 lg:order-2"
  >
- <div className="w-full max-w-[550px] mx-auto bg-white/70 backdrop-blur-md rounded-3xl p-1 md:p-2 shadow-2xl border border-white/50">
+ <div className="w-full max-w-[550px] mx-auto bg-transparent shadow-none border-none p-0">
  <LeadForm />
  </div>
  </motion.div>
