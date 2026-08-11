@@ -8,9 +8,7 @@ import LeadForm from '@/components/LeadForm';
 const Hero = () => {
  return (
  <section id="lead-form" className="bg-gradient-to-b from-purple-50/60 dark:from-slate-900 via-white dark:via-slate-950 to-slate-50 dark:to-slate-950 relative pt-24 lg:pt-32 pb-12 lg:pb-16 w-full font-sans min-h-[90vh] flex flex-col justify-center">
- {/* Radial Gradient Glow */}
- <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/15 dark:bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
-
+ 
  <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
  
  {/* LEFT COLUMN: Content & CTAs */}
@@ -68,8 +66,12 @@ const Hero = () => {
  transition={{ delay: 0.3, duration: 0.6 }}
  className="relative w-full mt-10 lg:mt-0 order-2 lg:order-2"
  >
- <div className="w-full max-w-[550px] mx-auto bg-transparent shadow-none border-none p-0">
+ <div className="w-full max-w-[550px] mx-auto relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-purple-500/10 border border-slate-200 dark:border-slate-800 overflow-hidden">
+ {/* Radial Gradient Glow (contained) */}
+ <div className="absolute -top-32 -right-32 w-96 h-96 bg-purple-500/20 dark:bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+ <div className="relative z-10">
  <LeadForm />
+ </div>
  </div>
  </motion.div>
  </div>
