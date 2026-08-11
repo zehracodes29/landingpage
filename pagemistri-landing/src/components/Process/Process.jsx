@@ -42,7 +42,7 @@ const Process = () => {
  const lineScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
  return (
- <section id="how-it-works" className="py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans overflow-hidden">
+ <section id="how-it-works" className="scroll-mt-24 py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans overflow-hidden">
  <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
  
  {/* Header */}

@@ -19,3 +19,8 @@ html {
 body {
   /* colors handled by layout.jsx */
 }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem; /* 96px offset matching navbar height + breathing room */
+}

@@ -55,7 +55,7 @@ const Pricing = () => {
  ];
 
  return (
- <section id="pricing" className="py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans">
+ <section id="pricing" className="scroll-mt-24 py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans">
  <div className="max-w-6xl mx-auto px-6 lg:px-8">
  
  {/* SECTION 1: SETUP COST */}

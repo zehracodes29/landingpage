@@ -37,7 +37,7 @@ const features = [
 
 const EverythingNeeded = () => {
  return (
- <section id="whats-included" className="py-12 lg:py-16 bg-slate-50 dark:bg-slate-950 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] relative overflow-hidden font-sans">
+ <section id="whats-included" className="scroll-mt-24 py-12 lg:py-16 bg-slate-50 dark:bg-slate-950 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] relative overflow-hidden font-sans">
  <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
  
