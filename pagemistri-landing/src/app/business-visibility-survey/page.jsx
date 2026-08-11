@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import SurveyNavbar from '@/components/SurveyNavbar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle, Send, Sparkles, Lock, Quote } from 'lucide-react';
 
@@ -183,6 +184,7 @@ export default function BusinessVisibilitySurvey() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-900 relative overflow-x-hidden w-full font-sans">
+      <SurveyNavbar />
       {/* Toast Notification */}
       <AnimatePresence>
         {showErrorToast && (
@@ -204,7 +206,7 @@ export default function BusinessVisibilitySurvey() {
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236b21a8' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} 
       />
 
-      <section className="w-full py-16 sm:py-24 px-4 sm:px-6 lg:px-8 text-center relative">
+      <section className="w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 text-center relative">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           
           {/* 1. TOP ANNOUNCEMENT BADGE */}
