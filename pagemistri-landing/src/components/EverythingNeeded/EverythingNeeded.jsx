@@ -38,7 +38,7 @@ const features = [
 
 const EverythingNeeded = () => {
  return (
- <section id="whats-included" className="py-24 bg-[#FAF9F7]">
+ <section id="whats-included" className="pt-10 pb-24 bg-[#FAF9F7]">
  <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
  {/* LEFT COLUMN: Content & Features */}
