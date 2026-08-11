@@ -1,4 +1,3 @@
-import HeroMockupVisual from '@/components/HeroMockupVisual';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, LayoutGrid, Sparkles } from 'lucide-react';
