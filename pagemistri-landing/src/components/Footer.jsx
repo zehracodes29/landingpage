@@ -11,14 +11,9 @@ export default function Footer() {
  <footer className="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 py-12 font-sans">
  <div className="max-w-7xl mx-auto px-6 lg:px-8">
  <div className="flex flex-col md:flex-row justify-between items-center gap-8">
- <div className="flex items-center gap-2">
- <div className="w-8 h-8 bg-[#4400AF] rounded-lg flex items-center justify-center text-white font-bold text-xl">
- P
- </div>
- <span className="text-[#111827] dark:text-white font-bold text-xl tracking-tight">
- Pagemistri
- </span>
- </div>
+ <a href="#" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }} className="block">
+ <img src="/pagemistri-logo.png" alt="PageMistri Logo" className="h-8 md:h-10 w-auto grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all dark:invert dark:opacity-70 dark:hover:opacity-100" />
+ </a>
  
  <div className="flex flex-wrap justify-center gap-6 md:gap-8">
  <a href="#whats-included" onClick={(e) => scrollToSection(e, '#whats-included')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">What's Included</a>
