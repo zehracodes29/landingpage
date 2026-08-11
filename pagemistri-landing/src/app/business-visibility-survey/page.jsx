@@ -182,7 +182,7 @@ export default function BusinessVisibilitySurvey() {
   };
 
   return (
-    <div className="min-h-screen bg-white relative overflow-x-hidden w-full font-sans">
+    <div className="min-h-screen bg-white dark:bg-slate-900 relative overflow-x-hidden w-full font-sans">
       {/* Toast Notification */}
       <AnimatePresence>
         {showErrorToast && (
@@ -198,7 +198,7 @@ export default function BusinessVisibilitySurvey() {
         )}
       </AnimatePresence>
       {/* Background Mesh & Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-100/80 via-white to-purple-50/40 -z-10" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-100/80 via-white dark:via-slate-950 to-purple-50/40 -z-10" />
       <div 
         className="absolute inset-0 opacity-[0.03] -z-10" 
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236b21a8' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} 
@@ -225,14 +225,14 @@ export default function BusinessVisibilitySurvey() {
             transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
             className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 leading-[1.15] tracking-tight max-w-4xl mx-auto mb-8 text-center"
           >
-            Share Your Business Experience. Receive Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-500 drop-shadow-sm filter">Personalised Visibility Report</span>.
+            Share Your Business Experience. Receive Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-500 drop-shadow-sm dark:shadow-none filter">Personalised Visibility Report</span>.
           </motion.h1>
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
-            className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 text-center leading-relaxed"
+            className="text-lg sm:text-xl text-gray-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 text-center leading-relaxed"
           >
             We're inviting small business owners across India to share how they attract customers, build their online presence, and grow their business. Your responses will contribute to our Business Visibility Survey 2026, and you'll receive a FREE personalised Business Visibility Report with practical recommendations for your business.
           </motion.p>
@@ -249,7 +249,7 @@ export default function BusinessVisibilitySurvey() {
                 const element = document.getElementById('survey-form');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group relative bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg shadow-purple-500/25 transition-all duration-300 hover:shadow-purple-500/40 hover:-translate-y-0.5 cursor-pointer text-base sm:text-lg w-full sm:w-auto overflow-hidden flex items-center justify-center"
+              className="group relative bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-2xl shadow-lg dark:shadow-none shadow-purple-500/25 transition-all duration-300 hover:shadow-purple-500/40 hover:-translate-y-0.5 cursor-pointer text-base sm:text-lg w-full sm:w-auto overflow-hidden flex items-center justify-center"
             >
               <span className="relative z-10 flex items-center">
                 Get My Visibility Report
@@ -291,48 +291,48 @@ export default function BusinessVisibilitySurvey() {
       </section>
 
       {/* What You'll Receive Section */}
-      <section className="py-12 sm:py-16 bg-white w-full relative z-10">
+      <section className="py-12 sm:py-16 bg-white dark:bg-slate-900 w-full relative z-10">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-3">
             What You'll Receive
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 text-center max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-slate-400 text-center max-w-2xl mx-auto mb-12 leading-relaxed">
             Complete the survey to receive a personalised Business Visibility Report with insights and recommendations tailored to your business.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Card 1 */}
-            <div className="bg-gradient-to-br from-purple-50/60 via-white to-purple-50/30 border border-purple-100 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
+            <div className="bg-gradient-to-br from-purple-50/60 dark:from-slate-900 via-white dark:via-slate-950 to-purple-50/30 border border-purple-100 dark:border-purple-900/50 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm dark:shadow-none relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="bg-purple-100 text-purple-600 p-3 rounded-xl inline-block mb-4">
                 <CheckCircle2 className="w-6 h-6" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Business Visibility Score</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 dark:text-slate-400 text-sm leading-relaxed">
                 Get a simple score that reflects your business's current online visibility.
               </p>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-gradient-to-br from-purple-50/60 via-white to-purple-50/30 border border-purple-100 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
+            <div className="bg-gradient-to-br from-purple-50/60 dark:from-slate-900 via-white dark:via-slate-950 to-purple-50/30 border border-purple-100 dark:border-purple-900/50 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm dark:shadow-none relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="bg-purple-100 text-purple-600 p-3 rounded-xl inline-block mb-4">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Personalised Recommendations</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 dark:text-slate-400 text-sm leading-relaxed">
                 Get tailored recommendations to improve your online visibility and business growth.
               </p>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-gradient-to-br from-purple-50/60 via-white to-purple-50/30 border border-purple-100 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
+            <div className="bg-gradient-to-br from-purple-50/60 dark:from-slate-900 via-white dark:via-slate-950 to-purple-50/30 border border-purple-100 dark:border-purple-900/50 rounded-2xl p-6 sm:p-8 text-left transition-all duration-300 shadow-sm dark:shadow-none relative overflow-hidden group hover:shadow-xl hover:shadow-purple-100/50 hover:-translate-y-1 hover:border-purple-300">
               <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity"></div>
               <div className="bg-purple-100 text-purple-600 p-3 rounded-xl inline-block mb-4">
                 <BarChart3 className="w-6 h-6" />
               </div>
               <h3 className="text-lg sm:text-xl font-bold text-gray-900 mb-2">Business Visibility Report</h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-gray-600 dark:text-slate-400 text-sm leading-relaxed">
                 A report highlighting your responses, key insights, and opportunities for improvement.
               </p>
             </div>
@@ -353,7 +353,7 @@ export default function BusinessVisibilitySurvey() {
         <div className="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
           
           {/* LEFT SIDE - FEATURED HIGHLIGHT CARD */}
-          <div className="col-span-12 lg:col-span-6 bg-gradient-to-br from-purple-50 via-purple-100/40 to-white border border-purple-200/60 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg shadow-purple-100/50 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-purple-300">
+          <div className="col-span-12 lg:col-span-6 bg-gradient-to-br from-purple-50 via-purple-100/40 to-white border border-purple-200/60 rounded-3xl p-6 sm:p-8 md:p-10 shadow-lg dark:shadow-none shadow-purple-100/50 relative overflow-hidden transition-all duration-300 hover:shadow-xl hover:border-purple-300">
             {/* Background Glow Orb */}
             <div className="absolute -top-10 -left-10 w-40 h-40 bg-purple-200/30 blur-2xl rounded-full pointer-events-none"></div>
             
@@ -379,8 +379,8 @@ export default function BusinessVisibilitySurvey() {
 
             <div className="flex flex-col">
               {/* Item 1 */}
-              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
-                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white dark:bg-slate-900 hover:shadow-md dark:shadow-none hover:shadow-purple-100 border border-transparent hover:border-purple-100 dark:border-purple-900/50 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm dark:shadow-none">
                   <Zap className="w-6 h-6" />
                 </div>
                 <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
@@ -389,8 +389,8 @@ export default function BusinessVisibilitySurvey() {
               </div>
 
               {/* Item 2 */}
-              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
-                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white dark:bg-slate-900 hover:shadow-md dark:shadow-none hover:shadow-purple-100 border border-transparent hover:border-purple-100 dark:border-purple-900/50 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm dark:shadow-none">
                   <Search className="w-6 h-6" />
                 </div>
                 <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
@@ -399,8 +399,8 @@ export default function BusinessVisibilitySurvey() {
               </div>
 
               {/* Item 3 */}
-              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
-                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white dark:bg-slate-900 hover:shadow-md dark:shadow-none hover:shadow-purple-100 border border-transparent hover:border-purple-100 dark:border-purple-900/50 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm dark:shadow-none">
                   <FileText className="w-6 h-6" />
                 </div>
                 <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
@@ -409,8 +409,8 @@ export default function BusinessVisibilitySurvey() {
               </div>
 
               {/* Item 4 */}
-              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white hover:shadow-md hover:shadow-purple-100 border border-transparent hover:border-purple-100 group cursor-default mb-3">
-                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm">
+              <div className="flex items-center gap-4 p-3.5 sm:p-4 rounded-2xl transition-all duration-300 hover:bg-white dark:bg-slate-900 hover:shadow-md dark:shadow-none hover:shadow-purple-100 border border-transparent hover:border-purple-100 dark:border-purple-900/50 group cursor-default mb-3">
+                <div className="w-12 h-12 rounded-xl bg-purple-100/80 text-purple-600 flex items-center justify-center shrink-0 group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110 shadow-sm dark:shadow-none">
                   <Layers className="w-6 h-6" />
                 </div>
                 <span className="text-base sm:text-lg font-semibold text-gray-800 group-hover:text-purple-950 transition-colors">
@@ -424,7 +424,7 @@ export default function BusinessVisibilitySurvey() {
                 const element = document.getElementById('survey-form');
                 element?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="mt-8 inline-flex items-center justify-center w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-base"
+              className="mt-8 inline-flex items-center justify-center w-full sm:w-auto bg-purple-600 hover:bg-purple-700 text-white font-semibold px-8 py-4 rounded-xl shadow-lg dark:shadow-none shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-base"
             >
               Get My Visibility Report
             </button>
@@ -438,13 +438,13 @@ export default function BusinessVisibilitySurvey() {
         <div className="absolute inset-0 bg-purple-200/20 blur-3xl pointer-events-none"></div>
         <div className="max-w-3xl mx-auto px-4 relative z-10">
           
-          <div className="max-w-2xl mx-auto bg-white border border-purple-100/80 shadow-2xl shadow-purple-950/5 rounded-3xl p-6 sm:p-10 min-h-[500px] flex flex-col relative overflow-hidden">
+          <div className="max-w-2xl mx-auto bg-white dark:bg-slate-900 border border-purple-100/80 shadow-2xl shadow-purple-950/5 rounded-3xl p-6 sm:p-10 min-h-[500px] flex flex-col relative overflow-hidden">
             
             {!isSuccess ? (
               <>
                 <div className="text-center mb-2">
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-purple-950 text-center mb-2">Business Visibility Survey 2026</h2>
-                  <p className="text-xs sm:text-sm text-gray-600 text-center max-w-xl mx-auto mb-6 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-600 dark:text-slate-400 text-center max-w-xl mx-auto mb-6 leading-relaxed">
                     Share your experience in this 2-minute survey and receive a personalised Business Visibility Report with insights and recommendations tailored to your business.
                   </p>
                 </div>
@@ -486,7 +486,7 @@ export default function BusinessVisibilitySurvey() {
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Name of your business <span className="text-purple-600">*</span></label>
                           <input 
                             type="text" 
-                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.businessName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm dark:shadow-none focus:scale-[1.01] ${errors.businessName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             placeholder="Enter name"
                             value={formData.businessName}
                             onChange={(e) => updateFormData('businessName', e.target.value)}
@@ -509,10 +509,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => updateFormData('businessType', type)}
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium ${
                                   formData.businessType === type 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 shadow-sm font-semibold' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 shadow-sm dark:shadow-none font-semibold' 
                                     : errors.businessType
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {type}
@@ -530,7 +530,7 @@ export default function BusinessVisibilitySurvey() {
                             <MapPin className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="text" 
-                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.city ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm dark:shadow-none focus:scale-[1.01] ${errors.city ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Location"
                               value={formData.city}
                               onChange={(e) => updateFormData('city', e.target.value)}
@@ -543,7 +543,7 @@ export default function BusinessVisibilitySurvey() {
                         <div id="yearsInBusiness" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">How long have you been running your business? <span className="text-purple-600">*</span></label>
                           <select 
-                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.yearsInBusiness ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white dark:bg-slate-900 shadow-sm dark:shadow-none cursor-pointer appearance-none focus:scale-[1.01] ${errors.yearsInBusiness ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.yearsInBusiness}
                             onChange={(e) => updateFormData('yearsInBusiness', e.target.value)}
                           >
@@ -560,7 +560,7 @@ export default function BusinessVisibilitySurvey() {
                         <div id="employees" className="mb-6">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">How many people currently work in your business? <span className="text-purple-600">*</span></label>
                           <select 
-                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.employees ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white dark:bg-slate-900 shadow-sm dark:shadow-none cursor-pointer appearance-none focus:scale-[1.01] ${errors.employees ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.employees}
                             onChange={(e) => updateFormData('employees', e.target.value)}
                           >
@@ -578,7 +578,7 @@ export default function BusinessVisibilitySurvey() {
                         <div id="monthlyEnquiries" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Approximately how many enquiries does your business receive every month? <span className="text-purple-600">*</span></label>
                           <select 
-                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.monthlyEnquiries ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white dark:bg-slate-900 shadow-sm dark:shadow-none cursor-pointer appearance-none focus:scale-[1.01] ${errors.monthlyEnquiries ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.monthlyEnquiries}
                             onChange={(e) => updateFormData('monthlyEnquiries', e.target.value)}
                           >
@@ -614,10 +614,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => toggleArrayData('activePlatforms', platform)}
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.activePlatforms.includes(platform) 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.activePlatforms
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {platform}
@@ -638,10 +638,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => updateFormData('customerSource', source)}
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.customerSource === source 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.customerSource
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {source}
@@ -662,10 +662,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => updateFormData('leadImportance', importance)}
                                 className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.leadImportance === importance 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.leadImportance
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {importance}
@@ -686,10 +686,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => updateFormData('paidAds', adStatus)}
                                 className={`p-2 sm:p-3 rounded-xl border text-center cursor-pointer transition-all text-xs sm:text-sm font-medium min-h-[48px] flex items-center justify-center ${
                                   formData.paidAds === adStatus 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.paidAds
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {adStatus}
@@ -709,10 +709,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => updateFormData('hasWebsite', hasWeb)}
                                 className={`p-4 rounded-xl border text-center cursor-pointer transition-all text-sm font-semibold min-h-[48px] ${
                                   formData.hasWebsite === hasWeb 
-                                    ? 'border-purple-600 bg-purple-600 text-white shadow-md' 
+                                    ? 'border-purple-600 bg-purple-600 text-white shadow-md dark:shadow-none' 
                                     : errors.hasWebsite
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 bg-white text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {hasWeb}
@@ -740,10 +740,10 @@ export default function BusinessVisibilitySurvey() {
                                       onClick={() => toggleArrayData('websiteUse', use)}
                                       className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                         formData.websiteUse.includes(use) 
-                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                           : errors.websiteUse
                                             ? 'border-red-500 bg-red-50/30 text-red-800'
-                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                       }`}
                                     >
                                       {use}
@@ -762,10 +762,10 @@ export default function BusinessVisibilitySurvey() {
                                       onClick={() => updateFormData('websiteSatisfaction', sat)}
                                       className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                         formData.websiteSatisfaction === sat 
-                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                           : errors.websiteSatisfaction
                                             ? 'border-red-500 bg-red-50/30 text-red-800'
-                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                       }`}
                                     >
                                       {sat}
@@ -793,10 +793,10 @@ export default function BusinessVisibilitySurvey() {
                                       onClick={() => updateFormData('noWebsiteReason', reason)}
                                       className={`w-full p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                         formData.noWebsiteReason === reason 
-                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                          ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                           : errors.noWebsiteReason
                                             ? 'border-red-500 bg-red-50/30 text-red-800'
-                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                            : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                       }`}
                                     >
                                       {reason}
@@ -820,10 +820,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => toggleArrayData('enquiryProcess', process)}
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.enquiryProcess.includes(process) 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.enquiryProcess
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {process}
@@ -838,7 +838,7 @@ export default function BusinessVisibilitySurvey() {
                         <div id="responseSpeed" className="mb-8">
                           <label className="block text-sm font-semibold text-gray-700 mb-2">On average, how quickly do you respond to a new enquiry? <span className="text-purple-600">*</span></label>
                           <select 
-                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white shadow-sm cursor-pointer appearance-none focus:scale-[1.01] ${errors.responseSpeed ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                            className={`w-full px-4 py-3 rounded-xl border transition-all text-sm outline-none bg-white dark:bg-slate-900 shadow-sm dark:shadow-none cursor-pointer appearance-none focus:scale-[1.01] ${errors.responseSpeed ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                             value={formData.responseSpeed}
                             onChange={(e) => updateFormData('responseSpeed', e.target.value)}
                           >
@@ -875,10 +875,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => toggleArrayData('biggestChallenge', challenge)}
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.biggestChallenge.includes(challenge) 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.biggestChallenge
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {challenge}
@@ -899,10 +899,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => toggleArrayData('improvements', imp)}
                                 className={`p-3 rounded-xl border text-left cursor-pointer transition-all flex items-center justify-between text-sm font-medium min-h-[48px] ${
                                   formData.improvements.includes(imp) 
-                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 text-purple-950 font-semibold shadow-sm dark:shadow-none' 
                                     : errors.improvements
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 text-gray-700 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 {imp}
@@ -929,10 +929,10 @@ export default function BusinessVisibilitySurvey() {
                                 onClick={() => updateFormData('onlinePresenceRating', rating.val)}
                                 className={`w-full p-4 rounded-xl border text-left cursor-pointer transition-all flex items-center gap-3 text-sm font-medium min-h-[48px] group ${
                                   formData.onlinePresenceRating === rating.val 
-                                    ? 'border-purple-600 bg-purple-50/80 shadow-sm' 
+                                    ? 'border-purple-600 bg-purple-50/80 shadow-sm dark:shadow-none' 
                                     : errors.onlinePresenceRating
                                       ? 'border-red-500 bg-red-50/30 text-red-800'
-                                      : 'border-gray-200 bg-white hover:border-purple-300 hover:bg-gray-50'
+                                      : 'border-gray-200 bg-white dark:bg-slate-900 hover:border-purple-300 hover:bg-gray-50 dark:bg-slate-800'
                                 }`}
                               >
                                 <div className="flex gap-1">
@@ -981,7 +981,7 @@ export default function BusinessVisibilitySurvey() {
                             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="text" 
-                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.fullName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm dark:shadow-none focus:scale-[1.01] ${errors.fullName ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Enter name"
                               value={formData.fullName}
                               onChange={(e) => updateFormData('fullName', e.target.value)}
@@ -996,7 +996,7 @@ export default function BusinessVisibilitySurvey() {
                             <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="email" 
-                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.email ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm dark:shadow-none focus:scale-[1.01] ${errors.email ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Enter email"
                               value={formData.email}
                               onChange={(e) => updateFormData('email', e.target.value)}
@@ -1011,7 +1011,7 @@ export default function BusinessVisibilitySurvey() {
                             <Phone className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                             <input 
                               type="tel" 
-                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm focus:scale-[1.01] ${errors.phoneNumber ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
+                              className={`w-full pl-11 pr-4 py-3 rounded-xl border transition-all text-sm outline-none shadow-sm dark:shadow-none focus:scale-[1.01] ${errors.phoneNumber ? 'border-red-500 bg-red-50/30' : 'border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100'}`}
                               placeholder="Your personal number"
                               value={formData.phoneNumber}
                               onChange={(e) => updateFormData('phoneNumber', e.target.value)}
@@ -1024,7 +1024,7 @@ export default function BusinessVisibilitySurvey() {
                           <label className="block text-sm font-semibold text-gray-700 mb-2">Is there anything else you'd like to share about your business or your experience with growing online? (Optional)</label>
                           <textarea 
                             rows={4}
-                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm resize-none focus:scale-[1.01]"
+                            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-purple-600 focus:ring-2 focus:ring-purple-100 transition-all text-sm outline-none shadow-sm dark:shadow-none resize-none focus:scale-[1.01]"
                             placeholder="Enter message"
                             value={formData.additionalFeedback}
                             onChange={(e) => updateFormData('additionalFeedback', e.target.value)}
@@ -1035,7 +1035,7 @@ export default function BusinessVisibilitySurvey() {
                   </AnimatePresence>
                 </div>
 
-                <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-gray-100 w-full">
+                <div className="flex items-center justify-between gap-4 mt-8 pt-6 border-t border-gray-100 dark:border-slate-800 w-full">
                   {currentStep > 1 ? (
                     <button
                       onClick={handleBack}
@@ -1050,7 +1050,7 @@ export default function BusinessVisibilitySurvey() {
                   {currentStep < 4 ? (
                     <button
                       onClick={handleNext}
-                      className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 flex-1 sm:flex-none"
+                      className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg dark:shadow-none shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 flex-1 sm:flex-none"
                     >
                       Next <ArrowRight className="w-4 h-4" />
                     </button>
@@ -1058,7 +1058,7 @@ export default function BusinessVisibilitySurvey() {
                     <button
                       onClick={handleSubmit}
                       disabled={isSubmitting}
-                      className="px-10 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70 flex-1 sm:flex-none"
+                      className="px-10 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg dark:shadow-none shadow-purple-200 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] cursor-pointer text-sm flex items-center justify-center gap-2 disabled:opacity-70 flex-1 sm:flex-none"
                     >
                       {isSubmitting ? (
                         <>
@@ -1082,12 +1082,12 @@ export default function BusinessVisibilitySurvey() {
                   <CheckCircle2 className="w-10 h-10 text-purple-600 animate-[bounce_1s_ease-in-out]" />
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Survey Submitted Successfully!</h3>
-                <p className="text-sm text-gray-600 max-w-md mx-auto mb-8">
+                <p className="text-sm text-gray-600 dark:text-slate-400 max-w-md mx-auto mb-8">
                   Thank you for contributing to the Business Visibility Survey 2026. Your Personalised Visibility Report will be delivered to your email shortly.
                 </p>
                 <a
                   href="/"
-                  className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg shadow-purple-200 transition-all w-full sm:w-auto inline-flex justify-center"
+                  className="px-8 py-3.5 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-xl shadow-lg dark:shadow-none shadow-purple-200 transition-all w-full sm:w-auto inline-flex justify-center"
                 >
                   Return to PageMistri Home
                 </a>
@@ -1099,12 +1099,12 @@ export default function BusinessVisibilitySurvey() {
       </section>
 
       {/* SECTION 1: What Happens Next? */}
-      <section className="py-16 sm:py-24 bg-white w-full overflow-hidden">
+      <section className="py-16 sm:py-24 bg-white dark:bg-slate-900 w-full overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-4">
             What Happens Next?
           </h2>
-          <p className="text-base sm:text-lg text-gray-600 text-center max-w-3xl mx-auto mb-16 leading-relaxed px-4">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-slate-400 text-center max-w-3xl mx-auto mb-16 leading-relaxed px-4">
             Once you submit your responses, we'll review them and prepare your personalised Business Visibility Report. The report will be delivered to the email address you provide during the survey.
           </p>
 
@@ -1113,40 +1113,40 @@ export default function BusinessVisibilitySurvey() {
             <div className="hidden md:block absolute top-[3.75rem] left-[16.6%] right-[16.6%] border-t-2 border-dashed border-purple-200 z-0"></div>
 
             {/* Card 1 */}
-            <div className="bg-gradient-to-br from-purple-50/50 via-white to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white">
-              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+            <div className="bg-gradient-to-br from-purple-50/50 via-white dark:via-slate-950 to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm dark:shadow-none relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white dark:bg-slate-900">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm dark:shadow-none group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
                 <Send className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-950 transition-colors">
                 Step 1: Submit Your Survey
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-600 dark:text-slate-400 leading-relaxed">
                 Complete the Business Visibility Survey 2026 by answering a few questions about your business.
               </p>
             </div>
 
             {/* Card 2 */}
-            <div className="bg-gradient-to-br from-purple-50/50 via-white to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white">
-              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+            <div className="bg-gradient-to-br from-purple-50/50 via-white dark:via-slate-950 to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm dark:shadow-none relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white dark:bg-slate-900">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm dark:shadow-none group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
                 <ShieldCheck className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-950 transition-colors">
                 Step 2: We Prepare Your Report
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-600 dark:text-slate-400 leading-relaxed">
                 We'll analyse your responses and generate a personalised Business Visibility Report with practical insights and recommendations.
               </p>
             </div>
 
             {/* Card 3 */}
-            <div className="bg-gradient-to-br from-purple-50/50 via-white to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white">
-              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
+            <div className="bg-gradient-to-br from-purple-50/50 via-white dark:via-slate-950 to-purple-50/20 border border-purple-100/80 rounded-3xl p-8 text-left transition-all duration-300 shadow-sm dark:shadow-none relative group hover:shadow-xl hover:shadow-purple-100/60 hover:-translate-y-1 hover:border-purple-300 z-10 bg-white dark:bg-slate-900">
+              <div className="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-6 shadow-sm dark:shadow-none group-hover:bg-purple-600 group-hover:text-white transition-all duration-300 group-hover:scale-110">
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-purple-950 transition-colors">
                 Step 3: Receive Your Report
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-gray-600 dark:text-slate-400 leading-relaxed">
                 Your report will be delivered to your email, ready for you to review and use to improve your online visibility.
               </p>
             </div>
@@ -1183,11 +1183,11 @@ export default function BusinessVisibilitySurvey() {
 
           {/* Right Column - Founder Spotlight Card */}
           <div className="col-span-12 lg:col-span-6">
-            <div className="w-full max-w-full box-border bg-gradient-to-br from-purple-50/80 via-white to-purple-100/40 border border-purple-200/80 rounded-3xl p-4 sm:p-8 shadow-xl overflow-hidden relative transition-all duration-300 hover:shadow-2xl hover:shadow-purple-100/80 hover:-translate-y-1 group">
+            <div className="w-full max-w-full box-border bg-gradient-to-br from-purple-50/80 via-white dark:via-slate-950 to-purple-100/40 border border-purple-200/80 rounded-3xl p-4 sm:p-8 shadow-xl overflow-hidden relative transition-all duration-300 hover:shadow-2xl hover:shadow-purple-100/80 hover:-translate-y-1 group">
               <div className="flex flex-col items-center text-center sm:text-left sm:flex-row sm:items-start gap-4 sm:gap-6 w-full max-w-full">
                 
                 {/* Founder Photo Avatar */}
-                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0 border-4 border-purple-200 shadow-md mx-auto sm:mx-0 group-hover:border-purple-400 group-hover:scale-105 transition-all duration-300 relative">
+                <div className="w-20 h-20 sm:w-28 sm:h-28 rounded-full overflow-hidden shrink-0 border-4 border-purple-200 shadow-md dark:shadow-none mx-auto sm:mx-0 group-hover:border-purple-400 group-hover:scale-105 transition-all duration-300 relative">
                   <img src="/founder-avatar.jpeg" alt="Bharvi Sharma - Founder, SocialMistry" className="w-full h-full object-cover object-center rounded-full" />
                 </div>
                 
@@ -1237,7 +1237,7 @@ export default function BusinessVisibilitySurvey() {
             {/* BRANDING & LOGO */}
             <div className="flex flex-col">
               <div className="flex items-center gap-4">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 text-white font-extrabold flex items-center justify-center text-lg shadow-md shadow-purple-900/50">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-500 text-white font-extrabold flex items-center justify-center text-lg shadow-md dark:shadow-none shadow-purple-900/50">
                   BS
                 </div>
                 <span className="text-xl font-bold text-white tracking-tight">Business Survey</span>

@@ -10,9 +10,5 @@ export default {
   theme: {
     extend: {},
   },
-  plugins: [
-    plugin(function({ addVariant }) {
-      addVariant('dark', '&:is(.dark *)');
-    })
-  ],
+  plugins: [],
 }

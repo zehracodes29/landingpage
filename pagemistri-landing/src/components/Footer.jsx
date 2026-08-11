@@ -8,23 +8,23 @@ export default function Footer() {
  };
 
  return (
- <footer className="bg-white border-t border-slate-100 py-12 font-sans">
+ <footer className="bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800 py-12 font-sans">
  <div className="max-w-7xl mx-auto px-6 lg:px-8">
  <div className="flex flex-col md:flex-row justify-between items-center gap-8">
  <div className="flex items-center gap-2">
  <div className="w-8 h-8 bg-[#4400AF] rounded-lg flex items-center justify-center text-white font-bold text-xl">
  P
  </div>
- <span className="text-[#111827] font-bold text-xl tracking-tight">
+ <span className="text-[#111827] dark:text-white font-bold text-xl tracking-tight">
  Pagemistri
  </span>
  </div>
  
  <div className="flex flex-wrap justify-center gap-6 md:gap-8">
- <a href="#whats-included" onClick={(e) => scrollToSection(e, '#whats-included')} className="text-[#4B5563] hover:text-[#4400AF] transition-colors text-[14px] font-medium">What's Included</a>
- <a href="#how-it-works" onClick={(e) => scrollToSection(e, '#how-it-works')} className="text-[#4B5563] hover:text-[#4400AF] transition-colors text-[14px] font-medium">How It Works</a>
- <a href="#pricing" onClick={(e) => scrollToSection(e, '#pricing')} className="text-[#4B5563] hover:text-[#4400AF] transition-colors text-[14px] font-medium">Pricing</a>
- <a href="#faq" onClick={(e) => scrollToSection(e, '#faq')} className="text-[#4B5563] hover:text-[#4400AF] transition-colors text-[14px] font-medium">FAQ</a>
+ <a href="#whats-included" onClick={(e) => scrollToSection(e, '#whats-included')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">What's Included</a>
+ <a href="#how-it-works" onClick={(e) => scrollToSection(e, '#how-it-works')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">How It Works</a>
+ <a href="#pricing" onClick={(e) => scrollToSection(e, '#pricing')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">Pricing</a>
+ <a href="#faq" onClick={(e) => scrollToSection(e, '#faq')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">FAQ</a>
  </div>
 
  <div className="flex items-center gap-4">
@@ -43,11 +43,11 @@ export default function Footer() {
  </div>
  </div>
  
- <div className="mt-8 pt-8 border-t border-slate-100 flex flex-col md:flex-row justify-between items-center gap-4 text-[#9CA3AF] text-[13px]">
+ <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[#9CA3AF] text-[13px]">
  <div>&copy; {new Date().getFullYear()} Pagemistri. All rights reserved.</div>
  <div className="flex gap-4">
- <a href="#" className="hover:text-[#4B5563] transition-colors">Terms</a>
- <a href="#" className="hover:text-[#4B5563] transition-colors">Privacy</a>
+ <a href="#" className="hover:text-[#4B5563] dark:text-slate-400 transition-colors">Terms</a>
+ <a href="#" className="hover:text-[#4B5563] dark:text-slate-400 transition-colors">Privacy</a>
  </div>
  </div>
  </div>

@@ -59,7 +59,7 @@ export default function Navbar() {
  };
 
  return (
- <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
+ <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm dark:shadow-none py-4' : 'bg-transparent py-6'}`}>
  <div className="max-w-7xl mx-auto px-6 lg:px-8">
  <div className="flex items-center justify-between">
  
@@ -85,7 +85,7 @@ export default function Navbar() {
  </div>
 
  
- <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
+ <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
  {darkMode ? <Sun size={20} /> : <Moon size={20} />}
  </button>
  
@@ -93,20 +93,20 @@ export default function Navbar() {
  <div className="hidden md:flex items-center space-x-3">
  <Link 
  href="/business-visibility-survey"
- className="px-5 py-2.5 bg-white text-[#4400AF] text-[15px] font-semibold rounded-lg hover:bg-gray-50 border border-[#4400AF] transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-[1px]"
+ className="px-5 py-2.5 bg-white text-[#4400AF] text-[15px] font-semibold rounded-lg hover:bg-gray-50 dark:bg-slate-800 border border-[#4400AF] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
  >
  Take a Visibility Test
  </Link>
  <button 
  onClick={scrollToHero}
- className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm hover:shadow-md transform hover:-translate-y-[1px]"
+ className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
  >
  Start building my website
  </button>
  </div>
 
  
- <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
+ <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
  {darkMode ? <Sun size={20} /> : <Moon size={20} />}
  </button>
  
@@ -114,7 +114,7 @@ export default function Navbar() {
  <div className="md:hidden flex items-center">
  <button
  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
- className="text-[#111827] hover:text-gray-600 focus:outline-none"
+ className="text-[#111827] dark:text-white hover:text-gray-600 dark:text-slate-400 focus:outline-none"
  >
  {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
  </button>
@@ -124,13 +124,13 @@ export default function Navbar() {
 
  {/* Mobile Menu */}
  {mobileMenuOpen && (
- <div className="md:hidden absolute top-full left-0 right-0 bg-white border-t border-gray-100 shadow-lg py-4 px-6 flex flex-col space-y-4">
+ <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 shadow-lg dark:shadow-none py-4 px-6 flex flex-col space-y-4">
  {navLinks.map((link) => (
  <a
  key={link.name}
  href={link.href}
  onClick={(e) => scrollToSection(e, link.href)}
- className="text-[16px] font-semibold text-[#4400AF] py-2 border-b border-gray-50"
+ className="text-[16px] font-semibold text-[#4400AF] py-2 border-b border-gray-50 dark:border-slate-800"
  >
  {link.name}
  </a>
@@ -138,7 +138,7 @@ export default function Navbar() {
  <Link 
  href="/business-visibility-survey"
  onClick={() => setMobileMenuOpen(false)}
- className="w-full mt-4 px-5 py-3 bg-white border border-[#4400AF] text-[#4400AF] hover:bg-gray-50 transition-colors text-[16px] font-semibold rounded-lg text-center"
+ className="w-full mt-4 px-5 py-3 bg-white dark:bg-slate-900 border border-[#4400AF] text-[#4400AF] hover:bg-gray-50 dark:bg-slate-800 transition-colors text-[16px] font-semibold rounded-lg text-center"
  >
  Take a Visibility Test
  </Link>

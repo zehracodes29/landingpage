@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
  ` }} 
  />
  </head>
- <body>
+ <body className="bg-slate-50 text-slate-900 dark:text-white dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300">
  <noscript>
  <iframe 
  src="https://www.googletagmanager.com/ns.html?id=GTM-PBG4766S"

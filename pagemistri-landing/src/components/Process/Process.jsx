@@ -42,7 +42,7 @@ const Process = () => {
  const lineScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
  return (
- <section id="how-it-works" className="py-12 lg:py-16 bg-[#FAF9F7] font-sans overflow-hidden">
+ <section id="how-it-works" className="py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans overflow-hidden">
  <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
  
  {/* Header */}
@@ -50,10 +50,10 @@ const Process = () => {
  <div className="mb-6 inline-flex">
  <SectionBadge>Simple 5-Step Process</SectionBadge>
  </div>
- <h2 className="text-[32px] md:text-[44px] font-[800] text-[#111827] tracking-tight leading-[1.15] mb-6">
+ <h2 className="text-[32px] md:text-[44px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15] mb-6">
  Getting Your Business Online Is Easier Than You Think
  </h2>
- <p className="text-[17px] text-[#4B5563] leading-[1.6]">
+ <p className="text-[17px] text-[#4B5563] dark:text-slate-400 leading-[1.6]">
  From your first enquiry to a live website, we've made the entire process simple, transparent and stress-free.
  </p>
  </div>
@@ -83,16 +83,16 @@ const Process = () => {
  className="flex flex-col items-center text-center relative z-10 group"
  >
  {/* Node */}
- <div className="w-14 h-14 rounded-full bg-white border-2 border-slate-200 flex items-center justify-center text-lg font-bold text-slate-700 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md group-hover:shadow-purple-500/20 group-hover:border-purple-500 mb-6 relative z-10">
+ <div className="w-14 h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center text-lg font-bold text-slate-700 dark:text-slate-300 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md dark:shadow-none group-hover:shadow-purple-500/20 group-hover:border-purple-500 mb-6 relative z-10">
  <span className="group-hover:text-purple-600 transition-colors">{step.num}</span>
  </div>
  
  {/* Content */}
  <div className="px-2">
- <h3 className="text-base font-bold text-slate-900 mb-2 leading-tight">
+ <h3 className="text-base font-bold text-slate-900 dark:text-white mb-2 leading-tight">
  {step.title}
  </h3>
- <p className="text-xs text-slate-600 leading-relaxed">
+ <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
  {step.description}
  </p>
  </div>
@@ -116,16 +116,16 @@ const Process = () => {
  className="flex items-start gap-4 relative group"
  >
  {/* Node */}
- <div className="flex items-center justify-center w-8 h-8 shrink-0 bg-white border-2 border-purple-600 p-1.5 rounded-full shadow-md z-10 mt-2">
+ <div className="flex items-center justify-center w-8 h-8 shrink-0 bg-white dark:bg-slate-900 border-2 border-purple-600 p-1.5 rounded-full shadow-md dark:shadow-none z-10 mt-2">
  <span className="text-xs font-bold text-purple-600">{step.num}</span>
  </div>
  
  {/* Content Card */}
- <div className="bg-slate-50 p-4 rounded-2xl border border-slate-200/60 shadow-sm flex-1">
- <h3 className="text-sm font-bold text-slate-900 mb-1.5">
+ <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/60 shadow-sm dark:shadow-none flex-1">
+ <h3 className="text-sm font-bold text-slate-900 dark:text-white mb-1.5">
  {step.title}
  </h3>
- <p className="text-xs text-slate-600 leading-relaxed">
+ <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
  {step.description}
  </p>
  </div>

@@ -42,7 +42,7 @@ const FAQ = () => {
  };
 
  return (
- <section id="faq" className="py-12 lg:py-16 bg-[#FAF9F7]">
+ <section id="faq" className="py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950">
  <div className="max-w-3xl mx-auto px-6 lg:px-8">
  <div className="text-center mb-16">
  <div className="mb-6">
@@ -57,13 +57,13 @@ const FAQ = () => {
  {faqs.map((faq, index) => (
  <div 
  key={index}
- className={`bg-white rounded-xl border ${openIndex === index ? 'border-[#4400AF] shadow-md' : 'border-slate-200 shadow-sm'} overflow-hidden transition-all duration-300`}
+ className={`bg-white dark:bg-slate-900 rounded-xl border ${openIndex === index ? 'border-[#4400AF] shadow-md dark:shadow-none' : 'border-slate-200 dark:border-slate-700 shadow-sm dark:shadow-none'} overflow-hidden transition-all duration-300`}
  >
  <button 
  onClick={() => toggleFAQ(index)}
  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
  >
- <span className={`text-[17px] font-semibold ${openIndex === index ? 'text-[#4400AF]' : 'text-[#111827]'}`}>
+ <span className={`text-[17px] font-semibold ${openIndex === index ? 'text-[#4400AF]' : 'text-[#111827] dark:text-white'}`}>
  {faq.question}
  </span>
  <svg 
@@ -88,7 +88,7 @@ const FAQ = () => {
  transition={{ duration: 0.3 }}
  >
  <div className="px-6 pb-5">
- <p className="text-[#4B5563] text-[15px] leading-relaxed">
+ <p className="text-[#4B5563] dark:text-slate-400 text-[15px] leading-relaxed">
  {faq.answer}
  </p>
  </div>
