@@ -1,6 +1,7 @@
 // Navbar component
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import Link from 'next/link';
 
 const navLinks = [
@@ -13,30 +14,7 @@ const navLinks = [
 export default function Navbar() {
  const [isScrolled, setIsScrolled] = useState(false);
  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
- const [darkMode, setDarkMode] = useState(false);
 
- useEffect(() => {
- const isDark = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
- if (isDark) {
- document.documentElement.classList.add('dark');
- setDarkMode(true);
- } else {
- document.documentElement.classList.remove('dark');
- setDarkMode(false);
- }
- }, []);
-
- const toggleTheme = () => {
- if (darkMode) {
- document.documentElement.classList.remove('dark');
- localStorage.setItem('theme', 'light');
- setDarkMode(false);
- } else {
- document.documentElement.classList.add('dark');
- localStorage.setItem('theme', 'dark');
- setDarkMode(true);
- }
- };
 
  useEffect(() => {
  const handleScroll = () => {
@@ -85,9 +63,7 @@ export default function Navbar() {
  </div>
 
  
- <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
- {darkMode ? <Sun size={20} /> : <Moon size={20} />}
- </button>
+ <ThemeToggle />
  
  {/* CTA Buttons */}
  <div className="hidden md:flex items-center space-x-3">
@@ -106,9 +82,7 @@ export default function Navbar() {
  </div>
 
  
- <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
- {darkMode ? <Sun size={20} /> : <Moon size={20} />}
- </button>
+ <ThemeToggle />
  
  {/* Mobile Menu Button */}
  <div className="md:hidden flex items-center">

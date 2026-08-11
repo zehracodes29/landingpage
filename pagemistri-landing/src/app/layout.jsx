@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import '../index.css';
+import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata = {
  title: 'PageMistri Landing',
@@ -8,7 +9,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
- <html lang="en">
+ <html lang="en" suppressHydrationWarning>
  <head>
  <Script 
  id="gtm-script" 
@@ -22,7 +23,7 @@ export default function RootLayout({ children }) {
  ` }} 
  />
  </head>
- <body className="bg-slate-50 text-slate-900 dark:text-white dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300">
+ <body className="bg-white text-slate-900 dark:text-white dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300">
  <noscript>
  <iframe 
  src="https://www.googletagmanager.com/ns.html?id=GTM-PBG4766S"
@@ -31,7 +32,9 @@ export default function RootLayout({ children }) {
  style={{ display: 'none', visibility: 'hidden' }}
  />
  </noscript>
- {children}
+ <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+        {children}
+      </ThemeProvider>
  </body>
  </html>
  );
