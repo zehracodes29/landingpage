@@ -22,7 +22,21 @@ export default function RootLayout({ children }) {
  })(window,document,'script','dataLayer','GTM-PBG4766S');
  ` }} 
  />
- </head>
+ 
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                  document.documentElement.classList.add('dark');
+                } else {
+                  document.documentElement.classList.remove('dark');
+                }
+              } catch (_) {}
+            `
+          }}
+        />
+      </head>
  <body className="bg-white text-slate-900 dark:text-white dark:bg-slate-950 dark:text-slate-100 font-sans transition-colors duration-300">
  <noscript>
  <iframe 
@@ -32,7 +46,7 @@ export default function RootLayout({ children }) {
  style={{ display: 'none', visibility: 'hidden' }}
  />
  </noscript>
- <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
+ <ThemeProvider defaultTheme="light">
         {children}
       </ThemeProvider>
  </body>
