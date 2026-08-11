@@ -54,7 +54,7 @@ const Hero = () => {
  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
  <button 
  onClick={() => document.getElementById('whats-included')?.scrollIntoView({ behavior: 'smooth' })}
- className="px-8 py-4 bg-transparent border-2 border-slate-200 text-slate-800 font-bold text-[15px] rounded-xl hover:bg-slate-50 transition-all duration-300 w-full sm:w-auto"
+ className="px-6 py-3 bg-purple-600 text-white font-semibold text-sm rounded-xl hover:bg-purple-700 hover:shadow-lg transition-all duration-300 w-full sm:w-auto border-none"
  >
  See How It Works &rarr;
  </button>
