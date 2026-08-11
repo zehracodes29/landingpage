@@ -1,8 +1,9 @@
+import HeroMockupVisual from '@/components/HeroMockupVisual';
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, LayoutGrid, Sparkles } from 'lucide-react';
 import SectionBadge from '@/ui/SectionBadge';
-import LeadForm from '@/components/LeadForm';
+import HeroMockupVisual from '@/components/HeroMockupVisual';
 
 const BusinessBenefits = () => {
  return (
@@ -10,7 +11,7 @@ const BusinessBenefits = () => {
  <div className="max-w-[1440px] mx-auto px-6 md:px-8 lg:px-[32px] w-full">
  <div className="grid grid-cols-1 lg:grid-cols-12 items-center gap-12 lg:gap-16">
  
- {/* Left Column (Form) */}
+ {/* Left Column (Visual) */}
  <motion.div 
  initial={{ opacity: 0 }}
  whileInView={{ opacity: 1 }}
@@ -18,7 +19,7 @@ const BusinessBenefits = () => {
  transition={{ duration: 1, ease: "easeOut" }}
  className="w-full lg:col-span-7 relative z-20"
  >
- <LeadForm />
+ <HeroMockupVisual />
  </motion.div>
 
  {/* Right Column (Text Content) */}
