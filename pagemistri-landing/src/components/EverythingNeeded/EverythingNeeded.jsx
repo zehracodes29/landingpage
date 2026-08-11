@@ -1,8 +1,7 @@
 import React from 'react';
 import SectionBadge from '../../ui/SectionBadge';
-import SectionTitle from '../../ui/SectionTitle';
-import Card from '../../ui/Card';
 import { GitPullRequest, ListTodo, LayoutGrid, TrendingUp, CheckCheck, Zap } from 'lucide-react';
+import HeroMockupVisual from '@/components/HeroMockupVisual';
 
 const features = [
  {
@@ -40,8 +39,17 @@ const features = [
 const EverythingNeeded = () => {
  return (
  <section id="whats-included" className="py-24 bg-[#FAF9F7]">
- <div className="max-w-7xl mx-auto px-6 lg:px-8">
- <div className="text-center max-w-4xl mx-auto mb-16">
+ <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
+ <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+ 
+ {/* LEFT COLUMN: Visual Showcase */}
+ <div className="lg:col-span-5 w-full">
+   <HeroMockupVisual />
+ </div>
+
+ {/* RIGHT COLUMN: Content & Features */}
+ <div className="lg:col-span-7 w-full flex flex-col">
+ <div className="mb-10 text-center lg:text-left">
  <div className="mb-4 inline-flex">
  <SectionBadge>Complete Business Website Setup</SectionBadge>
  </div>
@@ -53,30 +61,35 @@ const EverythingNeeded = () => {
  </p>
  </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+ <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
  {features.map((feature, index) => (
- <Card key={index} index={index}>
- <div className="flex flex-col h-full text-left p-2">
- <div className="w-12 h-12 bg-[#F4EEFF] rounded-lg flex items-center justify-center mb-6 text-[#4400AF]">
- <feature.icon className="w-[22px] h-[22px]" strokeWidth={2} />
+ <div 
+ key={index} 
+ className="bg-slate-50/70 hover:bg-white border border-slate-100 hover:border-purple-200 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300"
+ >
+ <div className="bg-purple-100/60 text-purple-600 rounded-xl p-2.5 w-fit mb-3">
+ <feature.icon className="w-5 h-5" strokeWidth={2} />
  </div>
- <h3 className="text-[17px] font-bold text-[#111827] mb-3">
+ <h3 className="text-slate-900 font-bold text-sm mb-1">
  {feature.title}
  </h3>
- <p className="text-[#4B5563] text-[14px] leading-relaxed">
+ <p className="text-slate-500 text-xs leading-relaxed">
  {feature.description}
  </p>
  </div>
- </Card>
  ))}
  </div>
-
- <div className="mt-16 text-center">
+ 
+ {/* CTA Button aligned under the grid */}
+ <div className="mt-10 text-center lg:text-left">
  <button 
  onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
  className="px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-lg hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
  Let's Build My Website
  </button>
+ </div>
+ </div>
+ 
  </div>
  </div>
  </section>

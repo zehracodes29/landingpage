@@ -11,7 +11,7 @@ const HeroMockupVisual = () => {
         </div>
         
         {/* Floating Badge 2 */}
-        <div className="absolute -bottom-6 -right-2 md:-right-6 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 z-20">
+        <div className="absolute -bottom-6 -right-2 md:-right-6 bg-white/95 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl border border-slate-100 flex items-center gap-3 z-20 animate-[bounce_4s_infinite]">
           <div className="w-2.5 h-2.5 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.6)] animate-pulse" />
           <span className="text-xl">🎉</span>
           <span className="font-semibold text-sm text-slate-800 ">Leads Managed Effortlessly</span>
