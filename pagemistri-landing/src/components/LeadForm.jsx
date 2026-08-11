@@ -197,10 +197,10 @@ const LeadForm = () => {
  </p>
  </div>
 
- <form className="space-y-3" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
+ <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Full name <span className="text-red-500">*</span>
  </label>
  <input 
@@ -215,7 +215,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Business name <span className="text-red-500">*</span>
  </label>
  <input 
@@ -232,7 +232,7 @@ const LeadForm = () => {
 
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Email <span className="text-red-500">*</span>
  </label>
  <input 
@@ -247,7 +247,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Phone number <span className="text-red-500">*</span>
  </label>
  <input 
@@ -263,7 +263,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Business Category <span className="text-red-500">*</span>
  </label>
  <select 
@@ -287,7 +287,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  What do you offer? <span className="text-red-500">*</span>
  </label>
  <input 
@@ -329,86 +329,106 @@ const LeadForm = () => {
  </p>
  </div>
 
- <form className="space-y-3" onSubmit={handleSubmit}>
+ <form className="space-y-6" onSubmit={handleSubmit}>
  
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Do you already have a website? <span className="text-red-500">*</span>
  </label>
- <div className="flex gap-4">
- <label className="flex items-center gap-2 cursor-pointer">
+ <div className="grid grid-cols-2 gap-3">
+<label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
+ formData.hasWebsite === 'Yes' 
+ ? 'border-purple-600 bg-purple-50/50 text-purple-700'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ }`}>
  <input 
  type="radio" 
  name="hasWebsite" 
  value="Yes" 
  checked={formData.hasWebsite === 'Yes'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="sr-only"
  />
- <span className="text-sm text-slate-600 ">Yes</span>
+ Yes
  </label>
- <label className="flex items-center gap-2 cursor-pointer">
+ <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
+ formData.hasWebsite === 'No' 
+ ? 'border-purple-600 bg-purple-50/50 text-purple-700'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ }`}>
  <input 
  type="radio" 
  name="hasWebsite" 
  value="No" 
  checked={formData.hasWebsite === 'No'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="sr-only"
  />
- <span className="text-sm text-slate-600 ">No</span>
+ No
  </label>
  </div>
  {errors.hasWebsite && <p className="text-red-500 text-[10px] mt-1">{errors.hasWebsite}</p>}
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Do you already have a domain? <span className="text-red-500">*</span>
  </label>
- <div className="flex gap-4">
- <label className="flex items-center gap-2 cursor-pointer">
+ <div className="grid grid-cols-2 gap-3">
+<label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
+ formData.hasDomain === 'Yes' 
+ ? 'border-purple-600 bg-purple-50/50 text-purple-700'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ }`}>
  <input 
  type="radio" 
  name="hasDomain" 
  value="Yes" 
  checked={formData.hasDomain === 'Yes'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="sr-only"
  />
- <span className="text-sm text-slate-600 ">Yes</span>
+ Yes
  </label>
- <label className="flex items-center gap-2 cursor-pointer">
+ <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
+ formData.hasDomain === 'No' 
+ ? 'border-purple-600 bg-purple-50/50 text-purple-700'
+ : 'border-slate-200 bg-white text-slate-600 hover:border-purple-300'
+ }`}>
  <input 
  type="radio" 
  name="hasDomain" 
  value="No" 
  checked={formData.hasDomain === 'No'}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 focus:ring-purple-600"
+ className="sr-only"
  />
- <span className="text-sm text-slate-600 ">No</span>
+ No
  </label>
  </div>
  {errors.hasDomain && <p className="text-red-500 text-[10px] mt-1">{errors.hasDomain}</p>}
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Why do you want a website? <span className="text-red-500">*</span>
  </label>
- <div className="flex flex-col gap-1.5">
+ <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  {['Get More Enquiries', 'Build Trust', 'Showcase My Business', 'Replace My Current Website'].map(goal => (
- <label key={goal} className="flex items-center gap-2 cursor-pointer">
+ <label key={goal} className={`flex items-center gap-3 p-3 border rounded-xl cursor-pointer transition-all ${
+ formData.websiteGoals.includes(goal) 
+ ? 'border-purple-600 bg-purple-50/50' 
+ : 'border-slate-200 bg-white hover:border-purple-300'
+ }`}>
  <input 
  type="checkbox" 
  name="websiteGoals" 
  value={goal}
  checked={formData.websiteGoals.includes(goal)}
  onChange={handleInputChange}
- className="w-3.5 h-3.5 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
+ className="w-4 h-4 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
  />
- <span className="text-sm text-slate-600 ">{goal}</span>
+ <span className={`text-sm font-medium ${formData.websiteGoals.includes(goal) ? 'text-purple-700' : 'text-slate-600'}`}>{goal}</span>
  </label>
  ))}
  </div>
@@ -416,7 +436,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  If you have a website - Enter your URL:
  </label>
  <input 
@@ -430,7 +450,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Tell us about your website <span className="text-red-500">*</span>
  </label>
  <textarea 
@@ -445,7 +465,7 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-xs font-semibold text-slate-700 mb-1 block">
+ <label className="text-sm font-semibold text-slate-700 mb-2 block">
  Message <span className="text-red-500">*</span>
  </label>
  <textarea 
