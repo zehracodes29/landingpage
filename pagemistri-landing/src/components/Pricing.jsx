@@ -55,11 +55,11 @@ const Pricing = () => {
  ];
 
  return (
- <section id="pricing" className="py-20 md:py-28 bg-[#FAF9F7] font-sans">
+ <section id="pricing" className="py-12 lg:py-16 bg-[#FAF9F7] font-sans">
  <div className="max-w-6xl mx-auto px-6 lg:px-8">
  
  {/* SECTION 1: SETUP COST */}
- <div className="mb-24">
+ <div className="mb-16">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
  
  {/* Left Column: Description */}
@@ -120,7 +120,7 @@ const Pricing = () => {
  </div>
 
  {/* Divider */}
- <div className="w-full h-px bg-slate-200 mb-20"></div>
+ <div className="w-full h-px bg-slate-200 mb-16"></div>
 
  {/* SECTION 2: SUBSCRIPTION PLANS */}
  <div>

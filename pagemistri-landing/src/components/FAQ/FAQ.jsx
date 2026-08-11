@@ -42,7 +42,7 @@ const FAQ = () => {
  };
 
  return (
- <section id="faq" className="py-24 bg-[#FAF9F7]">
+ <section id="faq" className="py-12 lg:py-16 bg-[#FAF9F7]">
  <div className="max-w-3xl mx-auto px-6 lg:px-8">
  <div className="text-center mb-16">
  <div className="mb-6">

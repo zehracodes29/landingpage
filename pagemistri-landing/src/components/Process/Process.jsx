@@ -42,11 +42,11 @@ const Process = () => {
  const lineScaleX = useTransform(scrollYProgress, [0, 1], [0, 1]);
 
  return (
- <section id="how-it-works" className="py-24 md:py-32 bg-[#FAF9F7] font-sans overflow-hidden">
+ <section id="how-it-works" className="py-12 lg:py-16 bg-[#FAF9F7] font-sans overflow-hidden">
  <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
  
  {/* Header */}
- <div className="text-center max-w-3xl mx-auto mb-16 md:mb-24">
+ <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
  <div className="mb-6 inline-flex">
  <SectionBadge>Simple 5-Step Process</SectionBadge>
  </div>
