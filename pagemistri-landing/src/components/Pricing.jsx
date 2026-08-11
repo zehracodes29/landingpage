@@ -60,15 +60,12 @@ const Pricing = () => {
  
  {/* SECTION 1: SETUP COST */}
  <div className="mb-16">
- <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-center">
+ <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
  
  {/* Left Column: Description */}
  <div className="order-2 md:order-1 text-center md:text-left flex flex-col gap-6">
- <div className="inline-flex justify-center md:justify-start">
- <SectionBadge>One-Time Setup</SectionBadge>
- </div>
  <h2 className="text-[36px] md:text-[44px] lg:text-[48px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15]">
- Setup Cost
+ One Time Setup Cost
  </h2>
  <p className="text-[#4B5563] dark:text-slate-400 text-[16px] md:text-[18px] leading-[1.6] max-w-lg mx-auto md:mx-0">
  We take care of the entire design, build, and setup process from scratch so you don't have to spend hours trying to build a website yourself. Get a complete, fully functional, and high-converting professional business website built specifically for your brand.
@@ -80,11 +77,11 @@ const Pricing = () => {
  </span>
  <span className="flex items-center justify-center md:justify-start gap-2.5">
  <Check className="w-5 h-5 text-[#4400AF]" strokeWidth={3} />
- Fully managed setup
+ fully managed business setup
  </span>
  <span className="flex items-center justify-center md:justify-start gap-2.5">
  <Check className="w-5 h-5 text-[#4400AF]" strokeWidth={3} />
- Ready to collect leads from Day 1
+ lead collection system ready from day 1
  </span>
  </div>
  </div>
