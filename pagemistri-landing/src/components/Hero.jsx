@@ -7,7 +7,7 @@ import LeadForm from '@/components/LeadForm';
 
 const Hero = () => {
  return (
- <section className="bg-gradient-to-b from-purple-50/60 via-white to-slate-50 relative py-12 lg:py-16 w-full font-sans min-h-[90vh] flex flex-col justify-center">
+ <section className="bg-gradient-to-b from-purple-50/60 via-white to-slate-50 relative pt-24 lg:pt-32 pb-12 lg:pb-16 w-full font-sans min-h-[90vh] flex flex-col justify-center">
  {/* Radial Gradient Glow */}
  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-purple-400/15 rounded-full blur-3xl pointer-events-none" />
 
