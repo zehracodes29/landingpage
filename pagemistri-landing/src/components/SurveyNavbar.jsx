@@ -4,6 +4,11 @@ import { ArrowLeft } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
 
 export default function SurveyNavbar() {
+  const scrollToSection = (e, id) => {
+    e.preventDefault();
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 py-3.5 flex items-center justify-between font-sans transition-colors duration-300">
       
@@ -26,11 +31,12 @@ export default function SurveyNavbar() {
         </Link>
       </div>
 
-      {/* Center: Status Pill */}
-      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 hidden md:block">
-        <span className="bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 border border-purple-100 dark:border-purple-800/50 text-[11px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-sm">
-          Business Visibility Assessment
-        </span>
+      {/* Center: Navigation Links */}
+      <div className="hidden md:flex items-center gap-6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <a href="#overview" onClick={(e) => scrollToSection(e, 'overview')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Overview</a>
+        <a href="#why-participate" onClick={(e) => scrollToSection(e, 'why-participate')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Why Participate</a>
+        <a href="#survey-form" onClick={(e) => scrollToSection(e, 'survey-form')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Take Assessment</a>
+        <a href="#benefits" onClick={(e) => scrollToSection(e, 'benefits')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">What You Get</a>
       </div>
 
       {/* Right Side: Theme Toggle */}

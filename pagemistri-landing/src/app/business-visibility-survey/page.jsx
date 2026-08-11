@@ -206,7 +206,7 @@ export default function BusinessVisibilitySurvey() {
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%236b21a8' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")` }} 
       />
 
-      <section className="w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 text-center relative">
+      <section id="overview" className="scroll-mt-24 w-full pt-28 pb-16 sm:pt-36 sm:pb-24 px-4 sm:px-6 lg:px-8 text-center relative">
         <div className="max-w-4xl mx-auto flex flex-col items-center">
           
           {/* 1. TOP ANNOUNCEMENT BADGE */}
@@ -293,7 +293,7 @@ export default function BusinessVisibilitySurvey() {
       </section>
 
       {/* What You'll Receive Section */}
-      <section className="py-12 sm:py-16 bg-white dark:bg-slate-900 w-full relative z-10">
+      <section id="benefits" className="scroll-mt-24 py-12 sm:py-16 bg-white dark:bg-slate-900 w-full relative z-10">
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-3">
             What You'll Receive
@@ -347,7 +347,7 @@ export default function BusinessVisibilitySurvey() {
       </section>
 
       {/* Why Your Experience Matters Section */}
-      <section className="py-12 sm:py-20 bg-gradient-to-b from-white via-purple-50/20 to-white w-full overflow-hidden">
+      <section id="why-participate" className="scroll-mt-24 py-12 sm:py-20 bg-gradient-to-b from-white via-purple-50/20 to-white w-full overflow-hidden">
         <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 text-center tracking-tight mb-12">
           Why Your Experience Matters
         </h2>
@@ -436,7 +436,7 @@ export default function BusinessVisibilitySurvey() {
       </section>
 
       {/* Interactive Survey Form Section */}
-      <section id="survey-form" className="py-20 sm:py-28 relative">
+      <section id="survey-form" className="scroll-mt-24 py-20 sm:py-28 relative">
         <div className="absolute inset-0 bg-purple-200/20 blur-3xl pointer-events-none"></div>
         <div className="max-w-3xl mx-auto px-4 relative z-10">
           
