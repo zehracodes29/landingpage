@@ -41,13 +41,7 @@ const EverythingNeeded = () => {
  <section id="whats-included" className="py-24 bg-[#FAF9F7]">
  <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
- 
- {/* LEFT COLUMN: Visual Showcase */}
- <div className="lg:col-span-5 w-full">
-   <HeroMockupVisual />
- </div>
-
- {/* RIGHT COLUMN: Content & Features */}
+ {/* LEFT COLUMN: Content & Features */}
  <div className="lg:col-span-7 w-full flex flex-col">
  <div className="mb-10 text-center lg:text-left">
  <div className="mb-4 inline-flex">
@@ -89,7 +83,11 @@ const EverythingNeeded = () => {
  </button>
  </div>
  </div>
- 
+
+ {/* RIGHT COLUMN: Visual Showcase */}
+ <div className="lg:col-span-5 w-full">
+   <HeroMockupVisual />
+ </div>
  </div>
  </div>
  </section>
