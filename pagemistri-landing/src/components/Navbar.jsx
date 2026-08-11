@@ -1,6 +1,6 @@
 // Navbar component
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Sun, Moon } from 'lucide-react';
 import Link from 'next/link';
 
 const navLinks = [
@@ -13,6 +13,30 @@ const navLinks = [
 export default function Navbar() {
  const [isScrolled, setIsScrolled] = useState(false);
  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+ const [darkMode, setDarkMode] = useState(false);
+
+ useEffect(() => {
+ const isDark = localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+ if (isDark) {
+ document.documentElement.classList.add('dark');
+ setDarkMode(true);
+ } else {
+ document.documentElement.classList.remove('dark');
+ setDarkMode(false);
+ }
+ }, []);
+
+ const toggleTheme = () => {
+ if (darkMode) {
+ document.documentElement.classList.remove('dark');
+ localStorage.setItem('theme', 'light');
+ setDarkMode(false);
+ } else {
+ document.documentElement.classList.add('dark');
+ localStorage.setItem('theme', 'dark');
+ setDarkMode(true);
+ }
+ };
 
  useEffect(() => {
  const handleScroll = () => {
@@ -35,7 +59,7 @@ export default function Navbar() {
  };
 
  return (
- <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${isScrolled ? 'bg-white/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
+ <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 font-sans ${isScrolled ? 'bg-white/90 dark:bg-slate-900/90 backdrop-blur-md shadow-sm py-4' : 'bg-transparent py-6'}`}>
  <div className="max-w-7xl mx-auto px-6 lg:px-8">
  <div className="flex items-center justify-between">
  
@@ -60,6 +84,11 @@ export default function Navbar() {
  ))}
  </div>
 
+ 
+ <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
+ {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+ </button>
+ 
  {/* CTA Buttons */}
  <div className="hidden md:flex items-center space-x-3">
  <Link 
@@ -76,6 +105,11 @@ export default function Navbar() {
  </button>
  </div>
 
+ 
+ <button onClick={toggleTheme} className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors mr-2">
+ {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+ </button>
+ 
  {/* Mobile Menu Button */}
  <div className="md:hidden flex items-center">
  <button

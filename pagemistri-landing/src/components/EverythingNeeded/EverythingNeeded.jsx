@@ -1,5 +1,4 @@
 import React from 'react';
-import SectionBadge from '../../ui/SectionBadge';
 import { GitPullRequest, ListTodo, LayoutGrid, TrendingUp, CheckCheck, Zap } from 'lucide-react';
 import HeroMockupVisual from '@/components/HeroMockupVisual';
 
@@ -38,57 +37,91 @@ const features = [
 
 const EverythingNeeded = () => {
  return (
- <section id="whats-included" className="py-12 lg:py-16 bg-[#FAF9F7]">
- <div className="max-w-[1440px] mx-auto px-6 lg:px-8">
+ <section id="whats-included" className="py-12 lg:py-16 bg-slate-50 dark:bg-slate-950 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] dark:bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] relative overflow-hidden font-sans">
+ <div className="max-w-[1440px] mx-auto px-6 lg:px-8 relative z-10">
  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+ 
  {/* LEFT COLUMN: Content & Features */}
- <div className="lg:col-span-7 w-full flex flex-col">
+ <div className="lg:col-span-7 w-full flex flex-col order-2 lg:order-1">
  <div className="mb-10 text-center lg:text-left">
  <div className="mb-4 inline-flex">
- <SectionBadge>Complete Business Website Setup</SectionBadge>
+ <span className="bg-purple-100 text-purple-700 dark:bg-purple-950/50 dark:border dark:border-purple-800/50 dark:text-purple-300 text-xs font-bold px-3 py-1.5 rounded-full tracking-wide uppercase shadow-sm">
+ ✨ COMPLETE BUSINESS WEBSITE SETUP
+ </span>
  </div>
- <h2 className="text-[32px] md:text-[40px] font-[800] text-[#111827] tracking-tight leading-tight mb-4">
- Everything Your Business Needs to Get Online
+ <h2 className="text-[32px] md:text-[40px] font-[800] text-[#111827] dark:text-white tracking-tight leading-tight mb-4">
+ Everything Your Business Needs to <span className="text-purple-600 dark:text-purple-400">Get Online</span>
  </h2>
- <p className="text-[16px] text-[#4B5563] leading-[1.6]">
- More than just a website. We build a complete online presence that helps your business look professional and capture customer enquiries from day one.
- </p>
  </div>
 
- <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+ <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-8">
  {features.map((feature, index) => (
  <div 
  key={index} 
- className="bg-slate-50/70 hover:bg-white border border-slate-100 hover:border-purple-200 rounded-2xl p-5 hover:-translate-y-1 hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300"
+ className="rounded-2xl border border-slate-200/80 bg-white/80 dark:border-slate-800 dark:bg-slate-900/60 p-4 shadow-sm hover:shadow-md transition-all group"
  >
- <div className="bg-purple-100/60 text-purple-600 rounded-xl p-2.5 w-fit mb-3">
+ <div className="bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 rounded-xl p-2.5 w-fit mb-2.5 transition-colors group-hover:bg-purple-200 dark:group-hover:bg-purple-900/60">
  <feature.icon className="w-5 h-5" strokeWidth={2} />
  </div>
- <h3 className="text-slate-900 font-bold text-sm mb-1">
+ <h3 className="text-slate-900 dark:text-slate-100 font-bold text-sm mb-1">
  {feature.title}
  </h3>
- <p className="text-slate-500 text-xs leading-relaxed">
+ <p className="text-slate-500 dark:text-slate-400 text-xs leading-relaxed">
  {feature.description}
  </p>
  </div>
  ))}
  </div>
  
- {/* CTA Button aligned under the grid */}
- <div className="mt-10 text-center lg:text-left">
+ {/* Action Bar */}
+ <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 w-full">
  <button 
  onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
- className="px-8 py-3.5 bg-[#4400AF] text-white font-bold text-[14px] rounded-lg hover:bg-[#35008a] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
- Let's Build My Website
+ className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium text-[15px] rounded-xl shadow-md shadow-purple-500/20 hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto text-center"
+ >
+ Let's Build My Website &rarr;
  </button>
+ <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
+ <span className="flex items-center gap-1">⚡ 3–5 Days Delivery</span>
+ <span className="flex items-center gap-1">&lt;/&gt; No Coding Required</span>
+ <span className="flex items-center gap-1">✓ Easy to Use</span>
+ </div>
+ </div>
+ </div>
+ 
+ {/* RIGHT COLUMN: Visual Showcase */}
+ <div className="lg:col-span-5 w-full order-1 lg:order-2">
+ <HeroMockupVisual />
+ </div>
+ 
+ </div>
+ 
+ {/* Bottom Stat Bar */}
+ <div className="mt-16 border-t border-slate-200 dark:border-slate-800 pt-8">
+ <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-x divide-slate-200 dark:divide-slate-800 text-center">
+ <div className="flex flex-col items-center justify-center px-4">
+ <span className="text-2xl mb-1">🚀</span>
+ <span className="text-slate-900 dark:text-white font-bold text-lg">3–5 Days</span>
+ <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Fast Delivery</span>
+ </div>
+ <div className="flex flex-col items-center justify-center px-4">
+ <span className="text-2xl mb-1">👥</span>
+ <span className="text-slate-900 dark:text-white font-bold text-lg">100+</span>
+ <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Businesses Online</span>
+ </div>
+ <div className="flex flex-col items-center justify-center px-4">
+ <span className="text-2xl mb-1">🎧</span>
+ <span className="text-slate-900 dark:text-white font-bold text-lg">24/7</span>
+ <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Support</span>
+ </div>
+ <div className="flex flex-col items-center justify-center px-4">
+ <span className="text-2xl mb-1">🛡️</span>
+ <span className="text-slate-900 dark:text-white font-bold text-lg">99.9%</span>
+ <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Uptime</span>
+ </div>
  </div>
  </div>
 
- {/* RIGHT COLUMN: Visual Showcase */}
- <div className="lg:col-span-5 w-full">
-   <HeroMockupVisual />
- </div>
- </div>
  </div>
  </section>
  );
