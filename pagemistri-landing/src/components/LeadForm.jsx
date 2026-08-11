@@ -268,18 +268,18 @@ const LeadForm = () => {
  name="category"
  value={formData.category}
  onChange={handleInputChange}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white text-[#111827] dark:text-white focus:outline-none focus:ring-2 transition-all appearance-none`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 transition-all appearance-none`}
  style={{ backgroundImage: "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\")", backgroundPosition: "right 0.875rem center", backgroundRepeat: "no-repeat", backgroundSize: "1em" }}
  >
- <option value="" disabled>Select category</option>
- <option value="coach">Coach / Consultant</option>
- <option value="healthcare">Healthcare</option>
- <option value="real-estate">Real Estate</option>
- <option value="restaurant">Restaurant / Café</option>
- <option value="salon">Salon / Spa</option>
- <option value="education">Education</option>
- <option value="retail">Retail Store</option>
- <option value="other">Other</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="" disabled>Select category</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="coach">Coach / Consultant</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="healthcare">Healthcare</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="real-estate">Real Estate</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="restaurant">Restaurant / Café</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="salon">Salon / Spa</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="education">Education</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="retail">Retail Store</option>
+ <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="other">Other</option>
  </select>
  {errors.category && <p className="text-red-500 text-[10px] mt-1">{errors.category}</p>}
  </div>

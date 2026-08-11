@@ -44,8 +44,8 @@ const Hero = () => {
  { text: "Lead Collection Included" },
  { text: "Mobile-Friendly" }
  ].map((item, i) => (
- <div key={i} className="bg-white/80 border border-slate-200/80 p-3 rounded-xl font-medium text-sm text-slate-800 dark:text-slate-200 shadow-sm dark:shadow-none flex items-center gap-2 justify-center sm:justify-start">
- <CheckCircle2 className="w-4 h-4 text-[#4400AF] shrink-0" />
+ <div key={i} className="flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-medium bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 shadow-sm justify-center sm:justify-start">
+ <CheckCircle2 className="w-4 h-4 text-purple-600 dark:text-purple-400 shrink-0" />
  <span>{item.text}</span>
  </div>
  ))}
