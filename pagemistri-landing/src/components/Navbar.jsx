@@ -81,9 +81,7 @@ export default function Navbar() {
  </button>
  </div>
 
- 
- <ThemeToggle />
- 
+
  {/* Mobile Menu Button */}
  <div className="md:hidden flex items-center">
  <button
