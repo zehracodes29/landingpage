@@ -1,15 +1,18 @@
 "use client";
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
 export default function PrivacyPolicy() {
   const [activeSection, setActiveSection] = useState('');
+  const isManualScrolling = useRef(false);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
+        if (isManualScrolling.current) return; // Skip updating state during manual click scroll
+
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             setActiveSection(entry.target.id);
@@ -17,8 +20,8 @@ export default function PrivacyPolicy() {
         });
       },
       {
-        rootMargin: '-120px 0px -40% 0px',
-        threshold: 0,
+        rootMargin: "-80px 0px -60% 0px",
+        threshold: 0.1,
       }
     );
 
@@ -69,13 +72,20 @@ export default function PrivacyPolicy() {
                     href={`#${item.id}`}
                     onClick={(e) => {
                       e.preventDefault();
+                      isManualScrolling.current = true;
                       setActiveSection(item.id);
+                      
                       const element = document.getElementById(item.id);
                       if (element) {
                         element.scrollIntoView({ behavior: 'smooth' });
                         // Update URL hash without jumping
                         window.history.pushState(null, '', `#${item.id}`);
                       }
+                      
+                      // Re-enable scroll detection after smooth scroll finishes (~800ms)
+                      setTimeout(() => {
+                        isManualScrolling.current = false;
+                      }, 800);
                     }}
                     className={`block px-3 py-1.5 text-sm rounded-lg transition-all ${
                       activeSection === item.id
