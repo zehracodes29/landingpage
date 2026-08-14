@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-
+import Link from 'next/link';
 export default function Footer() {
  const scrollToSection = (e, href) => {
  e.preventDefault();
@@ -41,8 +41,10 @@ export default function Footer() {
  <div className="mt-8 pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4 text-[#9CA3AF] text-[13px]">
  <div>&copy; {new Date().getFullYear()} Pagemistri. All rights reserved.</div>
  <div className="flex gap-4">
- <a href="#" className="hover:text-[#4B5563] dark:text-slate-400 transition-colors">Terms</a>
- <a href="#" className="hover:text-[#4B5563] dark:text-slate-400 transition-colors">Privacy</a>
+ <a href="#" className="text-sm text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Terms of Service</a>
+ <Link href="/privacy-policy" className="text-sm text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+   Privacy Policy
+ </Link>
  </div>
  </div>
  </div>
