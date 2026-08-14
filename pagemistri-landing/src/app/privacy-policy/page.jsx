@@ -30,14 +30,14 @@ export default function PrivacyPolicy() {
     };
   }, []);
 
-  const navLinks = [
-    { id: '1-introduction', label: '1. Introduction' },
-    { id: '2-information-we-collect', label: '2. Information We Collect' },
-    { id: '3-how-we-use-information', label: '3. How We Use Information' },
-    { id: '4-data-storage--security', label: '4. Data Storage & Security' },
-    { id: '5-data-sharing--third-parties', label: '5. Data Sharing & Third Parties' },
-    { id: '6-your-rights--compliance', label: '6. Your Rights & Compliance' },
-    { id: '7-contact-us', label: '7. Contact Us' },
+  const sections = [
+    { id: "1-introduction", label: "1. Introduction" },
+    { id: "2-information-we-collect", label: "2. Information We Collect" },
+    { id: "3-how-we-use-information", label: "3. How We Use Information" },
+    { id: "4-data-storage-security", label: "4. Data Storage & Security" },
+    { id: "5-data-sharing-third-parties", label: "5. Data Sharing & Third Parties" },
+    { id: "6-your-rights-compliance", label: "6. Your Rights & Compliance" },
+    { id: "7-contact-us", label: "7. Contact Us" },
   ];
 
   return (
@@ -63,26 +63,27 @@ export default function PrivacyPolicy() {
                 📋 CONTENTS
               </h2>
               <nav className="flex flex-col space-y-1">
-                {navLinks.map((link) => (
+                {sections.map((item) => (
                   <a
-                    key={link.id}
-                    href={`#${link.id}`}
-                    className={`block px-3 py-2 text-sm transition-colors duration-200 ${
-                      activeSection === link.id
-                        ? 'border-l-2 border-purple-600 text-purple-600 font-semibold'
-                        : 'border-l-2 border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
-                    }`}
+                    key={item.id}
+                    href={`#${item.id}`}
                     onClick={(e) => {
                       e.preventDefault();
-                      const element = document.getElementById(link.id);
+                      setActiveSection(item.id);
+                      const element = document.getElementById(item.id);
                       if (element) {
                         element.scrollIntoView({ behavior: 'smooth' });
                         // Update URL hash without jumping
-                        window.history.pushState(null, '', `#${link.id}`);
+                        window.history.pushState(null, '', `#${item.id}`);
                       }
                     }}
+                    className={`block px-3 py-1.5 text-sm rounded-lg transition-all ${
+                      activeSection === item.id
+                        ? "text-purple-600 dark:text-purple-400 font-semibold bg-purple-50 dark:bg-purple-950/40 border-l-2 border-purple-600"
+                        : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                    }`}
                   >
-                    {link.label}
+                    {item.label}
                   </a>
                 ))}
               </nav>
@@ -139,7 +140,7 @@ export default function PrivacyPolicy() {
               </ul>
             </section>
 
-            <section id="4-data-storage--security" className="scroll-mt-28">
+            <section id="4-data-storage-security" className="scroll-mt-28">
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3 mb-6">
                 4. Data Storage & Security
               </h2>
@@ -148,7 +149,7 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            <section id="5-data-sharing--third-parties" className="scroll-mt-28">
+            <section id="5-data-sharing-third-parties" className="scroll-mt-28">
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3 mb-6">
                 5. Data Sharing & Third Parties
               </h2>
@@ -157,7 +158,7 @@ export default function PrivacyPolicy() {
               </p>
             </section>
 
-            <section id="6-your-rights--compliance" className="scroll-mt-28">
+            <section id="6-your-rights-compliance" className="scroll-mt-28">
               <h2 className="text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-3 mb-6">
                 6. Your Rights & Compliance
               </h2>
