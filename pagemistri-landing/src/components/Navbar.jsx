@@ -9,6 +9,7 @@ const navLinks = [
  { name: 'How It Works', href: '#how-it-works' },
  { name: 'Pricing', href: '#pricing' },
  { name: 'FAQ', href: '#faq' },
+ { name: 'Free Visibility Audit', href: '/business-visibility-survey', isRoute: true },
 ];
 
 export default function Navbar() {
@@ -51,14 +52,24 @@ export default function Navbar() {
  {/* Desktop Links */}
  <div className="hidden md:flex items-center space-x-8">
  {navLinks.map((link) => (
- <a
- key={link.name}
- href={link.href}
- onClick={(e) => scrollToSection(e, link.href)}
- className="text-[15px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
- >
- {link.name}
- </a>
+  link.isRoute ? (
+  <Link
+  key={link.name}
+  href={link.href}
+  className="text-[15px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+  >
+  {link.name}
+  </Link>
+  ) : (
+  <a
+  key={link.name}
+  href={link.href}
+  onClick={(e) => scrollToSection(e, link.href)}
+  className="text-[15px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+  >
+  {link.name}
+  </a>
+  )
  ))}
  </div>
 
@@ -92,14 +103,25 @@ export default function Navbar() {
  {mobileMenuOpen && (
  <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-slate-900 border-t border-gray-100 dark:border-slate-800 shadow-lg dark:shadow-none py-4 px-6 flex flex-col space-y-4">
  {navLinks.map((link) => (
- <a
- key={link.name}
- href={link.href}
- onClick={(e) => scrollToSection(e, link.href)}
- className="text-[16px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
- >
- {link.name}
- </a>
+  link.isRoute ? (
+  <Link
+  key={link.name}
+  href={link.href}
+  onClick={() => setMobileMenuOpen(false)}
+  className="text-[16px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
+  >
+  {link.name}
+  </Link>
+  ) : (
+  <a
+  key={link.name}
+  href={link.href}
+  onClick={(e) => scrollToSection(e, link.href)}
+  className="text-[16px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
+  >
+  {link.name}
+  </a>
+  )
  ))}
  <button 
  onClick={scrollToHero}
