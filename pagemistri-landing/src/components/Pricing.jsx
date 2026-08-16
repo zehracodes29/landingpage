@@ -1,178 +1,219 @@
 import React from 'react';
-import { Check } from 'lucide-react';
-import SectionBadge from '@/ui/SectionBadge';
+import { motion } from 'framer-motion';
+import { Check, X, ShieldCheck } from 'lucide-react';
 
 const Pricing = () => {
- const scrollToLeadForm = () => {
- document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' });
- };
+  const scrollToLeadForm = () => {
+    document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
- const setupFeatures = [
- 'Custom Design',
- 'Mobile Responsiveness',
- 'Enquiry Forms',
- 'Lead Dashboard Setup',
- 'Basic SEO',
- 'Domain Connection'
- ];
+  const comparisonRows = [
+    { feature: 'End-to-end Service', pm: 'One team, one process', diy: 'Find, manage & coordinate' },
+    { feature: 'Enquiry Collection', pm: 'Built-in', diy: 'Extra cost / Manual setup' },
+    { feature: 'Lead Management', pm: 'Dashboard included', diy: 'Need separate tools' },
+    { feature: 'Analytics & Tracking', pm: 'Set up & ready', diy: 'Complex setup' },
+    { feature: 'Hosting & Security', pm: 'Secure & managed', diy: 'You handle everything' },
+    { feature: 'Support', pm: '24/7 Support', diy: 'Limited / No support' },
+    { feature: 'Delivery Time', pm: '3–5 Days', diy: 'Unpredictable' },
+  ];
 
- const subPlans = [
- {
- name: 'Hosted on Pagemistri domain/subdomain',
- price: '₹99',
- period: '/mo',
- features: [
- 'Pagemistri Subdomain',
- '50 Leads/month',
- 'Secure Hosting',
- 'Lead Dashboard',
- 'Basic Analytics',
- 'SEO Integration',
- 'Payment Gateway integration'
- ],
- buttonText: 'Start My Website',
- popular: true,
- },
- {
- name: 'Hosted on your own custom domain/brand',
- price: '₹349',
- period: '/mo',
- features: [
- 'Custom Domain',
- '350 Leads/month',
- 'Secure Hosting',
- 'Lead Dashboard',
- 'Basic Analytics',
- 'SEO Integration',
- 'Payment Gateway integration'
- ],
- buttonText: 'Start My Website',
- popular: false,
- }
- ];
+  const setupFeatures = [
+    'Professional Website Design',
+    'Mobile Responsive',
+    'Enquiry Form',
+    'Lead Dashboard',
+    'Performance Tracking',
+    'Basic SEO',
+    'Domain Connection',
+    '2 Revisions',
+    'Delivered in 3–5 Days'
+  ];
 
- return (
- <section id="pricing" className="scroll-mt-24 py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans">
- <div className="max-w-6xl mx-auto px-6 lg:px-8">
- 
- <div className="text-center mb-16">
- <h2 className="text-[28px] md:text-[36px] font-extrabold text-[#111827] dark:text-white tracking-tight">
- No freelancer coordination. No technical setup headache.
- </h2>
- </div>
- 
- {/* SECTION 1: SETUP COST */}
- <div className="mb-16">
- <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
- 
- {/* Left Column: Description */}
- <div className="order-2 md:order-1 text-center md:text-left flex flex-col gap-6">
- <h2 className="text-[32px] md:text-[40px] lg:text-[44px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15]">
- Step 1: One-Time Setup
- </h2>
- <p className="text-[#4B5563] dark:text-slate-400 text-[16px] md:text-[18px] leading-[1.6] max-w-lg mx-auto md:mx-0">
- We take care of the entire design, build, and setup process from scratch so you don't have to spend hours trying to build a website yourself. Get a complete, fully functional, and high-converting professional business website built specifically for your brand.
- </p>
- <div className="mt-2 flex flex-col gap-3 text-slate-700 dark:text-slate-300 font-bold text-[15px]">
- <span className="flex items-center justify-center md:justify-start gap-2.5">
- <Check className="w-5 h-5 text-[#4400AF]" strokeWidth={3} />
- Zero tech hassle
- </span>
- <span className="flex items-center justify-center md:justify-start gap-2.5">
- <Check className="w-5 h-5 text-[#4400AF]" strokeWidth={3} />
- fully managed business setup
- </span>
- <span className="flex items-center justify-center md:justify-start gap-2.5">
- <Check className="w-5 h-5 text-[#4400AF]" strokeWidth={3} />
- lead collection system ready from day 1
- </span>
- </div>
- </div>
+  const subPlans = [
+    {
+      name: 'Hosted by Pagemistri',
+      price: '₹99',
+      period: '/month',
+      features: [
+        'Pagemistri Subdomain',
+        '50 Leads / month',
+        'Secure Hosting',
+        'Lead Dashboard',
+        'Basic Analytics',
+        'SEO Integration',
+        'Payment Gateway Integration'
+      ]
+    },
+    {
+      name: 'Hosted on Your Brand',
+      price: '₹349',
+      period: '/month',
+      features: [
+        'Custom Domain',
+        '350 Leads / month',
+        'Secure Hosting',
+        'Lead Dashboard',
+        'Basic Analytics',
+        'SEO Integration',
+        'Payment Gateway Integration'
+      ]
+    }
+  ];
 
- {/* Right Column: Featured Pricing Card */}
- <div className="order-1 md:order-2">
- <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-purple-900/50 text-[#111827] dark:text-white rounded-3xl p-8 md:p-10 shadow-sm dark:shadow-none relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02]">
- <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-purple-50 opacity-50 rounded-full blur-2xl pointer-events-none"></div>
- 
- <h3 className="text-[28px] font-extrabold text-[#111827] dark:text-white mb-8">Build Your Website — ₹5,000</h3>
- 
- <ul className="space-y-4 mb-8">
- {setupFeatures.map((feature, i) => (
- <li key={i} className="flex items-start gap-3">
- <Check className="w-5 h-5 text-[#4400AF] shrink-0 mt-[1px]" strokeWidth={3} />
- <span className="text-[#4B5563] dark:text-slate-400 text-[15px] font-medium leading-snug">{feature}</span>
- </li>
- ))}
- </ul>
- 
- <button 
- onClick={scrollToLeadForm}
- className="w-full bg-[#4400AF] text-white font-bold py-3.5 px-6 rounded-xl hover:bg-[#310080] transition-all shadow-md dark:shadow-none mt-6 active:scale-95"
- >
- Start My Website
- </button>
- </div>
- </div>
- </div>
- </div>
+  return (
+    <section id="pricing" className="scroll-mt-24 py-16 lg:py-24 bg-[#FAF9F7] dark:bg-slate-950 font-sans overflow-hidden">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+          
+          {/* LEFT COLUMN */}
+          <div className="flex flex-col">
+            <div className="mb-8 text-center lg:text-left">
+              <span className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2 block">
+                Why Businesses Choose Us
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Pagemistri vs Doing It Yourself
+              </h2>
+            </div>
 
- {/* Divider */}
- <div className="w-full h-px bg-slate-200 mb-16"></div>
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -4 }}
+              className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col transition-all duration-300 hover:shadow-lg dark:hover:shadow-purple-900/10 hover:border-purple-200 dark:hover:border-purple-800/50"
+            >
+              <div className="overflow-x-auto pb-4 flex-1">
+                <table className="w-full text-left border-collapse">
+                  <thead>
+                    <tr className="border-b border-slate-200 dark:border-slate-800">
+                      <th className="py-3 px-2 text-sm font-semibold text-slate-500 dark:text-slate-400">Feature</th>
+                      <th className="py-3 px-2 text-sm font-bold text-slate-900 dark:text-white border-b-2 border-purple-600">Pagemistri</th>
+                      <th className="py-3 px-2 text-sm font-semibold text-slate-500 dark:text-slate-400">Freelancer / DIY</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {comparisonRows.map((row, i) => (
+                      <tr key={i} className="border-b border-slate-100 dark:border-slate-800/50 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
+                        <td className="py-4 px-2 text-sm font-medium text-slate-700 dark:text-slate-300">{row.feature}</td>
+                        <td className="py-4 px-2 text-sm font-semibold text-slate-900 dark:text-white flex items-start gap-2">
+                          <Check className="w-4 h-4 text-purple-600 mt-0.5 shrink-0" strokeWidth={3} />
+                          <span className="leading-snug">{row.pm}</span>
+                        </td>
+                        <td className="py-4 px-2 text-sm text-slate-500 dark:text-slate-400">
+                          <div className="flex items-start gap-2">
+                            <X className="w-4 h-4 text-red-400 mt-0.5 shrink-0" strokeWidth={2.5} />
+                            <span className="leading-snug">{row.diy}</span>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
 
- {/* SECTION 2: SUBSCRIPTION PLANS */}
- <div>
- <div className="text-center max-w-3xl mx-auto mb-12">
- <h2 className="text-[32px] md:text-[36px] font-[800] text-[#111827] dark:text-white tracking-tight leading-tight mb-4">
- Step 2: Choose Your Monthly Hosting
- </h2>
- </div>
+              <div className="mt-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 flex items-center justify-center gap-3 border border-purple-100 dark:border-purple-800/30">
+                <ShieldCheck className="w-6 h-6 text-purple-600 dark:text-purple-400 shrink-0" />
+                <p className="font-semibold text-purple-700 dark:text-purple-300 text-[15px] text-center">
+                  No freelancer coordination. No technical setup headache.
+                </p>
+              </div>
+            </motion.div>
+          </div>
 
- <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mt-12">
- {subPlans.map((plan, index) => (
- <div 
- key={index} 
- className={`flex flex-col bg-white dark:bg-slate-900 border ${plan.popular ? 'border-[#4400AF] border-2 shadow-[0_15px_40px_-10px_rgba(68,0,175,0.15)] ring-2 ring-purple-600/10' : 'border-slate-200 dark:border-slate-700 shadow-sm dark:shadow-none'} rounded-3xl p-8 md:p-10 relative transition-all duration-300 hover:shadow-2xl hover:-translate-y-1`}
- >
- {plan.popular && (
- <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-[#4400AF] text-white px-5 py-1.5 rounded-full text-[12px] font-bold tracking-wide uppercase shadow-sm dark:shadow-none whitespace-nowrap">
- Most Popular
- </div>
- )}
- 
- <div className="text-center mb-6 mt-2">
- <h3 className="text-[22px] font-bold text-[#111827] dark:text-white mb-2">{plan.name}</h3>
- </div>
- 
- <div className="text-center mb-10 flex items-baseline justify-center gap-1">
- <span className="text-[44px] md:text-[48px] font-extrabold text-[#111827] dark:text-white tracking-tight">{plan.price}</span>
- <span className="text-[#6B7280] text-[15px] font-medium">{plan.period}</span>
- </div>
+          {/* RIGHT COLUMN */}
+          <div className="flex flex-col">
+            <div className="mb-8 text-center lg:text-left">
+              <span className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2 block">
+                Simple Pricing
+              </span>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+                Transparent & Affordable
+              </h2>
+            </div>
 
- <div className="flex-1 flex flex-col">
- <ul className="space-y-4 mb-10 flex-1">
- {plan.features.map((feature, i) => (
- <li key={i} className="flex items-start gap-3">
- <Check className="w-5 h-5 text-[#4400AF] shrink-0 mt-[1px]" strokeWidth={2.5} />
- <span className="text-[#4B5563] dark:text-slate-400 text-[15px] font-medium leading-snug">{feature}</span>
- </li>
- ))}
- </ul>
- </div>
+            <div className="flex flex-col gap-6 flex-1">
+              
+              {/* Step 1 Card */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col transition-all duration-300 hover:shadow-xl dark:hover:shadow-purple-900/20 hover:border-purple-300 dark:hover:border-purple-700/50 relative overflow-hidden"
+              >
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 dark:bg-purple-900/10 rounded-full blur-2xl -mt-10 -mr-10 pointer-events-none"></div>
+                
+                <div className="mb-6 relative z-10">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">One-Time Setup</span>
+                  <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">Step 1: Build Your Website</h3>
+                  <div className="flex items-baseline gap-1 mt-1">
+                    <span className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">₹5,000</span>
+                  </div>
+                </div>
 
- <button 
- onClick={scrollToLeadForm}
- className={`w-full py-3.5 rounded-xl font-bold text-[15px] shadow-sm dark:shadow-none active:scale-95 transition-all ${plan.popular ? 'bg-[#4400AF] text-white hover:bg-[#310080]' : 'bg-white text-[#4400AF] border border-[#4400AF]/30 hover:bg-[#F4EEFF] dark:bg-slate-900'}`}
- >
- {plan.buttonText}
- </button>
- </div>
- ))}
- </div>
- </div>
+                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-8 relative z-10">
+                  {setupFeatures.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-2 group">
+                      <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 mt-0.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" strokeWidth={2.5} />
+                      <span className="text-sm font-medium text-slate-600 dark:text-slate-300 leading-snug">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
- </div>
- </section>
- );
+                <button 
+                  onClick={scrollToLeadForm}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-bold transition-all shadow-md hover:shadow-purple-500/20 active:scale-95 relative z-10"
+                >
+                  Start My Website
+                </button>
+              </motion.div>
+
+              {/* Step 2 Card */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                whileHover={{ y: -4 }}
+                className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm flex flex-col transition-all duration-300 hover:shadow-lg dark:hover:shadow-purple-900/10 hover:border-purple-200 dark:hover:border-purple-800/50"
+              >
+                <div className="mb-5 text-center lg:text-left">
+                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">Monthly Plans</span>
+                  <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400">Step 2: Choose Your Hosting</h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {subPlans.map((plan, i) => (
+                    <div key={i} className="border border-slate-100 dark:border-slate-800 rounded-xl p-4 bg-slate-50 dark:bg-slate-900/50 flex flex-col">
+                      <h4 className="font-bold text-slate-900 dark:text-white text-[15px] mb-1">{plan.name}</h4>
+                      <div className="font-extrabold text-xl text-purple-600 dark:text-purple-400 mb-4">{plan.price} <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{plan.period}</span></div>
+                      
+                      <ul className="space-y-2 flex-1">
+                        {plan.features.map((feature, j) => (
+                          <li key={j} className="flex items-start gap-1.5 group">
+                            <Check className="w-3.5 h-3.5 text-purple-500 mt-0.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" strokeWidth={2.5} />
+                            <span className="text-xs text-slate-600 dark:text-slate-400 leading-snug">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+                
+                <p className="text-xs text-slate-500 dark:text-slate-400 text-center mt-5 font-medium">
+                  Cancel anytime. Your website will remain live as per your plan.
+                </p>
+              </motion.div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Pricing;
