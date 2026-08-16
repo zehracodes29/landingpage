@@ -76,10 +76,10 @@ const EverythingNeeded = () => {
  {/* Action Bar */}
  <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-5 w-full">
  <button 
- onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
- className="px-5 py-2.5 bg-purple-600 hover:bg-purple-700 text-white font-medium text-[15px] rounded-xl shadow-md shadow-purple-500/20 hover:-translate-y-0.5 transition-all duration-300 w-full sm:w-auto text-center"
+ onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
+ className="px-5 py-2.5 bg-transparent border border-purple-600 text-purple-600 dark:text-purple-400 font-medium text-[15px] rounded-xl hover:bg-purple-50 dark:hover:bg-purple-900/30 transition-all duration-300 w-full sm:w-auto text-center"
  >
- Let's Build My Website &rarr;
+ See How It Works
  </button>
  <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-semibold text-slate-500 dark:text-slate-400">
  <span className="flex items-center gap-1">⚡ 3–5 Days Delivery</span>

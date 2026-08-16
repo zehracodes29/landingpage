@@ -34,10 +34,10 @@ const FinalCTA = () => {
  Start My Website <span>&rarr;</span>
  </button>
  <button
- onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+ onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
  className="w-full md:w-auto border border-purple-400/40 hover:bg-purple-500/10 text-purple-200 font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
  >
- Explore Self-Serve Packages <span>&rarr;</span>
+ See How It Works
  </button>
  </div>
 
