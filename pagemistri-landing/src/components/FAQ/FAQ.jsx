@@ -4,34 +4,42 @@ import SectionBadge from '../../ui/SectionBadge';
 import SectionTitle from '../../ui/SectionTitle';
 
 const faqs = [
- {
- question: "How long will it take to build my website?",
- answer: "Your website will be ready in just 3-5 working days after we receive all your requirements and content."
- },
- {
- question: "What is included in the ₹5,000 website setup?",
- answer: "The setup includes a professional mobile-friendly design, enquiry form, lead dashboard, basic SEO setup, and initial content population."
- },
- {
- question: "Why is there a monthly subscription?",
- answer: "The monthly subscription covers premium secure hosting, continuous maintenance, lead management dashboard access, and technical support to keep your website running smoothly."
- },
- {
- question: "Can I use my own domain name?",
- answer: "Yes, absolutely! You can connect any custom domain you own. We'll provide you with the necessary DNS records and help you set it up."
- },
- {
- question: "I don't have a logo or professional photos. Can I still get started?",
- answer: "Yes! We can use high-quality stock photos related to your industry and set up a clean text-based logo for you to get started immediately."
- },
- {
- question: "What happens after I submit the form?",
- answer: "We'll review your requirements and contact you within one business day to discuss your business and the next steps."
- },
- {
- question: "Will my website work on mobile phones?",
- answer: "Yes, every website we build is fully responsive and optimized to look and work perfectly on smartphones, tablets, and desktops."
- }
+  {
+  question: "Is this a custom website or a template?",
+  answer: "We build custom-designed websites tailored to your brand. While we use proven high-converting layouts as a foundation, your website's colors, typography, images, and content will be completely unique to your business."
+  },
+  {
+  question: "What exactly is included in the ₹5,000 setup?",
+  answer: "The setup includes a professional mobile-friendly design, enquiry forms, a lead dashboard, basic SEO setup, domain connection, and initial content population."
+  },
+  {
+  question: "What is the difference between the ₹5,000 setup fee and the monthly hosting plans?",
+  answer: "The ₹5,000 setup fee is a one-time cost to design and build your website from scratch. The monthly plans cover ongoing secure hosting, continuous maintenance, lead management dashboard access, and technical support."
+  },
+  {
+  question: "Who owns my website content and where do my enquiries/leads go?",
+  answer: "You own all your website content. All enquiries and leads generated through your website are securely stored in your personal lead dashboard, which only you have access to."
+  },
+  {
+  question: "How long will it take to build my website?",
+  answer: "Your website will be ready in just 3-5 working days after we receive all your requirements and content."
+  },
+  {
+  question: "Can I use my own domain name?",
+  answer: "Yes, absolutely! You can connect any custom domain you own. We'll provide you with the necessary DNS records and help you set it up."
+  },
+  {
+  question: "I don't have a logo or professional photos. Can I still get started?",
+  answer: "Yes! We can use high-quality stock photos related to your industry and set up a clean text-based logo for you to get started immediately."
+  },
+  {
+  question: "What happens after I submit the form?",
+  answer: "We'll review your requirements and contact you within one business day to discuss your business and the next steps."
+  },
+  {
+  question: "Will my website work on mobile phones?",
+  answer: "Yes, every website we build is fully responsive and optimized to look and work perfectly on smartphones, tablets, and desktops."
+  }
 ];
 
 const FAQ = () => {

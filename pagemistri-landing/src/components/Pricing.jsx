@@ -8,22 +8,19 @@ const Pricing = () => {
  };
 
  const setupFeatures = [
- 'Professionally Designed Website',
- 'Mobile Responsive',
- 'Enquiry Form',
- 'Lead Dashboard',
- 'Performance Tracking',
+ 'Custom Design',
+ 'Mobile Responsiveness',
+ 'Enquiry Forms',
+ 'Lead Dashboard Setup',
  'Basic SEO',
- 'Domain Connection',
- 'Two Revisions',
- 'Delivered in 3–5 Days'
+ 'Domain Connection'
  ];
 
  const subPlans = [
  {
- name: 'Hosted by Pagemistri',
+ name: 'Hosted on Pagemistri domain/subdomain',
  price: '₹99',
- period: '/month',
+ period: '/mo',
  features: [
  'Pagemistri Subdomain',
  '50 Leads/month',
@@ -37,9 +34,9 @@ const Pricing = () => {
  popular: true,
  },
  {
- name: 'Hosted on Your Brand',
+ name: 'Hosted on your own custom domain/brand',
  price: '₹349',
- period: '/month',
+ period: '/mo',
  features: [
  'Custom Domain',
  '350 Leads/month',
@@ -58,14 +55,20 @@ const Pricing = () => {
  <section id="pricing" className="scroll-mt-24 py-12 lg:py-16 bg-[#FAF9F7] dark:bg-slate-950 font-sans">
  <div className="max-w-6xl mx-auto px-6 lg:px-8">
  
+ <div className="text-center mb-16">
+ <h2 className="text-[28px] md:text-[36px] font-extrabold text-[#111827] dark:text-white tracking-tight">
+ No freelancer coordination. No technical setup headache.
+ </h2>
+ </div>
+ 
  {/* SECTION 1: SETUP COST */}
  <div className="mb-16">
  <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 items-start">
  
  {/* Left Column: Description */}
  <div className="order-2 md:order-1 text-center md:text-left flex flex-col gap-6">
- <h2 className="text-[36px] md:text-[44px] lg:text-[48px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15]">
- One Time Setup Cost
+ <h2 className="text-[32px] md:text-[40px] lg:text-[44px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15]">
+ Step 1: One-Time Setup
  </h2>
  <p className="text-[#4B5563] dark:text-slate-400 text-[16px] md:text-[18px] leading-[1.6] max-w-lg mx-auto md:mx-0">
  We take care of the entire design, build, and setup process from scratch so you don't have to spend hours trying to build a website yourself. Get a complete, fully functional, and high-converting professional business website built specifically for your brand.
@@ -91,10 +94,7 @@ const Pricing = () => {
  <div className="bg-white dark:bg-slate-900 border border-purple-100 dark:border-purple-900/50 text-[#111827] dark:text-white rounded-3xl p-8 md:p-10 shadow-sm dark:shadow-none relative overflow-hidden transform transition-all duration-300 hover:scale-[1.02]">
  <div className="absolute top-0 right-0 -mt-8 -mr-8 w-40 h-40 bg-purple-50 opacity-50 rounded-full blur-2xl pointer-events-none"></div>
  
- <h3 className="text-[22px] font-bold text-[#111827] dark:text-white mb-2">One-Time Payment</h3>
- <div className="mb-8">
- <span className="text-[48px] md:text-[56px] font-extrabold tracking-tight text-[#111827] dark:text-white">₹5,000</span>
- </div>
+ <h3 className="text-[28px] font-extrabold text-[#111827] dark:text-white mb-8">Build Your Website — ₹5,000</h3>
  
  <ul className="space-y-4 mb-8">
  {setupFeatures.map((feature, i) => (
@@ -123,7 +123,7 @@ const Pricing = () => {
  <div>
  <div className="text-center max-w-3xl mx-auto mb-12">
  <h2 className="text-[32px] md:text-[36px] font-[800] text-[#111827] dark:text-white tracking-tight leading-tight mb-4">
- Choose Your Monthly Plan
+ Step 2: Choose Your Monthly Hosting
  </h2>
  </div>
 

@@ -19,15 +19,15 @@ const Hero = () => {
  className="flex flex-col items-center lg:items-start text-center lg:text-left w-full"
  >
  <div className="inline-flex justify-center lg:justify-start mb-6">
- <SectionBadge>PROFESSIONAL WEBSITE SETUP • STARTING AT ₹5,000</SectionBadge>
+ <SectionBadge>Complete website setup from ₹5,000.</SectionBadge>
  </div>
  
  <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-slate-900 dark:text-white leading-tight tracking-tight mb-6">
- Your Professional<br className="hidden lg:block" /> Business Website,<br className="hidden lg:block" /> Ready in Just 3-5 Days
+ A Professional<br className="hidden lg:block" /> Business Website That Helps You<br className="hidden lg:block" /> Collect Leads
  </h1>
  
  <p className="text-lg md:text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">
- From design and setup to lead collection and analytics, we build everything for you - so you can focus on growing your business, not building your website.
+ Get a mobile-responsive website equipped with enquiry forms and a built-in lead dashboard — set up and launched in 3–5 days.
  </p>
 
  <motion.div 
