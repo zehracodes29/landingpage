@@ -66,6 +66,7 @@ export default function Navbar() {
  <ThemeToggle />
  
  {/* CTA Buttons */}
+ <div className="hidden md:flex items-center space-x-3">
  <button 
  onClick={scrollToHero}
  className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
