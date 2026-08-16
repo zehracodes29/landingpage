@@ -1,6 +1,6 @@
 import React from 'react';
 import { GitPullRequest, ListTodo, LayoutGrid, TrendingUp, CheckCheck, Zap } from 'lucide-react';
-import HeroMockupVisual from '@/components/HeroMockupVisual';
+import LeadForm from '@/components/LeadForm';
 
 const features = [
  {
@@ -89,9 +89,15 @@ const EverythingNeeded = () => {
  </div>
  </div>
  
- {/* RIGHT COLUMN: Visual Showcase */}
+ {/* RIGHT COLUMN: Lead Form */}
  <div className="lg:col-span-5 w-full order-1 lg:order-2">
- <HeroMockupVisual />
+ <div className="w-full max-w-[550px] mx-auto relative bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl rounded-3xl p-6 sm:p-8 shadow-2xl shadow-purple-500/10 border border-slate-200 dark:border-slate-800 overflow-hidden">
+ {/* Radial Gradient Glow (contained) */}
+ <div className="absolute -top-32 -right-32 w-96 h-96 bg-purple-500/20 dark:bg-purple-600/20 rounded-full blur-3xl pointer-events-none"></div>
+ <div className="relative z-10">
+ <LeadForm />
+ </div>
+ </div>
  </div>
  
  </div>
