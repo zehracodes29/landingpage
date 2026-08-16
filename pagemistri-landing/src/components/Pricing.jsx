@@ -202,7 +202,7 @@ const Pricing = () => {
                       </ul>
                     </div>
                   ))}
-                </div>    </div>
+                </div>
                 
                 <p className="text-xs text-slate-500 dark:text-slate-400 text-center mt-5 font-medium">
                   Cancel anytime. Your website will remain live as per your plan.
