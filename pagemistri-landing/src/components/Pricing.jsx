@@ -33,7 +33,7 @@ const Pricing = () => {
  'SEO Integration',
  'Payment Gateway integration'
  ],
- buttonText: 'Get started',
+ buttonText: 'Start My Website',
  popular: true,
  },
  {
@@ -49,7 +49,7 @@ const Pricing = () => {
  'SEO Integration',
  'Payment Gateway integration'
  ],
- buttonText: 'Get started',
+ buttonText: 'Start My Website',
  popular: false,
  }
  ];
@@ -109,7 +109,7 @@ const Pricing = () => {
  onClick={scrollToLeadForm}
  className="w-full bg-[#4400AF] text-white font-bold py-3.5 px-6 rounded-xl hover:bg-[#310080] transition-all shadow-md dark:shadow-none mt-6 active:scale-95"
  >
- Let's Build My Website
+ Start My Website
  </button>
  </div>
  </div>

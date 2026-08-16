@@ -31,7 +31,7 @@ const FinalCTA = () => {
  onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
  className="w-full md:w-auto bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold py-4 px-8 rounded-xl shadow-lg dark:shadow-none shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
  >
- Get Your Website Built <span>&rarr;</span>
+ Start My Website <span>&rarr;</span>
  </button>
  <button
  onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}

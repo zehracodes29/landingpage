@@ -66,18 +66,11 @@ export default function Navbar() {
  <ThemeToggle />
  
  {/* CTA Buttons */}
- <div className="hidden md:flex items-center space-x-3">
- <Link 
- href="/business-visibility-survey"
- className="px-5 py-2.5 bg-transparent border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-[15px] font-semibold rounded-lg hover:bg-slate-100 dark:hover:bg-slate-800/60 transition-colors transform hover:-translate-y-[1px]"
- >
- Take a Visibility Test
- </Link>
  <button 
  onClick={scrollToHero}
  className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
  >
- Start building my website
+ Start My Website
  </button>
  </div>
 
@@ -107,18 +100,11 @@ export default function Navbar() {
  {link.name}
  </a>
  ))}
- <Link 
- href="/business-visibility-survey"
- onClick={() => setMobileMenuOpen(false)}
- className="w-full mt-4 px-5 py-3 bg-white dark:bg-slate-900 border border-[#4400AF] text-[#4400AF] hover:bg-gray-50 dark:bg-slate-800 transition-colors text-[16px] font-semibold rounded-lg text-center"
- >
- Take a Visibility Test
- </Link>
  <button 
  onClick={scrollToHero}
  className="w-full mt-3 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center"
  >
- Start building my website
+ Start My Website
  </button>
  </div>
  )}
