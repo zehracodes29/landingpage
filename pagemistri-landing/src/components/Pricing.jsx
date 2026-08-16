@@ -87,20 +87,20 @@ const Pricing = () => {
                 <table className="w-full text-left border-collapse">
                   <thead>
                     <tr className="border-b border-slate-200 dark:border-slate-800">
-                      <th className="py-3 px-2 text-sm font-semibold text-slate-500 dark:text-slate-400">Feature</th>
-                      <th className="py-3 px-2 text-sm font-bold text-slate-900 dark:text-white border-b-2 border-purple-600">Pagemistri</th>
-                      <th className="py-3 px-2 text-sm font-semibold text-slate-500 dark:text-slate-400">Freelancer / DIY</th>
+                      <th className="py-3 px-4 text-sm font-semibold text-slate-500 dark:text-slate-400">Feature</th>
+                      <th className="py-3 px-4 text-sm font-bold text-slate-900 dark:text-white border-b-2 border-purple-600">Pagemistri</th>
+                      <th className="py-3 px-4 text-sm font-semibold text-slate-500 dark:text-slate-400">Freelancer / DIY</th>
                     </tr>
                   </thead>
                   <tbody>
                     {comparisonRows.map((row, i) => (
                       <tr key={i} className="border-b border-slate-100 dark:border-slate-800/50 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
-                        <td className="py-4 px-2 text-sm font-medium text-slate-700 dark:text-slate-300">{row.feature}</td>
-                        <td className="py-4 px-2 text-sm font-semibold text-slate-900 dark:text-white flex items-start gap-2">
+                        <td className="py-3.5 px-4 text-sm font-medium text-slate-700 dark:text-slate-300">{row.feature}</td>
+                        <td className="py-3.5 px-4 text-sm font-semibold text-slate-900 dark:text-white flex items-start gap-2">
                           <Check className="w-4 h-4 text-purple-600 mt-0.5 shrink-0" strokeWidth={3} />
                           <span className="leading-snug">{row.pm}</span>
                         </td>
-                        <td className="py-4 px-2 text-sm text-slate-500 dark:text-slate-400">
+                        <td className="py-3.5 px-4 text-sm text-slate-500 dark:text-slate-400">
                           <div className="flex items-start gap-2">
                             <X className="w-4 h-4 text-red-400 mt-0.5 shrink-0" strokeWidth={2.5} />
                             <span className="leading-snug">{row.diy}</span>
@@ -112,11 +112,11 @@ const Pricing = () => {
                 </table>
               </div>
 
-              <div className="mt-6 bg-purple-50 dark:bg-purple-900/20 rounded-xl p-4 flex items-center justify-center gap-3 border border-purple-100 dark:border-purple-800/30">
-                <ShieldCheck className="w-6 h-6 text-purple-600 dark:text-purple-400 shrink-0" />
-                <p className="font-semibold text-purple-700 dark:text-purple-300 text-[15px] text-center">
+              <div className="mt-6 bg-purple-50 text-purple-900 rounded-xl p-4 text-sm font-semibold flex items-center justify-center gap-2">
+                <ShieldCheck className="w-5 h-5 text-purple-600 shrink-0" />
+                <span>
                   No freelancer coordination. No technical setup headache.
-                </p>
+                </span>
               </div>
             </motion.div>
           </div>
@@ -145,22 +145,24 @@ const Pricing = () => {
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-50 dark:bg-purple-900/10 rounded-full blur-2xl -mt-10 -mr-10 pointer-events-none"></div>
                 
-                <div className="mb-6 relative z-10">
-                  <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">One-Time Setup</span>
-                  <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">Step 1: Build Your Website</h3>
-                  <div className="flex items-baseline gap-1 mt-1">
-                    <span className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">₹5,000</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10 mb-8">
+                  <div className="flex flex-col justify-center text-center md:text-left">
+                    <span className="text-xs font-bold text-slate-500 dark:text-slate-400 uppercase tracking-wider block mb-1">One-Time Setup</span>
+                    <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400 mb-2">Step 1: Build Your Website</h3>
+                    <div className="flex items-baseline justify-center md:justify-start gap-1 mt-1">
+                      <span className="text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">₹5,000</span>
+                    </div>
                   </div>
+ 
+                  <ul className="grid grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-300">
+                    {setupFeatures.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-1.5 group">
+                        <Check className="w-3.5 h-3.5 text-purple-600 dark:text-purple-400 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" strokeWidth={2.5} />
+                        <span className="font-medium leading-snug">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-
-                <ul className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-4 mb-8 relative z-10">
-                  {setupFeatures.map((feature, i) => (
-                    <li key={i} className="flex items-start gap-2 group">
-                      <Check className="w-4 h-4 text-purple-600 dark:text-purple-400 mt-0.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-1 group-hover:scale-110" strokeWidth={2.5} />
-                      <span className="text-sm font-medium text-slate-600 dark:text-slate-300 leading-snug">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
 
                 <button 
                   onClick={scrollToLeadForm}
@@ -184,17 +186,17 @@ const Pricing = () => {
                   <h3 className="text-lg font-bold text-purple-600 dark:text-purple-400">Step 2: Choose Your Hosting</h3>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                   {subPlans.map((plan, i) => (
-                    <div key={i} className="border border-slate-100 dark:border-slate-800 rounded-xl p-4 bg-slate-50 dark:bg-slate-900/50 flex flex-col">
+                    <div key={i} className={`rounded-xl p-5 flex flex-col border ${plan.name === 'Hosted on Your Brand' ? 'border-purple-500 bg-purple-50/30 dark:bg-purple-900/10 shadow-sm' : 'border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/50'}`}>
                       <h4 className="font-bold text-slate-900 dark:text-white text-[15px] mb-1">{plan.name}</h4>
                       <div className="font-extrabold text-xl text-purple-600 dark:text-purple-400 mb-4">{plan.price} <span className="text-xs font-medium text-slate-500 dark:text-slate-400">{plan.period}</span></div>
                       
-                      <ul className="space-y-2 flex-1">
+                      <ul className="space-y-3 flex-1">
                         {plan.features.map((feature, j) => (
-                          <li key={j} className="flex items-start gap-1.5 group">
+                          <li key={j} className="flex items-start gap-2 group">
                             <Check className="w-3.5 h-3.5 text-purple-500 mt-0.5 shrink-0 transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:scale-110" strokeWidth={2.5} />
-                            <span className="text-xs text-slate-600 dark:text-slate-400 leading-snug">{feature}</span>
+                            <span className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">{feature}</span>
                           </li>
                         ))}
                       </ul>
