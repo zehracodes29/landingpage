@@ -9,7 +9,6 @@ const navLinks = [
  { name: 'How It Works', href: '#how-it-works' },
  { name: 'Pricing', href: '#pricing' },
  { name: 'FAQ', href: '#faq' },
- { name: 'Free Visibility Test', href: '/business-visibility-survey', isRoute: true },
 ];
 
 export default function Navbar() {
