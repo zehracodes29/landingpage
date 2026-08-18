@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 const HeroMockupVisual = () => {
   return (
@@ -40,9 +41,12 @@ const HeroMockupVisual = () => {
           </div>
           
           {/* Actual Local Image */}
-          <img 
+          <Image 
             src="/image1.png" 
             alt="Hero Preview" 
+            width={800}
+            height={480}
+            priority
             className="w-full h-auto object-cover max-h-[480px] dark:opacity-90"
           />
         </div>

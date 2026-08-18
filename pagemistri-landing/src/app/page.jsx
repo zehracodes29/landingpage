@@ -2,13 +2,14 @@
 
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import WhatsIncluded from '../components/EverythingNeeded/EverythingNeeded';
+import dynamic from 'next/dynamic';
 
-import HowItWorks from '../components/Process/Process';
-import BusinessBenefits from '../components/BusinessBenefits';
-import Pricing from '../components/Pricing';
-import FAQ from '../components/FAQ/FAQ';
-import Footer from '../components/Footer';
+const WhatsIncluded = dynamic(() => import('../components/EverythingNeeded/EverythingNeeded'), { ssr: false });
+const HowItWorks = dynamic(() => import('../components/Process/Process'), { ssr: false });
+const BusinessBenefits = dynamic(() => import('../components/BusinessBenefits'), { ssr: false });
+const Pricing = dynamic(() => import('../components/Pricing'), { ssr: false });
+const FAQ = dynamic(() => import('../components/FAQ/FAQ'), { ssr: false });
+const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 
 export default function Home() {
  return (
