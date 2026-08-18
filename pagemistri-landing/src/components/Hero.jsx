@@ -32,10 +32,15 @@ const Hero = () => {
 
 
 
- <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
+ <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
+ <button 
+ className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition-all active:scale-95 w-full sm:w-auto"
+ >
+ Start My Website
+ </button>
  <button 
  onClick={() => document.getElementById('whats-included')?.scrollIntoView({ behavior: 'smooth' })}
- className="px-6 py-3 bg-[#4400AF] text-white font-semibold text-[15px] rounded-lg hover:bg-[#310080] transition-all shadow-sm hover:shadow-md w-full sm:w-auto border-none"
+ className="border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold px-6 py-3.5 rounded-xl transition-all w-full sm:w-auto"
  >
  See How It Works
  </button>

@@ -11,10 +11,10 @@ const HeroMockupVisual = () => {
           <span className="font-semibold text-xs text-slate-800 dark:text-slate-200">Ready in 3-5 Days</span>
         </div>
         
-        {/* Floating Badge 2 (Middle Right) */}
-        <div className="absolute top-1/2 -translate-y-1/2 -right-4 md:-right-8 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 flex items-center gap-2 z-20 animate-[bounce_4s_infinite]">
+        {/* Floating Badge 2 (Middle Left) */}
+        <div className="absolute top-1/2 -translate-y-1/2 -left-4 md:-left-8 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md px-3.5 py-2.5 rounded-2xl shadow-xl border border-slate-100 dark:border-slate-800 flex items-center gap-2 z-20 animate-[bounce_4s_infinite]">
           <span className="text-lg">✓</span>
-          <span className="font-semibold text-xs text-slate-800 dark:text-slate-200">New Enquiry Received!</span>
+          <span className="font-semibold text-xs text-slate-800 dark:text-slate-200">Hosted in minutes</span>
         </div>
 
         {/* Floating Badge 3 (Bottom Right) */}
