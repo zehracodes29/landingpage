@@ -3,8 +3,22 @@ import '../index.css';
 import { ThemeProvider } from '@/components/ThemeProvider';
 
 export const metadata = {
- title: 'PageMistri Landing',
- description: 'Landing page',
+ title: 'Business Website for Small Businesses in India | Pagemistri',
+ description: ' Get a professional business website for ₹5,000. Collect enquiries, manage leads and track performance with Pagemistri. Go live in 3–5 days.Landing page',
+ openGraph: {
+  title: 'Business Website for Small Businesses in India | Pagemistri',
+  description: ' Get a professional business website for ₹5,000. Collect enquiries, manage leads and track performance with Pagemistri. Go live in 3–5 days.',
+  url: 'https://pagemistri.in',
+  siteName: 'PageMistri',
+  images: [
+   {
+    url: 'https://pagemistri.in/og-image.jpg',
+    width: 1200,
+    height: 630,
+   }
+  ],
+  type: 'website',
+ },
 };
 
 export default function RootLayout({ children }) {
