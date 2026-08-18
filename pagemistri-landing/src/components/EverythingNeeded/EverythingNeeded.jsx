@@ -103,24 +103,31 @@ const EverythingNeeded = () => {
  </div>
  
  {/* Bottom Stat Bar */}
- <div className="mt-16 border-t border-slate-200 dark:border-slate-800 pt-8">
- <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mt-10">
- <div className="flex flex-col items-center justify-center">
- <span className="text-2xl mb-1">🚀</span>
- <span className="text-slate-900 dark:text-white font-bold text-lg">3–5 Days</span>
- <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Fast Delivery</span>
- </div>
- 
- <div className="bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-bold px-5 py-2.5 rounded-full border border-purple-200 dark:border-purple-800 shadow-sm inline-flex items-center gap-2">
- For ₹5,000 Only
- </div>
+ <div className="max-w-3xl mx-auto mt-12 p-6 rounded-2xl bg-white/80 dark:bg-slate-900/80 border border-slate-200/80 dark:border-slate-800 shadow-sm backdrop-blur-md">
+   <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 items-center text-center divide-y sm:divide-y-0 sm:divide-x divide-slate-200 dark:divide-slate-800">
+     
+     {/* Metric 1 */}
+     <div className="flex flex-col items-center justify-center py-4 sm:py-0">
+       <span className="text-2xl mb-2">🚀</span>
+       <span className="text-xl font-extrabold text-slate-900 dark:text-white">3–5 Days</span>
+       <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase mt-1">FAST DELIVERY</span>
+     </div>
 
- <div className="flex flex-col items-center justify-center">
- <span className="text-2xl mb-1">🛡️</span>
- <span className="text-slate-900 dark:text-white font-bold text-lg">99.9%</span>
- <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Uptime</span>
- </div>
- </div>
+     {/* Metric 2 */}
+     <div className="flex flex-col items-center justify-center py-4 sm:py-0">
+       <span className="text-2xl mb-2">💰</span>
+       <span className="text-xl font-extrabold text-purple-600 dark:text-purple-400">₹5,000</span>
+       <span className="text-xs font-semibold tracking-wider text-purple-600/80 dark:text-purple-400/80 uppercase mt-1">ONE-TIME COST</span>
+     </div>
+
+     {/* Metric 3 */}
+     <div className="flex flex-col items-center justify-center py-4 sm:py-0">
+       <span className="text-2xl mb-2">🛡️</span>
+       <span className="text-xl font-extrabold text-slate-900 dark:text-white">99.9%</span>
+       <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase mt-1">UPTIME</span>
+     </div>
+
+   </div>
  </div>
 
  </div>
