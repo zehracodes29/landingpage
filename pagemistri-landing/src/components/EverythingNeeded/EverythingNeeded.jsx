@@ -104,23 +104,18 @@ const EverythingNeeded = () => {
  
  {/* Bottom Stat Bar */}
  <div className="mt-16 border-t border-slate-200 dark:border-slate-800 pt-8">
- <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-x divide-slate-200 dark:divide-slate-800 text-center">
- <div className="flex flex-col items-center justify-center px-4">
+ <div className="flex flex-wrap items-center justify-center gap-6 sm:gap-10 mt-10">
+ <div className="flex flex-col items-center justify-center">
  <span className="text-2xl mb-1">🚀</span>
  <span className="text-slate-900 dark:text-white font-bold text-lg">3–5 Days</span>
  <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Fast Delivery</span>
  </div>
- <div className="flex flex-col items-center justify-center px-4">
- <span className="text-2xl mb-1">👥</span>
- <span className="text-slate-900 dark:text-white font-bold text-lg">100+</span>
- <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Businesses Online</span>
+ 
+ <div className="bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300 font-bold px-5 py-2.5 rounded-full border border-purple-200 dark:border-purple-800 shadow-sm inline-flex items-center gap-2">
+ For ₹5,000 Only
  </div>
- <div className="flex flex-col items-center justify-center px-4">
- <span className="text-2xl mb-1">🎧</span>
- <span className="text-slate-900 dark:text-white font-bold text-lg">24/7</span>
- <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Support</span>
- </div>
- <div className="flex flex-col items-center justify-center px-4">
+
+ <div className="flex flex-col items-center justify-center">
  <span className="text-2xl mb-1">🛡️</span>
  <span className="text-slate-900 dark:text-white font-bold text-lg">99.9%</span>
  <span className="text-slate-500 dark:text-slate-400 text-xs font-medium uppercase tracking-wider mt-0.5">Uptime</span>
