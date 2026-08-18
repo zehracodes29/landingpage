@@ -73,29 +73,30 @@ export default function Navbar() {
  ))}
  </div>
 
- 
- <ThemeToggle />
- 
- {/* CTA Buttons */}
- <div className="hidden md:flex items-center space-x-3">
- <button 
- onClick={scrollToHero}
- className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
- >
- Start My Website
- </button>
- </div>
+				{/* Right-hand actions */}
+				<div className="flex items-center gap-3">
+					{/* CTA Buttons */}
+					<div className="hidden md:flex items-center">
+						<button 
+							onClick={scrollToHero}
+							className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
+						>
+							Start My Website
+						</button>
+					</div>
 
+					<ThemeToggle />
 
- {/* Mobile Menu Button */}
- <div className="md:hidden flex items-center">
- <button
- onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
- className="text-[#111827] dark:text-white hover:text-gray-600 dark:text-slate-400 focus:outline-none"
- >
- {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
- </button>
- </div>
+					{/* Mobile Menu Button */}
+					<div className="md:hidden flex items-center">
+						<button
+							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+							className="text-[#111827] dark:text-white hover:text-gray-600 dark:text-slate-400 focus:outline-none"
+						>
+							{mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+						</button>
+					</div>
+				</div>
  </div>
  </div>
 
