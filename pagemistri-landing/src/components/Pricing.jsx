@@ -61,65 +61,11 @@ const Pricing = () => {
   ];
 
   return (
-    <section id="pricing" className="scroll-mt-24 py-16 lg:py-24 bg-[#FAF9F7] dark:bg-slate-950 font-sans overflow-hidden">
+    <section className="py-16 lg:py-24 bg-[#FAF9F7] dark:bg-slate-950 font-sans overflow-hidden">
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-        {/* TOP BLOCK: Comparison Section */}
-        <div className="max-w-4xl mx-auto mb-20">
-          <div className="mb-8 text-center">
-            <span className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2 block">
-              Why Businesses Choose Us
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-              Pagemistri vs Doing It Yourself
-            </h2>
-          </div>
-
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl p-6 shadow-sm"
-          >
-            <div className="overflow-x-auto pb-2">
-              <table className="w-full text-left border-collapse min-w-[600px]">
-                <thead>
-                  <tr className="border-b border-slate-200 dark:border-slate-800">
-                    <th className="py-3 px-2 w-1/3 text-sm font-semibold text-slate-500 dark:text-slate-400">Feature</th>
-                    <th className="py-3 px-2 w-1/3 text-sm font-bold text-slate-900 dark:text-white border-b-2 border-purple-600">Pagemistri</th>
-                    <th className="py-3 px-2 w-1/3 text-sm font-semibold text-slate-500 dark:text-slate-400">Freelancer / DIY</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {comparisonRows.map((row, i) => (
-                    <tr key={i} className="border-b border-slate-100 dark:border-slate-800/50 last:border-0 hover:bg-slate-50 dark:hover:bg-slate-800/20 transition-colors">
-                      <td className="py-3 px-2 text-sm font-medium text-slate-700 dark:text-slate-300">{row.feature}</td>
-                      <td className="py-3 px-2 text-sm font-semibold text-slate-900 dark:text-white flex items-start gap-2">
-                        <Check className="w-4 h-4 text-purple-600 mt-0.5 shrink-0" strokeWidth={3} />
-                        <span className="leading-snug">{row.pm}</span>
-                      </td>
-                      <td className="py-3 px-2 text-sm text-slate-500 dark:text-slate-400">
-                        <div className="flex items-start gap-2">
-                          <X className="w-4 h-4 text-red-400 mt-0.5 shrink-0" strokeWidth={2.5} />
-                          <span className="leading-snug">{row.diy}</span>
-                        </div>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-
-            <div className="mt-4 p-3 bg-purple-50 dark:bg-purple-950/40 rounded-xl text-sm font-semibold text-purple-900 dark:text-purple-300 flex items-center justify-center gap-2">
-              <ShieldCheck className="w-5 h-5 shrink-0" />
-              <span>No freelancer coordination. No technical setup headache.</span>
-            </div>
-          </motion.div>
-        </div>
-
-
         {/* BOTTOM BLOCK: Pricing Section */}
-        <div className="max-w-5xl mx-auto">
+        <div id="pricing" className="scroll-mt-24 max-w-5xl mx-auto">
           <div className="mb-10 text-center">
             <span className="text-xs font-bold text-purple-600 uppercase tracking-wider mb-2 block">
               Simple Pricing
