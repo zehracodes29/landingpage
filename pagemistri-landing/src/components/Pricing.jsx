@@ -86,7 +86,7 @@ const Pricing = () => {
                 </ul>
 
                 <a 
-                  href="#lead-form"
+                  href="#complete-website-setup"
                   className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95 block text-center"
                 >
                   Let's Build My Website
@@ -159,7 +159,7 @@ const Pricing = () => {
                 </div>
 
                 <a 
-                  href="#lead-form"
+                  href="#complete-website-setup"
                   className="w-full mt-4 border-2 border-purple-600 text-purple-700 font-bold py-2.5 text-sm rounded-2xl hover:bg-purple-50 transition-all active:scale-95 block text-center"
                 >
                   Get started
@@ -199,7 +199,7 @@ const Pricing = () => {
                 </div>
 
                 <a 
-                  href="#lead-form"
+                  href="#complete-website-setup"
                   className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95 block text-center"
                 >
                   Get started
@@ -211,7 +211,7 @@ const Pricing = () => {
             <div className="mt-3 text-center text-xs font-medium text-slate-200 flex items-center justify-center gap-2">
               <HelpCircle className="w-3 h-3 shrink-0" />
               Not sure which one to choose?{' '}
-              <a href="#lead-form" className="text-purple-300 hover:text-white underline underline-offset-4 transition-colors">
+              <a href="#complete-website-setup" className="text-purple-300 hover:text-white underline underline-offset-4 transition-colors">
                 We're here to help &rarr;
               </a>
             </div>

@@ -12,7 +12,7 @@ const DomainSetupCard = () => {
       
       <div className="flex flex-wrap items-center justify-center gap-4">
         <a 
-          href="#lead-form"
+          href="#complete-website-setup"
           className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 inline-block"
         >
           Let's Build My Website

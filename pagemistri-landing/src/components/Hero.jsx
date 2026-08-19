@@ -7,7 +7,7 @@ import HeroMockupVisual from '@/components/HeroMockupVisual';
 
 const Hero = () => {
  return (
- <section id="lead-form" className="bg-gradient-to-b from-purple-50/60 dark:from-slate-900 via-white dark:via-slate-950 to-slate-50 dark:to-slate-950 relative pt-24 lg:pt-32 pb-12 lg:pb-16 w-full font-sans min-h-[90vh] flex flex-col justify-center">
+ <section id="hero" className="bg-gradient-to-b from-purple-50/60 dark:from-slate-900 via-white dark:via-slate-950 to-slate-50 dark:to-slate-950 relative pt-24 lg:pt-32 pb-12 lg:pb-16 w-full font-sans min-h-[90vh] flex flex-col justify-center">
  
  <div className="max-w-7xl mx-auto px-6 w-full relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
  
@@ -34,7 +34,7 @@ const Hero = () => {
 
  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
  <a 
- href="#lead-form"
+ href="#complete-website-setup"
  className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto inline-block text-center"
  >
  Start My Website

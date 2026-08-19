@@ -28,7 +28,7 @@ const FinalCTA = () => {
  {/* CTA Buttons */}
  <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-3xl mx-auto">
  <a
- href="#lead-form"
+ href="#complete-website-setup"
  className="w-full md:w-auto bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-4 px-8 rounded-xl shadow-md dark:shadow-none shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap inline-block"
  >
  Start My Website <span>&rarr;</span>

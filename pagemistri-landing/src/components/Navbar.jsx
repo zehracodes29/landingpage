@@ -77,7 +77,7 @@ export default function Navbar() {
 					{/* CTA Buttons */}
 					<div className="hidden md:flex items-center">
 						<a 
-							href="#lead-form"
+							href="#complete-website-setup"
 							onClick={() => setMobileMenuOpen(false)}
 							className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md transform hover:-translate-y-[1px] inline-block"
 						>
@@ -125,7 +125,7 @@ export default function Navbar() {
   )
  ))}
  <a 
- href="#lead-form"
+ href="#complete-website-setup"
  onClick={() => setMobileMenuOpen(false)}
  className="w-full mt-3 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center block"
  >
