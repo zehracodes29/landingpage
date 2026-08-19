@@ -71,9 +71,9 @@ const FAQ = () => {
  onClick={() => toggleFAQ(index)}
  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
  >
- <span className={`text-[17px] font-semibold ${openIndex === index ? 'text-[#4400AF] dark:text-white' : 'text-[#111827] dark:text-white'}`}>
+ <h3 className={`text-[17px] font-semibold ${openIndex === index ? 'text-[#4400AF] dark:text-white' : 'text-[#111827] dark:text-white'}`}>
  {faq.question}
- </span>
+ </h3>
  <svg 
  className={`w-5 h-5 shrink-0 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-[#4400AF]' : 'text-slate-400'}`} 
  viewBox="0 0 24 24" 

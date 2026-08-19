@@ -34,7 +34,7 @@ const FormSection = () => {
             </p>
 
             <div className="flex flex-col">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">DESIGN & WEBSITE</span>
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3 block">DESIGN & WEBSITE</h3>
               <div className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 <span className="text-[#4400AF] font-bold mr-2">✓</span> Professional Website
               </div>
@@ -45,7 +45,7 @@ const FormSection = () => {
                 <span className="text-[#4400AF] font-bold mr-2">✓</span> Custom Domain
               </div>
 
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-6 mb-3 block">LEADS & GROWTH</span>
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-6 mb-3 block">LEADS & GROWTH</h3>
               <div className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 <span className="text-[#4400AF] font-bold mr-2">✓</span> Lead Capture
               </div>
@@ -59,7 +59,7 @@ const FormSection = () => {
                 <span className="text-[#4400AF] font-bold mr-2">✓</span> Basic SEO
               </div>
 
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-6 mb-3 block">LAUNCH & SUPPORT</span>
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mt-6 mb-3 block">LAUNCH & SUPPORT</h3>
               <div className="flex items-center text-sm font-medium text-slate-700 dark:text-slate-300 mb-2">
                 <span className="text-[#4400AF] font-bold mr-2">✓</span> 2 Revision Rounds
               </div>
