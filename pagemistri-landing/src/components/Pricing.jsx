@@ -178,8 +178,10 @@ const Pricing = () => {
                 transition={{ delay: 0.1 }}
                 className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 shadow-xl flex flex-col justify-between relative overflow-hidden border-2 border-[#4400AF]"
               >
-                <div className="bg-[#4400AF] text-white text-xs font-extrabold uppercase tracking-widest text-center py-2 w-full -mt-6 sm:-mt-8 -mx-6 sm:-mx-8 mb-6 rounded-t-3xl shadow-sm">
-                  🔥 Most Popular
+                <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden pointer-events-none">
+                  <div className="absolute top-6 -right-10 w-40 bg-[#4400AF] text-white text-[10px] font-extrabold uppercase tracking-widest text-center py-1 rotate-45 shadow-sm">
+                    MOST POPULAR
+                  </div>
                 </div>
 
                 <div>
