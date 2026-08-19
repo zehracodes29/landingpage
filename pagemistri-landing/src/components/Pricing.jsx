@@ -118,17 +118,13 @@ const Pricing = () => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Card 1: Hosted by Pagemistri (Most Popular) */}
+            {/* Card 1: Hosted by Pagemistri */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-white dark:bg-slate-900 border-2 border-purple-600 rounded-3xl p-8 shadow-xl relative flex flex-col h-full"
+              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm flex flex-col h-full"
             >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white text-[11px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                MOST POPULAR
-              </div>
-              
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Hosted by Pagemistri</h3>
               <div className="flex items-end gap-1 mb-8">
                 <span className="text-4xl font-black text-slate-900 dark:text-white">₹99</span>
@@ -152,14 +148,18 @@ const Pricing = () => {
               </button>
             </motion.div>
 
-            {/* Card 2: Hosted on Your Brand */}
+            {/* Card 2: Hosted on Your Brand (Most Popular) */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm flex flex-col h-full"
+              className="bg-white dark:bg-slate-900 border-2 border-purple-600 rounded-3xl p-8 shadow-xl relative flex flex-col h-full"
             >
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white text-[11px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
+                MOST POPULAR
+              </div>
+
               <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Hosted on Your Brand</h3>
               <div className="flex items-end gap-1 mb-8">
                 <span className="text-4xl font-black text-slate-900 dark:text-white">₹349</span>
