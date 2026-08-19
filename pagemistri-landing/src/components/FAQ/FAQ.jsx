@@ -57,7 +57,7 @@ const FAQ = () => {
   <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-1.5">FAQ</span>
  </div>
  <SectionTitle>
-  Questions in your mind
+  Questions that linger in your mind?
  </SectionTitle>
  </div>
 
