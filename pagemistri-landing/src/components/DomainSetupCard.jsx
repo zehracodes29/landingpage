@@ -18,7 +18,7 @@ const DomainSetupCard = () => {
           Let's Build My Website
         </button>
         <button 
-          onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
+          onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
           className="border border-purple-300/40 hover:bg-purple-800/50 text-white font-semibold px-6 py-3 rounded-xl transition-all"
         >
           See Pricing &rarr;

@@ -34,7 +34,6 @@ const Hero = () => {
 
  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
  <button 
- onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
  className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto"
  >
  Start My Website
