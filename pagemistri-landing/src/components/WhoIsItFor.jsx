@@ -83,7 +83,7 @@ export default function WhoIsItFor() {
           className="text-center mx-auto max-w-2xl mb-12"
         >
           <span className="bg-[rgba(68,0,175,0.10)] text-[#4400AF] font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">
-            WHO IT'S FOR
+            WHO CAN USE
           </span>
           <h2 className="text-3xl lg:text-4xl font-bold text-[#111827] dark:text-white tracking-tight text-center max-w-2xl mx-auto">
             Who is Pagemistri for?
