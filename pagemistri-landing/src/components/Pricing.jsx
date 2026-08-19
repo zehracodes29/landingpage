@@ -149,7 +149,7 @@ const Pricing = () => {
                   </div>
 
                   <ul className="space-y-1.5 mb-4 text-xs sm:text-sm">
-                    {['Pagemistri Subdomain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '50 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
+                    {['50 Leads/month', 'Pagemistri Subdomain Hosting', 'Lead Dashboard', 'Basic Analytics', 'Self-serve form & SEO setup', 'Ongoing site maintenance', 'Secure Hosting'].map((f, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <Check className="w-4 h-4 text-[#4400AF] shrink-0 mt-0.5" strokeWidth={2.5} />
                         <span className="text-slate-700 font-medium">{f}</span>
@@ -191,7 +191,7 @@ const Pricing = () => {
                   </div>
 
                   <ul className="space-y-1.5 mb-4 text-xs sm:text-sm">
-                    {['Custom Domain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '350 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
+                    {['350 Leads/month', 'Custom Domain Hosting', 'Lead Dashboard', 'Basic Analytics', 'Self-serve form & SEO setup', 'Ongoing site maintenance', 'Secure Hosting'].map((f, i) => (
                       <li key={i} className="flex items-start gap-3">
                         <Check className="w-4 h-4 text-[#4400AF] shrink-0 mt-0.5" strokeWidth={2.5} />
                         <span className="text-slate-700 font-medium">{f}</span>
