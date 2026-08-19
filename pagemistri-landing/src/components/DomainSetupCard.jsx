@@ -11,12 +11,12 @@ const DomainSetupCard = () => {
       </p>
       
       <div className="flex flex-wrap items-center justify-center gap-4">
-        <button 
-          onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
-          className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all active:scale-95"
+        <a 
+          href="#lead-form"
+          className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 inline-block"
         >
           Let's Build My Website
-        </button>
+        </a>
         <button 
           onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
           className="border border-purple-300/40 hover:bg-purple-800/50 text-white font-semibold px-6 py-3 rounded-xl transition-all"

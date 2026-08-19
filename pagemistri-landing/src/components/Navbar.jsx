@@ -76,12 +76,13 @@ export default function Navbar() {
 				<div className="flex items-center gap-3">
 					{/* CTA Buttons */}
 					<div className="hidden md:flex items-center">
-						<button 
-							onClick={scrollToHero}
-							className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md dark:shadow-none transform hover:-translate-y-[1px]"
+						<a 
+							href="#lead-form"
+							onClick={() => setMobileMenuOpen(false)}
+							className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md transform hover:-translate-y-[1px] inline-block"
 						>
 							Start My Website
-						</button>
+						</a>
 					</div>
 
 					<ThemeToggle />
@@ -123,12 +124,13 @@ export default function Navbar() {
   </a>
   )
  ))}
- <button 
- onClick={scrollToHero}
- className="w-full mt-3 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center"
+ <a 
+ href="#lead-form"
+ onClick={() => setMobileMenuOpen(false)}
+ className="w-full mt-3 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center block"
  >
  Start My Website
- </button>
+ </a>
  </div>
  )}
  </nav>

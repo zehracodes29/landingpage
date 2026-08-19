@@ -33,11 +33,12 @@ const Hero = () => {
 
 
  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
- <button 
- className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto"
+ <a 
+ href="#lead-form"
+ className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto inline-block text-center"
  >
  Start My Website
- </button>
+ </a>
  <button 
  onClick={() => document.getElementById('whats-included')?.scrollIntoView({ behavior: 'smooth' })}
  className="border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 font-semibold px-6 py-3.5 rounded-xl transition-all w-full sm:w-auto"

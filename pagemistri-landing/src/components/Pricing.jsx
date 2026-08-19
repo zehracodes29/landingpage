@@ -3,10 +3,6 @@ import { motion } from 'framer-motion';
 import { Check, Layout, LineChart, Rocket, Cloud, Globe, HelpCircle } from 'lucide-react';
 
 const Pricing = () => {
-  const scrollToLeadForm = () => {
-    document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   const setupFeatures = [
     'Professionally Designed Website',
     'Mobile Responsive',
@@ -89,12 +85,12 @@ const Pricing = () => {
                   ))}
                 </ul>
 
-                <button 
-                  onClick={scrollToLeadForm}
-                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95"
+                <a 
+                  href="#lead-form"
+                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95 block text-center"
                 >
                   Let's Build My Website
-                </button>
+                </a>
               </div>
             </div>
 
@@ -162,12 +158,12 @@ const Pricing = () => {
                   </ul>
                 </div>
 
-                <button 
-                  onClick={scrollToLeadForm}
-                  className="w-full mt-4 border-2 border-purple-600 text-purple-700 font-bold py-2.5 text-sm rounded-2xl hover:bg-purple-50 transition-all active:scale-95"
+                <a 
+                  href="#lead-form"
+                  className="w-full mt-4 border-2 border-purple-600 text-purple-700 font-bold py-2.5 text-sm rounded-2xl hover:bg-purple-50 transition-all active:scale-95 block text-center"
                 >
                   Get started
-                </button>
+                </a>
               </motion.div>
 
               {/* Card 2: Hosted on Your Brand */}
@@ -202,12 +198,12 @@ const Pricing = () => {
                   </ul>
                 </div>
 
-                <button 
-                  onClick={scrollToLeadForm}
-                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95"
+                <a 
+                  href="#lead-form"
+                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95 block text-center"
                 >
                   Get started
-                </button>
+                </a>
               </motion.div>
             </div>
 
