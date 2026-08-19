@@ -111,7 +111,7 @@ const Pricing = () => {
           </motion.div>
 
           {/* Divider */}
-          <div className="relative my-4 flex items-center justify-center max-w-4xl mx-auto">
+          <div className="relative mt-16 sm:mt-20 mb-8 flex items-center justify-center max-w-4xl mx-auto">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-300 dark:border-slate-800" />
             </div>
@@ -121,7 +121,7 @@ const Pricing = () => {
           </div>
 
           {/* STEP 2: Subscription Based Pricing Plans */}
-          <div id="step-2-pricing" className="scroll-mt-12 text-center mb-6">
+          <div id="step-2-pricing" className="pt-8 sm:pt-12 scroll-mt-20 text-center mb-6">
             <span className="inline-block bg-purple-100 text-purple-700 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-1">
               STEP 2: MONTHLY HOSTING
             </span>
