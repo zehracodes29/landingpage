@@ -24,10 +24,10 @@ const Pricing = () => {
           {/* STEP 1: One-Time Setup Cost */}
           <div className="text-center mb-0">
             <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-1.5">
-              STEP 1 &bull; ONE-TIME SETUP
+              STEP 1 &bull; ENVIRONMENT-SETUP
             </span>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-white mb-1 text-center">
-              Setup Cost
+              OneTime Setup Cost
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7280] dark:text-slate-400 mb-4 sm:mb-6 text-center">
               Everything you need to go live—handled by us.
