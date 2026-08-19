@@ -57,6 +57,15 @@ export function BeforeAfterSection() {
                 With Pagemistri
               </button>
             </div>
+
+            <div className="mt-8">
+              <a
+                href="#complete-website-setup"
+                className="inline-flex items-center justify-center bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-8 py-3.5 rounded-xl shadow-md transition-all active:scale-95 text-base"
+              >
+                Get Started →
+              </a>
+            </div>
           </motion.div>
 
           {/* RIGHT CONTAINER - VISUALIZATION */}
