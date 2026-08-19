@@ -9,6 +9,23 @@
 @layer theme {
   :root {
     --font-sans: 'Inter', sans-serif;
+    /* Core Brand Colors */
+    --brand-primary: #4400AF;
+    --brand-hover: #310080;
+
+    /* Brand Tints (Opacity surfaces based on #4400AF) */
+    --brand-surface-xs: rgba(68, 0, 175, 0.04);
+    --brand-surface-sm: rgba(68, 0, 175, 0.06);
+    --brand-surface-md: rgba(68, 0, 175, 0.10);
+
+    /* Brand Borders */
+    --brand-border: rgba(68, 0, 175, 0.18);
+
+    /* Neutrals & Text */
+    --text-primary: #111827;
+    --text-secondary: #52627A;
+    --text-muted: #6B7280;
+    --border-neutral: #E5E7EB;
   }
 }
 

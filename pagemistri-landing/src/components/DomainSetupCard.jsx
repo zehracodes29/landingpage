@@ -2,7 +2,7 @@ import React from 'react';
 
 const DomainSetupCard = () => {
   return (
-    <div className="bg-purple-900 dark:bg-purple-950 p-8 sm:p-10 rounded-3xl text-white border border-purple-800/60 shadow-xl relative overflow-hidden max-w-5xl mx-auto my-12">
+    <div className="bg-brand p-8 sm:p-10 rounded-3xl text-white border border-purple-800/60 shadow-xl relative overflow-hidden max-w-5xl mx-auto my-12">
       <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 text-center">
         Need a Custom Domain?
       </h2>
@@ -13,7 +13,7 @@ const DomainSetupCard = () => {
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
         <a 
           href="#complete-website-setup"
-          className="bg-white hover:bg-slate-100 text-[#5B06BE] font-extrabold px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto text-center inline-block"
+          className="bg-white hover:bg-slate-100 text-[#4400AF] font-extrabold px-6 py-3 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto text-center inline-block"
         >
           Let's Build My Website
         </a>

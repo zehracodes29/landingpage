@@ -56,7 +56,7 @@ export default function Navbar() {
   <Link
   key={link.name}
   href={link.href}
-  className="text-[15px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+  className="text-[15px] font-semibold text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 transition-colors"
   >
   {link.name}
   </Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
   key={link.name}
   href={link.href}
   onClick={(e) => scrollToSection(e, link.href)}
-  className="text-[15px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+  className="text-[15px] font-semibold text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 transition-colors"
   >
   {link.name}
   </a>
@@ -80,7 +80,7 @@ export default function Navbar() {
 						<a 
 							href="#complete-website-setup"
 							onClick={() => setMobileMenuOpen(false)}
-							className="px-5 py-2.5 bg-[#4400AF] text-white text-[15px] font-semibold rounded-lg hover:bg-[#310080] transition-colors shadow-sm dark:shadow-none hover:shadow-md transform hover:-translate-y-[1px] inline-block"
+							className="px-5 py-2.5 bg-brand text-white text-[15px] font-semibold rounded-lg hover:bg-brand-hover transition-colors shadow-sm dark:shadow-none hover:shadow-md transform hover:-translate-y-[1px] inline-block"
 						>
 							Start My Website
 						</a>
@@ -92,7 +92,7 @@ export default function Navbar() {
 					<div className="md:hidden flex items-center">
 						<button
 							onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-							className="text-[#111827] dark:text-white hover:text-gray-600 dark:text-slate-400 focus:outline-none"
+							className="text-text-primary dark:text-white hover:text-gray-600 dark:text-slate-400 focus:outline-none"
 						>
 							{mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
 						</button>
@@ -110,7 +110,7 @@ export default function Navbar() {
   key={link.name}
   href={link.href}
   onClick={() => setMobileMenuOpen(false)}
-  className="text-[16px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
+  className="text-[16px] font-semibold text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
   >
   {link.name}
   </Link>
@@ -119,7 +119,7 @@ export default function Navbar() {
   key={link.name}
   href={link.href}
   onClick={(e) => scrollToSection(e, link.href)}
-  className="text-[16px] font-semibold text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
+  className="text-[16px] font-semibold text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 py-2 border-b border-slate-100 dark:border-slate-800 transition-colors dark:border-slate-800"
   >
   {link.name}
   </a>
@@ -128,7 +128,7 @@ export default function Navbar() {
  <a 
  href="#complete-website-setup"
  onClick={() => setMobileMenuOpen(false)}
- className="w-full mt-3 px-5 py-3 bg-[#4400AF] hover:bg-[#310080] transition-colors text-white text-[16px] font-semibold rounded-lg text-center block"
+ className="w-full mt-3 px-5 py-3 bg-brand hover:bg-brand-hover transition-colors text-white text-[16px] font-semibold rounded-lg text-center block"
  >
  Start My Website
  </a>

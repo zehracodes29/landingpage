@@ -24,7 +24,7 @@ export default function SurveyNavbar() {
         <div className="hidden sm:block w-px h-6 bg-slate-200 dark:bg-slate-700"></div>
         <Link 
           href="/" 
-          className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-slate-500 hover:text-purple-600 dark:text-slate-400 dark:hover:text-purple-400 transition-colors"
+          className="hidden sm:flex items-center gap-1.5 text-xs font-semibold text-text-secondary hover:text-brand dark:text-slate-400 dark:hover:text-purple-400 transition-colors"
         >
           <ArrowLeft className="w-3.5 h-3.5" />
           Back to Home
@@ -33,10 +33,10 @@ export default function SurveyNavbar() {
 
       {/* Center: Navigation Links */}
       <div className="hidden md:flex items-center gap-6 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <a href="#overview" onClick={(e) => scrollToSection(e, 'overview')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Overview</a>
-        <a href="#why-participate" onClick={(e) => scrollToSection(e, 'why-participate')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Why Participate</a>
-        <a href="#survey-form" onClick={(e) => scrollToSection(e, 'survey-form')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Take Assessment</a>
-        <a href="#benefits" onClick={(e) => scrollToSection(e, 'benefits')} className="text-sm font-medium text-slate-600 dark:text-slate-300 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">What You Get</a>
+        <a href="#overview" onClick={(e) => scrollToSection(e, 'overview')} className="text-sm font-medium text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 transition-colors">Overview</a>
+        <a href="#why-participate" onClick={(e) => scrollToSection(e, 'why-participate')} className="text-sm font-medium text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 transition-colors">Why Participate</a>
+        <a href="#survey-form" onClick={(e) => scrollToSection(e, 'survey-form')} className="text-sm font-medium text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 transition-colors">Take Assessment</a>
+        <a href="#benefits" onClick={(e) => scrollToSection(e, 'benefits')} className="text-sm font-medium text-text-muted dark:text-slate-300 hover:text-brand dark:hover:text-purple-400 transition-colors">What You Get</a>
       </div>
 
       {/* Right Side: Theme Toggle */}

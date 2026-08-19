@@ -72,7 +72,7 @@ export default function WhoIsItFor() {
       whileInView="show"
       viewport={{ once: true, margin: "-50px" }}
     >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#5841D8]/20 via-slate-50/20 dark:from-[#5841D8]/20 dark:via-slate-900/20 to-transparent blur-3xl pointer-events-none" />
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-[#4400AF]/20 via-slate-50/20 dark:from-[#4400AF]/20 dark:via-slate-900/20 to-transparent blur-3xl pointer-events-none" />
 
       <div className="max-w-[1400px] mx-auto px-4 md:px-6">
         <motion.div
@@ -82,10 +82,10 @@ export default function WhoIsItFor() {
           }}
           className="text-center mx-auto max-w-2xl mb-12"
         >
-          <span className="bg-[#5841D8]/10 text-[#5841D8] font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">
+          <span className="bg-brand-surface-md text-[#4400AF] font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">
             WHO IT'S FOR
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-slate-900 dark:text-white tracking-tight text-center max-w-2xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold text-text-primary dark:text-white tracking-tight text-center max-w-2xl mx-auto">
             Who is Pagemistri for?
           </h2>
         </motion.div>
@@ -103,15 +103,15 @@ export default function WhoIsItFor() {
                   key={i}
                   variants={itemVariants}
                   whileHover={{ y: -6 }}
-                  className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:shadow-[#5841D8]/5 hover:border-[#5841D8]/40 transition-all duration-200 relative group flex flex-col items-center text-center cursor-default"
+                  className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:shadow-[#4400AF]/5 hover:border-[#4400AF]/40 transition-all duration-200 relative group flex flex-col items-center text-center cursor-default"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-[#5841D8]/10 dark:bg-[#5841D8]/20 text-[#5841D8] dark:text-[#5841D8] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shrink-0">
+                  <div className="w-14 h-14 rounded-2xl bg-brand-surface-md dark:bg-[#4400AF]/20 text-[#4400AF] dark:text-[#4400AF] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shrink-0">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-900 dark:text-white group-hover:text-[#5841D8] dark:group-hover:text-[#5841D8] transition-colors mb-3 leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-text-primary dark:text-white group-hover:text-[#4400AF] dark:group-hover:text-[#4400AF] transition-colors mb-3 leading-snug">
                     {persona.title}
                   </h3>
-                  <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                  <p className="text-sm text-text-muted dark:text-slate-400 leading-relaxed">
                     {persona.description}
                   </p>
                 </motion.div>
@@ -133,7 +133,7 @@ export default function WhoIsItFor() {
         >
           <a
             href="#complete-website-setup"
-            className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-8 py-4 rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2 mx-auto mt-12 group"
+            className="bg-brand hover:bg-brand-hover text-white font-bold px-8 py-4 rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2 mx-auto mt-12 group"
           >
             Get Started
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

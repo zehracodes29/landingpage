@@ -17,10 +17,10 @@ export default function Footer() {
  </a>
  
  <div className="flex flex-wrap justify-center gap-6 md:gap-8">
- <a href="#whats-included" onClick={(e) => scrollToSection(e, '#whats-included')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">What's Included</a>
- <a href="#how-it-works" onClick={(e) => scrollToSection(e, '#how-it-works')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">How It Works</a>
- <a href="#pricing" onClick={(e) => scrollToSection(e, '#pricing')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">Pricing</a>
- <a href="#faq" onClick={(e) => scrollToSection(e, '#faq')} className="text-[#4B5563] dark:text-slate-400 hover:text-[#4400AF] transition-colors text-[14px] font-medium">FAQ</a>
+ <a href="#whats-included" onClick={(e) => scrollToSection(e, '#whats-included')} className="text-[#4B5563] dark:text-slate-400 hover:text-brand transition-colors text-[14px] font-medium">What's Included</a>
+ <a href="#how-it-works" onClick={(e) => scrollToSection(e, '#how-it-works')} className="text-[#4B5563] dark:text-slate-400 hover:text-brand transition-colors text-[14px] font-medium">How It Works</a>
+ <a href="#pricing" onClick={(e) => scrollToSection(e, '#pricing')} className="text-[#4B5563] dark:text-slate-400 hover:text-brand transition-colors text-[14px] font-medium">Pricing</a>
+ <a href="#faq" onClick={(e) => scrollToSection(e, '#faq')} className="text-[#4B5563] dark:text-slate-400 hover:text-brand transition-colors text-[14px] font-medium">FAQ</a>
  </div>
 
  <div className="flex items-center gap-6">
@@ -56,7 +56,7 @@ export default function Footer() {
                 href="https://socialmistry.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800/80 text-xs text-slate-600 dark:text-slate-400 font-medium hover:border-purple-300 dark:hover:border-purple-500 transition-colors border border-transparent"
+                className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 dark:bg-slate-800/80 text-xs text-text-muted dark:text-slate-400 font-medium hover:border-purple-300 dark:hover:border-purple-500 transition-colors border border-transparent"
               >
                 A Product of Socialmistry
               </a>
@@ -72,8 +72,8 @@ export default function Footer() {
             </div>
           </div>
           <div className="flex gap-4">
-            <Link href="/terms-of-service" className="text-sm text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">Terms of Service</Link>
-            <Link href="/privacy-policy" className="text-sm text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors">
+            <Link href="/terms-of-service" className="text-sm text-text-muted dark:text-slate-400 hover:text-brand dark:hover:text-purple-400 transition-colors">Terms of Service</Link>
+            <Link href="/privacy-policy" className="text-sm text-text-muted dark:text-slate-400 hover:text-brand dark:hover:text-purple-400 transition-colors">
               Privacy Policy
             </Link>
           </div>

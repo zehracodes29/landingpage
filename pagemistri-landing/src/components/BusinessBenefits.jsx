@@ -31,14 +31,14 @@ const BusinessBenefits = () => {
  {/* Header Content */}
  <div className="flex flex-col gap-4 w-full mb-10">
  <div className="inline-flex mb-1">
- <span className="bg-purple-100 text-purple-700 dark:bg-purple-950/50 dark:border dark:border-purple-800/50 dark:text-purple-300 text-xs font-bold px-3 py-1.5 rounded-full tracking-wide shadow-sm uppercase">
+ <span className="bg-brand-surface-sm text-brand dark:border text-xs font-bold px-3 py-1.5 rounded-full tracking-wide shadow-sm uppercase">
  👤 BUILT FOR BUSY BUSINESS OWNERS
  </span>
  </div>
- <h2 className="text-[32px] md:text-[40px] lg:text-[46px] font-[800] text-[#111827] dark:text-white leading-[1.2] tracking-tight">
- Your Business Needs Your Time. Your Website <span className="text-purple-600 dark:text-purple-400">Doesn't.</span>
+ <h2 className="text-[32px] md:text-[40px] lg:text-[46px] font-[800] text-text-primary dark:text-white leading-[1.2] tracking-tight">
+ Your Business Needs Your Time. Your Website <span className="text-brand">Doesn't.</span>
  </h2>
- <p className="text-[17px] text-slate-600 dark:text-slate-400 leading-[1.6] max-w-[540px] mt-2">
+ <p className="text-[17px] text-text-muted dark:text-slate-400 leading-[1.6] max-w-[540px] mt-2">
  You're busy running your business. We'll design, build and launch your website - so you can focus on serving your customers.
  </p>
  </div>
@@ -50,12 +50,12 @@ const BusinessBenefits = () => {
  whileHover={{ x: 4 }}
  className="flex gap-[20px] items-start transition-all border-b border-slate-200 dark:border-slate-800/60 pb-6 mb-6"
  >
- <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 shadow-sm">
+ <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-2xl bg-brand-surface-sm dark:bg-brand-surface-sm text-brand shadow-sm">
  <Clock className="w-6 h-6" />
  </div>
  <div className="flex flex-col justify-center pt-0.5">
- <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-1.5">Save Your Time</h3>
- <p className="text-[15px] text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">Focus on running your business while we build your website.</p>
+ <h3 className="text-[17px] font-bold text-text-primary dark:text-white mb-1.5">Save Your Time</h3>
+ <p className="text-[15px] text-text-muted dark:text-slate-400 leading-relaxed max-w-md">Focus on running your business while we build your website.</p>
  </div>
  </motion.div>
 
@@ -64,12 +64,12 @@ const BusinessBenefits = () => {
  whileHover={{ x: 4 }}
  className="flex gap-[20px] items-start transition-all border-b border-slate-200 dark:border-slate-800/60 pb-6 mb-6"
  >
- <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 shadow-sm">
+ <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-2xl bg-brand-surface-sm dark:bg-brand-surface-sm text-brand shadow-sm">
  <LayoutGrid className="w-6 h-6" />
  </div>
  <div className="flex flex-col justify-center pt-0.5">
- <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-1.5">Complete Website Setup</h3>
- <p className="text-[15px] text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">Everything from design and setup to lead collection and analytics.</p>
+ <h3 className="text-[17px] font-bold text-text-primary dark:text-white mb-1.5">Complete Website Setup</h3>
+ <p className="text-[15px] text-text-muted dark:text-slate-400 leading-relaxed max-w-md">Everything from design and setup to lead collection and analytics.</p>
  </div>
  </motion.div>
 
@@ -78,12 +78,12 @@ const BusinessBenefits = () => {
  whileHover={{ x: 4 }}
  className="flex gap-[20px] items-start transition-all"
  >
- <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-2xl bg-purple-100 dark:bg-purple-900/40 text-purple-600 dark:text-purple-400 shadow-sm">
+ <div className="flex h-[48px] w-[48px] shrink-0 items-center justify-center rounded-2xl bg-brand-surface-sm dark:bg-brand-surface-sm text-brand shadow-sm">
  <Sparkles className="w-6 h-6" />
  </div>
  <div className="flex flex-col justify-center pt-0.5">
- <h3 className="text-[17px] font-bold text-slate-900 dark:text-white mb-1.5">Ready in Just 3–5 Days</h3>
- <p className="text-[15px] text-slate-600 dark:text-slate-400 leading-relaxed max-w-md">A professional website delivered quickly without compromising quality.</p>
+ <h3 className="text-[17px] font-bold text-text-primary dark:text-white mb-1.5">Ready in Just 3–5 Days</h3>
+ <p className="text-[15px] text-text-muted dark:text-slate-400 leading-relaxed max-w-md">A professional website delivered quickly without compromising quality.</p>
  </div>
  </motion.div>
  </div>

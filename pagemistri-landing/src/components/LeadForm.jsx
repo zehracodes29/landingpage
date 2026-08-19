@@ -145,7 +145,7 @@ const LeadForm = () => {
  return (
  <div className="w-full font-sans">
  <div className="text-center mb-8">
- <h2 className="text-[28px] md:text-[32px] font-extrabold text-[#111827] dark:text-white tracking-tight leading-tight mb-3">
+ <h2 className="text-[28px] md:text-[32px] font-extrabold text-text-primary dark:text-white tracking-tight leading-tight mb-3">
  Tell Us About Your Business
  </h2>
  <p className="text-[15px] text-[#4B5563] dark:text-slate-400 leading-relaxed max-w-xl mx-auto">
@@ -161,18 +161,18 @@ const LeadForm = () => {
  {step === 1 ? (
  <>
  <div className="flex items-center gap-2.5">
- <div className="h-3 w-3 rounded-full bg-purple-600 ring-4 ring-purple-100 " />
- <div className="h-1 w-10 rounded-full bg-purple-100 " />
+ <div className="h-3 w-3 rounded-full bg-brand ring-4 ring-purple-100" />
+ <div className="h-1 w-10 rounded-full bg-brand-surface-sm" />
  </div>
- <div className="h-2.5 w-2.5 rounded-full bg-slate-200 " />
+ <div className="h-2.5 w-2.5 rounded-full bg-slate-200" />
  </>
  ) : (
  <>
  <div className="flex items-center gap-2.5">
- <div className="h-2.5 w-2.5 rounded-full bg-purple-600" />
- <div className="h-1 w-10 rounded-full bg-purple-600" />
+ <div className="h-2.5 w-2.5 rounded-full bg-brand" />
+ <div className="h-1 w-10 rounded-full bg-brand" />
  </div>
- <div className="h-3 w-3 rounded-full bg-purple-600 ring-4 ring-purple-100 " />
+ <div className="h-3 w-3 rounded-full bg-brand ring-4 ring-purple-100" />
  </>
  )}
  </div>
@@ -198,7 +198,7 @@ const LeadForm = () => {
  <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Full name <span className="text-red-500">*</span>
  </label>
  <input 
@@ -207,13 +207,13 @@ const LeadForm = () => {
  value={formData.fullName}
  onChange={handleInputChange}
  placeholder="Enter your full name" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.fullName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.fullName && <p className="text-red-500 text-[10px] mt-1">{errors.fullName}</p>}
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Business name <span className="text-red-500">*</span>
  </label>
  <input 
@@ -222,7 +222,7 @@ const LeadForm = () => {
  value={formData.businessName}
  onChange={handleInputChange}
  placeholder="Enter your business name" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.businessName ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.businessName && <p className="text-red-500 text-[10px] mt-1">{errors.businessName}</p>}
  </div>
@@ -230,7 +230,7 @@ const LeadForm = () => {
 
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Email <span className="text-red-500">*</span>
  </label>
  <input 
@@ -239,13 +239,13 @@ const LeadForm = () => {
  value={formData.email}
  onChange={handleInputChange}
  placeholder="you@example.com" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.email ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.email && <p className="text-red-500 text-[10px] mt-1">{errors.email}</p>}
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Phone number <span className="text-red-500">*</span>
  </label>
  <input 
@@ -254,38 +254,38 @@ const LeadForm = () => {
  value={formData.phone}
  onChange={handleInputChange}
  placeholder="+91 XXXXX XXXXX" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.phone ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.phone && <p className="text-red-500 text-[10px] mt-1">{errors.phone}</p>}
  </div>
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Business Category <span className="text-red-500">*</span>
  </label>
  <select 
  name="category"
  value={formData.category}
  onChange={handleInputChange}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 transition-all appearance-none`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.category ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 focus:outline-none focus:ring-2 transition-all appearance-none`}
  style={{ backgroundImage: "url(\"data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\")", backgroundPosition: "right 0.875rem center", backgroundRepeat: "no-repeat", backgroundSize: "1em" }}
  >
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="" disabled>Select category</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="coach">Coach / Consultant</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="healthcare">Healthcare</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="real-estate">Real Estate</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="restaurant">Restaurant / Café</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="salon">Salon / Spa</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="education">Education</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="retail">Retail Store</option>
- <option className="bg-white dark:bg-slate-900 text-slate-900 dark:text-slate-100" value="other">Other</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="" disabled>Select category</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="coach">Coach / Consultant</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="healthcare">Healthcare</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="real-estate">Real Estate</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="restaurant">Restaurant / Café</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="salon">Salon / Spa</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="education">Education</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="retail">Retail Store</option>
+ <option className="bg-white dark:bg-slate-900 text-text-primary dark:text-slate-100" value="other">Other</option>
  </select>
  {errors.category && <p className="text-red-500 text-[10px] mt-1">{errors.category}</p>}
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  What do you offer? <span className="text-red-500">*</span>
  </label>
  <input 
@@ -294,7 +294,7 @@ const LeadForm = () => {
  value={formData.offering}
  onChange={handleInputChange}
  placeholder="e.g. Interior Design Services, Home Bakery" 
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.offering ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all`}
  />
  {errors.offering && <p className="text-red-500 text-[10px] mt-1">{errors.offering}</p>}
  </div>
@@ -302,7 +302,7 @@ const LeadForm = () => {
  <div className="pt-2">
  <button 
  type="submit" 
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-[#4400AF] hover:bg-[#310080] text-white transition-all shadow-md dark:shadow-none shadow-purple-500/20 active:scale-95"
+ className="py-2.5 px-6 rounded-xl font-bold text-sm bg-brand hover:bg-brand-hover text-white transition-all shadow-md dark:shadow-none shadow-purple-500/20 active:scale-95"
  >
  Start My Website
  </button>
@@ -330,14 +330,14 @@ const LeadForm = () => {
  <form className="space-y-4" onSubmit={handleSubmit}>
  
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Do you already have a website? <span className="text-red-500">*</span>
  </label>
  <div className="grid grid-cols-2 gap-3">
 <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasWebsite === 'Yes' 
- ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 ring-1 ring-purple-600 shadow-sm dark:shadow-none'
- : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
+ ? 'border-brand bg-brand-surface-xs dark:bg-brand-surface-sm text-brand  ring-1 ring-brand shadow-sm dark:shadow-none'
+ : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-text-muted dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
  }`}>
  <input 
  type="radio" 
@@ -351,8 +351,8 @@ const LeadForm = () => {
  </label>
  <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasWebsite === 'No' 
- ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 ring-1 ring-purple-600 shadow-sm dark:shadow-none'
- : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
+ ? 'border-brand bg-brand-surface-xs dark:bg-brand-surface-sm text-brand  ring-1 ring-brand shadow-sm dark:shadow-none'
+ : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-text-muted dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
  }`}>
  <input 
  type="radio" 
@@ -369,14 +369,14 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Do you already have a domain? <span className="text-red-500">*</span>
  </label>
  <div className="grid grid-cols-2 gap-3">
 <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasDomain === 'Yes' 
- ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 ring-1 ring-purple-600 shadow-sm dark:shadow-none'
- : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
+ ? 'border-brand bg-brand-surface-xs dark:bg-brand-surface-sm text-brand  ring-1 ring-brand shadow-sm dark:shadow-none'
+ : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-text-muted dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
  }`}>
  <input 
  type="radio" 
@@ -390,8 +390,8 @@ const LeadForm = () => {
  </label>
  <label className={`cursor-pointer rounded-xl border py-3 text-center font-medium transition-all ${
  formData.hasDomain === 'No' 
- ? 'border-purple-600 bg-purple-50 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 ring-1 ring-purple-600 shadow-sm dark:shadow-none'
- : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
+ ? 'border-brand bg-brand-surface-xs dark:bg-brand-surface-sm text-brand  ring-1 ring-brand shadow-sm dark:shadow-none'
+ : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900/80 text-text-muted dark:text-slate-400 hover:border-purple-400 dark:hover:border-purple-500 hover:bg-slate-50 dark:hover:bg-slate-800/60 hover:shadow-sm dark:shadow-none'
  }`}>
  <input 
  type="radio" 
@@ -408,14 +408,14 @@ const LeadForm = () => {
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Why do you want a website? <span className="text-red-500">*</span>
  </label>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
  {['Get More Enquiries', 'Build Trust', 'Showcase My Business', 'Replace My Current Website'].map(goal => (
  <label key={goal} className={`flex items-center gap-3 p-3 border rounded-xl cursor-pointer transition-all ${
  formData.websiteGoals.includes(goal) 
- ? 'border-purple-600 bg-purple-50 ring-1 ring-purple-600 shadow-sm dark:shadow-none' 
+ ? 'border-brand bg-brand-surface-xs ring-1 ring-brand shadow-sm dark:shadow-none' 
  : 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 hover:border-purple-400 hover:bg-slate-50 dark:bg-slate-900/50 hover:shadow-sm dark:shadow-none'
  }`}>
  <input 
@@ -424,9 +424,9 @@ const LeadForm = () => {
  value={goal}
  checked={formData.websiteGoals.includes(goal)}
  onChange={handleInputChange}
- className="w-4 h-4 text-purple-600 border-slate-300 rounded focus:ring-purple-600"
+ className="w-4 h-4 text-brand border-slate-300 rounded focus:ring-brand"
  />
- <span className={`text-sm font-medium ${formData.websiteGoals.includes(goal) ? 'text-purple-700' : 'text-slate-600 dark:text-slate-400'}`}>{goal}</span>
+ <span className={`text-sm font-medium ${formData.websiteGoals.includes(goal) ? 'text-brand' : 'text-text-muted dark:text-slate-400'}`}>{goal}</span>
  </label>
  ))}
  </div>
@@ -435,7 +435,7 @@ const LeadForm = () => {
 
  {formData.hasWebsite === 'Yes' && (
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  If you have a website - Enter your URL:
  </label>
  <input 
@@ -444,13 +444,13 @@ const LeadForm = () => {
  value={formData.websiteUrl}
  onChange={handleInputChange}
  placeholder="https://example.com" 
- className="w-full py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-500/20 focus:border-purple-500 dark:focus:border-purple-500 transition-all"
+ className="w-full py-2.5 px-3.5 text-sm rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-purple-500/20 dark:focus:ring-purple-500/20 focus:border-purple-500 dark:focus:border-purple-500 transition-all"
  />
  </div>
  )}
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Tell us about your website <span className="text-red-500">*</span>
  </label>
  <textarea 
@@ -459,13 +459,13 @@ const LeadForm = () => {
  onChange={handleInputChange}
  placeholder="Describe your current website..." 
  rows={2}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all max-h-32 overflow-y-auto`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.websiteDescription ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all max-h-32 overflow-y-auto`}
  />
  {errors.websiteDescription && <p className="text-red-500 text-[10px] mt-1">{errors.websiteDescription}</p>}
  </div>
 
  <div>
- <label className="text-sm font-semibold text-slate-500 dark:text-slate-400 mb-2 block">
+ <label className="text-sm font-semibold text-text-secondary dark:text-slate-400 mb-2 block">
  Message <span className="text-red-500">*</span>
  </label>
  <textarea 
@@ -474,7 +474,7 @@ const LeadForm = () => {
  onChange={handleInputChange}
  placeholder="Anything else we should know?" 
  rows={2}
- className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 transition-all max-h-32 overflow-y-auto`}
+ className={`w-full py-2.5 px-3.5 text-sm rounded-xl border ${errors.message ? 'border-red-500 focus:ring-red-500/20' : 'border-slate-200 dark:border-slate-700 focus:border-purple-500 dark:focus:border-purple-500 focus:ring-purple-500/20 dark:focus:ring-purple-500/20'} bg-white dark:bg-slate-900/90 text-text-primary dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-text-secondary focus:outline-none focus:ring-2 transition-all max-h-32 overflow-y-auto`}
  />
  {errors.message && <p className="text-red-500 text-[10px] mt-1">{errors.message}</p>}
  </div>
@@ -495,14 +495,14 @@ const LeadForm = () => {
  type="button" 
  onClick={handleBack}
  disabled={isSubmitting}
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-white dark:bg-slate-900 border border-slate-300 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-900/50 transition-all shadow-sm dark:shadow-none disabled:opacity-50"
+ className="py-2.5 px-6 rounded-xl font-bold text-sm bg-white dark:bg-slate-900 border border-slate-300 text-text-muted dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-900/50 transition-all shadow-sm dark:shadow-none disabled:opacity-50"
  >
  Back
  </button>
  <button 
  type="submit" 
  disabled={isSubmitting}
- className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-[#4400AF] text-white transition-all shadow-md dark:shadow-none flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#310080] shadow-purple-500/20 active:scale-95'}`}
+ className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-brand text-white transition-all shadow-md dark:shadow-none flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-brand-hover shadow-purple-500/20 active:scale-95'}`}
  >
  {isSubmitting ? (
  <>

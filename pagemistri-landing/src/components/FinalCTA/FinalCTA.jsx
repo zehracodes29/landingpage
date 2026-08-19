@@ -7,11 +7,11 @@ const FinalCTA = () => {
  <div className="bg-gradient-to-br from-purple-950 via-slate-900 to-indigo-950 text-white rounded-3xl p-8 md:p-14 shadow-2xl relative overflow-hidden text-center flex flex-col items-center">
 
  {/* Ambient Glow */}
- <div className="absolute -top-24 -right-24 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl pointer-events-none"></div>
+ <div className="absolute -top-24 -right-24 w-72 h-72 bg-brand-surface-xs0/20 rounded-full blur-3xl pointer-events-none"></div>
  <div className="absolute -bottom-24 -left-24 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl pointer-events-none"></div>
 
  {/* Badge */}
- <span className="px-3 py-1 text-xs font-semibold rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 mb-6 inline-block relative z-10">
+ <span className="px-3 py-1 text-xs font-semibold rounded-full bg-brand-surface-xs0/20 text-brand border border-purple-500/30 mb-6 inline-block relative z-10">
  ⚡ Ready to get started?
  </span>
 
@@ -29,20 +29,20 @@ const FinalCTA = () => {
  <div className="relative z-10 flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-3xl mx-auto">
  <a
  href="#complete-website-setup"
- className="w-full md:w-auto bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-4 px-8 rounded-xl shadow-md dark:shadow-none shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap inline-block"
+ className="w-full md:w-auto bg-brand hover:bg-brand-hover text-white font-bold py-4 px-8 rounded-xl shadow-md dark:shadow-none shadow-purple-500/25 transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap inline-block"
  >
  Start My Website <span>&rarr;</span>
  </a>
  <button
  onClick={() => document.getElementById('how-it-works')?.scrollIntoView({ behavior: 'smooth' })}
- className="w-full md:w-auto border border-purple-400/40 hover:bg-purple-500/10 text-purple-200 font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
+ className="w-full md:w-auto border border-purple-400/40 hover:bg-brand-surface-xs0/10 text-white font-bold py-4 px-8 rounded-xl transition-all duration-300 hover:scale-105 active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap"
  >
  See How It Works
  </button>
  </div>
 
  {/* DIY Note */}
- <p className="text-[13.5px] text-purple-200/70 max-w-2xl mx-auto mt-6 text-center relative z-10 leading-relaxed">
+ <p className="text-[13.5px] text-white/70 max-w-2xl mx-auto mt-6 text-center relative z-10 leading-relaxed">
  Prefer a DIY approach? If you don't need our one-time website delivery service, you can also build your landing page yourself using our two self-serve package options.
  </p>
 
