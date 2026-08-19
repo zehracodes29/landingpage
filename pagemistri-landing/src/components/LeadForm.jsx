@@ -144,37 +144,16 @@ const LeadForm = () => {
 
  return (
  <div className="w-full font-sans">
- <div className="text-center mb-8">
- <h2 className="text-[28px] md:text-[32px] font-extrabold text-[#111827] dark:text-white tracking-tight leading-tight mb-3">
- Tell Us About Your Business
- </h2>
- <p className="text-[15px] text-[#4B5563] dark:text-slate-400 leading-relaxed max-w-xl mx-auto">
- Fill out the quick form below to start your custom website build.
- </p>
+ <div className="mb-6">
+ <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Start Your Website</h3>
+ <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Tell us about your business and we'll take care of the rest.</p>
  </div>
 
  <div className="w-full relative flex items-center justify-center">
  <div className="bg-transparent shadow-none border-none p-0 sm:p-2 w-full max-w-lg mx-auto relative z-10 overflow-visible min-h-[540px]">
  
- {/* Step Indicators */}
- <div className="flex items-center justify-center gap-2.5 mb-4 relative z-20 sticky top-0 bg-transparent py-2">
- {step === 1 ? (
- <>
- <div className="flex items-center gap-2.5">
- <div className="h-3 w-3 rounded-full bg-[#4400AF] ring-4 ring-purple-100" />
- <div className="h-1 w-10 rounded-full bg-[rgba(68,0,175,0.08)]" />
- </div>
- <div className="h-2.5 w-2.5 rounded-full bg-slate-200" />
- </>
- ) : (
- <>
- <div className="flex items-center gap-2.5">
- <div className="h-2.5 w-2.5 rounded-full bg-[#4400AF]" />
- <div className="h-1 w-10 rounded-full bg-[#4400AF]" />
- </div>
- <div className="h-3 w-3 rounded-full bg-[#4400AF] ring-4 ring-purple-100" />
- </>
- )}
+ <div className="text-xs font-semibold text-slate-400 uppercase mb-4">
+ Step {step} of 2
  </div>
 
  <div className="relative">
@@ -189,11 +168,6 @@ const LeadForm = () => {
  exit="exit"
  transition={{ duration: 0.35, ease: "easeInOut" }}
  >
- <div className="text-center mb-4">
- <p className="text-xs tracking-wider text-slate-400 font-bold uppercase">
- TELL US ABOUT YOUR BUSINESS
- </p>
- </div>
 
  <form className="space-y-4" onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -490,26 +464,26 @@ const LeadForm = () => {
  {submitMessage}
  </div>
  )}
- <div className="flex justify-between items-center w-full">
+ <div className="flex justify-between items-center w-full gap-3">
  <button 
  type="button" 
  onClick={handleBack}
  disabled={isSubmitting}
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-white dark:bg-slate-900 border border-slate-300 text-[#6B7280] dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-900/50 transition-all shadow-sm dark:shadow-none disabled:opacity-50"
+ className="py-3.5 px-6 rounded-xl font-bold text-sm bg-white dark:bg-slate-900 border border-slate-300 text-[#6B7280] dark:text-slate-400 hover:bg-slate-50 dark:bg-slate-900/50 transition-all shadow-sm dark:shadow-none disabled:opacity-50"
  >
  Back
  </button>
  <button 
  type="submit" 
  disabled={isSubmitting}
- className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-[#4400AF] text-white transition-all shadow-md dark:shadow-none flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#310080] shadow-purple-500/20 active:scale-95'}`}
+ className={`flex-1 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-3.5 rounded-xl shadow-md transition-all active:scale-95 text-base flex justify-center items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : ''}`}
  >
  {isSubmitting ? (
  <>
  <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
  Submitting...
  </>
- ) : "Start My Website"}
+ ) : "Start My Website →"}
  </button>
  </div>
  </div>
@@ -517,6 +491,10 @@ const LeadForm = () => {
  </motion.div>
  )}
  </AnimatePresence>
+ <div className="flex justify-between items-center text-xs text-slate-500 mt-4 px-1 w-full">
+   <span>₹5,000 one-time</span>
+   <span>No hidden fees</span>
+ </div>
  </div>
  </div>
  </div>
