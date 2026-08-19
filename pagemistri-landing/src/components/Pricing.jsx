@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Layout, LineChart, Rocket } from 'lucide-react';
 
 const Pricing = () => {
   const scrollToLeadForm = () => {
@@ -26,71 +26,87 @@ const Pricing = () => {
         <div id="pricing" className="scroll-mt-24 max-w-5xl mx-auto">
           
           {/* STEP 1: One-Time Setup Cost */}
-          <div className="text-center mb-10">
-            <span className="inline-block bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3">
-              STEP 1: ONE-TIME SETUP
+          <div className="text-center mb-0">
+            <span className="inline-block bg-purple-100 dark:bg-purple-950/60 text-purple-700 dark:text-purple-300 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-3">
+              STEP 1 &bull; ONE-TIME SETUP
             </span>
-            <h2 className="text-3xl font-bold text-slate-900 dark:text-white mb-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-2 text-center">
               Setup Cost
             </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-10 text-center">
+              Everything you need to go live—handled by us.
+            </p>
           </div>
 
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-4xl mx-auto rounded-3xl bg-purple-50/60 dark:bg-slate-900/60 border border-purple-200/80 dark:border-slate-800 p-8 mb-12 shadow-sm"
+            className="max-w-4xl mx-auto p-6 sm:p-10 bg-slate-50/50 dark:bg-slate-900/50 rounded-3xl border border-slate-200/80 dark:border-slate-800 shadow-sm relative mb-12"
           >
-            {/* Left Side (Context & Copy) */}
-            <div>
-              <p className="text-base text-slate-600 dark:text-slate-400 mb-8 leading-relaxed">
-                We take care of the entire design, build, and setup process from scratch so you don't have to spend hours trying to build a website yourself. Get a complete, fully functional, and high-converting professional business website built specifically for your brand.
-              </p>
-              <ul className="space-y-3">
-                <li className="flex items-center gap-3 text-slate-800 dark:text-slate-200 font-semibold">
-                  <Check className="text-purple-600 w-5 h-5 shrink-0" /> Zero tech hassle
-                </li>
-                <li className="flex items-center gap-3 text-slate-800 dark:text-slate-200 font-semibold">
-                  <Check className="text-purple-600 w-5 h-5 shrink-0" /> Fully managed setup
-                </li>
-                <li className="flex items-center gap-3 text-slate-800 dark:text-slate-200 font-semibold">
-                  <Check className="text-purple-600 w-5 h-5 shrink-0" /> Ready to collect leads from Day 1
-                </li>
-              </ul>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+              {/* Left Side (3 Value Proposition Cards - 5 Columns) */}
+              <div className="lg:col-span-5 flex flex-col gap-4">
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
+                  <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full shrink-0">
+                    <Layout className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300">We design & build a stunning website for your brand.</p>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
+                  <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full shrink-0">
+                    <LineChart className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300">We set up everything you need to start collecting leads.</p>
+                </div>
+                
+                <div className="flex items-center gap-4 p-4 rounded-2xl bg-white dark:bg-slate-800/80 border border-slate-200/60 dark:border-slate-700/60 shadow-sm">
+                  <div className="bg-purple-100 dark:bg-purple-900/50 p-3 rounded-full shrink-0">
+                    <Rocket className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+                  </div>
+                  <p className="text-sm font-medium text-slate-700 dark:text-slate-300">You go live in 3–5 days and start seeing results.</p>
+                </div>
+              </div>
 
-            {/* Right Side (Price & Feature List) */}
-            <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-md">
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">One-Time Payment</h3>
-              <div className="text-4xl font-black text-purple-600 mb-6">₹5,000</div>
+              {/* Right Side (Featured Pricing Box - 7 Columns) */}
+              <div className="lg:col-span-7 bg-white dark:bg-slate-900 border-2 border-purple-200 dark:border-purple-900/50 rounded-3xl p-6 sm:p-8 shadow-xl relative overflow-hidden">
+                <div className="absolute top-0 right-0 bg-purple-700 text-white text-[10px] font-extrabold tracking-widest uppercase px-8 py-1 rotate-45 translate-x-6 translate-y-3 shadow-md">
+                  BEST VALUE
+                </div>
+                
+                <span className="inline-block bg-purple-100 dark:bg-purple-950 text-purple-700 dark:text-purple-300 text-[11px] font-bold tracking-wider uppercase px-3 py-1 rounded-full mb-2">
+                  ONE-TIME PAYMENT
+                </span>
+                <div className="text-4xl sm:text-5xl font-black text-purple-700 dark:text-purple-400 my-2">₹5,000</div>
 
-              <ul className="space-y-3 mb-8">
-                {setupFeatures.map((feature, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
-                    <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{feature}</span>
-                  </li>
-                ))}
-              </ul>
+                <ul className="space-y-3 mt-6 mb-8">
+                  {setupFeatures.map((feature, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
+                      <span className="text-slate-700 dark:text-slate-300 font-medium text-sm">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
 
-              <button 
-                onClick={scrollToLeadForm}
-                className="bg-purple-700 hover:bg-purple-800 text-white w-full py-3.5 rounded-xl font-bold transition-all shadow-md active:scale-95"
-              >
-                Let's Build My Website
-              </button>
-            </div>
-
-            <div className="lg:col-span-2 mt-2 pt-6 border-t border-purple-200/60 dark:border-slate-800/60 text-center">
-              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
-                Don't want to pay this much?{' '}
-                <a 
-                  href="#step-2-pricing" 
-                  className="text-purple-600 dark:text-purple-400 font-bold underline underline-offset-4 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+                <button 
+                  onClick={scrollToLeadForm}
+                  className="w-full mt-6 bg-purple-700 hover:bg-purple-800 text-white font-bold py-3.5 rounded-2xl shadow-lg transition-all active:scale-95"
                 >
-                  Do it yourself →
-                </a>
-              </p>
+                  Let's Build My Website
+                </button>
+              </div>
+            </div>
+
+            {/* Bottom Skip Link */}
+            <div className="mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-800/60 text-center text-sm text-slate-600 dark:text-slate-400">
+              Don't want to pay this much?{' '}
+              <a 
+                href="#step-2-pricing" 
+                className="text-purple-600 dark:text-purple-400 font-bold underline underline-offset-4 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+              >
+                Do it yourself →
+              </a>
             </div>
           </motion.div>
 
