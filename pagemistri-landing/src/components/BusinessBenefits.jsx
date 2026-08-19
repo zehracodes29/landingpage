@@ -35,8 +35,8 @@ const BusinessBenefits = () => {
  👤 BUILT FOR BUSY BUSINESS OWNERS
  </span>
  </div>
- <h2 className="text-[32px] md:text-[40px] lg:text-[46px] font-[800] text-[#111827] dark:text-white leading-[1.2] tracking-tight">
- Your Business Needs Your Time. Your Website <span className="text-[#4400AF]">Doesn't.</span>
+ <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+ Your Business Needs Your Time. Your Website Doesn't.
  </h2>
  <p className="text-[17px] text-[#6B7280] dark:text-slate-400 leading-[1.6] max-w-[540px] mt-2">
  You're busy running your business. We'll design, build and launch your website - so you can focus on serving your customers.
@@ -54,7 +54,7 @@ const BusinessBenefits = () => {
  <Clock className="w-6 h-6" />
  </div>
  <div className="flex flex-col justify-center pt-0.5">
- <h3 className="text-[17px] font-bold text-[#111827] dark:text-white mb-1.5">Save Your Time</h3>
+ <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1.5">Save Your Time</h3>
  <p className="text-[15px] text-[#6B7280] dark:text-slate-400 leading-relaxed max-w-md">Focus on running your business while we build your website.</p>
  </div>
  </motion.div>
@@ -68,7 +68,7 @@ const BusinessBenefits = () => {
  <LayoutGrid className="w-6 h-6" />
  </div>
  <div className="flex flex-col justify-center pt-0.5">
- <h3 className="text-[17px] font-bold text-[#111827] dark:text-white mb-1.5">Complete Website Setup</h3>
+ <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1.5">Complete Website Setup</h3>
  <p className="text-[15px] text-[#6B7280] dark:text-slate-400 leading-relaxed max-w-md">Everything from design and setup to lead collection and analytics.</p>
  </div>
  </motion.div>
@@ -82,7 +82,7 @@ const BusinessBenefits = () => {
  <Sparkles className="w-6 h-6" />
  </div>
  <div className="flex flex-col justify-center pt-0.5">
- <h3 className="text-[17px] font-bold text-[#111827] dark:text-white mb-1.5">Ready in Just 3–5 Days</h3>
+ <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-1.5">Ready in Just 3–5 Days</h3>
  <p className="text-[15px] text-[#6B7280] dark:text-slate-400 leading-relaxed max-w-md">A professional website delivered quickly without compromising quality.</p>
  </div>
  </motion.div>

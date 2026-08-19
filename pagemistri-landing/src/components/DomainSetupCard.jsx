@@ -3,9 +3,9 @@ import React from 'react';
 const DomainSetupCard = () => {
   return (
     <div className="bg-[#4400AF] text-white p-8 sm:p-10 rounded-3xl shadow-xl border border-purple-800/50 relative overflow-hidden max-w-5xl mx-auto my-12">
-      <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 text-center">
+      <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 text-center">
         Need a Custom Domain?
-      </h2>
+      </h3>
       <p className="text-purple-100/90 text-sm sm:text-base text-center max-w-md mx-auto mb-8">
         Already have one? We'll connect it. Don't have one yet? We'll guide you through buying the right domain for your business.
       </p>

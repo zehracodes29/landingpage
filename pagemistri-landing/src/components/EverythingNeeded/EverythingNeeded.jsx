@@ -49,8 +49,8 @@ const EverythingNeeded = () => {
  ✨ COMPLETE BUSINESS WEBSITE SETUP
  </span>
  </div>
- <h2 className="text-[32px] md:text-[40px] font-[800] text-[#111827] dark:text-white tracking-tight leading-tight mb-4">
- Everything Your Business Needs to <span className="text-[#4400AF]">Get Online</span>
+ <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+ Everything Your Business Needs to Get Online
  </h2>
  </div>
 
@@ -63,7 +63,7 @@ const EverythingNeeded = () => {
  <div className="bg-[rgba(68,0,175,0.08)] dark:bg-[rgba(68,0,175,0.08)] text-[#4400AF] rounded-xl p-2.5 w-fit mb-2.5 transition-colors group-hover:bg-purple-200">
  <feature.icon className="w-5 h-5" strokeWidth={2} />
  </div>
- <h3 className="text-[#111827] dark:text-slate-100 font-bold text-sm mb-1">
+ <h3 className="text-lg font-bold text-slate-900 mb-1">
  {feature.title}
  </h3>
  <p className="text-[#52627A] dark:text-slate-400 text-xs leading-relaxed">

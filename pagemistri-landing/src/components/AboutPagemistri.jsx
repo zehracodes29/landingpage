@@ -15,8 +15,8 @@ export function AboutPagemistri() {
               ABOUT PAGEMISTRI
             </div>
 
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-black font-sans text-[#111827] dark:text-white tracking-tight">
-              What is <span className="text-[#4400AF]">Pagemistri?</span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+              What is Pagemistri?
             </h2>
 
             <div className="space-y-6 text-lg text-[#6B7280] dark:text-slate-300 leading-relaxed">

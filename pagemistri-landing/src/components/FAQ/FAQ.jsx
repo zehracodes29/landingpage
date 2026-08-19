@@ -56,9 +56,9 @@ const FAQ = () => {
  <div className="mb-6">
   <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-1.5">FAQ</span>
  </div>
- <SectionTitle>
+ <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
   Questions that linger in your mind?
- </SectionTitle>
+ </h2>
  </div>
 
  <div className="space-y-4">
@@ -71,7 +71,7 @@ const FAQ = () => {
  onClick={() => toggleFAQ(index)}
  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
  >
- <h3 className={`text-[17px] font-semibold ${openIndex === index ? 'text-[#4400AF] dark:text-white' : 'text-[#111827] dark:text-white'}`}>
+ <h3 className="text-base sm:text-lg font-semibold text-slate-900">
  {faq.question}
  </h3>
  <svg 

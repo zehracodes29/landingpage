@@ -50,7 +50,7 @@ const Process = () => {
  <div className="mb-6 inline-flex">
  <SectionBadge>Simple 5-Step Process</SectionBadge>
  </div>
- <h2 className="text-[32px] md:text-[44px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15] mb-6">
+ <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
  Getting Your Business Online Is Easier Than You Think
  </h2>
  <p className="text-[17px] text-[#4B5563] dark:text-slate-400 leading-[1.6]">
@@ -89,7 +89,7 @@ const Process = () => {
  
  {/* Content */}
  <div className="px-2">
- <h3 className="text-base font-bold text-[#111827] dark:text-white mb-2 leading-tight">
+ <h3 className="text-base font-bold text-slate-900 mb-2">
  {step.title}
  </h3>
  <p className="text-xs text-[#6B7280] dark:text-slate-400 leading-relaxed">
@@ -122,7 +122,7 @@ const Process = () => {
  
  {/* Content Card */}
  <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/60 shadow-sm dark:shadow-none flex-1">
- <h3 className="text-sm font-bold text-[#111827] dark:text-white mb-1.5">
+ <h3 className="text-base font-bold text-slate-900 mb-1.5">
  {step.title}
  </h3>
  <p className="text-xs text-[#6B7280] dark:text-slate-400 leading-relaxed">

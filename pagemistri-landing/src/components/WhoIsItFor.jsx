@@ -85,7 +85,7 @@ export default function WhoIsItFor() {
           <span className="bg-[rgba(68,0,175,0.10)] text-[#4400AF] font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">
             WHO CAN USE
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-[#111827] dark:text-white tracking-tight text-center max-w-2xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
             Who is Pagemistri for?
           </h2>
         </motion.div>
@@ -108,7 +108,7 @@ export default function WhoIsItFor() {
                   <div className="w-14 h-14 rounded-2xl bg-[rgba(68,0,175,0.10)] dark:bg-[#4400AF]/20 text-[#4400AF] dark:text-[#4400AF] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shrink-0">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-[#111827] dark:text-white group-hover:text-[#4400AF] dark:group-hover:text-[#4400AF] transition-colors mb-3 leading-snug">
+                  <h3 className="text-lg font-bold text-slate-900 mb-3">
                     {persona.title}
                   </h3>
                   <p className="text-sm text-[#6B7280] dark:text-slate-400 leading-relaxed">

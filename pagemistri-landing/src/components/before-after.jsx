@@ -34,8 +34,8 @@ export function BeforeAfterSection() {
               YOUR BUSINESS WITHOUT PAGEMISTRI
             </span>
             
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
-              From chaos to <span className="text-[#4400AF]">clarity.</span> In one switch.
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
+              From chaos to clarity. In one switch.
             </h2>
             
             <p className="text-lg text-slate-600 dark:text-slate-400 mb-10 leading-relaxed max-w-md">
@@ -208,7 +208,7 @@ export function BeforeAfterSection() {
 
                     <div className="bg-white dark:bg-zinc-950 rounded-3xl p-6 sm:p-8 shadow-2xl border border-gray-100/80 dark:border-zinc-800/80">
                       
-                      <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-6">Lead Dashboard</h3>
+                      <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-6">Lead Dashboard</h3>
                       
                       {/* KPI Metrics Row */}
                       <div className="grid grid-cols-4 gap-2 sm:gap-4 mb-6">

@@ -22,8 +22,8 @@ const Hero = () => {
  <SectionBadge>Complete website setup from ₹5,000.</SectionBadge>
  </div>
  
- <h1 className="text-4xl sm:text-5xl lg:text-5xl xl:text-6xl font-extrabold text-[#111827] dark:text-white leading-tight tracking-tight mb-6">
- A Professional<br className="hidden lg:block" /> Business Website That Helps You<br className="hidden lg:block" /> Collect Leads
+ <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-slate-900 leading-tight">
+ A Professional Business Website That Helps You Collect Leads
  </h1>
  
  <p className="text-lg md:text-xl text-[#6B7280] dark:text-slate-400 max-w-2xl mx-auto lg:mx-0 mb-8 leading-relaxed">

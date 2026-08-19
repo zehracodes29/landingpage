@@ -145,7 +145,7 @@ const LeadForm = () => {
  return (
  <div className="w-full font-sans">
  <div className="mb-6">
- <h3 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">Start Your Website</h3>
+ <h3 className="text-xl sm:text-2xl font-bold text-slate-900 mb-2">Start Your Website</h3>
  <p className="text-slate-500 dark:text-slate-400 text-sm mb-6">Tell us about your business and we'll take care of the rest.</p>
  </div>
 

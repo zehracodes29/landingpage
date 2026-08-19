@@ -25,7 +25,7 @@ const FormSection = () => {
               ✦ COMPLETE WEBSITE SETUP · ₹5,000 ONE-TIME
             </span>
             
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white leading-tight mb-3">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
               Everything You Need to Launch Your Website
             </h2>
             

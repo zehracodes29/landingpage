@@ -26,7 +26,7 @@ const Pricing = () => {
             <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-1.5">
               STEP 1 &bull; ENVIRONMENT-SETUP
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-white mb-1 text-center">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
               OneTime Setup Cost
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7280] dark:text-slate-400 mb-4 sm:mb-6 text-center">
@@ -123,7 +123,7 @@ const Pricing = () => {
             <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-1">
               STEP 2: MONTHLY HOSTING
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-[#111827] dark:text-white mb-1">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight mb-4">
               Choose Your Monthly Plan
             </h2>
             <p className="text-xs sm:text-sm text-[#6B7280] dark:text-slate-400 max-w-xl mx-auto text-center mb-4 sm:mb-6">
@@ -144,7 +144,7 @@ const Pricing = () => {
                   <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[rgba(68,0,175,0.08)] rounded-full flex items-center justify-center text-[#4400AF] mb-2">
                     <Cloud className="w-5 h-5" strokeWidth={2} />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Hosted by Pagemistri</h3>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">Hosted by Pagemistri</h3>
                   <div className="flex items-end gap-1 mb-4 pb-4 border-b border-slate-100">
                     <span className="text-2xl sm:text-3xl font-extrabold">₹99</span>
                     <span className="text-[#52627A] mb-1">/month</span>
@@ -186,7 +186,7 @@ const Pricing = () => {
                   <div className="w-10 h-10 sm:w-11 sm:h-11 bg-[rgba(68,0,175,0.08)] rounded-full flex items-center justify-center text-[#4400AF] mb-2">
                     <Globe className="w-5 h-5" strokeWidth={2} />
                   </div>
-                  <h3 className="text-xl font-bold mb-2">Hosted on Your Brand</h3>
+                  <h3 className="text-xl font-bold text-slate-900 mb-2">Hosted on Your Brand</h3>
                   <div className="flex items-end gap-1 mb-4 pb-4 border-b border-slate-100">
                     <span className="text-2xl sm:text-3xl font-extrabold">₹349</span>
                     <span className="text-[#52627A] mb-1">/month</span>
