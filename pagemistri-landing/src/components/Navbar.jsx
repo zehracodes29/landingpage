@@ -1,7 +1,6 @@
 // Navbar component
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import Link from 'next/link';
 
 const navLinks = [
@@ -75,7 +74,6 @@ export default function Navbar() {
 						</Link>
 					</div>
 
-					<ThemeToggle />
 
 					{/* Mobile Menu Button */}
 					<div className="md:hidden flex items-center">
