@@ -30,9 +30,9 @@ export function BeforeAfterSection() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
           >
-            <div className="inline-flex items-center rounded-full border border-purple-200 bg-purple-50 px-3 py-1 text-sm font-medium text-purple-700 dark:border-purple-800/50 dark:bg-purple-900/20 dark:text-purple-300 mb-6">
-              BEFORE & AFTER PAGEMISTRI
-            </div>
+            <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-1.5">
+              YOUR BUSINESS WITHOUT PAGEMISTRI
+            </span>
             
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
               From chaos to <span className="text-[#4400AF]">clarity.</span> In one switch.

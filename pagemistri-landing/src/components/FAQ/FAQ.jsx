@@ -54,10 +54,10 @@ const FAQ = () => {
  <div className="max-w-3xl mx-auto px-6 lg:px-8">
  <div className="text-center mb-16">
  <div className="mb-6">
- <SectionBadge>FAQ</SectionBadge>
+  <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-1.5">FAQ</span>
  </div>
  <SectionTitle>
- Frequently Asked Questions
+  Questions in your mind
  </SectionTitle>
  </div>
 
