@@ -10,6 +10,7 @@ const BusinessBenefits = dynamic(() => import('../components/BusinessBenefits'),
 const AboutPagemistri = dynamic(() => import('../components/AboutPagemistri'), { ssr: false });
 const Pricing = dynamic(() => import('../components/Pricing'), { ssr: false });
 const WhoIsItFor = dynamic(() => import('../components/WhoIsItFor'), { ssr: false });
+const BeforeAfterSection = dynamic(() => import('../components/before-after').then(mod => mod.BeforeAfterSection), { ssr: false });
 const FAQ = dynamic(() => import('../components/FAQ/FAQ'), { ssr: false });
 const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 
@@ -24,6 +25,7 @@ export default function Home() {
  <BusinessBenefits/>
  <AboutPagemistri/>
  <WhoIsItFor/>
+ <BeforeAfterSection/>
  <Pricing/>
  <FAQ/>
  <Footer/>
