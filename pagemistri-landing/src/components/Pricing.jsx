@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Layout, LineChart, Rocket } from 'lucide-react';
+import { Check, Layout, LineChart, Rocket, Cloud, Globe, HelpCircle } from 'lucide-react';
 
 const Pricing = () => {
   const scrollToLeadForm = () => {
@@ -121,83 +121,104 @@ const Pricing = () => {
           </div>
 
           {/* STEP 2: Subscription Based Pricing Plans */}
-          <div id="step-2-pricing" className="scroll-mt-12 text-center mb-12">
-            <span className="inline-block bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3">
+          <div id="step-2-pricing" className="scroll-mt-12 text-center mb-10">
+            <span className="inline-block bg-purple-100 text-purple-700 text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full mb-3">
               STEP 2: MONTHLY HOSTING
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4 text-center">
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white mb-4">
               Choose Your Monthly Plan
             </h2>
-            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-center mb-8">
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-center mb-10">
               Build your own page, forms, and SEO with our DIY plans—or select a hosting plan to keep your ₹5,000 ready-made website live and maintained. Choose ₹99/mo for Pagemistri subdomain hosting or ₹349/mo to launch on your custom domain.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Card 1: Hosted by Pagemistri */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 shadow-sm flex flex-col h-full"
-            >
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Hosted by Pagemistri</h3>
-              <div className="flex items-end gap-1 mb-8">
-                <span className="text-4xl font-black text-slate-900 dark:text-white">₹99</span>
-                <span className="text-slate-500 mb-1">/month</span>
-              </div>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                {['Pagemistri Subdomain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '50 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
-                    <span className="text-slate-700 dark:text-slate-300 font-medium">{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button 
-                onClick={scrollToLeadForm}
-                className="bg-purple-700 hover:bg-purple-800 text-white w-full py-3 rounded-xl font-semibold transition-all active:scale-95 mt-auto"
+          <div className="max-w-4xl mx-auto p-6 sm:p-10 bg-indigo-950/90 dark:bg-purple-950/80 rounded-3xl shadow-2xl border border-purple-900/50 text-white relative">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-stretch">
+              {/* Card 1: Hosted by Pagemistri */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white text-slate-900 rounded-3xl p-8 shadow-md flex flex-col justify-between"
               >
-                Get started
-              </button>
-            </motion.div>
+                <div>
+                  <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-4">
+                    <Cloud className="w-7 h-7" strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Hosted by Pagemistri</h3>
+                  <div className="flex items-end gap-1 mb-6 pb-6 border-b border-slate-100">
+                    <span className="text-4xl font-black">₹99</span>
+                    <span className="text-slate-500 mb-1">/month</span>
+                  </div>
 
-            {/* Card 2: Hosted on Your Brand (Most Popular) */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.1 }}
-              className="bg-white dark:bg-slate-900 border-2 border-purple-600 rounded-3xl p-8 shadow-xl relative flex flex-col h-full"
-            >
-              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-purple-600 text-white text-[11px] font-bold px-4 py-1.5 rounded-full uppercase tracking-wider">
-                MOST POPULAR
-              </div>
+                  <ul className="space-y-4 mb-8">
+                    {['Pagemistri Subdomain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '50 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
+                        <span className="text-slate-700 font-medium">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-              <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-2">Hosted on Your Brand</h3>
-              <div className="flex items-end gap-1 mb-8">
-                <span className="text-4xl font-black text-slate-900 dark:text-white">₹349</span>
-                <span className="text-slate-500 mb-1">/month</span>
-              </div>
+                <button 
+                  onClick={scrollToLeadForm}
+                  className="w-full mt-8 border-2 border-purple-600 text-purple-700 font-bold py-3.5 rounded-2xl hover:bg-purple-50 transition-all active:scale-95"
+                >
+                  Get started
+                </button>
+              </motion.div>
 
-              <ul className="space-y-4 mb-8 flex-1">
-                {['Custom Domain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '350 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
-                    <span className="text-slate-700 dark:text-slate-300 font-medium">{f}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <button 
-                onClick={scrollToLeadForm}
-                className="border border-slate-300 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-800 dark:text-white w-full py-3 rounded-xl font-semibold transition-all active:scale-95 mt-auto"
+              {/* Card 2: Hosted on Your Brand */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-white text-slate-900 rounded-3xl p-8 shadow-xl flex flex-col justify-between relative"
               >
-                Get started
-              </button>
-            </motion.div>
+                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-purple-600 text-white text-[10px] font-extrabold tracking-widest uppercase px-4 py-1 rounded-full shadow-md">
+                  MOST POPULAR
+                </div>
+
+                <div>
+                  <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center text-purple-600 mb-4">
+                    <Globe className="w-7 h-7" strokeWidth={2} />
+                  </div>
+                  <h3 className="text-xl font-bold mb-2">Hosted on Your Brand</h3>
+                  <div className="flex items-end gap-1 mb-6 pb-6 border-b border-slate-100">
+                    <span className="text-4xl font-black">₹349</span>
+                    <span className="text-slate-500 mb-1">/month</span>
+                  </div>
+
+                  <ul className="space-y-4 mb-8">
+                    {['Custom Domain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '350 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
+                        <span className="text-slate-700 font-medium">{f}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <button 
+                  onClick={scrollToLeadForm}
+                  className="w-full mt-8 bg-purple-600 hover:bg-purple-700 text-white font-bold py-3.5 rounded-2xl shadow-lg transition-all active:scale-95"
+                >
+                  Get started
+                </button>
+              </motion.div>
+            </div>
+
+            {/* Bottom Help Link */}
+            <div className="mt-8 text-center text-sm font-medium text-slate-200 flex items-center justify-center gap-2">
+              <HelpCircle className="w-4 h-4 shrink-0" />
+              Not sure which one to choose?{' '}
+              <a href="#lead-form" className="text-purple-300 hover:text-white underline underline-offset-4 transition-colors">
+                We're here to help &rarr;
+              </a>
+            </div>
           </div>
 
         </div>
