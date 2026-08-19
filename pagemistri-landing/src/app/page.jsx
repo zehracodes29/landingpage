@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic';
 const WhatsIncluded = dynamic(() => import('../components/EverythingNeeded/EverythingNeeded'), { ssr: false });
 const HowItWorks = dynamic(() => import('../components/Process/Process'), { ssr: false });
 const BusinessBenefits = dynamic(() => import('../components/BusinessBenefits'), { ssr: false });
+const AboutPagemistri = dynamic(() => import('../components/AboutPagemistri'), { ssr: false });
 const Pricing = dynamic(() => import('../components/Pricing'), { ssr: false });
 const WhoIsItFor = dynamic(() => import('../components/WhoIsItFor'), { ssr: false });
 const FAQ = dynamic(() => import('../components/FAQ/FAQ'), { ssr: false });
@@ -21,6 +22,7 @@ export default function Home() {
 
  <HowItWorks/>
  <BusinessBenefits/>
+ <AboutPagemistri/>
  <WhoIsItFor/>
  <Pricing/>
  <FAQ/>
