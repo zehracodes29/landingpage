@@ -67,8 +67,10 @@ const Pricing = () => {
 
               {/* Right Side (Featured Pricing Box - 7 Columns) */}
               <div className="lg:col-span-7 bg-white dark:bg-slate-900 border-2 border-[rgba(68,0,175,0.18)] rounded-3xl p-4 sm:p-5 shadow-xl relative overflow-hidden">
-                <div className="absolute top-0 right-0 bg-[#4400AF] text-white text-[10px] font-extrabold tracking-widest uppercase px-8 py-1 rotate-45 translate-x-6 translate-y-3 shadow-md">
-                  BEST VALUE
+                <div className="absolute top-0 right-0 w-32 h-32 overflow-hidden pointer-events-none">
+                  <div className="absolute top-6 -right-10 w-40 bg-[#4400AF] text-white text-[10px] font-extrabold tracking-widest text-center py-1 rotate-45 shadow-sm">
+                    BEST VALUE
+                  </div>
                 </div>
                 
                 <span className="inline-block bg-[rgba(68,0,175,0.08)] text-[#4400AF] text-[11px] font-bold tracking-wider uppercase px-3 py-1 rounded-full mb-2">
