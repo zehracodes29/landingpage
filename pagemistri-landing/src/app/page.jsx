@@ -11,6 +11,7 @@ const AboutPagemistri = dynamic(() => import('../components/AboutPagemistri'), {
 const Pricing = dynamic(() => import('../components/Pricing'), { ssr: false });
 const WhoIsItFor = dynamic(() => import('../components/WhoIsItFor'), { ssr: false });
 const BeforeAfterSection = dynamic(() => import('../components/before-after').then(mod => mod.BeforeAfterSection), { ssr: false });
+const FormSection = dynamic(() => import('../components/FormSection'), { ssr: false });
 const FAQ = dynamic(() => import('../components/FAQ/FAQ'), { ssr: false });
 const Footer = dynamic(() => import('../components/Footer'), { ssr: false });
 
@@ -26,6 +27,7 @@ export default function Home() {
  <AboutPagemistri/>
  <WhoIsItFor/>
  <BeforeAfterSection/>
+ <FormSection/>
  <Pricing/>
  <FAQ/>
  <Footer/>
