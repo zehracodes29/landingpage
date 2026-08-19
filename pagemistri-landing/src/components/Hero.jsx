@@ -34,7 +34,7 @@ const Hero = () => {
 
  <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 w-full sm:w-auto">
  <button 
- className="bg-purple-600 hover:bg-purple-700 text-white font-bold px-6 py-3.5 rounded-xl shadow-lg transition-all active:scale-95 w-full sm:w-auto"
+ className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3.5 rounded-xl shadow-md transition-all active:scale-95 w-full sm:w-auto"
  >
  Start My Website
  </button>

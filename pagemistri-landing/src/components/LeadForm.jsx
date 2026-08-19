@@ -302,7 +302,7 @@ const LeadForm = () => {
  <div className="pt-2">
  <button 
  type="submit" 
- className="py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 hover:bg-purple-700 text-white transition-all shadow-md dark:shadow-none shadow-purple-500/20"
+ className="py-2.5 px-6 rounded-xl font-bold text-sm bg-[#4400AF] hover:bg-[#310080] text-white transition-all shadow-md dark:shadow-none shadow-purple-500/20 active:scale-95"
  >
  Start My Website
  </button>
@@ -502,7 +502,7 @@ const LeadForm = () => {
  <button 
  type="submit" 
  disabled={isSubmitting}
- className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-purple-600 text-white transition-all shadow-md dark:shadow-none flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-purple-700 shadow-purple-500/20'}`}
+ className={`py-2.5 px-6 rounded-xl font-bold text-sm bg-[#4400AF] text-white transition-all shadow-md dark:shadow-none flex items-center gap-2 ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-[#310080] shadow-purple-500/20 active:scale-95'}`}
  >
  {isSubmitting ? (
  <>

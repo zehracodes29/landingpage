@@ -91,7 +91,7 @@ const Pricing = () => {
 
                 <button 
                   onClick={scrollToLeadForm}
-                  className="w-full mt-4 bg-purple-700 hover:bg-purple-800 text-white font-bold py-2.5 text-sm rounded-2xl shadow-lg transition-all active:scale-95"
+                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95"
                 >
                   Let's Build My Website
                 </button>
@@ -204,7 +204,7 @@ const Pricing = () => {
 
                 <button 
                   onClick={scrollToLeadForm}
-                  className="w-full mt-4 bg-purple-600 hover:bg-purple-700 text-white font-bold py-2.5 text-sm rounded-2xl shadow-lg transition-all active:scale-95"
+                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95"
                 >
                   Get started
                 </button>

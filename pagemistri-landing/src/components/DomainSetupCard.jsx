@@ -13,7 +13,7 @@ const DomainSetupCard = () => {
       <div className="flex flex-wrap items-center justify-center gap-4">
         <button 
           onClick={() => document.getElementById('lead-form')?.scrollIntoView({ behavior: 'smooth' })}
-          className="bg-white hover:bg-slate-100 text-purple-900 font-extrabold px-6 py-3 rounded-xl shadow-lg transition-all"
+          className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-6 py-3 rounded-xl shadow-md transition-all active:scale-95"
         >
           Let's Build My Website
         </button>
