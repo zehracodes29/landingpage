@@ -105,13 +105,16 @@ const Pricing = () => {
           </div>
 
           {/* STEP 2: Subscription Based Pricing Plans */}
-          <div id="step-2-pricing" className="scroll-mt-12 text-center mb-8">
+          <div id="step-2-pricing" className="scroll-mt-12 text-center mb-12">
             <span className="inline-block bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3">
               STEP 2: MONTHLY HOSTING
             </span>
-            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-8 text-center">
+            <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white mb-4 text-center">
               Choose Your Monthly Plan
             </h2>
+            <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 max-w-2xl mx-auto text-center mb-8">
+              Build your own page, forms, and SEO with our DIY plans—or select a hosting plan to keep your ₹5,000 ready-made website live and maintained. Choose ₹99/mo for Pagemistri subdomain hosting or ₹349/mo to launch on your custom domain.
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -133,7 +136,7 @@ const Pricing = () => {
               </div>
 
               <ul className="space-y-4 mb-8 flex-1">
-                {['Pagemistri Subdomain', '50 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics', 'SEO Integration', 'Payment Gateway integration'].map((f, i) => (
+                {['Pagemistri Subdomain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '50 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
                     <span className="text-slate-700 dark:text-slate-300 font-medium">{f}</span>
@@ -164,7 +167,7 @@ const Pricing = () => {
               </div>
 
               <ul className="space-y-4 mb-8 flex-1">
-                {['Custom Domain', '350 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics', 'SEO Integration', 'Payment Gateway integration'].map((f, i) => (
+                {['Custom Domain Hosting', 'Self-serve form & SEO setup', 'Ongoing site maintenance', '350 Leads/month', 'Secure Hosting', 'Lead Dashboard', 'Basic Analytics'].map((f, i) => (
                   <li key={i} className="flex items-start gap-3">
                     <Check className="w-5 h-5 text-purple-600 shrink-0" strokeWidth={2.5} />
                     <span className="text-slate-700 dark:text-slate-300 font-medium">{f}</span>
