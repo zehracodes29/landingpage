@@ -80,6 +80,18 @@ const Pricing = () => {
                 Let's Build My Website
               </button>
             </div>
+
+            <div className="lg:col-span-2 mt-2 pt-6 border-t border-purple-200/60 dark:border-slate-800/60 text-center">
+              <p className="text-sm text-slate-600 dark:text-slate-400 font-medium">
+                Don't want to pay this much?{' '}
+                <a 
+                  href="#step-2-pricing" 
+                  className="text-purple-600 dark:text-purple-400 font-bold underline underline-offset-4 hover:text-purple-700 dark:hover:text-purple-300 transition-colors"
+                >
+                  Do it yourself →
+                </a>
+              </p>
+            </div>
           </motion.div>
 
           {/* Divider */}
@@ -93,7 +105,7 @@ const Pricing = () => {
           </div>
 
           {/* STEP 2: Subscription Based Pricing Plans */}
-          <div className="text-center mb-8">
+          <div id="step-2-pricing" className="scroll-mt-12 text-center mb-8">
             <span className="inline-block bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs font-extrabold uppercase tracking-widest px-3.5 py-1.5 rounded-full mb-3">
               STEP 2: MONTHLY HOSTING
             </span>
