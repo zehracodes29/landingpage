@@ -82,10 +82,10 @@ export default function WhoIsItFor() {
           }}
           className="text-center mx-auto max-w-2xl mb-12"
         >
-          <span className="bg-brand-surface-md text-[#4400AF] font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">
+          <span className="bg-[rgba(68,0,175,0.10)] text-[#4400AF] font-bold text-xs px-3.5 py-1.5 rounded-full uppercase tracking-wider inline-block mb-4">
             WHO IT'S FOR
           </span>
-          <h2 className="text-3xl lg:text-4xl font-bold text-text-primary dark:text-white tracking-tight text-center max-w-2xl mx-auto">
+          <h2 className="text-3xl lg:text-4xl font-bold text-[#111827] dark:text-white tracking-tight text-center max-w-2xl mx-auto">
             Who is Pagemistri for?
           </h2>
         </motion.div>
@@ -105,13 +105,13 @@ export default function WhoIsItFor() {
                   whileHover={{ y: -6 }}
                   className="flex-1 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm hover:shadow-lg hover:shadow-[#4400AF]/5 hover:border-[#4400AF]/40 transition-all duration-200 relative group flex flex-col items-center text-center cursor-default"
                 >
-                  <div className="w-14 h-14 rounded-2xl bg-brand-surface-md dark:bg-[#4400AF]/20 text-[#4400AF] dark:text-[#4400AF] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shrink-0">
+                  <div className="w-14 h-14 rounded-2xl bg-[rgba(68,0,175,0.10)] dark:bg-[#4400AF]/20 text-[#4400AF] dark:text-[#4400AF] flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300 shrink-0">
                     <Icon className="w-6 h-6" />
                   </div>
-                  <h3 className="text-base sm:text-lg font-bold text-text-primary dark:text-white group-hover:text-[#4400AF] dark:group-hover:text-[#4400AF] transition-colors mb-3 leading-snug">
+                  <h3 className="text-base sm:text-lg font-bold text-[#111827] dark:text-white group-hover:text-[#4400AF] dark:group-hover:text-[#4400AF] transition-colors mb-3 leading-snug">
                     {persona.title}
                   </h3>
-                  <p className="text-sm text-text-muted dark:text-slate-400 leading-relaxed">
+                  <p className="text-sm text-[#6B7280] dark:text-slate-400 leading-relaxed">
                     {persona.description}
                   </p>
                 </motion.div>
@@ -133,7 +133,7 @@ export default function WhoIsItFor() {
         >
           <a
             href="#complete-website-setup"
-            className="bg-brand hover:bg-brand-hover text-white font-bold px-8 py-4 rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2 mx-auto mt-12 group"
+            className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold px-8 py-4 rounded-xl shadow-md transition-all active:scale-95 flex items-center gap-2 mx-auto mt-12 group"
           >
             Get Started
             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

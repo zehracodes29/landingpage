@@ -2,7 +2,7 @@ import React from 'react';
 
 const DomainSetupCard = () => {
   return (
-    <div className="bg-brand p-8 sm:p-10 rounded-3xl text-white border border-purple-800/60 shadow-xl relative overflow-hidden max-w-5xl mx-auto my-12">
+    <div className="bg-[#4400AF] text-white p-8 sm:p-10 rounded-3xl shadow-xl border border-purple-800/50 relative overflow-hidden max-w-5xl mx-auto my-12">
       <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3 text-center">
         Need a Custom Domain?
       </h2>
@@ -19,7 +19,7 @@ const DomainSetupCard = () => {
         </a>
         <button 
           onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
-          className="border border-white/40 hover:border-white hover:bg-white/10 text-white font-semibold px-6 py-3 rounded-xl transition-all w-full sm:w-auto text-center"
+          className="border border-white/40 hover:bg-white/10 text-white font-semibold px-6 py-3 rounded-xl transition-all w-full sm:w-auto text-center"
         >
           See Pricing &rarr;
         </button>

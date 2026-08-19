@@ -50,7 +50,7 @@ const Process = () => {
  <div className="mb-6 inline-flex">
  <SectionBadge>Simple 5-Step Process</SectionBadge>
  </div>
- <h2 className="text-[32px] md:text-[44px] font-[800] text-text-primary dark:text-white tracking-tight leading-[1.15] mb-6">
+ <h2 className="text-[32px] md:text-[44px] font-[800] text-[#111827] dark:text-white tracking-tight leading-[1.15] mb-6">
  Getting Your Business Online Is Easier Than You Think
  </h2>
  <p className="text-[17px] text-[#4B5563] dark:text-slate-400 leading-[1.6]">
@@ -68,7 +68,7 @@ const Process = () => {
  
  {/* Animated Progress Line */}
  <motion.div 
- className="absolute top-[58px] left-[10%] right-[10%] h-0.5 bg-gradient-to-br from-brand-surface-md to-brand-surface-xs origin-left"
+ className="absolute top-[58px] left-[10%] right-[10%] h-0.5 bg-gradient-to-br from-[rgba(68,0,175,0.10)] to-[rgba(68,0,175,0.05)] origin-left"
  style={{ scaleX: lineScaleX }}
  />
 
@@ -84,15 +84,15 @@ const Process = () => {
  >
  {/* Node */}
  <div className="w-14 h-14 rounded-full bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-700 flex items-center justify-center text-lg font-bold text-slate-700 dark:text-slate-300 transition-transform duration-300 group-hover:scale-110 group-hover:shadow-md dark:shadow-none group-hover:shadow-purple-500/20 group-hover:border-purple-500 mb-6 relative z-10">
- <span className="group-hover:text-brand transition-colors">{step.num}</span>
+ <span className="group-hover:text-[#4400AF] transition-colors">{step.num}</span>
  </div>
  
  {/* Content */}
  <div className="px-2">
- <h3 className="text-base font-bold text-text-primary dark:text-white mb-2 leading-tight">
+ <h3 className="text-base font-bold text-[#111827] dark:text-white mb-2 leading-tight">
  {step.title}
  </h3>
- <p className="text-xs text-text-muted dark:text-slate-400 leading-relaxed">
+ <p className="text-xs text-[#6B7280] dark:text-slate-400 leading-relaxed">
  {step.description}
  </p>
  </div>
@@ -103,7 +103,7 @@ const Process = () => {
 
  {/* Mobile View (Vertical Timeline - below md) */}
  <div className="md:hidden block relative mt-2 mb-4 px-2">
- <div className="absolute left-[23px] top-6 bottom-6 w-0.5 bg-gradient-to-br from-brand-surface-md to-brand-surface-xs" />
+ <div className="absolute left-[23px] top-6 bottom-6 w-0.5 bg-gradient-to-br from-[rgba(68,0,175,0.10)] to-[rgba(68,0,175,0.05)]" />
  
  <div className="flex flex-col gap-5 relative">
  {steps.map((step, index) => (
@@ -116,16 +116,16 @@ const Process = () => {
  className="flex items-start gap-4 relative group"
  >
  {/* Node */}
- <div className="flex items-center justify-center w-8 h-8 shrink-0 bg-white dark:bg-slate-900 border-2 border-brand p-1.5 rounded-full shadow-md dark:shadow-none z-10 mt-2">
- <span className="text-xs font-bold text-brand">{step.num}</span>
+ <div className="flex items-center justify-center w-8 h-8 shrink-0 bg-white dark:bg-slate-900 border-2 border-[#4400AF] p-1.5 rounded-full shadow-md dark:shadow-none z-10 mt-2">
+ <span className="text-xs font-bold text-[#4400AF]">{step.num}</span>
  </div>
  
  {/* Content Card */}
  <div className="bg-slate-50 dark:bg-slate-900/50 p-4 rounded-2xl border border-slate-200/60 shadow-sm dark:shadow-none flex-1">
- <h3 className="text-sm font-bold text-text-primary dark:text-white mb-1.5">
+ <h3 className="text-sm font-bold text-[#111827] dark:text-white mb-1.5">
  {step.title}
  </h3>
- <p className="text-xs text-text-muted dark:text-slate-400 leading-relaxed">
+ <p className="text-xs text-[#6B7280] dark:text-slate-400 leading-relaxed">
  {step.description}
  </p>
  </div>

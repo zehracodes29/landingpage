@@ -65,17 +65,17 @@ const FAQ = () => {
  {faqs.map((faq, index) => (
  <div 
  key={index}
- className={`bg-white dark:bg-slate-900 rounded-xl border ${openIndex === index ? 'border-brand shadow-md dark:shadow-none' : 'border-slate-200 dark:border-slate-700 shadow-sm dark:shadow-none'} overflow-hidden transition-all duration-300`}
+ className={`bg-white dark:bg-slate-900 rounded-xl border ${openIndex === index ? 'border-[#4400AF] dark:border-slate-800 shadow-md dark:shadow-none' : 'border-slate-200 dark:border-slate-800 shadow-sm dark:shadow-none'} overflow-hidden transition-all duration-300`}
  >
  <button 
  onClick={() => toggleFAQ(index)}
  className="w-full px-6 py-5 flex items-center justify-between text-left focus:outline-none"
  >
- <span className={`text-[17px] font-semibold ${openIndex === index ? 'text-brand' : 'text-text-primary dark:text-white'}`}>
+ <span className={`text-[17px] font-semibold ${openIndex === index ? 'text-[#4400AF] dark:text-white' : 'text-[#111827] dark:text-white'}`}>
  {faq.question}
  </span>
  <svg 
- className={`w-5 h-5 shrink-0 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-brand' : 'text-slate-400'}`} 
+ className={`w-5 h-5 shrink-0 transition-transform duration-300 ${openIndex === index ? 'rotate-180 text-[#4400AF]' : 'text-slate-400'}`} 
  viewBox="0 0 24 24" 
  fill="none" 
  stroke="currentColor" 
