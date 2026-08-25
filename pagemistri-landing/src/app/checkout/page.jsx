@@ -228,23 +228,48 @@ export default function CheckoutPage() {
             </div>
           </div>
           
-          <div className="w-full max-w-3xl mx-auto mb-2 px-2">
-            <div className="flex justify-between text-[10px] sm:text-xs font-semibold text-slate-500 mb-2">
-              {['1. Basics', '2. Brand', '3. Offerings', '4. Assets', '5. Payment'].map((label, idx) => (
-                <span 
-                  key={label} 
-                  className={currentStep === idx + 1 ? "text-[#4400AF] font-bold" : currentStep > idx + 1 ? "text-slate-900" : "text-slate-400"}
-                >
-                  {label}
-                </span>
-              ))}
-            </div>
+          <div className="relative w-full max-w-3xl mx-auto mb-8 px-4">
+            {/* Horizontal Background Line (Centering Fix) */}
+            <div className="absolute top-[18px] left-8 right-8 -translate-y-1/2 h-0.5 bg-slate-200 z-0" />
+            
+            {/* Active Filled Progress Line */}
+            <div 
+              className="absolute top-[18px] left-8 -translate-y-1/2 h-0.5 bg-[#4400AF] transition-all duration-300 z-0"
+              style={{ width: `calc(${((currentStep - 1) / 4) * 100}% - 4rem)` }}
+            />
 
-            <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
-              <div 
-                className="bg-[#4400AF] h-full transition-all duration-300 ease-in-out"
-                style={{ width: `${(currentStep / 5) * 100}%` }}
-              />
+            {/* Stepper Circles & Labels Container */}
+            <div className="relative z-10 flex justify-between items-center w-full">
+              {STEPS.map((step, index) => {
+                const isCompleted = currentStep > index + 1;
+                const isActive = currentStep === index + 1;
+
+                return (
+                  <div key={step.num} className="flex flex-col items-center">
+                    {/* Centered Circle */}
+                    <div
+                      className={`w-9 h-9 rounded-full flex items-center justify-center font-semibold text-xs transition-all bg-white border-2 ${
+                        isCompleted
+                          ? "border-emerald-500 text-emerald-500"
+                          : isActive
+                          ? "border-[#4400AF] text-[#4400AF] shadow-md ring-4 ring-[#4400AF]/10"
+                          : "border-slate-200 text-slate-400"
+                      }`}
+                    >
+                      {isCompleted ? <Check className="w-4 h-4 text-emerald-500"/> : index + 1}
+                    </div>
+
+                    {/* Label below circle */}
+                    <span
+                      className={`mt-2 text-[10px] sm:text-xs font-medium ${
+                        isActive ? "text-[#4400AF] font-bold" : isCompleted ? "text-slate-900" : "text-slate-400"
+                      }`}
+                    >
+                      {step.title}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
