@@ -268,7 +268,7 @@ export default function CheckoutPage() {
             <div className="w-full max-w-3xl">
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-6 relative overflow-hidden">
                 <AnimatePresence mode="wait">
-                  <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
+                  <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }} className="w-full">
                     <form className="flex flex-col relative" onSubmit={handleNext}>
                       
                       {currentStep === 1 && (
