@@ -171,51 +171,56 @@ export default function CheckoutPage() {
     const isValid = await trigger();
     if (!isValid) return;
 
-    const response = {
+    const paymentDetails = {
       razorpay_order_id: "order_mock_" + Math.random().toString(36).substr(2, 9),
       razorpay_payment_id: "pay_mock_" + Math.random().toString(36).substr(2, 9)
     };
 
     const payload = {
-      full_name: formData.fullName,
-      business_name: formData.businessName,
-      phone: formData.phone,
-      email: formData.email,
-      business_address: formData.businessAddress,
-      domain_details: formData.domainDetails,
-      social_links: formData.socialLinks,
-      logo_url: formData.logoUrl,
-      brand_color: formData.brandColor,
-      about_business: formData.aboutBusiness,
-      target_offering: formData.targetOffering,
-      offering_details: formData.offeringDetails,
-      usp_benefits: formData.uspBenefits,
-      testimonials_pricing: formData.testimonialsPricing,
-      form_requirements_doc_url: formData.formRequirementsDocUrl,
-      extra_docs_url: formData.extraDocsUrl,
-      media_files_url: formData.mediaFilesUrl,
-      payment_gateway_requested: formData.paymentGatewayRequested,
-      razorpay_order_id: response.razorpay_order_id,
-      razorpay_payment_id: response.razorpay_payment_id,
+      full_name: formData.fullName || "",
+      business_name: formData.businessName || "",
+      phone: formData.phone || "",
+      email: formData.email || "",
+      business_address: formData.businessAddress || "",
+      domain_details: formData.domainDetails || "",
+      social_links: formData.socialLinks || "",
+      logo_url: formData.logoUrl || "",
+      brand_color: formData.brandColor || "",
+      about_business: formData.aboutBusiness || "",
+      target_offering: formData.targetOffering || "",
+      offering_details: formData.offeringDetails || "",
+      usp_benefits: formData.uspBenefits || "",
+      testimonials_pricing: formData.testimonialsPricing || "",
+      form_requirements_doc_url: formData.formRequirementsDocUrl || "",
+      extra_docs_url: formData.extraDocsUrl || "",
+      media_files_url: formData.mediaFilesUrl || "",
+      payment_gateway_requested: formData.paymentGatewayRequested === "Yes" ? "Yes" : "No",
+      razorpay_order_id: paymentDetails.razorpay_order_id || "",
+      razorpay_payment_id: paymentDetails.razorpay_payment_id || "",
       payment_status: "Success"
     };
 
     try {
-      const res = await fetch(PHP_API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch(PHP_API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
         body: JSON.stringify(payload)
       });
-      
-      if (res.ok) {
-        localStorage.removeItem("pagemistri_onboarding");
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+        localStorage.clear();
         router.push("/thank-you");
       } else {
-        alert("Submission failed. Please try again.");
+        console.error("Submission error:", result.message);
+        alert(`Error saving form: ${result.message}`);
       }
     } catch (error) {
-      console.error("Error submitting form", error);
-      alert("Error submitting form.");
+      console.error("Network error:", error);
     }
   };
 
