@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronRight, UploadCloud, ChevronDown, Lock, ShieldCheck, Zap } from "lucide-react";
+import { UploadDropzone } from "@uploadthing/react";
+import "@uploadthing/react/styles.css";
 
 const STEPS = [
   { num: 1, title: "Basics" },
@@ -31,6 +33,9 @@ export default function CheckoutPage() {
     usp: "",
     testimonials: "",
     paymentGateway: "No",
+    logoUrl: "",
+    documentUrls: [],
+    mediaUrls: [],
   });
   
   const [isClient, setIsClient] = useState(false);
@@ -238,12 +243,25 @@ export default function CheckoutPage() {
                         <div className="space-y-6">
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload</label>
-                            <div className="border-2 border-dashed border-purple-200 hover:border-[#4400AF] bg-purple-50/30 transition-all rounded-2xl p-8 text-center cursor-pointer group relative overflow-hidden">
-                              <input type="file" accept=".svg,.png,.jpg,.jpeg" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                              <UploadCloud className="w-10 h-10 text-purple-300 group-hover:text-[#4400AF] mx-auto mb-3 transition-colors" />
-                              <p className="text-sm font-semibold text-slate-700">Drag & drop your logo here, or <span className="text-[#4400AF]">browse</span></p>
-                              <p className="text-xs text-slate-400 mt-1">Supports SVG, PNG, JPG (Max 5MB)</p>
-                            </div>
+                            {formData.logoUrl ? (
+                              <div className="relative border border-slate-200 rounded-xl p-4 inline-block bg-slate-50">
+                                <img src={formData.logoUrl} alt="Logo Preview" className="h-20 object-contain" />
+                                <button type="button" onClick={() => setFormData(prev => ({...prev, logoUrl: ""}))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">X</button>
+                              </div>
+                            ) : (
+                              <UploadDropzone
+                                endpoint="logoUploader"
+                                onClientUploadComplete={(res) => {
+                                  if (res && res[0]) {
+                                    setFormData((prev) => ({ ...prev, logoUrl: res[0].url }));
+                                  }
+                                }}
+                                onUploadError={(error) => {
+                                  alert(`ERROR! ${error.message}`);
+                                }}
+                                className="ut-button:bg-[#4400AF] ut-button:ut-readying:bg-[#4400AF]/50 ut-label:text-[#4400AF] hover:bg-purple-50/30 transition-all border-dashed border-purple-200 hover:border-[#4400AF] p-8"
+                              />
+                            )}
                           </div>
 
                           <div>
@@ -348,19 +366,44 @@ export default function CheckoutPage() {
                             <label className="block text-sm font-semibold text-slate-800 mb-1">Documents & Media Files</label>
                             <p className="text-xs text-slate-500 mb-4">Upload forms, PDFs, or a ZIP of your assets.</p>
                             
-                            <div className="border-2 border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all rounded-xl p-6 text-center cursor-pointer relative overflow-hidden">
-                              <input type="file" multiple onChange={mockUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                              <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                              <p className="text-sm font-semibold text-slate-700">Click to browse or drag files</p>
-                              
-                              {uploadProgress > 0 && uploadProgress < 100 && (
-                                <div className="mt-4 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
-                                  <motion.div initial={{ width: 0 }} animate={{ width: `${uploadProgress}%` }} className="h-full bg-[#4400AF]" />
-                                </div>
-                              )}
-                              {uploadProgress === 100 && (
-                                <p className="text-xs font-bold text-green-500 mt-3 flex items-center justify-center gap-1"><Check className="w-3 h-3" /> Files attached successfully</p>
-                              )}
+                            {formData.documentUrls?.length > 0 || formData.mediaUrls?.length > 0 ? (
+                              <div className="mb-4 space-y-2 border border-slate-200 rounded-xl p-4 bg-slate-50">
+                                {formData.documentUrls?.map((url, i) => (
+                                  <div key={`doc-${i}`} className="flex items-center gap-2 text-sm text-slate-700 bg-white px-3 py-2 rounded-lg border border-slate-100 truncate">
+                                    <Check className="w-4 h-4 text-green-500" /> Document {i+1} uploaded
+                                  </div>
+                                ))}
+                                {formData.mediaUrls?.map((url, i) => (
+                                  <div key={`media-${i}`} className="flex items-center gap-2 text-sm text-slate-700 bg-white px-3 py-2 rounded-lg border border-slate-100 truncate">
+                                    <Check className="w-4 h-4 text-green-500" /> Media {i+1} uploaded
+                                  </div>
+                                ))}
+                                <button type="button" onClick={() => setFormData(prev => ({...prev, documentUrls: [], mediaUrls: []}))} className="text-xs text-red-500 font-semibold hover:underline mt-2">Clear all uploads</button>
+                              </div>
+                            ) : null}
+                            <div className="space-y-4">
+                              <UploadDropzone
+                                endpoint="documentUploader"
+                                onClientUploadComplete={(res) => {
+                                  if (res) {
+                                    setFormData((prev) => ({ ...prev, documentUrls: [...(prev.documentUrls || []), ...res.map(r => r.url)] }));
+                                  }
+                                }}
+                                onUploadError={(error) => alert(`ERROR! ${error.message}`)}
+                                content={{ label: "Upload Documents & Forms" }}
+                                className="ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all p-4"
+                              />
+                              <UploadDropzone
+                                endpoint="mediaUploader"
+                                onClientUploadComplete={(res) => {
+                                  if (res) {
+                                    setFormData((prev) => ({ ...prev, mediaUrls: [...(prev.mediaUrls || []), ...res.map(r => r.url)] }));
+                                  }
+                                }}
+                                onUploadError={(error) => alert(`ERROR! ${error.message}`)}
+                                content={{ label: "Upload Images / Media Zip" }}
+                                className="ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all p-4"
+                              />
                             </div>
                           </div>
 
