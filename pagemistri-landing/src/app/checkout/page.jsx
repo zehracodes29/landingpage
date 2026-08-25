@@ -27,7 +27,8 @@ const baseSchema = z.object({
   businessName: z.string().min(2, "Business name is required"),
   hasDomain: z.string(),
   domainDetails: z.string().optional(),
-  phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian phone number"),
+  countryCode: z.string().default("+91"),
+  phone: z.string().regex(/^[0-9]{7,12}$/, "Enter a valid phone number"),
   businessAddress: z.string().min(5, "Address is required"),
   
   socialLinks: z.string().optional(),
@@ -61,6 +62,7 @@ export default function CheckoutPage() {
       businessName: "",
       hasDomain: "No",
       domainDetails: "",
+      countryCode: "+91",
       phone: "",
       businessAddress: "",
       socialLinks: "",
@@ -140,7 +142,7 @@ export default function CheckoutPage() {
     const payload = {
       full_name: formData.fullName || "",
       business_name: formData.businessName || "",
-      phone: formData.phone || "",
+      phone: (formData.countryCode || "+91") + " " + (formData.phone || ""),
       email: formData.email || "",
       business_address: formData.businessAddress || "",
       domain_details: formData.domainDetails || "",
@@ -301,7 +303,19 @@ export default function CheckoutPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
                                 <label className="block text-sm font-semibold text-slate-700 mb-1">Phone Number *</label>
-                                <input type="tel" {...register("phone")} className={getInputClass("phone")} placeholder="9XXXXXXXXX" />
+                                <div className={`flex rounded-xl overflow-hidden transition-all ${errors.phone ? 'border-2 border-red-500 bg-red-50/10' : 'border border-slate-200 bg-slate-50/50 focus-within:border-[#4400AF] focus-within:ring-2 focus-within:ring-[#4400AF]/20'}`}>
+                                  <select
+                                    {...register("countryCode")}
+                                    className="bg-transparent text-slate-700 text-sm px-3 py-3.5 border-r border-slate-200 focus:outline-none cursor-pointer hover:bg-slate-100"
+                                  >
+                                    <option value="+91">🇮🇳 +91</option>
+                                    <option value="+1">🇺🇸 +1</option>
+                                    <option value="+44">🇬🇧 +44</option>
+                                    <option value="+971">🇦🇪 +971</option>
+                                    <option value="+61">🇦🇺 +61</option>
+                                  </select>
+                                  <input type="tel" {...register("phone")} className="w-full px-4 py-3.5 bg-transparent focus:outline-none" placeholder="9876543210" />
+                                </div>
                                 {renderError("phone")}
                               </div>
                               <div>
@@ -536,7 +550,7 @@ export default function CheckoutPage() {
                       </div>
                       <div>
                         <p className="text-xs text-slate-500 mb-1">Phone</p>
-                        <p className="text-sm font-semibold text-slate-800">{formData.phone}</p>
+                        <p className="text-sm font-semibold text-slate-800">{formData.countryCode} {formData.phone}</p>
                       </div>
                     </div>
                   </div>
