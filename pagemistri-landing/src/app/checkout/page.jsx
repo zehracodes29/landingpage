@@ -226,39 +226,23 @@ export default function CheckoutPage() {
             </div>
           </div>
           
-          <div className="relative">
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -translate-y-1/2 rounded-full overflow-hidden">
-              <motion.div 
-                className="h-full bg-[#4400AF]"
-                initial={{ width: 0 }}
-                animate={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-              />
+          <div className="w-full max-w-3xl mx-auto mb-2 px-2">
+            <div className="flex justify-between text-[10px] sm:text-xs font-semibold text-slate-500 mb-2">
+              {['1. Basics', '2. Brand', '3. Offerings', '4. Assets', '5. Payment'].map((label, idx) => (
+                <span 
+                  key={label} 
+                  className={currentStep === idx + 1 ? "text-[#4400AF] font-bold" : currentStep > idx + 1 ? "text-slate-900" : "text-slate-400"}
+                >
+                  {label}
+                </span>
+              ))}
             </div>
-            
-            <div className="relative flex justify-between">
-              {STEPS.map((s) => {
-                const isCompleted = currentStep > s.num;
-                const isCurrent = currentStep === s.num;
-                return (
-                  <div key={s.num} className="flex flex-col items-center">
-                    <motion.div 
-                      className={`relative flex items-center justify-center w-10 h-10 rounded-full border-2 bg-white transition-colors duration-300 ${
-                        isCompleted ? "border-green-500 bg-green-50 text-green-500" : 
-                        isCurrent ? "border-[#4400AF] bg-[#4400AF] text-white" : "border-slate-200 text-slate-400"
-                      }`}
-                      animate={isCompleted ? { scale: [1, 1.1, 1] } : {}}
-                      transition={{ duration: 0.3 }}
-                    >
-                      {isCompleted ? <Check className="w-5 h-5 text-green-500 animate-pulse" /> : <span className="font-bold text-sm">{s.num}</span>}
-                      {isCompleted && <div className="absolute inset-0 rounded-full bg-green-400 opacity-20 animate-ping"></div>}
-                    </motion.div>
-                    <span className={`mt-2 text-xs font-semibold hidden sm:block ${isCurrent ? "text-[#4400AF]" : isCompleted ? "text-slate-600" : "text-slate-400"}`}>
-                      {s.title}
-                    </span>
-                  </div>
-                );
-              })}
+
+            <div className="w-full bg-slate-200 h-1.5 rounded-full overflow-hidden">
+              <div 
+                className="bg-[#4400AF] h-full transition-all duration-300 ease-in-out"
+                style={{ width: `${(currentStep / 5) * 100}%` }}
+              />
             </div>
           </div>
         </div>
