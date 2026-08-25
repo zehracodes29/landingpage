@@ -216,10 +216,10 @@ export default function CheckoutPage() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-100 flex flex-col font-sans text-slate-900 overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-grow py-12 px-4 sm:px-6 lg:px-8 mt-16 max-w-7xl mx-auto w-full">
-        <div className="mb-12">
-          <div className="flex items-center justify-between mb-4">
-            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Website Setup & Onboarding</h1>
+      <main className="flex-grow py-4 px-4 sm:px-6 lg:px-8 mt-16 max-w-7xl mx-auto w-full flex flex-col items-center justify-start">
+        <div className="mb-6 w-full max-w-3xl text-center sm:text-left">
+          <div className="flex items-center justify-center sm:justify-between mb-4">
+            <h1 className="text-xl font-bold text-slate-900 tracking-tight">Website Setup & Onboarding</h1>
             <div className="hidden md:flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100">
               <ShieldCheck className="w-4 h-4 text-green-500" />
               <span className="text-sm font-semibold text-slate-600">Secure Process</span>
@@ -266,40 +266,40 @@ export default function CheckoutPage() {
         {currentStep < 5 ? (
           <div className="flex justify-center">
             <div className="w-full max-w-3xl">
-              <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white shadow-xl shadow-slate-200/50 p-6 sm:p-10 relative overflow-hidden">
+              <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-6 relative overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
-                    <form className="space-y-8" onSubmit={handleNext}>
+                    <form className="flex flex-col relative" onSubmit={handleNext}>
                       
                       {currentStep === 1 && (
                         <div>
-                          <h2 className="text-2xl font-bold mb-6 text-slate-900 flex items-center gap-3">
+                          <h2 className="text-2xl font-bold mb-4 text-slate-900 flex items-center gap-3">
                             <span className="bg-[#4400AF]/10 text-[#4400AF] p-2 rounded-xl"><Zap className="w-5 h-5" /></span>
                             Business Basics
                           </h2>
                           
-                          <div className="space-y-6">
+                          <div className="space-y-4">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
-                                <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1">Full Name *</label>
                                 <input type="text" {...register("fullName")} className={getInputClass("fullName")} placeholder="John Doe" />
                                 {renderError("fullName")}
                               </div>
                               <div>
-                                <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address *</label>
                                 <input type="email" {...register("email")} className={getInputClass("email")} placeholder="john@example.com" />
                                 {renderError("email")}
                               </div>
                             </div>
 
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Business Name *</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Business Name *</label>
                               <input type="text" {...register("businessName")} className={getInputClass("businessName")} placeholder="e.g. Acme Corp" />
                               {renderError("businessName")}
                             </div>
 
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Domain Status *</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Domain Status *</label>
                               <div className="flex gap-4 mb-3">
                                 <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "Yes" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
                                   <input type="radio" value="Yes" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
@@ -316,12 +316,12 @@ export default function CheckoutPage() {
 
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
-                                <label className="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1">Phone Number *</label>
                                 <input type="tel" {...register("phone")} className={getInputClass("phone")} placeholder="9XXXXXXXXX" />
                                 {renderError("phone")}
                               </div>
                               <div>
-                                <label className="block text-sm font-semibold text-slate-700 mb-2">Business Address *</label>
+                                <label className="block text-sm font-semibold text-slate-700 mb-1">Business Address *</label>
                                 <input type="text" {...register("businessAddress")} className={getInputClass("businessAddress")} placeholder="City, State" />
                                 {renderError("businessAddress")}
                               </div>
@@ -332,10 +332,10 @@ export default function CheckoutPage() {
 
                       {currentStep === 2 && (
                         <div>
-                          <h2 className="text-2xl font-bold mb-6 text-slate-900">Brand Identity</h2>
-                          <div className="space-y-6">
+                          <h2 className="text-2xl font-bold mb-4 text-slate-900">Brand Identity</h2>
+                          <div className="space-y-4">
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload *</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Logo Upload *</label>
                               {formData.logoUrl ? (
                                 <div className="relative border border-slate-200 rounded-xl p-4 inline-block bg-slate-50">
                                   <img src={formData.logoUrl} alt="Logo Preview" className="h-20 object-contain" />
@@ -352,7 +352,7 @@ export default function CheckoutPage() {
                             </div>
 
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Brand Color *</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Brand Color *</label>
                               <div className={`flex flex-wrap items-center gap-4 bg-slate-50 p-4 rounded-2xl border ${errors.brandColor ? 'border-red-500 bg-red-50/10' : 'border-slate-100'}`}>
                                 <div className="flex gap-2">
                                   {BRAND_PALETTES.map(color => (
@@ -375,7 +375,7 @@ export default function CheckoutPage() {
                             </div>
 
                             <div>
-                              <label className="flex justify-between items-end mb-2">
+                              <label className="flex justify-between items-end mb-1">
                                 <span className="block text-sm font-semibold text-slate-700">About Your Business *</span>
                                 <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) < 20 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
                                   {getWordCount(formData.aboutBusiness)} / 20+ words
@@ -386,7 +386,7 @@ export default function CheckoutPage() {
                             </div>
                             
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Social Links</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Social Links</label>
                               <input type="text" {...register("socialLinks")} className={getInputClass("socialLinks")} placeholder="instagram.com/yourhandle, etc." />
                             </div>
                           </div>
@@ -395,16 +395,16 @@ export default function CheckoutPage() {
 
                       {currentStep === 3 && (
                         <div>
-                          <h2 className="text-2xl font-bold mb-6 text-slate-900">Offerings & Content</h2>
-                          <div className="space-y-6">
+                          <h2 className="text-2xl font-bold mb-4 text-slate-900">Offerings & Content</h2>
+                          <div className="space-y-4">
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Core Products / Services *</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Core Products / Services *</label>
                               <textarea {...register("targetOffering")} className={`${getInputClass("targetOffering")} min-h-[100px]`} placeholder="List the primary things you want to sell or promote..." />
                               {renderError("targetOffering")}
                             </div>
 
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Detailed Description *</label>
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Detailed Description *</label>
                               <textarea {...register("offeringDetails")} className={`${getInputClass("offeringDetails")} min-h-[120px]`} placeholder="Elaborate on your offerings, target audience, and pricing..." />
                               {renderError("offeringDetails")}
                             </div>
@@ -446,8 +446,8 @@ export default function CheckoutPage() {
 
                       {currentStep === 4 && (
                         <div>
-                          <h2 className="text-2xl font-bold mb-6 text-slate-900">Assets & Integrations</h2>
-                          <div className="space-y-6">
+                          <h2 className="text-2xl font-bold mb-4 text-slate-900">Assets & Integrations</h2>
+                          <div className="space-y-4">
                             <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
                               <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document *</label>
                               <p className="text-xs text-slate-500 mb-4">Upload the PDF or DOCX listing required fields for your site's contact form.</p>
@@ -473,7 +473,7 @@ export default function CheckoutPage() {
                                 <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
                                 <div className={`border-2 border-dashed rounded-2xl p-6 text-center relative border-slate-200 bg-slate-50`}>
                                   <input type="file" multiple onChange={handleMockUpload('mediaFilesUrl')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                                  <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                  <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-1" />
                                   <p className="text-sm font-semibold text-slate-700">Click to upload Additional Assets</p>
                                 </div>
                                 {formData.mediaFilesUrl && (
@@ -504,16 +504,13 @@ export default function CheckoutPage() {
                         </div>
                       )}
 
-                      <div className="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
-                        {currentStep > 1 ? (
-                          <button type="button" onClick={handlePrev} className="px-6 py-3 rounded-xl font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all flex items-center gap-2">
-                            Back
-                          </button>
-                        ) : <div></div>}
+                      <div className="mt-6 pt-4 border-t border-slate-100 flex justify-between items-center sticky bottom-0 bg-white py-3 z-10 w-full -mx-4 sm:-mx-6 px-4 sm:px-6">
+                        <button type="button" onClick={handlePrev} className={`px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-900 transition-all rounded-lg ${currentStep === 1 ? 'invisible' : 'visible'}`}>
+                          ← Back
+                        </button>
                         
-                        <button type="submit" className="bg-[#4400AF] hover:bg-[#310080] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 active:scale-[0.98] flex items-center gap-2">
-                          Next Step
-                          <ChevronRight className="w-5 h-5" />
+                        <button type="submit" className="px-6 py-2.5 bg-[#4400AF] text-white font-medium text-sm rounded-lg hover:bg-[#310080] transition-all">
+                          Next Step →
                         </button>
                       </div>
                     </form>
