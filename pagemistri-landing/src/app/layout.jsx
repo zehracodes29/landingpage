@@ -3,8 +3,13 @@ import '../index.css';
 import { ThemeProvider } from '../components/ThemeProvider';
 
 export const metadata = {
- title: 'Business Website for Small Businesses in India | Pagemistri',
- description: ' Get a professional business website for ₹5,000. Collect enquiries, manage leads and track performance with Pagemistri. Go live in 3–5 days.Landing page',
+ title: 'Pagemistri - High-Converting Website Setup & Hosting',
+ description: 'Build, host, and grow your business with Pagemistri.',
+ icons: {
+  icon: '/pagemistri-logo.png',
+  shortcut: '/pagemistri-logo.png',
+  apple: '/pagemistri-logo.png',
+ },
  openGraph: {
   title: 'Business Website for Small Businesses in India | Pagemistri',
   description: ' Get a professional business website for ₹5,000. Collect enquiries, manage leads and track performance with Pagemistri. Go live in 3–5 days.',
