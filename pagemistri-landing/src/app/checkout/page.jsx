@@ -264,15 +264,15 @@ export default function CheckoutPage() {
         </div>
 
         {currentStep < 5 ? (
-          <div className="flex justify-center">
-            <div className="w-full max-w-3xl">
+          <div className="flex justify-center w-full">
+            <div className="w-full max-w-3xl mx-auto min-w-[320px] md:min-w-[650px]">
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-6 relative overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }} className="w-full">
                     <form className="flex flex-col relative" onSubmit={handleNext}>
                       
                       {currentStep === 1 && (
-                        <div>
+                        <div className="w-full block">
                           <h2 className="text-2xl font-bold mb-4 text-slate-900 flex items-center gap-3">
                             <span className="bg-[#4400AF]/10 text-[#4400AF] p-2 rounded-xl"><Zap className="w-5 h-5" /></span>
                             Business Basics
@@ -331,7 +331,7 @@ export default function CheckoutPage() {
                       )}
 
                       {currentStep === 2 && (
-                        <div>
+                        <div className="w-full block">
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Brand Identity</h2>
                           <div className="space-y-4">
                             <div>
@@ -394,7 +394,7 @@ export default function CheckoutPage() {
                       )}
 
                       {currentStep === 3 && (
-                        <div>
+                        <div className="w-full block">
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Offerings & Content</h2>
                           <div className="space-y-4">
                             <div>
@@ -445,7 +445,7 @@ export default function CheckoutPage() {
                       )}
 
                       {currentStep === 4 && (
-                        <div>
+                        <div className="w-full block">
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Assets & Integrations</h2>
                           <div className="space-y-4">
                             <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
