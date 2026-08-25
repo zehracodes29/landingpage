@@ -367,8 +367,8 @@ export default function CheckoutPage() {
                                 </div>
                                 <div className="h-8 w-px bg-slate-200 mx-2 hidden sm:block"></div>
                                 <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-1.5 focus-within:ring-2 focus-within:ring-[#4400AF]/20 focus-within:border-[#4400AF] transition-all">
-                                  <input type="color" {...register("brandColor")} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
-                                  <input type="text" {...register("brandColor")} className="w-24 text-sm font-mono focus:outline-none uppercase" />
+                                  <input type="color" value={formData.brandColor || "#000000"} onChange={(e) => setValue("brandColor", e.target.value, { shouldValidate: true, shouldDirty: true })} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
+                                  <input type="text" value={formData.brandColor || ""} onChange={(e) => setValue("brandColor", e.target.value, { shouldValidate: true, shouldDirty: true })} className="w-24 text-sm font-mono focus:outline-none uppercase" placeholder="#000000" />
                                 </div>
                               </div>
                               {renderError("brandColor")}
