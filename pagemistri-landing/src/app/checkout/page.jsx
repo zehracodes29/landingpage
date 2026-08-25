@@ -6,6 +6,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronRight, UploadCloud, ChevronDown, Lock, ShieldCheck, Zap } from "lucide-react";
 import { UploadDropzone } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
+import { useRouter } from "next/navigation";
+
+const PHP_API_URL = "https://pagemistri.in/api/submit-form.php";
 
 const STEPS = [
   { num: 1, title: "Basics" },
@@ -18,8 +21,11 @@ const STEPS = [
 const BRAND_PALETTES = ["#4400AF", "#10B981", "#3B82F6", "#F59E0B", "#EF4444", "#000000"];
 
 export default function CheckoutPage() {
+  const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
     businessName: "",
     hasDomain: "No",
     domainDetails: "",
@@ -83,8 +89,59 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleCheckout = () => {
-    alert("Razorpay Checkout SDK Triggered!");
+  const handleCheckout = async () => {
+    // Razorpay Integration Placeholder (Mocking Success for now)
+    // alert("Razorpay Checkout SDK Triggered!");
+    
+    // Simulating Razorpay Success Callback
+    const response = {
+      razorpay_order_id: "order_mock_" + Math.random().toString(36).substr(2, 9),
+      razorpay_payment_id: "pay_mock_" + Math.random().toString(36).substr(2, 9)
+    };
+
+    const payload = {
+      full_name: formData.fullName,
+      business_name: formData.businessName,
+      phone: formData.phone,
+      email: formData.email,
+      business_address: formData.address,
+      domain_details: formData.domainDetails,
+      social_links: formData.socialLinks,
+      logo_url: formData.logoUrl,
+      brand_color: formData.brandColors,
+      about_business: formData.aboutBusiness,
+      target_offering: formData.productsServices,
+      offering_details: formData.description,
+      usp_benefits: formData.usp,
+      testimonials_pricing: formData.testimonials,
+      form_requirements_doc_url: formData.documentUrls.join(", "),
+      extra_docs_url: "", // merged with documentUrls for simplicity
+      media_files_url: formData.mediaUrls.join(", "),
+      payment_gateway_requested: formData.paymentGateway === "Yes" ? "Yes" : "No",
+      razorpay_order_id: response.razorpay_order_id,
+      razorpay_payment_id: response.razorpay_payment_id,
+      payment_status: "Success"
+    };
+
+    try {
+      const res = await fetch(PHP_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+      
+      if (res.ok) {
+        localStorage.removeItem("pagemistri_onboarding");
+        router.push("/thank-you");
+      } else {
+        alert("Submission failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting form", error);
+      alert("Error submitting form.");
+    }
   };
 
   const getWordCount = (str) => {
@@ -201,6 +258,17 @@ export default function CheckoutPage() {
                         </h2>
                         
                         <div className="space-y-6">
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                              <input required type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="John Doe" />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                              <input required type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="john@example.com" />
+                            </div>
+                          </div>
+
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Business Name *</label>
                             <input required type="text" name="businessName" value={formData.businessName} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="e.g. Acme Corp" />
