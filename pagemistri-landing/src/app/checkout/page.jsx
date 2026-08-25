@@ -31,7 +31,9 @@ const baseSchema = z.object({
   phone: z.string().regex(/^[0-9]{7,12}$/, "Enter a valid phone number"),
   businessAddress: z.string().min(5, "Address is required"),
   
-  socialLinks: z.string().optional(),
+  socialInstagram: z.string().optional(),
+  socialFacebook: z.string().optional(),
+  socialLinkedIn: z.string().optional(),
   logoUrl: z.string().min(1, "Please upload a logo before proceeding"),
   brandColor: z.string().min(1, "Select or enter a brand color"),
   aboutBusiness: z.string().refine(val => val && val.trim().split(/\s+/).length >= 20, "Please provide at least 20 words about your business"),
@@ -65,7 +67,9 @@ export default function CheckoutPage() {
       countryCode: "+91",
       phone: "",
       businessAddress: "",
-      socialLinks: "",
+      socialInstagram: "",
+      socialFacebook: "",
+      socialLinkedIn: "",
       brandColor: "#4400AF",
       aboutBusiness: "",
       targetOffering: "",
@@ -146,7 +150,11 @@ export default function CheckoutPage() {
       email: formData.email || "",
       business_address: formData.businessAddress || "",
       domain_details: formData.domainDetails || "",
-      social_links: formData.socialLinks || "",
+      social_links: [
+        formData.socialInstagram ? `IG: ${formData.socialInstagram}` : "",
+        formData.socialFacebook ? `FB: ${formData.socialFacebook}` : "",
+        formData.socialLinkedIn ? `LI: ${formData.socialLinkedIn}` : ""
+      ].filter(Boolean).join(" | "),
       logo_url: formData.logoUrl || "",
       brand_color: formData.brandColor || "",
       about_business: formData.aboutBusiness || "",
@@ -314,14 +322,14 @@ export default function CheckoutPage() {
                               <div className="flex gap-4 mb-3">
                                 <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "Yes" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
                                   <input type="radio" value="Yes" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
-                                  <span className="text-sm font-semibold text-slate-700">I have a domain</span>
+                                  <span className="text-sm font-semibold text-slate-700">I have one</span>
                                 </label>
                                 <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "No" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
                                   <input type="radio" value="No" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
-                                  <span className="text-sm font-semibold text-slate-700">I need one</span>
+                                  <span className="text-sm font-semibold text-slate-700">I don't have one</span>
                                 </label>
                               </div>
-                              <input type="text" {...register("domainDetails")} className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "Yes" ? "Enter your domain (e.g. example.com)" : "Preferred domain name to check availability"} />
+                              <input type="text" {...register("domainDetails")} className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "No" ? "Enter preferred domain name, e.g., mybusiness.com" : "e.g., mybusiness.com"} />
                               {renderError("domainDetails")}
                             </div>
 
@@ -408,9 +416,13 @@ export default function CheckoutPage() {
                               {renderError("aboutBusiness")}
                             </div>
                             
-                            <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-1">Social Links</label>
-                              <input type="text" {...register("socialLinks")} className={getInputClass("socialLinks")} placeholder="instagram.com/yourhandle, etc." />
+                            <div className="space-y-3">
+                              <label className="block text-sm font-semibold text-slate-700">Social Links (Optional)</label>
+                              <div className="grid grid-cols-1 gap-3">
+                                <input type="url" {...register("socialInstagram")} className={getInputClass("socialInstagram")} placeholder="https://instagram.com/yourhandle" />
+                                <input type="url" {...register("socialFacebook")} className={getInputClass("socialFacebook")} placeholder="https://facebook.com/yourpage" />
+                                <input type="url" {...register("socialLinkedIn")} className={getInputClass("socialLinkedIn")} placeholder="https://linkedin.com/company/yourcompany" />
+                              </div>
                             </div>
                           </div>
                         </div>
