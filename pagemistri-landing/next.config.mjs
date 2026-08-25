@@ -7,7 +7,6 @@ const __dirname = path.dirname(__filename);
 /** @type {import('next').NextConfig} */
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  trailingSlash: true,
   images: {
     unoptimized: true,
   },
