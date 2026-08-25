@@ -4,10 +4,8 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronRight, UploadCloud, ChevronDown, Lock, ShieldCheck, Zap } from "lucide-react";
-import { UploadDropzone } from "@uploadthing/react";
-import "@uploadthing/react/styles.css";
 import { useRouter } from "next/navigation";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 
@@ -23,43 +21,6 @@ const STEPS = [
 
 const BRAND_PALETTES = ["#4400AF", "#10B981", "#3B82F6", "#F59E0B", "#EF4444", "#000000"];
 
-const formSchema = z.object({
-  fullName: z.string().min(2, "Full name is required"),
-  email: z.string().email("Invalid email address"),
-  businessName: z.string().min(2, "Business name is required"),
-  hasDomain: z.string(),
-  domainDetails: z.string().optional(),
-  phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian phone number"),
-  businessAddress: z.string().min(5, "Address is required"),
-  
-  logoUrl: z.string().url("Please upload a logo before proceeding").or(z.literal("")),
-  brandColor: z.string().min(1, "Select or enter a brand color"),
-  aboutBusiness: z.string().refine(val => val.trim().split(/\s+/).length >= 20, "Please provide at least 20 words about your business").or(z.literal("")),
-  socialLinks: z.string().optional(),
-  
-  targetOffering: z.string().min(3, "Please specify your main product or service"),
-  offeringDetails: z.string().min(10, "Please describe your product/service details"),
-  uspBenefits: z.string().optional(),
-  testimonialsPricing: z.string().optional(),
-  
-  formRequirementsDocUrl: z.string().url("Please upload the form requirements document").or(z.literal("")),
-  extraDocsUrl: z.string().optional(),
-  mediaFilesUrl: z.string().optional(),
-  paymentGatewayRequested: z.enum(["Yes", "No"]).default("No"),
-}).superRefine((data, ctx) => {
-  if (data.hasDomain === "Yes" && (!data.domainDetails || data.domainDetails.length < 3)) {
-    ctx.addIssue({
-      code: z.ZodIssueCode.custom,
-      path: ["domainDetails"],
-      message: "Domain details are required",
-    });
-  }
-  // Enforce logoUrl on step 2 manually if needed, but since we trigger per step, we can refine logoUrl to not be literal("")
-  // Actually, wait, .or(z.literal("")) means empty is valid. The user asked for it to be required. 
-  // We'll fix it by overriding the schema directly below.
-});
-
-// Create step-specific schemas for more precise validation matching the prompt
 const baseSchema = z.object({
   fullName: z.string().min(2, "Full name is required"),
   email: z.string().email("Invalid email address"),
@@ -70,7 +31,7 @@ const baseSchema = z.object({
   businessAddress: z.string().min(5, "Address is required"),
   
   socialLinks: z.string().optional(),
-  logoUrl: z.string().min(1, "Please upload a logo before proceeding").url("Please upload a logo before proceeding"),
+  logoUrl: z.string().min(1, "Please upload a logo before proceeding"),
   brandColor: z.string().min(1, "Select or enter a brand color"),
   aboutBusiness: z.string().refine(val => val && val.trim().split(/\s+/).length >= 20, "Please provide at least 20 words about your business"),
   
@@ -79,7 +40,7 @@ const baseSchema = z.object({
   uspBenefits: z.string().optional(),
   testimonialsPricing: z.string().optional(),
   
-  formRequirementsDocUrl: z.string().min(1, "Please upload the form requirements document").url("Please upload the form requirements document"),
+  formRequirementsDocUrl: z.string().min(1, "Please upload the form requirements document"),
   extraDocsUrl: z.string().optional(),
   mediaFilesUrl: z.string().optional(),
   paymentGatewayRequested: z.enum(["Yes", "No"]).default("No"),
@@ -91,7 +52,7 @@ export default function CheckoutPage() {
   const [isClient, setIsClient] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(null);
   
-  const { register, handleSubmit, trigger, watch, setValue, formState: { errors }, reset } = useForm({
+  const { register, trigger, watch, setValue, formState: { errors }, reset } = useForm({
     resolver: zodResolver(baseSchema),
     mode: "onChange",
     defaultValues: {
@@ -242,6 +203,13 @@ export default function CheckoutPage() {
     return errors[fieldName] ? <p className="text-red-500 text-xs mt-1 font-semibold">{errors[fieldName]?.message}</p> : null;
   };
 
+  const handleMockUpload = (field) => (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setValue(field, URL.createObjectURL(file), { shouldValidate: true });
+    }
+  };
+
   if (!isClient) return null;
 
   return (
@@ -295,311 +263,346 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          <div className="lg:col-span-7">
-            <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white shadow-xl shadow-slate-200/50 p-6 sm:p-10 relative overflow-hidden">
-              <AnimatePresence mode="wait">
-                <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
-                  <form className="space-y-8" onSubmit={currentStep === 5 ? handleCheckout : handleNext}>
-                    
-                    {currentStep === 1 && (
-                      <div>
-                        <h2 className="text-2xl font-bold mb-6 text-slate-900 flex items-center gap-3">
-                          <span className="bg-[#4400AF]/10 text-[#4400AF] p-2 rounded-xl"><Zap className="w-5 h-5" /></span>
-                          Business Basics
-                        </h2>
-                        
-                        <div className="space-y-6">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
-                              <input type="text" {...register("fullName")} className={getInputClass("fullName")} placeholder="John Doe" />
-                              {renderError("fullName")}
-                            </div>
-                            <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
-                              <input type="email" {...register("email")} className={getInputClass("email")} placeholder="john@example.com" />
-                              {renderError("email")}
-                            </div>
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Business Name *</label>
-                            <input type="text" {...register("businessName")} className={getInputClass("businessName")} placeholder="e.g. Acme Corp" />
-                            {renderError("businessName")}
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Domain Status *</label>
-                            <div className="flex gap-4 mb-3">
-                              <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "Yes" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
-                                <input type="radio" value="Yes" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
-                                <span className="text-sm font-semibold text-slate-700">I have a domain</span>
-                              </label>
-                              <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "No" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
-                                <input type="radio" value="No" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
-                                <span className="text-sm font-semibold text-slate-700">I need one</span>
-                              </label>
-                            </div>
-                            <input type="text" {...register("domainDetails")} className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "Yes" ? "Enter your domain (e.g. example.com)" : "Preferred domain name to check availability"} />
-                            {renderError("domainDetails")}
-                          </div>
-
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
-                              <input type="tel" {...register("phone")} className={getInputClass("phone")} placeholder="9XXXXXXXXX" />
-                              {renderError("phone")}
-                            </div>
-                            <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-2">Business Address *</label>
-                              <input type="text" {...register("businessAddress")} className={getInputClass("businessAddress")} placeholder="City, State" />
-                              {renderError("businessAddress")}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {currentStep === 2 && (
-                      <div>
-                        <h2 className="text-2xl font-bold mb-6 text-slate-900">Brand Identity</h2>
-                        <div className="space-y-6">
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload *</label>
-                            {formData.logoUrl ? (
-                              <div className="relative border border-slate-200 rounded-xl p-4 inline-block bg-slate-50">
-                                <img src={formData.logoUrl} alt="Logo Preview" className="h-20 object-contain" />
-                                <button type="button" onClick={() => setValue("logoUrl", "", { shouldValidate: true })} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">X</button>
-                              </div>
-                            ) : (
-                              <UploadDropzone
-                                endpoint="logoUploader"
-                                onClientUploadComplete={(res) => {
-                                  if (res && res[0]) {
-                                    setValue('logoUrl', res[0].url, { shouldValidate: true });
-                                  }
-                                }}
-                                onUploadError={(error) => alert(`ERROR! ${error.message}`)}
-                                className={`ut-button:bg-[#4400AF] ut-button:ut-readying:bg-[#4400AF]/50 ut-label:text-[#4400AF] hover:bg-purple-50/30 transition-all border-dashed p-8 ${errors.logoUrl ? 'border-red-500' : 'border-purple-200 hover:border-[#4400AF]'}`}
-                              />
-                            )}
-                            {renderError("logoUrl")}
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Brand Color *</label>
-                            <div className={`flex flex-wrap items-center gap-4 bg-slate-50 p-4 rounded-2xl border ${errors.brandColor ? 'border-red-500 bg-red-50/10' : 'border-slate-100'}`}>
-                              <div className="flex gap-2">
-                                {BRAND_PALETTES.map(color => (
-                                  <button
-                                    key={color}
-                                    type="button"
-                                    onClick={() => setValue('brandColor', color, { shouldValidate: true })}
-                                    className={`w-8 h-8 rounded-full border-2 transition-all ${(formData.brandColor || "").toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
-                                    style={{ backgroundColor: color }}
-                                  />
-                                ))}
-                              </div>
-                              <div className="h-8 w-px bg-slate-200 mx-2 hidden sm:block"></div>
-                              <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-1.5 focus-within:ring-2 focus-within:ring-[#4400AF]/20 focus-within:border-[#4400AF] transition-all">
-                                <input type="color" {...register("brandColor")} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
-                                <input type="text" {...register("brandColor")} className="w-24 text-sm font-mono focus:outline-none uppercase" />
-                              </div>
-                            </div>
-                            {renderError("brandColor")}
-                          </div>
-
-                          <div>
-                            <label className="flex justify-between items-end mb-2">
-                              <span className="block text-sm font-semibold text-slate-700">About Your Business *</span>
-                              <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) < 20 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
-                                {getWordCount(formData.aboutBusiness)} / 20+ words
-                              </span>
-                            </label>
-                            <textarea {...register("aboutBusiness")} className={`${getInputClass("aboutBusiness")} min-h-[120px] resize-y`} placeholder="Provide at least 20 words describing what your business does..." />
-                            {renderError("aboutBusiness")}
-                          </div>
-                          
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Social Links</label>
-                            <input type="text" {...register("socialLinks")} className={getInputClass("socialLinks")} placeholder="instagram.com/yourhandle, etc." />
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {currentStep === 3 && (
-                      <div>
-                        <h2 className="text-2xl font-bold mb-6 text-slate-900">Offerings & Content</h2>
-                        <div className="space-y-6">
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Core Products / Services *</label>
-                            <textarea {...register("targetOffering")} className={`${getInputClass("targetOffering")} min-h-[100px]`} placeholder="List the primary things you want to sell or promote..." />
-                            {renderError("targetOffering")}
-                          </div>
-
-                          <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Detailed Description *</label>
-                            <textarea {...register("offeringDetails")} className={`${getInputClass("offeringDetails")} min-h-[120px]`} placeholder="Elaborate on your offerings, target audience, and pricing..." />
-                            {renderError("offeringDetails")}
-                          </div>
-
-                          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-                            <button type="button" onClick={() => setOpenAccordion(openAccordion === 'usp' ? null : 'usp')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
-                              <span className="font-semibold text-sm text-slate-700">Add USP / Key Benefits (Optional)</span>
-                              <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openAccordion === 'usp' ? 'rotate-180' : ''}`} />
-                            </button>
-                            <AnimatePresence>
-                              {openAccordion === 'usp' && (
-                                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                                  <div className="px-5 pb-5 pt-2">
-                                    <textarea {...register("uspBenefits")} className={`${getInputClass("uspBenefits")} min-h-[100px]`} placeholder="Why choose you over competitors?" />
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                          
-                          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
-                            <button type="button" onClick={() => setOpenAccordion(openAccordion === 'testi' ? null : 'testi')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
-                              <span className="font-semibold text-sm text-slate-700">Add Testimonials (Optional)</span>
-                              <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openAccordion === 'testi' ? 'rotate-180' : ''}`} />
-                            </button>
-                            <AnimatePresence>
-                              {openAccordion === 'testi' && (
-                                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
-                                  <div className="px-5 pb-5 pt-2">
-                                    <textarea {...register("testimonialsPricing")} className={`${getInputClass("testimonialsPricing")} min-h-[100px]`} placeholder="Paste customer reviews here..." />
-                                  </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {currentStep === 4 && (
-                      <div>
-                        <h2 className="text-2xl font-bold mb-6 text-slate-900">Assets & Integrations</h2>
-                        <div className="space-y-6">
-                          <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
-                            <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document *</label>
-                            <p className="text-xs text-slate-500 mb-4">Upload the PDF or DOCX listing required fields for your site's contact form.</p>
-                            
-                            {formData.formRequirementsDocUrl ? (
-                              <div className="mb-4 flex items-center justify-between bg-white px-4 py-3 rounded-lg border border-green-200 shadow-sm">
-                                <div className="flex items-center gap-2 text-sm text-slate-700 truncate">
-                                  <Check className="w-5 h-5 text-green-500" /> Document Uploaded
-                                </div>
-                                <button type="button" onClick={() => setValue('formRequirementsDocUrl', '', { shouldValidate: true })} className="text-xs text-red-500 font-semibold hover:underline">Change File</button>
-                              </div>
-                            ) : (
-                              <UploadDropzone
-                                endpoint="documentUploader"
-                                onClientUploadComplete={(res) => {
-                                  if (res && res[0]) {
-                                    setValue('formRequirementsDocUrl', res[0].url, { shouldValidate: true });
-                                  }
-                                }}
-                                onUploadError={(error) => alert(`ERROR! ${error.message}`)}
-                                content={{ label: "Upload Form Requirements" }}
-                                className={`ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed transition-all p-4 ${errors.formRequirementsDocUrl ? 'border-red-500 bg-red-50/10' : 'border-slate-200 hover:border-[#4400AF] bg-slate-50'}`}
-                              />
-                            )}
-                            {renderError("formRequirementsDocUrl")}
-                            
-                            <div className="mt-8 pt-6 border-t border-slate-100">
-                              <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents (Optional)</label>
-                              <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
-                              <UploadDropzone
-                                endpoint="mediaUploader"
-                                onClientUploadComplete={(res) => {
-                                  if (res) {
-                                    const urls = res.map(r => r.url).join(", ");
-                                    setValue('mediaFilesUrl', formData.mediaFilesUrl ? `${formData.mediaFilesUrl}, ${urls}` : urls);
-                                  }
-                                }}
-                                onUploadError={(error) => alert(`ERROR! ${error.message}`)}
-                                content={{ label: "Upload Additional Assets" }}
-                                className="ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all p-4"
-                              />
-                              {formData.mediaFilesUrl && (
-                                <p className="text-xs text-green-600 mt-2 font-medium flex items-center gap-1"><Check className="w-4 h-4"/> Additional assets uploaded successfully</p>
-                              )}
-                            </div>
-                          </div>
-
-                          <div className="p-6 bg-gradient-to-r from-purple-50 to-indigo-50/50 border border-purple-100 rounded-2xl relative overflow-hidden">
-                            <div className="absolute -right-4 -top-4 w-24 h-24 bg-purple-200/50 rounded-full blur-2xl"></div>
-                            <div className="relative z-10">
-                              <label className="block text-base font-bold text-slate-900 mb-1">Payment Gateway Integration</label>
-                              <p className="text-sm text-slate-600 mb-5">Do you want a payment gateway (e.g. Razorpay) integrated into your website's lead form?</p>
-                              
-                              <div className="flex gap-4">
-                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGatewayRequested === "Yes" ? "border-[#4400AF] bg-white shadow-md shadow-purple-900/5" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
-                                  <input type="radio" value="Yes" {...register("paymentGatewayRequested")} className="sr-only" />
-                                  <span className="text-sm font-bold text-slate-800">Yes, include it</span>
-                                </label>
-                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGatewayRequested === "No" ? "border-slate-800 bg-white shadow-md" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
-                                  <input type="radio" value="No" {...register("paymentGatewayRequested")} className="sr-only" />
-                                  <span className="text-sm font-bold text-slate-800">No, skip this</span>
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {currentStep === 5 && (
-                      <div className="text-center py-8">
-                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50 mb-6 relative">
-                          <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-0 bg-green-400 rounded-full opacity-20 blur-md"></motion.div>
-                          <Check className="w-10 h-10 text-green-500 relative z-10" />
-                        </div>
-                        <h2 className="text-3xl font-bold text-slate-900 mb-4">You're all set!</h2>
-                        <p className="text-slate-600 text-lg mb-8 max-w-md mx-auto">
-                          Please review your order summary on the right and proceed to secure payment to begin your website setup.
-                        </p>
-                      </div>
-                    )}
-
-                    <div className="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
-                      {currentStep > 1 ? (
-                        <button type="button" onClick={handlePrev} className="px-6 py-3 rounded-xl font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all flex items-center gap-2">
-                          Back
-                        </button>
-                      ) : <div></div>}
+        {currentStep < 5 ? (
+          <div className="flex justify-center">
+            <div className="w-full max-w-3xl">
+              <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white shadow-xl shadow-slate-200/50 p-6 sm:p-10 relative overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
+                    <form className="space-y-8" onSubmit={handleNext}>
                       
-                      {currentStep < 5 && (
-                        <button type="button" onClick={handleNext} className="bg-[#4400AF] hover:bg-[#310080] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 active:scale-[0.98] flex items-center gap-2">
+                      {currentStep === 1 && (
+                        <div>
+                          <h2 className="text-2xl font-bold mb-6 text-slate-900 flex items-center gap-3">
+                            <span className="bg-[#4400AF]/10 text-[#4400AF] p-2 rounded-xl"><Zap className="w-5 h-5" /></span>
+                            Business Basics
+                          </h2>
+                          
+                          <div className="space-y-6">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
+                                <input type="text" {...register("fullName")} className={getInputClass("fullName")} placeholder="John Doe" />
+                                {renderError("fullName")}
+                              </div>
+                              <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
+                                <input type="email" {...register("email")} className={getInputClass("email")} placeholder="john@example.com" />
+                                {renderError("email")}
+                              </div>
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Business Name *</label>
+                              <input type="text" {...register("businessName")} className={getInputClass("businessName")} placeholder="e.g. Acme Corp" />
+                              {renderError("businessName")}
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Domain Status *</label>
+                              <div className="flex gap-4 mb-3">
+                                <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "Yes" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
+                                  <input type="radio" value="Yes" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
+                                  <span className="text-sm font-semibold text-slate-700">I have a domain</span>
+                                </label>
+                                <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "No" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
+                                  <input type="radio" value="No" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
+                                  <span className="text-sm font-semibold text-slate-700">I need one</span>
+                                </label>
+                              </div>
+                              <input type="text" {...register("domainDetails")} className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "Yes" ? "Enter your domain (e.g. example.com)" : "Preferred domain name to check availability"} />
+                              {renderError("domainDetails")}
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                                <input type="tel" {...register("phone")} className={getInputClass("phone")} placeholder="9XXXXXXXXX" />
+                                {renderError("phone")}
+                              </div>
+                              <div>
+                                <label className="block text-sm font-semibold text-slate-700 mb-2">Business Address *</label>
+                                <input type="text" {...register("businessAddress")} className={getInputClass("businessAddress")} placeholder="City, State" />
+                                {renderError("businessAddress")}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {currentStep === 2 && (
+                        <div>
+                          <h2 className="text-2xl font-bold mb-6 text-slate-900">Brand Identity</h2>
+                          <div className="space-y-6">
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload *</label>
+                              {formData.logoUrl ? (
+                                <div className="relative border border-slate-200 rounded-xl p-4 inline-block bg-slate-50">
+                                  <img src={formData.logoUrl} alt="Logo Preview" className="h-20 object-contain" />
+                                  <button type="button" onClick={() => setValue("logoUrl", "", { shouldValidate: true })} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">X</button>
+                                </div>
+                              ) : (
+                                <div className={`border-2 border-dashed rounded-2xl p-8 text-center relative ${errors.logoUrl ? 'border-red-500 bg-red-50/10' : 'border-purple-200 bg-purple-50/30'}`}>
+                                  <input type="file" onChange={handleMockUpload('logoUrl')} accept="image/*" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                                  <UploadCloud className="w-10 h-10 text-purple-400 mx-auto mb-3" />
+                                  <p className="text-sm font-semibold text-slate-700">Click to upload Logo</p>
+                                </div>
+                              )}
+                              {renderError("logoUrl")}
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Brand Color *</label>
+                              <div className={`flex flex-wrap items-center gap-4 bg-slate-50 p-4 rounded-2xl border ${errors.brandColor ? 'border-red-500 bg-red-50/10' : 'border-slate-100'}`}>
+                                <div className="flex gap-2">
+                                  {BRAND_PALETTES.map(color => (
+                                    <button
+                                      key={color}
+                                      type="button"
+                                      onClick={() => setValue('brandColor', color, { shouldValidate: true })}
+                                      className={`w-8 h-8 rounded-full border-2 transition-all ${(formData.brandColor || "").toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
+                                      style={{ backgroundColor: color }}
+                                    />
+                                  ))}
+                                </div>
+                                <div className="h-8 w-px bg-slate-200 mx-2 hidden sm:block"></div>
+                                <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-1.5 focus-within:ring-2 focus-within:ring-[#4400AF]/20 focus-within:border-[#4400AF] transition-all">
+                                  <input type="color" {...register("brandColor")} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
+                                  <input type="text" {...register("brandColor")} className="w-24 text-sm font-mono focus:outline-none uppercase" />
+                                </div>
+                              </div>
+                              {renderError("brandColor")}
+                            </div>
+
+                            <div>
+                              <label className="flex justify-between items-end mb-2">
+                                <span className="block text-sm font-semibold text-slate-700">About Your Business *</span>
+                                <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) < 20 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
+                                  {getWordCount(formData.aboutBusiness)} / 20+ words
+                                </span>
+                              </label>
+                              <textarea {...register("aboutBusiness")} className={`${getInputClass("aboutBusiness")} min-h-[120px] resize-y`} placeholder="Provide at least 20 words describing what your business does..." />
+                              {renderError("aboutBusiness")}
+                            </div>
+                            
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Social Links</label>
+                              <input type="text" {...register("socialLinks")} className={getInputClass("socialLinks")} placeholder="instagram.com/yourhandle, etc." />
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {currentStep === 3 && (
+                        <div>
+                          <h2 className="text-2xl font-bold mb-6 text-slate-900">Offerings & Content</h2>
+                          <div className="space-y-6">
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Core Products / Services *</label>
+                              <textarea {...register("targetOffering")} className={`${getInputClass("targetOffering")} min-h-[100px]`} placeholder="List the primary things you want to sell or promote..." />
+                              {renderError("targetOffering")}
+                            </div>
+
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Detailed Description *</label>
+                              <textarea {...register("offeringDetails")} className={`${getInputClass("offeringDetails")} min-h-[120px]`} placeholder="Elaborate on your offerings, target audience, and pricing..." />
+                              {renderError("offeringDetails")}
+                            </div>
+
+                            <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                              <button type="button" onClick={() => setOpenAccordion(openAccordion === 'usp' ? null : 'usp')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                                <span className="font-semibold text-sm text-slate-700">Add USP / Key Benefits (Optional)</span>
+                                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openAccordion === 'usp' ? 'rotate-180' : ''}`} />
+                              </button>
+                              <AnimatePresence>
+                                {openAccordion === 'usp' && (
+                                  <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                                    <div className="px-5 pb-5 pt-2">
+                                      <textarea {...register("uspBenefits")} className={`${getInputClass("uspBenefits")} min-h-[100px]`} placeholder="Why choose you over competitors?" />
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                            
+                            <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                              <button type="button" onClick={() => setOpenAccordion(openAccordion === 'testi' ? null : 'testi')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                                <span className="font-semibold text-sm text-slate-700">Add Testimonials (Optional)</span>
+                                <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openAccordion === 'testi' ? 'rotate-180' : ''}`} />
+                              </button>
+                              <AnimatePresence>
+                                {openAccordion === 'testi' && (
+                                  <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                                    <div className="px-5 pb-5 pt-2">
+                                      <textarea {...register("testimonialsPricing")} className={`${getInputClass("testimonialsPricing")} min-h-[100px]`} placeholder="Paste customer reviews here..." />
+                                    </div>
+                                  </motion.div>
+                                )}
+                              </AnimatePresence>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      {currentStep === 4 && (
+                        <div>
+                          <h2 className="text-2xl font-bold mb-6 text-slate-900">Assets & Integrations</h2>
+                          <div className="space-y-6">
+                            <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
+                              <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document *</label>
+                              <p className="text-xs text-slate-500 mb-4">Upload the PDF or DOCX listing required fields for your site's contact form.</p>
+                              
+                              {formData.formRequirementsDocUrl ? (
+                                <div className="mb-4 flex items-center justify-between bg-white px-4 py-3 rounded-lg border border-green-200 shadow-sm">
+                                  <div className="flex items-center gap-2 text-sm text-slate-700 truncate">
+                                    <Check className="w-5 h-5 text-green-500" /> Document Uploaded
+                                  </div>
+                                  <button type="button" onClick={() => setValue('formRequirementsDocUrl', '', { shouldValidate: true })} className="text-xs text-red-500 font-semibold hover:underline">Change File</button>
+                                </div>
+                              ) : (
+                                <div className={`border-2 border-dashed rounded-2xl p-8 text-center relative ${errors.formRequirementsDocUrl ? 'border-red-500 bg-red-50/10' : 'border-purple-200 bg-purple-50/30'}`}>
+                                  <input type="file" onChange={handleMockUpload('formRequirementsDocUrl')} accept=".pdf,.doc,.docx" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                                  <UploadCloud className="w-10 h-10 text-purple-400 mx-auto mb-3" />
+                                  <p className="text-sm font-semibold text-slate-700">Click to upload Document</p>
+                                </div>
+                              )}
+                              {renderError("formRequirementsDocUrl")}
+                              
+                              <div className="mt-8 pt-6 border-t border-slate-100">
+                                <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents (Optional)</label>
+                                <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
+                                <div className={`border-2 border-dashed rounded-2xl p-6 text-center relative border-slate-200 bg-slate-50`}>
+                                  <input type="file" multiple onChange={handleMockUpload('mediaFilesUrl')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                                  <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                  <p className="text-sm font-semibold text-slate-700">Click to upload Additional Assets</p>
+                                </div>
+                                {formData.mediaFilesUrl && (
+                                  <p className="text-xs text-green-600 mt-2 font-medium flex items-center gap-1"><Check className="w-4 h-4"/> Additional assets uploaded successfully</p>
+                                )}
+                              </div>
+                            </div>
+
+                            <div className="p-6 bg-gradient-to-r from-purple-50 to-indigo-50/50 border border-purple-100 rounded-2xl relative overflow-hidden">
+                              <div className="absolute -right-4 -top-4 w-24 h-24 bg-purple-200/50 rounded-full blur-2xl"></div>
+                              <div className="relative z-10">
+                                <label className="block text-base font-bold text-slate-900 mb-1">Payment Gateway Integration</label>
+                                <p className="text-sm text-slate-600 mb-5">Do you want a payment gateway (e.g. Razorpay) integrated into your website's lead form?</p>
+                                
+                                <div className="flex gap-4">
+                                  <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGatewayRequested === "Yes" ? "border-[#4400AF] bg-white shadow-md shadow-purple-900/5" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
+                                    <input type="radio" value="Yes" {...register("paymentGatewayRequested")} className="sr-only" />
+                                    <span className="text-sm font-bold text-slate-800">Yes, include it</span>
+                                  </label>
+                                  <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGatewayRequested === "No" ? "border-slate-800 bg-white shadow-md" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
+                                    <input type="radio" value="No" {...register("paymentGatewayRequested")} className="sr-only" />
+                                    <span className="text-sm font-bold text-slate-800">No, skip this</span>
+                                  </label>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
+                        {currentStep > 1 ? (
+                          <button type="button" onClick={handlePrev} className="px-6 py-3 rounded-xl font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all flex items-center gap-2">
+                            Back
+                          </button>
+                        ) : <div></div>}
+                        
+                        <button type="submit" className="bg-[#4400AF] hover:bg-[#310080] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 active:scale-[0.98] flex items-center gap-2">
                           Next Step
                           <ChevronRight className="w-5 h-5" />
                         </button>
-                      )}
-                    </div>
-                  </form>
-                </motion.div>
-              </AnimatePresence>
+                      </div>
+                    </form>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
             </div>
           </div>
+        ) : (
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+            <div className="lg:col-span-7">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="bg-white/90 backdrop-blur-md rounded-3xl border border-slate-200 shadow-xl p-8 h-full"
+              >
+                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-50 mb-6 relative">
+                  <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-0 bg-green-400 rounded-full opacity-20 blur-md"></motion.div>
+                  <Check className="w-8 h-8 text-green-500 relative z-10" />
+                </div>
+                <h2 className="text-3xl font-bold text-slate-900 mb-2">Final Review</h2>
+                <p className="text-slate-600 mb-8">Please review your setup details before proceeding to payment.</p>
 
-          <div className="lg:col-span-5">
-            <div className="sticky top-28">
+                <div className="space-y-6">
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Business Profile</h3>
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-4">
+                      <div>
+                        <p className="text-xs text-slate-500 mb-1">Name</p>
+                        <p className="text-sm font-semibold text-slate-800">{formData.fullName}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 mb-1">Business</p>
+                        <p className="text-sm font-semibold text-slate-800">{formData.businessName}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 mb-1">Email</p>
+                        <p className="text-sm font-semibold text-slate-800 truncate">{formData.email}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs text-slate-500 mb-1">Phone</p>
+                        <p className="text-sm font-semibold text-slate-800">{formData.phone}</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100">
+                    <h3 className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-4">Assets & Settings</h3>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-600">Logo Uploaded</span>
+                        {formData.logoUrl ? <Check className="w-4 h-4 text-green-500" /> : <span className="text-sm text-slate-400">No</span>}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-600">Documents Uploaded</span>
+                        {formData.formRequirementsDocUrl ? <Check className="w-4 h-4 text-green-500" /> : <span className="text-sm text-slate-400">No</span>}
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm text-slate-600">Brand Color</span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-mono">{formData.brandColor}</span>
+                          <div className="w-4 h-4 rounded-full" style={{ backgroundColor: formData.brandColor }}></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-8 pt-6 border-t border-slate-100">
+                  <button type="button" onClick={() => setCurrentStep(1)} className="text-sm font-semibold text-[#4400AF] hover:underline">
+                    ← Edit Details
+                  </button>
+                </div>
+              </motion.div>
+            </div>
+
+            <div className="lg:col-span-5">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                className="bg-white/90 backdrop-blur-md rounded-3xl border border-purple-100 shadow-2xl shadow-purple-900/10 p-6 sm:p-8 relative overflow-hidden"
+                className="bg-white/90 backdrop-blur-md rounded-3xl border border-purple-100 shadow-2xl shadow-purple-900/10 p-6 sm:p-8 relative overflow-hidden h-full flex flex-col"
               >
                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-400/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
                 <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                   Order Summary
                 </h3>
                 
-                <div className="space-y-4 mb-8">
+                <div className="space-y-4 mb-8 flex-grow">
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-sm font-semibold text-slate-800">Business Name</p>
@@ -628,7 +631,7 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-6">
+                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-6 mt-auto">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-slate-600 font-medium">Setup Package</span>
                     <span className="text-slate-900 font-bold">₹5,000</span>
@@ -643,22 +646,16 @@ export default function CheckoutPage() {
                   </div>
                 </div>
                 
-                {currentStep === 5 ? (
-                  <motion.button 
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    onClick={handleCheckout}
-                    className="w-full bg-gradient-to-r from-[#4400AF] to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-900/30 flex justify-center items-center gap-2 group"
-                  >
-                    <Lock className="w-4 h-4 group-hover:hidden" />
-                    <Zap className="w-5 h-5 hidden group-hover:block text-yellow-300" />
-                    Pay ₹5,000 & Complete Setup
-                  </motion.button>
-                ) : (
-                  <button disabled className="w-full bg-slate-100 text-slate-400 font-bold py-4 rounded-xl flex justify-center items-center gap-2 cursor-not-allowed">
-                    Complete Form to Pay
-                  </button>
-                )}
+                <motion.button 
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={handleCheckout}
+                  className="w-full bg-gradient-to-r from-[#4400AF] to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-900/30 flex justify-center items-center gap-2 group"
+                >
+                  <Lock className="w-4 h-4 group-hover:hidden" />
+                  <Zap className="w-5 h-5 hidden group-hover:block text-yellow-300" />
+                  Pay ₹5,000 & Complete Setup
+                </motion.button>
 
                 <div className="mt-6 flex items-center justify-center gap-4 text-xs text-slate-400">
                   <div className="flex items-center gap-1"><Lock className="w-3 h-3" /> 256-bit SSL</div>
@@ -667,7 +664,7 @@ export default function CheckoutPage() {
               </motion.div>
             </div>
           </div>
-        </div>
+        )}
       </main>
     </div>
   );
