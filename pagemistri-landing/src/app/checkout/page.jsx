@@ -396,7 +396,7 @@ export default function CheckoutPage() {
                                     key={color}
                                     type="button"
                                     onClick={() => setValue('brandColor', color, { shouldValidate: true })}
-                                    className={`w-8 h-8 rounded-full border-2 transition-all ${formData.brandColor.toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
+                                    className={`w-8 h-8 rounded-full border-2 transition-all ${(formData.brandColor || "").toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
                                     style={{ backgroundColor: color }}
                                   />
                                 ))}
