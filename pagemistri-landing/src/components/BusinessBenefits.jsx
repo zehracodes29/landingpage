@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Clock, LayoutGrid, Sparkles } from 'lucide-react';
-import DomainSetupCard from '@/components/DomainSetupCard';
+import DomainSetupCard from './DomainSetupCard';
 
 const BusinessBenefits = () => {
  return (
