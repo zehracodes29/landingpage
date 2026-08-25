@@ -1,6 +1,6 @@
 import Script from 'next/script';
 import '../index.css';
-import { ThemeProvider } from '@/components/ThemeProvider';
+import { ThemeProvider } from '../components/ThemeProvider';
 
 export const metadata = {
  title: 'Business Website for Small Businesses in India | Pagemistri',
