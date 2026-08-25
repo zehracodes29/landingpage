@@ -1,6 +1,5 @@
 import Script from 'next/script';
 import '../index.css';
-import { ThemeProvider } from '../components/ThemeProvider';
 
 export const metadata = {
  title: 'Pagemistri - High-Converting Website Setup & Hosting',
@@ -28,7 +27,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
  return (
- <html lang="en" suppressHydrationWarning>
+ <html lang="en" className="light" style={{ colorScheme: 'light' }}>
  <head>
  <link rel="preconnect" href="https://fonts.googleapis.com" />
  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
@@ -44,22 +43,8 @@ export default function RootLayout({ children }) {
  })(window,document,'script','dataLayer','GTM-PBG4766S');
  ` }} 
  />
- 
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              try {
-                if (localStorage.getItem('theme') === 'dark') {
-                  document.documentElement.classList.add('dark');
-                } else {
-                  document.documentElement.classList.remove('dark');
-                }
-              } catch (_) {}
-            `
-          }}
-        />
-      </head>
- <body className="bg-white text-slate-900 dark:text-white dark:bg-[#090d16] dark:text-slate-100 font-sans transition-colors duration-300">
+ </head>
+ <body className="bg-white text-slate-900 font-sans transition-colors duration-300">
  <noscript>
  <iframe 
  src="https://www.googletagmanager.com/ns.html?id=GTM-PBG4766S"
@@ -68,9 +53,7 @@ export default function RootLayout({ children }) {
  style={{ display: 'none', visibility: 'hidden' }}
  />
  </noscript>
- <ThemeProvider defaultTheme="light">
         {children}
-      </ThemeProvider>
  </body>
  </html>
  );
