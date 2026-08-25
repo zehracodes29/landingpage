@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import SurveyNavbar from '@/components/SurveyNavbar';
+import SurveyNavbar from '../../components/SurveyNavbar';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Clock, Award, ShieldCheck, CheckCircle2, BarChart3, Zap, Search, FileText, Layers, Check, Loader2, MapPin, Star, User, Mail, Phone, AlertCircle, Send, Sparkles, Lock, Quote } from 'lucide-react';
 
