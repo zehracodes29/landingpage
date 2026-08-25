@@ -1,12 +1,15 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../../components/Navbar";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, ChevronRight, UploadCloud, ChevronDown, Lock, ShieldCheck, Zap } from "lucide-react";
 import { UploadDropzone } from "@uploadthing/react";
 import "@uploadthing/react/styles.css";
 import { useRouter } from "next/navigation";
+import { useForm, Controller } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 
 const PHP_API_URL = "https://pagemistri.in/api/submit-form.php";
 
@@ -20,62 +23,136 @@ const STEPS = [
 
 const BRAND_PALETTES = ["#4400AF", "#10B981", "#3B82F6", "#F59E0B", "#EF4444", "#000000"];
 
+const formSchema = z.object({
+  fullName: z.string().min(2, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  businessName: z.string().min(2, "Business name is required"),
+  hasDomain: z.string(),
+  domainDetails: z.string().optional(),
+  phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian phone number"),
+  businessAddress: z.string().min(5, "Address is required"),
+  
+  logoUrl: z.string().url("Please upload a logo before proceeding").or(z.literal("")),
+  brandColor: z.string().min(1, "Select or enter a brand color"),
+  aboutBusiness: z.string().refine(val => val.trim().split(/\s+/).length >= 20, "Please provide at least 20 words about your business").or(z.literal("")),
+  socialLinks: z.string().optional(),
+  
+  targetOffering: z.string().min(3, "Please specify your main product or service"),
+  offeringDetails: z.string().min(10, "Please describe your product/service details"),
+  uspBenefits: z.string().optional(),
+  testimonialsPricing: z.string().optional(),
+  
+  formRequirementsDocUrl: z.string().url("Please upload the form requirements document").or(z.literal("")),
+  extraDocsUrl: z.string().optional(),
+  mediaFilesUrl: z.string().optional(),
+  paymentGatewayRequested: z.enum(["Yes", "No"]).default("No"),
+}).superRefine((data, ctx) => {
+  if (data.hasDomain === "Yes" && (!data.domainDetails || data.domainDetails.length < 3)) {
+    ctx.addIssue({
+      code: z.ZodIssueCode.custom,
+      path: ["domainDetails"],
+      message: "Domain details are required",
+    });
+  }
+  // Enforce logoUrl on step 2 manually if needed, but since we trigger per step, we can refine logoUrl to not be literal("")
+  // Actually, wait, .or(z.literal("")) means empty is valid. The user asked for it to be required. 
+  // We'll fix it by overriding the schema directly below.
+});
+
+// Create step-specific schemas for more precise validation matching the prompt
+const baseSchema = z.object({
+  fullName: z.string().min(2, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  businessName: z.string().min(2, "Business name is required"),
+  hasDomain: z.string(),
+  domainDetails: z.string().optional(),
+  phone: z.string().regex(/^[6-9]\d{9}$/, "Enter a valid 10-digit Indian phone number"),
+  businessAddress: z.string().min(5, "Address is required"),
+  
+  socialLinks: z.string().optional(),
+  logoUrl: z.string().min(1, "Please upload a logo before proceeding").url("Please upload a logo before proceeding"),
+  brandColor: z.string().min(1, "Select or enter a brand color"),
+  aboutBusiness: z.string().refine(val => val && val.trim().split(/\s+/).length >= 20, "Please provide at least 20 words about your business"),
+  
+  targetOffering: z.string().min(3, "Please specify your main product or service"),
+  offeringDetails: z.string().min(10, "Please describe your product/service details"),
+  uspBenefits: z.string().optional(),
+  testimonialsPricing: z.string().optional(),
+  
+  formRequirementsDocUrl: z.string().min(1, "Please upload the form requirements document").url("Please upload the form requirements document"),
+  extraDocsUrl: z.string().optional(),
+  mediaFilesUrl: z.string().optional(),
+  paymentGatewayRequested: z.enum(["Yes", "No"]).default("No"),
+});
+
 export default function CheckoutPage() {
   const router = useRouter();
   const [currentStep, setCurrentStep] = useState(1);
-  const [formData, setFormData] = useState({
-    fullName: "",
-    email: "",
-    businessName: "",
-    hasDomain: "No",
-    domainDetails: "",
-    phone: "",
-    address: "",
-    socialLinks: "",
-    brandColors: "#4400AF",
-    aboutBusiness: "",
-    productsServices: "",
-    description: "",
-    usp: "",
-    testimonials: "",
-    paymentGateway: "No",
-    logoUrl: "",
-    documentUrls: [],
-    mediaUrls: [],
-  });
-  
   const [isClient, setIsClient] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(null);
-  const [uploadProgress, setUploadProgress] = useState(0); // mock progress
+  
+  const { register, handleSubmit, trigger, watch, setValue, formState: { errors }, reset } = useForm({
+    resolver: zodResolver(baseSchema),
+    mode: "onChange",
+    defaultValues: {
+      fullName: "",
+      email: "",
+      businessName: "",
+      hasDomain: "No",
+      domainDetails: "",
+      phone: "",
+      businessAddress: "",
+      socialLinks: "",
+      brandColor: "#4400AF",
+      aboutBusiness: "",
+      targetOffering: "",
+      offeringDetails: "",
+      uspBenefits: "",
+      testimonialsPricing: "",
+      logoUrl: "",
+      formRequirementsDocUrl: "",
+      extraDocsUrl: "",
+      mediaFilesUrl: "",
+      paymentGatewayRequested: "No",
+    }
+  });
 
-  // Load from LocalStorage
+  const formData = watch();
+
   useEffect(() => {
     setIsClient(true);
     const saved = localStorage.getItem("pagemistri_onboarding");
     if (saved) {
       try {
-        setFormData(JSON.parse(saved));
+        reset(JSON.parse(saved));
       } catch (e) {
         console.error("Failed to parse saved form data", e);
       }
     }
-  }, []);
+  }, [reset]);
 
-  // Save to LocalStorage
   useEffect(() => {
     if (isClient) {
-      localStorage.setItem("pagemistri_onboarding", JSON.stringify(formData));
+      const subscription = watch((value) => {
+        localStorage.setItem("pagemistri_onboarding", JSON.stringify(value));
+      });
+      return () => subscription.unsubscribe();
     }
-  }, [formData, isClient]);
+  }, [watch, isClient]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+  const stepFields = {
+    1: ["fullName", "email", "businessName", "phone", "businessAddress", "domainDetails"],
+    2: ["logoUrl", "brandColor", "aboutBusiness"],
+    3: ["targetOffering", "offeringDetails"],
+    4: ["formRequirementsDocUrl"]
   };
 
-  const handleNext = (e) => {
+  const handleNext = async (e) => {
     e?.preventDefault();
-    if (currentStep < 5) {
+    const fieldsToValidate = stepFields[currentStep];
+    const isStepValid = await trigger(fieldsToValidate);
+    
+    if (isStepValid && currentStep < 5) {
       setCurrentStep(currentStep + 1);
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
@@ -89,11 +166,11 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleCheckout = async () => {
-    // Razorpay Integration Placeholder (Mocking Success for now)
-    // alert("Razorpay Checkout SDK Triggered!");
-    
-    // Simulating Razorpay Success Callback
+  const handleCheckout = async (e) => {
+    e?.preventDefault();
+    const isValid = await trigger();
+    if (!isValid) return;
+
     const response = {
       razorpay_order_id: "order_mock_" + Math.random().toString(36).substr(2, 9),
       razorpay_payment_id: "pay_mock_" + Math.random().toString(36).substr(2, 9)
@@ -104,20 +181,20 @@ export default function CheckoutPage() {
       business_name: formData.businessName,
       phone: formData.phone,
       email: formData.email,
-      business_address: formData.address,
+      business_address: formData.businessAddress,
       domain_details: formData.domainDetails,
       social_links: formData.socialLinks,
       logo_url: formData.logoUrl,
-      brand_color: formData.brandColors,
+      brand_color: formData.brandColor,
       about_business: formData.aboutBusiness,
-      target_offering: formData.productsServices,
-      offering_details: formData.description,
-      usp_benefits: formData.usp,
-      testimonials_pricing: formData.testimonials,
-      form_requirements_doc_url: formData.documentUrls.join(", "),
-      extra_docs_url: "", // merged with documentUrls for simplicity
-      media_files_url: formData.mediaUrls.join(", "),
-      payment_gateway_requested: formData.paymentGateway === "Yes" ? "Yes" : "No",
+      target_offering: formData.targetOffering,
+      offering_details: formData.offeringDetails,
+      usp_benefits: formData.uspBenefits,
+      testimonials_pricing: formData.testimonialsPricing,
+      form_requirements_doc_url: formData.formRequirementsDocUrl,
+      extra_docs_url: formData.extraDocsUrl,
+      media_files_url: formData.mediaFilesUrl,
+      payment_gateway_requested: formData.paymentGatewayRequested,
       razorpay_order_id: response.razorpay_order_id,
       razorpay_payment_id: response.razorpay_payment_id,
       payment_status: "Success"
@@ -126,9 +203,7 @@ export default function CheckoutPage() {
     try {
       const res = await fetch(PHP_API_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
       });
       
@@ -145,39 +220,30 @@ export default function CheckoutPage() {
   };
 
   const getWordCount = (str) => {
-    return str.trim() ? str.trim().split(/\s+/).length : 0;
+    return str && typeof str === 'string' && str.trim() ? str.trim().split(/\s+/).length : 0;
   };
 
-  const mockUpload = (e) => {
-    if (e.target.files?.length > 0) {
-      setUploadProgress(0);
-      const interval = setInterval(() => {
-        setUploadProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            return 100;
-          }
-          return prev + 10;
-        });
-      }, 100);
-    }
-  };
-
-  // Form Step Variants
   const formVariants = {
     initial: { opacity: 0, x: 20 },
     animate: { opacity: 1, x: 0 },
     exit: { opacity: 0, x: -20 },
   };
 
-  if (!isClient) return null; // Prevent hydration mismatch
+  const getInputClass = (fieldName) => `w-full px-4 py-3.5 rounded-xl border focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 transition-all bg-slate-50/50 ${
+    errors[fieldName] ? 'border-red-500 focus:border-red-500 bg-red-50/10' : 'border-slate-200 focus:border-[#4400AF]'
+  }`;
+
+  const renderError = (fieldName) => {
+    return errors[fieldName] ? <p className="text-red-500 text-xs mt-1 font-semibold">{errors[fieldName]?.message}</p> : null;
+  };
+
+  if (!isClient) return null;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-100 flex flex-col font-sans text-slate-900 overflow-x-hidden">
       <Navbar />
 
       <main className="flex-grow py-12 px-4 sm:px-6 lg:px-8 mt-16 max-w-7xl mx-auto w-full">
-        {/* Progress Header */}
         <div className="mb-12">
           <div className="flex items-center justify-between mb-4">
             <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Website Setup & Onboarding</h1>
@@ -188,7 +254,6 @@ export default function CheckoutPage() {
           </div>
           
           <div className="relative">
-            {/* Progress Track Background */}
             <div className="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -translate-y-1/2 rounded-full overflow-hidden">
               <motion.div 
                 className="h-full bg-[#4400AF]"
@@ -198,9 +263,8 @@ export default function CheckoutPage() {
               />
             </div>
             
-            {/* Steps */}
             <div className="relative flex justify-between">
-              {STEPS.map((s, idx) => {
+              {STEPS.map((s) => {
                 const isCompleted = currentStep > s.num;
                 const isCurrent = currentStep === s.num;
                 return (
@@ -213,16 +277,8 @@ export default function CheckoutPage() {
                       animate={isCompleted ? { scale: [1, 1.1, 1] } : {}}
                       transition={{ duration: 0.3 }}
                     >
-                      {isCompleted ? (
-                        <Check className="w-5 h-5 text-green-500 animate-pulse" />
-                      ) : (
-                        <span className="font-bold text-sm">{s.num}</span>
-                      )}
-                      
-                      {/* Glow effect for completed */}
-                      {isCompleted && (
-                        <div className="absolute inset-0 rounded-full bg-green-400 opacity-20 animate-ping"></div>
-                      )}
+                      {isCompleted ? <Check className="w-5 h-5 text-green-500 animate-pulse" /> : <span className="font-bold text-sm">{s.num}</span>}
+                      {isCompleted && <div className="absolute inset-0 rounded-full bg-green-400 opacity-20 animate-ping"></div>}
                     </motion.div>
                     <span className={`mt-2 text-xs font-semibold hidden sm:block ${isCurrent ? "text-[#4400AF]" : isCompleted ? "text-slate-600" : "text-slate-400"}`}>
                       {s.title}
@@ -235,21 +291,12 @@ export default function CheckoutPage() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
-          {/* Left Column: Form Setup (7 cols) */}
           <div className="lg:col-span-7">
             <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white shadow-xl shadow-slate-200/50 p-6 sm:p-10 relative overflow-hidden">
               <AnimatePresence mode="wait">
-                <motion.div
-                  key={currentStep}
-                  variants={formVariants}
-                  initial="initial"
-                  animate="animate"
-                  exit="exit"
-                  transition={{ duration: 0.3 }}
-                >
-                  <form className="space-y-8" onSubmit={currentStep === 5 ? (e) => { e.preventDefault(); handleCheckout(); } : handleNext}>
+                <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }}>
+                  <form className="space-y-8" onSubmit={currentStep === 5 ? handleCheckout : handleNext}>
                     
-                    {/* Step 1: Business Basics */}
                     {currentStep === 1 && (
                       <div>
                         <h2 className="text-2xl font-bold mb-6 text-slate-900 flex items-center gap-3">
@@ -261,134 +308,138 @@ export default function CheckoutPage() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                               <label className="block text-sm font-semibold text-slate-700 mb-2">Full Name *</label>
-                              <input required type="text" name="fullName" value={formData.fullName} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="John Doe" />
+                              <input type="text" {...register("fullName")} className={getInputClass("fullName")} placeholder="John Doe" />
+                              {renderError("fullName")}
                             </div>
                             <div>
                               <label className="block text-sm font-semibold text-slate-700 mb-2">Email Address *</label>
-                              <input required type="email" name="email" value={formData.email} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="john@example.com" />
+                              <input type="email" {...register("email")} className={getInputClass("email")} placeholder="john@example.com" />
+                              {renderError("email")}
                             </div>
                           </div>
 
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Business Name *</label>
-                            <input required type="text" name="businessName" value={formData.businessName} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="e.g. Acme Corp" />
+                            <input type="text" {...register("businessName")} className={getInputClass("businessName")} placeholder="e.g. Acme Corp" />
+                            {renderError("businessName")}
                           </div>
 
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Domain Status *</label>
                             <div className="flex gap-4 mb-3">
                               <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "Yes" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
-                                <input type="radio" name="hasDomain" value="Yes" checked={formData.hasDomain === "Yes"} onChange={handleInputChange} className="accent-[#4400AF] w-4 h-4" />
+                                <input type="radio" value="Yes" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
                                 <span className="text-sm font-semibold text-slate-700">I have a domain</span>
                               </label>
                               <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "No" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
-                                <input type="radio" name="hasDomain" value="No" checked={formData.hasDomain === "No"} onChange={handleInputChange} className="accent-[#4400AF] w-4 h-4" />
+                                <input type="radio" value="No" {...register("hasDomain")} className="accent-[#4400AF] w-4 h-4" />
                                 <span className="text-sm font-semibold text-slate-700">I need one</span>
                               </label>
                             </div>
-                            <input required type="text" name="domainDetails" value={formData.domainDetails} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 mt-2" placeholder={formData.hasDomain === "Yes" ? "Enter your domain (e.g. example.com)" : "Preferred domain name to check availability"} />
+                            <input type="text" {...register("domainDetails")} className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "Yes" ? "Enter your domain (e.g. example.com)" : "Preferred domain name to check availability"} />
+                            {renderError("domainDetails")}
                           </div>
 
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                               <label className="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
-                              <input required type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="+91 XXXXX XXXXX" />
+                              <input type="tel" {...register("phone")} className={getInputClass("phone")} placeholder="9XXXXXXXXX" />
+                              {renderError("phone")}
                             </div>
                             <div>
                               <label className="block text-sm font-semibold text-slate-700 mb-2">Business Address *</label>
-                              <input required type="text" name="address" value={formData.address} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="City, State" />
+                              <input type="text" {...register("businessAddress")} className={getInputClass("businessAddress")} placeholder="City, State" />
+                              {renderError("businessAddress")}
                             </div>
                           </div>
                         </div>
                       </div>
                     )}
 
-                    {/* Step 2: Brand Identity */}
                     {currentStep === 2 && (
                       <div>
                         <h2 className="text-2xl font-bold mb-6 text-slate-900">Brand Identity</h2>
-                        
                         <div className="space-y-6">
                           <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload</label>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload *</label>
                             {formData.logoUrl ? (
                               <div className="relative border border-slate-200 rounded-xl p-4 inline-block bg-slate-50">
                                 <img src={formData.logoUrl} alt="Logo Preview" className="h-20 object-contain" />
-                                <button type="button" onClick={() => setFormData(prev => ({...prev, logoUrl: ""}))} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">X</button>
+                                <button type="button" onClick={() => setValue("logoUrl", "", { shouldValidate: true })} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">X</button>
                               </div>
                             ) : (
                               <UploadDropzone
                                 endpoint="logoUploader"
                                 onClientUploadComplete={(res) => {
                                   if (res && res[0]) {
-                                    setFormData((prev) => ({ ...prev, logoUrl: res[0].url }));
+                                    setValue('logoUrl', res[0].url, { shouldValidate: true });
                                   }
                                 }}
-                                onUploadError={(error) => {
-                                  alert(`ERROR! ${error.message}`);
-                                }}
-                                className="ut-button:bg-[#4400AF] ut-button:ut-readying:bg-[#4400AF]/50 ut-label:text-[#4400AF] hover:bg-purple-50/30 transition-all border-dashed border-purple-200 hover:border-[#4400AF] p-8"
+                                onUploadError={(error) => alert(`ERROR! ${error.message}`)}
+                                className={`ut-button:bg-[#4400AF] ut-button:ut-readying:bg-[#4400AF]/50 ut-label:text-[#4400AF] hover:bg-purple-50/30 transition-all border-dashed p-8 ${errors.logoUrl ? 'border-red-500' : 'border-purple-200 hover:border-[#4400AF]'}`}
                               />
                             )}
+                            {renderError("logoUrl")}
                           </div>
 
                           <div>
-                            <label className="block text-sm font-semibold text-slate-700 mb-2">Brand Color</label>
-                            <div className="flex flex-wrap items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Brand Color *</label>
+                            <div className={`flex flex-wrap items-center gap-4 bg-slate-50 p-4 rounded-2xl border ${errors.brandColor ? 'border-red-500 bg-red-50/10' : 'border-slate-100'}`}>
                               <div className="flex gap-2">
                                 {BRAND_PALETTES.map(color => (
                                   <button
                                     key={color}
                                     type="button"
-                                    onClick={() => setFormData(prev => ({...prev, brandColors: color}))}
-                                    className={`w-8 h-8 rounded-full border-2 transition-all ${formData.brandColors.toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
+                                    onClick={() => setValue('brandColor', color, { shouldValidate: true })}
+                                    className={`w-8 h-8 rounded-full border-2 transition-all ${formData.brandColor.toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
                                     style={{ backgroundColor: color }}
                                   />
                                 ))}
                               </div>
                               <div className="h-8 w-px bg-slate-200 mx-2 hidden sm:block"></div>
-                              <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-1.5 focus-within:ring-2 focus-within:ring-[#4400AF]/20 focus-within:border-[#4400AF] transition-all flex-grow sm:flex-grow-0">
-                                <input type="color" name="brandColors" value={formData.brandColors} onChange={handleInputChange} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
-                                <input type="text" name="brandColors" value={formData.brandColors} onChange={handleInputChange} className="w-24 text-sm font-mono focus:outline-none uppercase" />
+                              <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-1.5 focus-within:ring-2 focus-within:ring-[#4400AF]/20 focus-within:border-[#4400AF] transition-all">
+                                <input type="color" {...register("brandColor")} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
+                                <input type="text" {...register("brandColor")} className="w-24 text-sm font-mono focus:outline-none uppercase" />
                               </div>
                             </div>
+                            {renderError("brandColor")}
                           </div>
 
                           <div>
                             <label className="flex justify-between items-end mb-2">
-                              <span className="block text-sm font-semibold text-slate-700">About Your Business</span>
-                              <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) > 250 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
-                                {getWordCount(formData.aboutBusiness)} / 250 words
+                              <span className="block text-sm font-semibold text-slate-700">About Your Business *</span>
+                              <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) < 20 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
+                                {getWordCount(formData.aboutBusiness)} / 20+ words
                               </span>
                             </label>
-                            <textarea name="aboutBusiness" value={formData.aboutBusiness} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[120px] resize-y" placeholder="Briefly describe what your business does..." />
+                            <textarea {...register("aboutBusiness")} className={`${getInputClass("aboutBusiness")} min-h-[120px] resize-y`} placeholder="Provide at least 20 words describing what your business does..." />
+                            {renderError("aboutBusiness")}
                           </div>
                           
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Social Links</label>
-                            <input type="text" name="socialLinks" value={formData.socialLinks} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="instagram.com/yourhandle, etc." />
+                            <input type="text" {...register("socialLinks")} className={getInputClass("socialLinks")} placeholder="instagram.com/yourhandle, etc." />
                           </div>
                         </div>
                       </div>
                     )}
 
-                    {/* Step 3: Offerings */}
                     {currentStep === 3 && (
                       <div>
                         <h2 className="text-2xl font-bold mb-6 text-slate-900">Offerings & Content</h2>
-                        
                         <div className="space-y-6">
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Core Products / Services *</label>
-                            <textarea required name="productsServices" value={formData.productsServices} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[100px]" placeholder="List the primary things you want to sell or promote..." />
+                            <textarea {...register("targetOffering")} className={`${getInputClass("targetOffering")} min-h-[100px]`} placeholder="List the primary things you want to sell or promote..." />
+                            {renderError("targetOffering")}
                           </div>
 
                           <div>
                             <label className="block text-sm font-semibold text-slate-700 mb-2">Detailed Description *</label>
-                            <textarea required name="description" value={formData.description} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[120px]" placeholder="Elaborate on your offerings, target audience, and pricing..." />
+                            <textarea {...register("offeringDetails")} className={`${getInputClass("offeringDetails")} min-h-[120px]`} placeholder="Elaborate on your offerings, target audience, and pricing..." />
+                            {renderError("offeringDetails")}
                           </div>
 
-                          {/* Accordion for Optionals */}
                           <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
                             <button type="button" onClick={() => setOpenAccordion(openAccordion === 'usp' ? null : 'usp')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
                               <span className="font-semibold text-sm text-slate-700">Add USP / Key Benefits (Optional)</span>
@@ -398,7 +449,7 @@ export default function CheckoutPage() {
                               {openAccordion === 'usp' && (
                                 <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
                                   <div className="px-5 pb-5 pt-2">
-                                    <textarea name="usp" value={formData.usp} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[100px]" placeholder="Why choose you over competitors?" />
+                                    <textarea {...register("uspBenefits")} className={`${getInputClass("uspBenefits")} min-h-[100px]`} placeholder="Why choose you over competitors?" />
                                   </div>
                                 </motion.div>
                               )}
@@ -414,7 +465,7 @@ export default function CheckoutPage() {
                               {openAccordion === 'testi' && (
                                 <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
                                   <div className="px-5 pb-5 pt-2">
-                                    <textarea name="testimonials" value={formData.testimonials} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[100px]" placeholder="Paste customer reviews here..." />
+                                    <textarea {...register("testimonialsPricing")} className={`${getInputClass("testimonialsPricing")} min-h-[100px]`} placeholder="Paste customer reviews here..." />
                                   </div>
                                 </motion.div>
                               )}
@@ -424,54 +475,54 @@ export default function CheckoutPage() {
                       </div>
                     )}
 
-                    {/* Step 4: Assets & Integration */}
                     {currentStep === 4 && (
                       <div>
                         <h2 className="text-2xl font-bold mb-6 text-slate-900">Assets & Integrations</h2>
-                        
                         <div className="space-y-6">
                           <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
-                            <label className="block text-sm font-semibold text-slate-800 mb-1">Documents & Media Files</label>
-                            <p className="text-xs text-slate-500 mb-4">Upload forms, PDFs, or a ZIP of your assets.</p>
+                            <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document *</label>
+                            <p className="text-xs text-slate-500 mb-4">Upload the PDF or DOCX listing required fields for your site's contact form.</p>
                             
-                            {formData.documentUrls?.length > 0 || formData.mediaUrls?.length > 0 ? (
-                              <div className="mb-4 space-y-2 border border-slate-200 rounded-xl p-4 bg-slate-50">
-                                {formData.documentUrls?.map((url, i) => (
-                                  <div key={`doc-${i}`} className="flex items-center gap-2 text-sm text-slate-700 bg-white px-3 py-2 rounded-lg border border-slate-100 truncate">
-                                    <Check className="w-4 h-4 text-green-500" /> Document {i+1} uploaded
-                                  </div>
-                                ))}
-                                {formData.mediaUrls?.map((url, i) => (
-                                  <div key={`media-${i}`} className="flex items-center gap-2 text-sm text-slate-700 bg-white px-3 py-2 rounded-lg border border-slate-100 truncate">
-                                    <Check className="w-4 h-4 text-green-500" /> Media {i+1} uploaded
-                                  </div>
-                                ))}
-                                <button type="button" onClick={() => setFormData(prev => ({...prev, documentUrls: [], mediaUrls: []}))} className="text-xs text-red-500 font-semibold hover:underline mt-2">Clear all uploads</button>
+                            {formData.formRequirementsDocUrl ? (
+                              <div className="mb-4 flex items-center justify-between bg-white px-4 py-3 rounded-lg border border-green-200 shadow-sm">
+                                <div className="flex items-center gap-2 text-sm text-slate-700 truncate">
+                                  <Check className="w-5 h-5 text-green-500" /> Document Uploaded
+                                </div>
+                                <button type="button" onClick={() => setValue('formRequirementsDocUrl', '', { shouldValidate: true })} className="text-xs text-red-500 font-semibold hover:underline">Change File</button>
                               </div>
-                            ) : null}
-                            <div className="space-y-4">
+                            ) : (
                               <UploadDropzone
                                 endpoint="documentUploader"
                                 onClientUploadComplete={(res) => {
-                                  if (res) {
-                                    setFormData((prev) => ({ ...prev, documentUrls: [...(prev.documentUrls || []), ...res.map(r => r.url)] }));
+                                  if (res && res[0]) {
+                                    setValue('formRequirementsDocUrl', res[0].url, { shouldValidate: true });
                                   }
                                 }}
                                 onUploadError={(error) => alert(`ERROR! ${error.message}`)}
-                                content={{ label: "Upload Documents & Forms" }}
-                                className="ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all p-4"
+                                content={{ label: "Upload Form Requirements" }}
+                                className={`ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed transition-all p-4 ${errors.formRequirementsDocUrl ? 'border-red-500 bg-red-50/10' : 'border-slate-200 hover:border-[#4400AF] bg-slate-50'}`}
                               />
+                            )}
+                            {renderError("formRequirementsDocUrl")}
+                            
+                            <div className="mt-8 pt-6 border-t border-slate-100">
+                              <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents (Optional)</label>
+                              <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
                               <UploadDropzone
                                 endpoint="mediaUploader"
                                 onClientUploadComplete={(res) => {
                                   if (res) {
-                                    setFormData((prev) => ({ ...prev, mediaUrls: [...(prev.mediaUrls || []), ...res.map(r => r.url)] }));
+                                    const urls = res.map(r => r.url).join(", ");
+                                    setValue('mediaFilesUrl', formData.mediaFilesUrl ? `${formData.mediaFilesUrl}, ${urls}` : urls);
                                   }
                                 }}
                                 onUploadError={(error) => alert(`ERROR! ${error.message}`)}
-                                content={{ label: "Upload Images / Media Zip" }}
+                                content={{ label: "Upload Additional Assets" }}
                                 className="ut-button:bg-[#4400AF] ut-label:text-[#4400AF] border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all p-4"
                               />
+                              {formData.mediaFilesUrl && (
+                                <p className="text-xs text-green-600 mt-2 font-medium flex items-center gap-1"><Check className="w-4 h-4"/> Additional assets uploaded successfully</p>
+                              )}
                             </div>
                           </div>
 
@@ -482,15 +533,13 @@ export default function CheckoutPage() {
                               <p className="text-sm text-slate-600 mb-5">Do you want a payment gateway (e.g. Razorpay) integrated into your website's lead form?</p>
                               
                               <div className="flex gap-4">
-                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGateway === "Yes" ? "border-[#4400AF] bg-white shadow-md shadow-purple-900/5" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
-                                  <input type="radio" name="paymentGateway" value="Yes" checked={formData.paymentGateway === "Yes"} onChange={handleInputChange} className="sr-only" />
+                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGatewayRequested === "Yes" ? "border-[#4400AF] bg-white shadow-md shadow-purple-900/5" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
+                                  <input type="radio" value="Yes" {...register("paymentGatewayRequested")} className="sr-only" />
                                   <span className="text-sm font-bold text-slate-800">Yes, include it</span>
-                                  <span className="text-xs text-slate-500 text-center">Accept online payments</span>
                                 </label>
-                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGateway === "No" ? "border-slate-800 bg-white shadow-md" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
-                                  <input type="radio" name="paymentGateway" value="No" checked={formData.paymentGateway === "No"} onChange={handleInputChange} className="sr-only" />
+                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGatewayRequested === "No" ? "border-slate-800 bg-white shadow-md" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
+                                  <input type="radio" value="No" {...register("paymentGatewayRequested")} className="sr-only" />
                                   <span className="text-sm font-bold text-slate-800">No, skip this</span>
-                                  <span className="text-xs text-slate-500 text-center">I don't need payments</span>
                                 </label>
                               </div>
                             </div>
@@ -499,7 +548,6 @@ export default function CheckoutPage() {
                       </div>
                     )}
 
-                    {/* Step 5: Empty space to let right column shine, just final confirm button */}
                     {currentStep === 5 && (
                       <div className="text-center py-8">
                         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50 mb-6 relative">
@@ -513,7 +561,6 @@ export default function CheckoutPage() {
                       </div>
                     )}
 
-                    {/* Form Controls */}
                     <div className="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
                       {currentStep > 1 ? (
                         <button type="button" onClick={handlePrev} className="px-6 py-3 rounded-xl font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all flex items-center gap-2">
@@ -522,7 +569,7 @@ export default function CheckoutPage() {
                       ) : <div></div>}
                       
                       {currentStep < 5 && (
-                        <button type="submit" className="bg-[#4400AF] hover:bg-[#310080] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 active:scale-[0.98] flex items-center gap-2">
+                        <button type="button" onClick={handleNext} className="bg-[#4400AF] hover:bg-[#310080] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 active:scale-[0.98] flex items-center gap-2">
                           Next Step
                           <ChevronRight className="w-5 h-5" />
                         </button>
@@ -534,7 +581,6 @@ export default function CheckoutPage() {
             </div>
           </div>
 
-          {/* Right Column: Sticky Summary (5 cols) */}
           <div className="lg:col-span-5">
             <div className="sticky top-28">
               <motion.div 
@@ -543,9 +589,7 @@ export default function CheckoutPage() {
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="bg-white/90 backdrop-blur-md rounded-3xl border border-purple-100 shadow-2xl shadow-purple-900/10 p-6 sm:p-8 relative overflow-hidden"
               >
-                {/* Decorative blob */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-purple-400/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
-                
                 <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
                   Order Summary
                 </h3>
@@ -567,13 +611,13 @@ export default function CheckoutPage() {
                         {formData.domainDetails || "Pending..."}
                       </p>
                     </div>
-                    {formData.domainDetails && <Check className="w-4 h-4 text-green-500" />}
+                    {(formData.domainDetails || formData.hasDomain === "No") && <Check className="w-4 h-4 text-green-500" />}
                   </div>
 
                   <div className="flex justify-between items-start">
                     <div>
                       <p className="text-sm font-semibold text-slate-800">Payment Gateway Add-on</p>
-                      <p className="text-xs text-slate-500 mt-0.5">{formData.paymentGateway === "Yes" ? "Included" : "Skipped"}</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{formData.paymentGatewayRequested === "Yes" ? "Included" : "Skipped"}</p>
                     </div>
                     <Check className="w-4 h-4 text-green-500" />
                   </div>
@@ -588,7 +632,6 @@ export default function CheckoutPage() {
                     <span className="text-slate-500">Taxes & Fees</span>
                     <span className="text-green-600 font-semibold text-xs bg-green-100 px-2 py-0.5 rounded">Included</span>
                   </div>
-                  
                   <div className="border-t border-slate-200 mt-4 pt-4 flex justify-between items-center">
                     <span className="text-lg font-bold text-slate-900">Total Due Today</span>
                     <span className="text-3xl font-black text-[#4400AF]">₹5,000</span>
