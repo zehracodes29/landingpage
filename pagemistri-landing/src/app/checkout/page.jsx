@@ -1,8 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Navbar from "../../components/Navbar";
-// import Footer from "../../components/Footer";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, ChevronRight, UploadCloud, ChevronDown, Lock, ShieldCheck, Zap } from "lucide-react";
+
+const STEPS = [
+  { num: 1, title: "Basics" },
+  { num: 2, title: "Brand" },
+  { num: 3, title: "Offerings" },
+  { num: 4, title: "Assets" },
+  { num: 5, title: "Payment" },
+];
+
+const BRAND_PALETTES = ["#4400AF", "#10B981", "#3B82F6", "#F59E0B", "#EF4444", "#000000"];
 
 export default function CheckoutPage() {
   const [currentStep, setCurrentStep] = useState(1);
@@ -21,6 +32,30 @@ export default function CheckoutPage() {
     testimonials: "",
     paymentGateway: "No",
   });
+  
+  const [isClient, setIsClient] = useState(false);
+  const [openAccordion, setOpenAccordion] = useState(null);
+  const [uploadProgress, setUploadProgress] = useState(0); // mock progress
+
+  // Load from LocalStorage
+  useEffect(() => {
+    setIsClient(true);
+    const saved = localStorage.getItem("pagemistri_onboarding");
+    if (saved) {
+      try {
+        setFormData(JSON.parse(saved));
+      } catch (e) {
+        console.error("Failed to parse saved form data", e);
+      }
+    }
+  }, []);
+
+  // Save to LocalStorage
+  useEffect(() => {
+    if (isClient) {
+      localStorage.setItem("pagemistri_onboarding", JSON.stringify(formData));
+    }
+  }, [formData, isClient]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -28,322 +63,451 @@ export default function CheckoutPage() {
   };
 
   const handleNext = (e) => {
-    e.preventDefault();
-    if (currentStep < 5) setCurrentStep(currentStep + 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    e?.preventDefault();
+    if (currentStep < 5) {
+      setCurrentStep(currentStep + 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handlePrev = (e) => {
-    e.preventDefault();
-    if (currentStep > 1) setCurrentStep(currentStep - 1);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    e?.preventDefault();
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   };
 
   const handleCheckout = () => {
-    // Razorpay Integration Placeholder
     alert("Razorpay Checkout SDK Triggered!");
-    // You would integrate Razorpay here like:
-    // const options = {
-    //   key: "YOUR_RAZORPAY_KEY",
-    //   amount: 500000, // in paise
-    //   currency: "INR",
-    //   name: "Pagemistri",
-    //   description: "Website Setup",
-    //   handler: function (response) { ... }
-    // };
-    // const rzp = new window.Razorpay(options);
-    // rzp.open();
   };
 
-  const steps = [
-    { num: 1, title: "Basics" },
-    { num: 2, title: "Brand" },
-    { num: 3, title: "Offerings" },
-    { num: 4, title: "Assets" },
-    { num: 5, title: "Payment" },
-  ];
+  const getWordCount = (str) => {
+    return str.trim() ? str.trim().split(/\s+/).length : 0;
+  };
+
+  const mockUpload = (e) => {
+    if (e.target.files?.length > 0) {
+      setUploadProgress(0);
+      const interval = setInterval(() => {
+        setUploadProgress((prev) => {
+          if (prev >= 100) {
+            clearInterval(interval);
+            return 100;
+          }
+          return prev + 10;
+        });
+      }, 100);
+    }
+  };
+
+  // Form Step Variants
+  const formVariants = {
+    initial: { opacity: 0, x: 20 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -20 },
+  };
+
+  if (!isClient) return null; // Prevent hydration mismatch
 
   return (
-    <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-900">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50/20 to-slate-100 flex flex-col font-sans text-slate-900 overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-grow py-12 px-4 sm:px-6 lg:px-8 mt-16 max-w-4xl mx-auto w-full">
-        {/* Header & Progress Bar */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 space-y-4 md:space-y-0">
-          <div className="flex items-center space-x-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
-            {steps.map((s, idx) => (
-              <React.Fragment key={s.num}>
-                <div className={`flex items-center ${currentStep === s.num ? "text-[#4400AF] font-bold" : currentStep > s.num ? "text-[#4400AF]" : "text-slate-400"}`}>
-                  <div className={`flex items-center justify-center w-8 h-8 rounded-full border-2 text-sm mr-2 transition-colors ${
-                    currentStep === s.num ? "border-[#4400AF] bg-[#4400AF] text-white" : 
-                    currentStep > s.num ? "border-[#4400AF] bg-[#4400AF] text-white" : "border-slate-300"
-                  }`}>
-                    {currentStep > s.num ? (
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                    ) : (
-                      s.num
-                    )}
-                  </div>
-                  <span className="whitespace-nowrap">{s.title}</span>
-                </div>
-                {idx < steps.length - 1 && (
-                  <div className={`mx-2 ${currentStep > s.num ? "text-[#4400AF]" : "text-slate-300"}`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
-                  </div>
-                )}
-              </React.Fragment>
-            ))}
+      <main className="flex-grow py-12 px-4 sm:px-6 lg:px-8 mt-16 max-w-7xl mx-auto w-full">
+        {/* Progress Header */}
+        <div className="mb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Website Setup & Onboarding</h1>
+            <div className="hidden md:flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-100">
+              <ShieldCheck className="w-4 h-4 text-green-500" />
+              <span className="text-sm font-semibold text-slate-600">Secure Process</span>
+            </div>
           </div>
           
-          <div className="bg-[#4400AF]/10 text-[#4400AF] border border-[#4400AF]/20 px-4 py-2 rounded-xl text-sm font-semibold shadow-sm whitespace-nowrap self-start md:self-auto flex items-center gap-2">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2v20"></path><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
-            Total Setup Cost: ₹5,000 One-Time
+          <div className="relative">
+            {/* Progress Track Background */}
+            <div className="absolute top-1/2 left-0 right-0 h-1 bg-slate-200 -translate-y-1/2 rounded-full overflow-hidden">
+              <motion.div 
+                className="h-full bg-[#4400AF]"
+                initial={{ width: 0 }}
+                animate={{ width: `${((currentStep - 1) / (STEPS.length - 1)) * 100}%` }}
+                transition={{ duration: 0.4, ease: "easeInOut" }}
+              />
+            </div>
+            
+            {/* Steps */}
+            <div className="relative flex justify-between">
+              {STEPS.map((s, idx) => {
+                const isCompleted = currentStep > s.num;
+                const isCurrent = currentStep === s.num;
+                return (
+                  <div key={s.num} className="flex flex-col items-center">
+                    <motion.div 
+                      className={`relative flex items-center justify-center w-10 h-10 rounded-full border-2 bg-white transition-colors duration-300 ${
+                        isCompleted ? "border-green-500 bg-green-50 text-green-500" : 
+                        isCurrent ? "border-[#4400AF] bg-[#4400AF] text-white" : "border-slate-200 text-slate-400"
+                      }`}
+                      animate={isCompleted ? { scale: [1, 1.1, 1] } : {}}
+                      transition={{ duration: 0.3 }}
+                    >
+                      {isCompleted ? (
+                        <Check className="w-5 h-5 text-green-500 animate-pulse" />
+                      ) : (
+                        <span className="font-bold text-sm">{s.num}</span>
+                      )}
+                      
+                      {/* Glow effect for completed */}
+                      {isCompleted && (
+                        <div className="absolute inset-0 rounded-full bg-green-400 opacity-20 animate-ping"></div>
+                      )}
+                    </motion.div>
+                    <span className={`mt-2 text-xs font-semibold hidden sm:block ${isCurrent ? "text-[#4400AF]" : isCompleted ? "text-slate-600" : "text-slate-400"}`}>
+                      {s.title}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
         </div>
 
-        {/* Form Container */}
-        <div className="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 md:p-10">
-          <form className="space-y-8" onSubmit={currentStep === 5 ? (e) => { e.preventDefault(); handleCheckout(); } : handleNext}>
-            {/* Step 1: Business Basics */}
-            {currentStep === 1 && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <h2 className="text-2xl font-bold mb-6 text-slate-900">1. Business Basics</h2>
-                
-                <div className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Business Name *</label>
-                    <input required type="text" name="businessName" value={formData.businessName} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all" placeholder="e.g. Acme Corp" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Existing Domain Details *</label>
-                    <div className="flex gap-4 mb-3">
-                      <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-                        <input type="radio" name="hasDomain" value="Yes" checked={formData.hasDomain === "Yes"} onChange={handleInputChange} className="accent-[#4400AF]" />
-                        <span className="text-sm font-medium">I have a domain</span>
-                      </label>
-                      <label className="flex items-center gap-2 cursor-pointer bg-slate-50 border border-slate-200 px-4 py-2 rounded-lg hover:bg-slate-100 transition-colors">
-                        <input type="radio" name="hasDomain" value="No" checked={formData.hasDomain === "No"} onChange={handleInputChange} className="accent-[#4400AF]" />
-                        <span className="text-sm font-medium">I need a new domain</span>
-                      </label>
-                    </div>
-                    {formData.hasDomain === "Yes" ? (
-                      <input required type="text" name="domainDetails" value={formData.domainDetails} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all" placeholder="Enter your domain (e.g. example.com)" />
-                    ) : (
-                      <input required type="text" name="domainDetails" value={formData.domainDetails} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all" placeholder="Preferred domain name to check availability" />
-                    )}
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Phone Number *</label>
-                      <input required type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all" placeholder="+91 XXXXX XXXXX" />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1">Business Address *</label>
-                      <input required type="text" name="address" value={formData.address} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all" placeholder="City, State" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Step 2: Brand Identity */}
-            {currentStep === 2 && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <h2 className="text-2xl font-bold mb-6 text-slate-900">2. Brand Identity</h2>
-                
-                <div className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Social Media Links & Public Contact Info</label>
-                    <textarea name="socialLinks" value={formData.socialLinks} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all min-h-[100px] resize-none" placeholder="Instagram, Facebook, LinkedIn, public email, etc." />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Logo Upload</label>
-                    <input type="file" accept=".svg,.png,.jpg,.jpeg" className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#4400AF]/10 file:text-[#4400AF] hover:file:bg-[#4400AF]/20" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Preferred Brand Colors</label>
-                    <div className="flex items-center gap-4 bg-slate-50 p-2 rounded-xl border border-slate-200">
-                      <input type="color" name="brandColors" value={formData.brandColors} onChange={handleInputChange} className="w-12 h-12 rounded cursor-pointer border-0 p-0 shadow-sm" />
-                      <input type="text" name="brandColors" value={formData.brandColors} onChange={handleInputChange} className="flex-grow px-4 py-2 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all uppercase bg-white font-mono text-slate-700" />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">About Your Business</label>
-                    <textarea name="aboutBusiness" value={formData.aboutBusiness} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all min-h-[140px] resize-y" placeholder="Describe your business in up to 250 words..." />
-                    <p className="text-xs text-slate-500 mt-2 flex items-center justify-between">
-                      <span>Provide a brief overview for your website copy.</span>
-                      <span className="font-medium bg-slate-100 px-2 py-1 rounded text-slate-600">Max ~250 words</span>
-                    </p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Step 3: Offerings & Copy */}
-            {currentStep === 3 && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <h2 className="text-2xl font-bold mb-6 text-slate-900">3. Offerings & Copy</h2>
-                
-                <div className="space-y-5">
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Products / Services to mention on landing page</label>
-                    <textarea required name="productsServices" value={formData.productsServices} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all min-h-[100px] resize-none" placeholder="List your key products or services" />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Detailed Description of Services / Products</label>
-                    <textarea required name="description" value={formData.description} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all min-h-[140px] resize-y" placeholder="Explain what they do, who they are for, and pricing if applicable..." />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">USP / Key Benefits <span className="text-slate-400 font-normal ml-1">(Optional)</span></label>
-                    <textarea name="usp" value={formData.usp} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all min-h-[100px] resize-none" placeholder="Why should customers choose you?" />
-                  </div>
-
-                  <div className="p-4 bg-slate-50 border border-slate-200 rounded-xl">
-                    <label className="block text-sm font-semibold text-slate-700 mb-1">Testimonials & Pricing/Package Details <span className="text-slate-400 font-normal ml-1">(Optional)</span></label>
-                    <textarea name="testimonials" value={formData.testimonials} onChange={handleInputChange} className="w-full px-4 py-3 rounded-lg border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/50 focus:border-[#4400AF] transition-all min-h-[100px] mb-4 resize-none bg-white" placeholder="Paste text here or upload a file below" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+          {/* Left Column: Form Setup (7 cols) */}
+          <div className="lg:col-span-7">
+            <div className="bg-white/80 backdrop-blur-xl rounded-3xl border border-white shadow-xl shadow-slate-200/50 p-6 sm:p-10 relative overflow-hidden">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentStep}
+                  variants={formVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ duration: 0.3 }}
+                >
+                  <form className="space-y-8" onSubmit={currentStep === 5 ? (e) => { e.preventDefault(); handleCheckout(); } : handleNext}>
                     
-                    <div className="flex items-center gap-2">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-slate-500"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                      <input type="file" className="w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-medium file:bg-white file:border-slate-200 file:border file:text-slate-700 hover:file:bg-slate-100 transition-all cursor-pointer" />
+                    {/* Step 1: Business Basics */}
+                    {currentStep === 1 && (
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6 text-slate-900 flex items-center gap-3">
+                          <span className="bg-[#4400AF]/10 text-[#4400AF] p-2 rounded-xl"><Zap className="w-5 h-5" /></span>
+                          Business Basics
+                        </h2>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Business Name *</label>
+                            <input required type="text" name="businessName" value={formData.businessName} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="e.g. Acme Corp" />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Domain Status *</label>
+                            <div className="flex gap-4 mb-3">
+                              <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "Yes" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
+                                <input type="radio" name="hasDomain" value="Yes" checked={formData.hasDomain === "Yes"} onChange={handleInputChange} className="accent-[#4400AF] w-4 h-4" />
+                                <span className="text-sm font-semibold text-slate-700">I have a domain</span>
+                              </label>
+                              <label className={`flex-1 flex items-center gap-3 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.hasDomain === "No" ? "border-[#4400AF] bg-[#4400AF]/5" : "border-slate-100 hover:border-slate-200"}`}>
+                                <input type="radio" name="hasDomain" value="No" checked={formData.hasDomain === "No"} onChange={handleInputChange} className="accent-[#4400AF] w-4 h-4" />
+                                <span className="text-sm font-semibold text-slate-700">I need one</span>
+                              </label>
+                            </div>
+                            <input required type="text" name="domainDetails" value={formData.domainDetails} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 mt-2" placeholder={formData.hasDomain === "Yes" ? "Enter your domain (e.g. example.com)" : "Preferred domain name to check availability"} />
+                          </div>
+
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Phone Number *</label>
+                              <input required type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="+91 XXXXX XXXXX" />
+                            </div>
+                            <div>
+                              <label className="block text-sm font-semibold text-slate-700 mb-2">Business Address *</label>
+                              <input required type="text" name="address" value={formData.address} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="City, State" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 2: Brand Identity */}
+                    {currentStep === 2 && (
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6 text-slate-900">Brand Identity</h2>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Logo Upload</label>
+                            <div className="border-2 border-dashed border-purple-200 hover:border-[#4400AF] bg-purple-50/30 transition-all rounded-2xl p-8 text-center cursor-pointer group relative overflow-hidden">
+                              <input type="file" accept=".svg,.png,.jpg,.jpeg" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                              <UploadCloud className="w-10 h-10 text-purple-300 group-hover:text-[#4400AF] mx-auto mb-3 transition-colors" />
+                              <p className="text-sm font-semibold text-slate-700">Drag & drop your logo here, or <span className="text-[#4400AF]">browse</span></p>
+                              <p className="text-xs text-slate-400 mt-1">Supports SVG, PNG, JPG (Max 5MB)</p>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Brand Color</label>
+                            <div className="flex flex-wrap items-center gap-4 bg-slate-50 p-4 rounded-2xl border border-slate-100">
+                              <div className="flex gap-2">
+                                {BRAND_PALETTES.map(color => (
+                                  <button
+                                    key={color}
+                                    type="button"
+                                    onClick={() => setFormData(prev => ({...prev, brandColors: color}))}
+                                    className={`w-8 h-8 rounded-full border-2 transition-all ${formData.brandColors.toLowerCase() === color.toLowerCase() ? "border-slate-800 scale-110 shadow-md" : "border-transparent hover:scale-110"}`}
+                                    style={{ backgroundColor: color }}
+                                  />
+                                ))}
+                              </div>
+                              <div className="h-8 w-px bg-slate-200 mx-2 hidden sm:block"></div>
+                              <div className="flex items-center gap-2 bg-white rounded-xl border border-slate-200 px-3 py-1.5 focus-within:ring-2 focus-within:ring-[#4400AF]/20 focus-within:border-[#4400AF] transition-all flex-grow sm:flex-grow-0">
+                                <input type="color" name="brandColors" value={formData.brandColors} onChange={handleInputChange} className="w-6 h-6 rounded cursor-pointer border-0 p-0 bg-transparent" />
+                                <input type="text" name="brandColors" value={formData.brandColors} onChange={handleInputChange} className="w-24 text-sm font-mono focus:outline-none uppercase" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <div>
+                            <label className="flex justify-between items-end mb-2">
+                              <span className="block text-sm font-semibold text-slate-700">About Your Business</span>
+                              <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) > 250 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
+                                {getWordCount(formData.aboutBusiness)} / 250 words
+                              </span>
+                            </label>
+                            <textarea name="aboutBusiness" value={formData.aboutBusiness} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[120px] resize-y" placeholder="Briefly describe what your business does..." />
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Social Links</label>
+                            <input type="text" name="socialLinks" value={formData.socialLinks} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50" placeholder="instagram.com/yourhandle, etc." />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 3: Offerings */}
+                    {currentStep === 3 && (
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6 text-slate-900">Offerings & Content</h2>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Core Products / Services *</label>
+                            <textarea required name="productsServices" value={formData.productsServices} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[100px]" placeholder="List the primary things you want to sell or promote..." />
+                          </div>
+
+                          <div>
+                            <label className="block text-sm font-semibold text-slate-700 mb-2">Detailed Description *</label>
+                            <textarea required name="description" value={formData.description} onChange={handleInputChange} className="w-full px-4 py-3.5 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[120px]" placeholder="Elaborate on your offerings, target audience, and pricing..." />
+                          </div>
+
+                          {/* Accordion for Optionals */}
+                          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                            <button type="button" onClick={() => setOpenAccordion(openAccordion === 'usp' ? null : 'usp')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                              <span className="font-semibold text-sm text-slate-700">Add USP / Key Benefits (Optional)</span>
+                              <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openAccordion === 'usp' ? 'rotate-180' : ''}`} />
+                            </button>
+                            <AnimatePresence>
+                              {openAccordion === 'usp' && (
+                                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                                  <div className="px-5 pb-5 pt-2">
+                                    <textarea name="usp" value={formData.usp} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[100px]" placeholder="Why choose you over competitors?" />
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                          
+                          <div className="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+                            <button type="button" onClick={() => setOpenAccordion(openAccordion === 'testi' ? null : 'testi')} className="w-full px-5 py-4 flex items-center justify-between text-left hover:bg-slate-50 transition-colors">
+                              <span className="font-semibold text-sm text-slate-700">Add Testimonials (Optional)</span>
+                              <ChevronDown className={`w-5 h-5 text-slate-400 transition-transform ${openAccordion === 'testi' ? 'rotate-180' : ''}`} />
+                            </button>
+                            <AnimatePresence>
+                              {openAccordion === 'testi' && (
+                                <motion.div initial={{ height: 0 }} animate={{ height: 'auto' }} exit={{ height: 0 }} className="overflow-hidden">
+                                  <div className="px-5 pb-5 pt-2">
+                                    <textarea name="testimonials" value={formData.testimonials} onChange={handleInputChange} className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#4400AF]/20 focus:border-[#4400AF] transition-all bg-slate-50/50 min-h-[100px]" placeholder="Paste customer reviews here..." />
+                                  </div>
+                                </motion.div>
+                              )}
+                            </AnimatePresence>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 4: Assets & Integration */}
+                    {currentStep === 4 && (
+                      <div>
+                        <h2 className="text-2xl font-bold mb-6 text-slate-900">Assets & Integrations</h2>
+                        
+                        <div className="space-y-6">
+                          <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
+                            <label className="block text-sm font-semibold text-slate-800 mb-1">Documents & Media Files</label>
+                            <p className="text-xs text-slate-500 mb-4">Upload forms, PDFs, or a ZIP of your assets.</p>
+                            
+                            <div className="border-2 border-dashed border-slate-200 hover:border-[#4400AF] bg-slate-50 transition-all rounded-xl p-6 text-center cursor-pointer relative overflow-hidden">
+                              <input type="file" multiple onChange={mockUpload} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
+                              <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                              <p className="text-sm font-semibold text-slate-700">Click to browse or drag files</p>
+                              
+                              {uploadProgress > 0 && uploadProgress < 100 && (
+                                <div className="mt-4 h-1.5 w-full bg-slate-200 rounded-full overflow-hidden">
+                                  <motion.div initial={{ width: 0 }} animate={{ width: `${uploadProgress}%` }} className="h-full bg-[#4400AF]" />
+                                </div>
+                              )}
+                              {uploadProgress === 100 && (
+                                <p className="text-xs font-bold text-green-500 mt-3 flex items-center justify-center gap-1"><Check className="w-3 h-3" /> Files attached successfully</p>
+                              )}
+                            </div>
+                          </div>
+
+                          <div className="p-6 bg-gradient-to-r from-purple-50 to-indigo-50/50 border border-purple-100 rounded-2xl relative overflow-hidden">
+                            <div className="absolute -right-4 -top-4 w-24 h-24 bg-purple-200/50 rounded-full blur-2xl"></div>
+                            <div className="relative z-10">
+                              <label className="block text-base font-bold text-slate-900 mb-1">Payment Gateway Integration</label>
+                              <p className="text-sm text-slate-600 mb-5">Do you want a payment gateway (e.g. Razorpay) integrated into your website's lead form?</p>
+                              
+                              <div className="flex gap-4">
+                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGateway === "Yes" ? "border-[#4400AF] bg-white shadow-md shadow-purple-900/5" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
+                                  <input type="radio" name="paymentGateway" value="Yes" checked={formData.paymentGateway === "Yes"} onChange={handleInputChange} className="sr-only" />
+                                  <span className="text-sm font-bold text-slate-800">Yes, include it</span>
+                                  <span className="text-xs text-slate-500 text-center">Accept online payments</span>
+                                </label>
+                                <label className={`flex-1 flex flex-col items-center justify-center gap-2 cursor-pointer p-4 rounded-xl border-2 transition-all ${formData.paymentGateway === "No" ? "border-slate-800 bg-white shadow-md" : "border-slate-200 bg-white/50 hover:bg-white"}`}>
+                                  <input type="radio" name="paymentGateway" value="No" checked={formData.paymentGateway === "No"} onChange={handleInputChange} className="sr-only" />
+                                  <span className="text-sm font-bold text-slate-800">No, skip this</span>
+                                  <span className="text-xs text-slate-500 text-center">I don't need payments</span>
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 5: Empty space to let right column shine, just final confirm button */}
+                    {currentStep === 5 && (
+                      <div className="text-center py-8">
+                        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-50 mb-6 relative">
+                          <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }} className="absolute inset-0 bg-green-400 rounded-full opacity-20 blur-md"></motion.div>
+                          <Check className="w-10 h-10 text-green-500 relative z-10" />
+                        </div>
+                        <h2 className="text-3xl font-bold text-slate-900 mb-4">You're all set!</h2>
+                        <p className="text-slate-600 text-lg mb-8 max-w-md mx-auto">
+                          Please review your order summary on the right and proceed to secure payment to begin your website setup.
+                        </p>
+                      </div>
+                    )}
+
+                    {/* Form Controls */}
+                    <div className="pt-8 mt-8 border-t border-slate-100 flex items-center justify-between">
+                      {currentStep > 1 ? (
+                        <button type="button" onClick={handlePrev} className="px-6 py-3 rounded-xl font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all flex items-center gap-2">
+                          Back
+                        </button>
+                      ) : <div></div>}
+                      
+                      {currentStep < 5 && (
+                        <button type="submit" className="bg-[#4400AF] hover:bg-[#310080] text-white px-8 py-3.5 rounded-xl font-bold transition-all shadow-lg shadow-purple-900/20 hover:shadow-purple-900/40 active:scale-[0.98] flex items-center gap-2">
+                          Next Step
+                          <ChevronRight className="w-5 h-5" />
+                        </button>
+                      )}
                     </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Step 4: Form Requirements & Assets */}
-            {currentStep === 4 && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <h2 className="text-2xl font-bold mb-6 text-slate-900">4. Form Requirements & Assets</h2>
-                
-                <div className="space-y-6">
-                  <div className="border border-slate-200 p-5 rounded-xl bg-slate-50">
-                    <label className="block text-sm font-semibold text-slate-900 mb-1">Form Content Document</label>
-                    <p className="text-xs text-slate-500 mb-4">Upload a file listing the fields you want in your site's contact/lead form.</p>
-                    <input type="file" accept=".pdf,.doc,.docx,.txt" className="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[#4400AF]/10 file:text-[#4400AF] hover:file:bg-[#4400AF]/20 transition-all cursor-pointer bg-white border border-slate-200 rounded-xl p-1" />
-                  </div>
-
-                  <div className="border border-slate-200 p-5 rounded-xl bg-slate-50">
-                    <label className="block text-sm font-semibold text-slate-900 mb-1">Additional Documents</label>
-                    <p className="text-xs text-slate-500 mb-4">Any extra content (PDF, DOCX) for context.</p>
-                    <input type="file" multiple accept=".pdf,.doc,.docx" className="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[#4400AF]/10 file:text-[#4400AF] hover:file:bg-[#4400AF]/20 transition-all cursor-pointer bg-white border border-slate-200 rounded-xl p-1" />
-                  </div>
-
-                  <div className="border border-slate-200 p-5 rounded-xl bg-slate-50">
-                    <label className="block text-sm font-semibold text-slate-900 mb-1">Media Assets</label>
-                    <p className="text-xs text-slate-500 mb-4">Upload images, videos, or a ZIP file containing your media.</p>
-                    <input type="file" multiple accept="image/*,video/*,.zip" className="w-full text-sm text-slate-500 file:mr-4 file:py-2.5 file:px-5 file:rounded-xl file:border-0 file:text-sm file:font-semibold file:bg-[#4400AF]/10 file:text-[#4400AF] hover:file:bg-[#4400AF]/20 transition-all cursor-pointer bg-white border border-slate-200 rounded-xl p-1" />
-                  </div>
-
-                  <div className="p-6 bg-blue-50/50 rounded-xl border border-blue-100 mt-8">
-                    <label className="block text-base font-semibold text-slate-900 mb-4">Integrate Payment Gateway for my website lead form?</label>
-                    <div className="flex gap-6">
-                      <label className="flex items-center gap-3 cursor-pointer bg-white px-5 py-3 rounded-xl border border-slate-200 hover:border-[#4400AF]/30 hover:shadow-sm transition-all">
-                        <input type="radio" name="paymentGateway" value="Yes" checked={formData.paymentGateway === "Yes"} onChange={handleInputChange} className="accent-[#4400AF] w-5 h-5" />
-                        <span className="text-sm font-semibold text-slate-700">Yes, please integrate</span>
-                      </label>
-                      <label className="flex items-center gap-3 cursor-pointer bg-white px-5 py-3 rounded-xl border border-slate-200 hover:border-[#4400AF]/30 hover:shadow-sm transition-all">
-                        <input type="radio" name="paymentGateway" value="No" checked={formData.paymentGateway === "No"} onChange={handleInputChange} className="accent-[#4400AF] w-5 h-5" />
-                        <span className="text-sm font-semibold text-slate-700">No, not needed</span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Step 5: Review & Checkout */}
-            {currentStep === 5 && (
-              <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                <div className="text-center mb-8">
-                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-green-100 text-green-600 mb-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-                  </div>
-                  <h2 className="text-3xl font-bold text-slate-900">Review & Complete Setup</h2>
-                  <p className="text-slate-500 mt-2">You're almost done! Review your details and proceed to payment.</p>
-                </div>
-                
-                <div className="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm mb-8 space-y-5">
-                  <h3 className="text-lg font-bold border-b border-slate-100 pb-3 flex items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-[#4400AF]"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg>
-                    Summary
-                  </h3>
-                  
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
-                    <div className="bg-slate-50 p-4 rounded-xl">
-                      <span className="text-slate-500 block mb-1 text-xs uppercase tracking-wider font-semibold">Business Name</span>
-                      <span className="font-bold text-slate-900 text-base">{formData.businessName || "Not provided"}</span>
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded-xl">
-                      <span className="text-slate-500 block mb-1 text-xs uppercase tracking-wider font-semibold">Domain Status</span>
-                      <span className="font-bold text-slate-900 text-base">{formData.hasDomain === "Yes" ? "Existing Domain" : "Needs Domain"}</span>
-                      {formData.domainDetails && <span className="block text-slate-600 mt-1 truncate">{formData.domainDetails}</span>}
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded-xl">
-                      <span className="text-slate-500 block mb-1 text-xs uppercase tracking-wider font-semibold">Phone</span>
-                      <span className="font-bold text-slate-900 text-base">{formData.phone || "Not provided"}</span>
-                    </div>
-                    <div className="bg-slate-50 p-4 rounded-xl">
-                      <span className="text-slate-500 block mb-1 text-xs uppercase tracking-wider font-semibold">Payment Gateway</span>
-                      <span className="font-bold text-slate-900 text-base flex items-center gap-2">
-                        {formData.paymentGateway === "Yes" ? (
-                           <><span className="w-2 h-2 rounded-full bg-green-500"></span> Requested</>
-                        ) : (
-                           <><span className="w-2 h-2 rounded-full bg-slate-300"></span> Not requested</>
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="border border-[#4400AF]/20 bg-[#4400AF]/5 p-6 rounded-2xl">
-                  <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-                    <span className="text-xl font-semibold text-slate-800">Total Setup Cost</span>
-                    <span className="text-4xl font-black text-[#4400AF]">₹5,000</span>
-                  </div>
-                  
-                  <div className="flex items-start gap-3 bg-white p-4 rounded-xl border border-slate-100 mb-6 shadow-sm">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-green-500 mt-0.5 flex-shrink-0"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
-                    <p className="text-sm text-slate-600">
-                      <strong>Secure & transparent.</strong> No hidden fees. This is a one-time payment for the complete setup of your website as per our standard package.
-                    </p>
-                  </div>
-                  
-                  <button type="submit" className="bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-4 px-6 rounded-xl w-full transition-all text-lg shadow-xl shadow-[#4400AF]/25 flex justify-center items-center gap-3 transform hover:-translate-y-0.5">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="14" x="2" y="5" rx="2"></rect><line x1="2" x2="22" y1="10" y2="10"></line></svg>
-                    Pay ₹5,000 & Complete Setup
-                  </button>
-                  <p className="text-center text-xs text-slate-400 mt-4 flex items-center justify-center gap-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
-                    Payments are securely processed via Razorpay
-                  </p>
-                </div>
-              </div>
-            )}
-
-            {/* Navigation Buttons */}
-            <div className={`flex items-center pt-8 mt-8 border-t border-slate-200 ${currentStep === 1 ? 'justify-end' : 'justify-between'}`}>
-              {currentStep > 1 && (
-                <button type="button" onClick={handlePrev} className="flex items-center gap-2 px-6 py-3 rounded-xl font-semibold text-slate-600 hover:bg-slate-100 hover:text-slate-900 transition-all border border-transparent hover:border-slate-200">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6"></path></svg>
-                  Back
-                </button>
-              )}
-              {currentStep < 5 && (
-                <button type="submit" className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white px-8 py-3 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
-                  Next Step
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6"></path></svg>
-                </button>
-              )}
+                  </form>
+                </motion.div>
+              </AnimatePresence>
             </div>
-          </form>
+          </div>
+
+          {/* Right Column: Sticky Summary (5 cols) */}
+          <div className="lg:col-span-5">
+            <div className="sticky top-28">
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="bg-white/90 backdrop-blur-md rounded-3xl border border-purple-100 shadow-2xl shadow-purple-900/10 p-6 sm:p-8 relative overflow-hidden"
+              >
+                {/* Decorative blob */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-purple-400/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+                
+                <h3 className="text-xl font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-slate-100 pb-4">
+                  Order Summary
+                </h3>
+                
+                <div className="space-y-4 mb-8">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-sm font-semibold text-slate-800">Business Name</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{formData.businessName || "Pending..."}</p>
+                    </div>
+                    {formData.businessName && <Check className="w-4 h-4 text-green-500" />}
+                  </div>
+                  
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-sm font-semibold text-slate-800">Domain Strategy</p>
+                      <p className="text-xs text-slate-500 mt-0.5 truncate max-w-[200px]">
+                        {formData.hasDomain === "Yes" ? "Existing: " : "Needs: "} 
+                        {formData.domainDetails || "Pending..."}
+                      </p>
+                    </div>
+                    {formData.domainDetails && <Check className="w-4 h-4 text-green-500" />}
+                  </div>
+
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <p className="text-sm font-semibold text-slate-800">Payment Gateway Add-on</p>
+                      <p className="text-xs text-slate-500 mt-0.5">{formData.paymentGateway === "Yes" ? "Included" : "Skipped"}</p>
+                    </div>
+                    <Check className="w-4 h-4 text-green-500" />
+                  </div>
+                </div>
+
+                <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-6">
+                  <div className="flex justify-between items-center mb-2">
+                    <span className="text-slate-600 font-medium">Setup Package</span>
+                    <span className="text-slate-900 font-bold">₹5,000</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="text-slate-500">Taxes & Fees</span>
+                    <span className="text-green-600 font-semibold text-xs bg-green-100 px-2 py-0.5 rounded">Included</span>
+                  </div>
+                  
+                  <div className="border-t border-slate-200 mt-4 pt-4 flex justify-between items-center">
+                    <span className="text-lg font-bold text-slate-900">Total Due Today</span>
+                    <span className="text-3xl font-black text-[#4400AF]">₹5,000</span>
+                  </div>
+                </div>
+                
+                {currentStep === 5 ? (
+                  <motion.button 
+                    whileHover={{ scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    onClick={handleCheckout}
+                    className="w-full bg-gradient-to-r from-[#4400AF] to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-900/30 flex justify-center items-center gap-2 group"
+                  >
+                    <Lock className="w-4 h-4 group-hover:hidden" />
+                    <Zap className="w-5 h-5 hidden group-hover:block text-yellow-300" />
+                    Pay ₹5,000 & Complete Setup
+                  </motion.button>
+                ) : (
+                  <button disabled className="w-full bg-slate-100 text-slate-400 font-bold py-4 rounded-xl flex justify-center items-center gap-2 cursor-not-allowed">
+                    Complete Form to Pay
+                  </button>
+                )}
+
+                <div className="mt-6 flex items-center justify-center gap-4 text-xs text-slate-400">
+                  <div className="flex items-center gap-1"><Lock className="w-3 h-3" /> 256-bit SSL</div>
+                  <div className="flex items-center gap-1"><ShieldCheck className="w-3 h-3" /> Secure Payment via Razorpay</div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
         </div>
       </main>
     </div>
