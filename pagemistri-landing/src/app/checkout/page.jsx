@@ -213,12 +213,7 @@ export default function CheckoutPage() {
     return errors[fieldName] ? <p className="text-red-500 text-xs mt-1 font-semibold">{errors[fieldName]?.message}</p> : null;
   };
 
-  const handleMockUpload = (field) => (e) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      setValue(field, URL.createObjectURL(file), { shouldValidate: true });
-    }
-  };
+
 
   if (!isClient) return null;
 
@@ -366,19 +361,9 @@ export default function CheckoutPage() {
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Brand Identity</h2>
                           <div className="space-y-4">
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-1">Logo Upload *</label>
-                              {formData.logoUrl ? (
-                                <div className="relative border border-slate-200 rounded-xl p-4 inline-block bg-slate-50">
-                                  <img src={formData.logoUrl} alt="Logo Preview" className="h-20 object-contain" />
-                                  <button type="button" onClick={() => setValue("logoUrl", "", { shouldValidate: true })} className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs shadow-md">X</button>
-                                </div>
-                              ) : (
-                                <div className={`border-2 border-dashed rounded-2xl p-8 text-center relative ${errors.logoUrl ? 'border-red-500 bg-red-50/10' : 'border-purple-200 bg-purple-50/30'}`}>
-                                  <input type="file" onChange={handleMockUpload('logoUrl')} accept="image/*" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                                  <UploadCloud className="w-10 h-10 text-purple-400 mx-auto mb-3" />
-                                  <p className="text-sm font-semibold text-slate-700">Click to upload Logo</p>
-                                </div>
-                              )}
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Logo Link *</label>
+                              <p className="text-xs text-slate-500 mb-2">Provide a URL to your logo (e.g., Google Drive link, Figma link, or direct image URL).</p>
+                              <input type="url" {...register("logoUrl")} className={getInputClass("logoUrl")} placeholder="https://link-to-your-logo.com" />
                               {renderError("logoUrl")}
                             </div>
 
@@ -484,36 +469,15 @@ export default function CheckoutPage() {
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Assets & Integrations</h2>
                           <div className="space-y-4">
                             <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
-                              <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document *</label>
-                              <p className="text-xs text-slate-500 mb-4">Upload the PDF or DOCX listing required fields for your site's contact form.</p>
-                              
-                              {formData.formRequirementsDocUrl ? (
-                                <div className="mb-4 flex items-center justify-between bg-white px-4 py-3 rounded-lg border border-green-200 shadow-sm">
-                                  <div className="flex items-center gap-2 text-sm text-slate-700 truncate">
-                                    <Check className="w-5 h-5 text-green-500" /> Document Uploaded
-                                  </div>
-                                  <button type="button" onClick={() => setValue('formRequirementsDocUrl', '', { shouldValidate: true })} className="text-xs text-red-500 font-semibold hover:underline">Change File</button>
-                                </div>
-                              ) : (
-                                <div className={`border-2 border-dashed rounded-2xl p-8 text-center relative ${errors.formRequirementsDocUrl ? 'border-red-500 bg-red-50/10' : 'border-purple-200 bg-purple-50/30'}`}>
-                                  <input type="file" onChange={handleMockUpload('formRequirementsDocUrl')} accept=".pdf,.doc,.docx" className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                                  <UploadCloud className="w-10 h-10 text-purple-400 mx-auto mb-3" />
-                                  <p className="text-sm font-semibold text-slate-700">Click to upload Document</p>
-                                </div>
-                              )}
+                              <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document Link *</label>
+                              <p className="text-xs text-slate-500 mb-4">Paste a link to the PDF or DOCX listing required fields for your site's contact form.</p>
+                              <input type="url" {...register("formRequirementsDocUrl")} className={getInputClass("formRequirementsDocUrl")} placeholder="https://docs.google.com/document/d/..." />
                               {renderError("formRequirementsDocUrl")}
                               
                               <div className="mt-8 pt-6 border-t border-slate-100">
-                                <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents (Optional)</label>
-                                <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
-                                <div className={`border-2 border-dashed rounded-2xl p-6 text-center relative border-slate-200 bg-slate-50`}>
-                                  <input type="file" multiple onChange={handleMockUpload('mediaFilesUrl')} className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" />
-                                  <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-1" />
-                                  <p className="text-sm font-semibold text-slate-700">Click to upload Additional Assets</p>
-                                </div>
-                                {formData.mediaFilesUrl && (
-                                  <p className="text-xs text-green-600 mt-2 font-medium flex items-center gap-1"><Check className="w-4 h-4"/> Additional assets uploaded successfully</p>
-                                )}
+                                <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents Link (Optional)</label>
+                                <p className="text-xs text-slate-500 mb-4">Provide a link to a folder containing images or extra files.</p>
+                                <input type="url" {...register("mediaFilesUrl")} className={getInputClass("mediaFilesUrl")} placeholder="https://drive.google.com/drive/folders/..." />
                               </div>
                             </div>
 
