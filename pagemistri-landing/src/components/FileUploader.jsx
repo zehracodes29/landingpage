@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-export function FileUploader({ onUploadComplete, value }: { onUploadComplete: (url: string) => void, value?: string }) {
+export function FileUploader({ onUploadComplete, value }) {
   const [loading, setLoading] = useState(false);
-  const [preview, setPreview] = useState<string>(value || "");
+  const [preview, setPreview] = useState(value || "");
 
-  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
