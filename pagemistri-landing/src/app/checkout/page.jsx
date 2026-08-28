@@ -133,16 +133,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleCheckout = async (e) => {
-    e?.preventDefault();
-    const isValid = await trigger();
-    if (!isValid) return;
-
-    const paymentDetails = {
-      razorpay_order_id: "order_mock_" + Math.random().toString(36).substr(2, 9),
-      razorpay_payment_id: "pay_mock_" + Math.random().toString(36).substr(2, 9)
-    };
-
+  const submitPayload = async (orderId, paymentId) => {
     const payload = {
       full_name: formData.fullName || "",
       business_name: formData.businessName || "",
@@ -166,8 +157,8 @@ export default function CheckoutPage() {
       extra_docs_url: formData.extraDocsUrl || "",
       media_files_url: formData.mediaFilesUrl || "",
       payment_gateway_requested: formData.paymentGatewayRequested === "Yes" ? "Yes" : "No",
-      razorpay_order_id: paymentDetails.razorpay_order_id || "",
-      razorpay_payment_id: paymentDetails.razorpay_payment_id || "",
+      razorpay_order_id: orderId || "",
+      razorpay_payment_id: paymentId || "",
       payment_status: "Success"
     };
 
@@ -193,6 +184,65 @@ export default function CheckoutPage() {
     } catch (error) {
       console.error("Network error:", error);
     }
+  };
+
+  const handleRazorpayPayment = async (formData) => {
+    const res = await new Promise((resolve) => {
+      if (typeof window === "undefined") {
+        resolve(false);
+        return;
+      }
+      if (window.Razorpay) {
+        resolve(true);
+        return;
+      }
+      const script = document.createElement("script");
+      script.src = "https://checkout.razorpay.com/v1/checkout.js";
+      script.onload = () => resolve(true);
+      script.onerror = () => resolve(false);
+      document.body.appendChild(script);
+    });
+
+    if (!res) {
+      alert("Razorpay SDK failed to load. Please check your connection.");
+      return;
+    }
+
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+      amount: 500000, // ₹5,000
+      currency: "INR",
+      name: "Pagemistri",
+      description: "Website Setup Fee",
+      prefill: {
+        name: formData.fullName || "",
+        email: formData.email || "",
+        contact: formData.phone || "",
+      },
+      theme: {
+        color: "#6366F1",
+      },
+      handler: function (response) {
+        console.log("Payment Successful:", response.razorpay_payment_id);
+        submitPayload(response.razorpay_order_id, response.razorpay_payment_id);
+      },
+      modal: {
+        ondismiss: function () {
+          console.log("Checkout modal closed");
+        },
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
+
+  const processPayment = async (e) => {
+    e?.preventDefault();
+    const isValid = await trigger();
+    if (!isValid) return;
+
+    handleRazorpayPayment(formData);
   };
 
   const getWordCount = (str) => {
@@ -645,7 +695,7 @@ export default function CheckoutPage() {
                 <motion.button 
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  onClick={handleCheckout}
+                  onClick={processPayment}
                   className="w-full bg-gradient-to-r from-[#4400AF] to-purple-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-purple-900/30 flex justify-center items-center gap-2 group"
                 >
                   <Lock className="w-4 h-4 group-hover:hidden" />
