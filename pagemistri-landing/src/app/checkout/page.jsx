@@ -28,7 +28,7 @@ const baseSchema = z.object({
   hasDomain: z.string(),
   domainDetails: z.string().optional(),
   countryCode: z.string().default("+91"),
-  phone: z.string().regex(/^[0-9]{7,12}$/, "Enter a valid phone number"),
+  phone: z.string().regex(/^[0-9]{10}$/, "Please enter a valid 10-digit phone number"),
   businessAddress: z.string().min(5, "Address is required"),
   
   socialInstagram: z.string().optional(),
@@ -392,7 +392,7 @@ export default function CheckoutPage() {
                                     <option value="+971">🇦🇪 +971</option>
                                     <option value="+61">🇦🇺 +61</option>
                                   </select>
-                                  <input type="tel" {...register("phone")} className="w-full px-4 py-3.5 bg-transparent focus:outline-none" placeholder="9876543210" />
+                                  <input type="tel" {...register("phone")} onInput={(e) => { e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10); }} className="w-full px-4 py-3.5 bg-transparent focus:outline-none" placeholder="9876543210" />
                                 </div>
                                 {renderError("phone")}
                               </div>
@@ -411,9 +411,29 @@ export default function CheckoutPage() {
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Brand Identity</h2>
                           <div className="space-y-4">
                             <div>
-                              <label className="block text-sm font-semibold text-slate-700 mb-1">Logo Link *</label>
-                              <p className="text-xs text-slate-500 mb-2">Provide a URL to your logo (e.g., Google Drive link, Figma link, or direct image URL).</p>
-                              <input type="url" {...register("logoUrl")} className={getInputClass("logoUrl")} placeholder="https://link-to-your-logo.com" />
+                              <label className="block text-sm font-semibold text-slate-700 mb-1">Upload Logo *</label>
+                              <p className="text-xs text-slate-500 mb-2">Upload a local image file for your brand logo.</p>
+                              <div className="flex items-center gap-4">
+                                <label className={`flex-1 flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${errors.logoUrl ? 'border-red-400 bg-red-50/10' : 'border-slate-300 hover:border-[#4400AF] bg-slate-50 hover:bg-[#4400AF]/5'}`}>
+                                  <UploadCloud className={`w-8 h-8 mb-2 ${errors.logoUrl ? 'text-red-400' : 'text-slate-400'}`} />
+                                  <span className="text-sm font-medium text-slate-600">Click to upload logo</span>
+                                  <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                      const reader = new FileReader();
+                                      reader.onloadend = () => {
+                                        setValue("logoUrl", reader.result, { shouldValidate: true });
+                                      };
+                                      reader.readAsDataURL(file);
+                                    }
+                                  }} />
+                                </label>
+                                {formData.logoUrl && formData.logoUrl.startsWith('data:image') && (
+                                  <div className="w-24 h-24 rounded-xl border border-slate-200 overflow-hidden bg-white flex-shrink-0 flex items-center justify-center">
+                                    <img src={formData.logoUrl} alt="Logo preview" className="max-w-full max-h-full object-contain p-2" />
+                                  </div>
+                                )}
+                              </div>
                               {renderError("logoUrl")}
                             </div>
 
