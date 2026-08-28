@@ -133,7 +133,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const submitPayload = async (orderId, paymentId) => {
+  const handleFormFinalSubmit = async (paymentId) => {
     const payload = {
       full_name: formData.fullName || "",
       business_name: formData.businessName || "",
@@ -157,7 +157,7 @@ export default function CheckoutPage() {
       extra_docs_url: formData.extraDocsUrl || "",
       media_files_url: formData.mediaFilesUrl || "",
       payment_gateway_requested: formData.paymentGatewayRequested === "Yes" ? "Yes" : "No",
-      razorpay_order_id: orderId || "",
+      razorpay_order_id: "",
       razorpay_payment_id: paymentId || "",
       payment_status: "Success"
     };
@@ -186,7 +186,7 @@ export default function CheckoutPage() {
     }
   };
 
-  const handleRazorpayPayment = async (formData) => {
+  const handleDirectPayment = async (formData) => {
     const res = await new Promise((resolve) => {
       if (typeof window === "undefined") {
         resolve(false);
@@ -210,25 +210,25 @@ export default function CheckoutPage() {
 
     const options = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      amount: 500000, // ₹5,000
+      amount: 500000, // Amount in paise (₹5,000)
       currency: "INR",
       name: "Pagemistri",
-      description: "Website Setup Fee",
+      description: "Website Setup & Onboarding",
       prefill: {
         name: formData.fullName || "",
         email: formData.email || "",
-        contact: formData.phone || "",
+        contact: `${formData.countryCode || '+91'}${formData.phone || ''}`,
       },
       theme: {
         color: "#6366F1",
       },
       handler: function (response) {
-        console.log("Payment Successful:", response.razorpay_payment_id);
-        submitPayload(response.razorpay_order_id, response.razorpay_payment_id);
+        console.log("Payment Successful ID:", response.razorpay_payment_id);
+        handleFormFinalSubmit(response.razorpay_payment_id);
       },
       modal: {
         ondismiss: function () {
-          console.log("Checkout modal closed");
+          console.log("Payment modal closed by user");
         },
       },
     };
@@ -242,7 +242,7 @@ export default function CheckoutPage() {
     const isValid = await trigger();
     if (!isValid) return;
 
-    handleRazorpayPayment(formData);
+    handleDirectPayment(formData);
   };
 
   const getWordCount = (str) => {
