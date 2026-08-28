@@ -43,9 +43,9 @@ const baseSchema = z.object({
   uspBenefits: z.string().optional(),
   testimonialsPricing: z.string().optional(),
   
-  formRequirementsDocUrl: z.string().min(1, "Please upload the form requirements document"),
+  formRequirementsDocUrl: z.any().refine((val) => Array.isArray(val) ? val.length > 0 : (typeof val === 'string' ? val.length > 0 : !!val), "Please upload the form requirements document"),
   extraDocsUrl: z.string().optional(),
-  mediaFilesUrl: z.string().optional(),
+  mediaFilesUrl: z.any().optional(),
   paymentGatewayRequested: z.enum(["Yes", "No"]).default("No"),
 });
 
@@ -539,15 +539,87 @@ export default function CheckoutPage() {
                           <h2 className="text-2xl font-bold mb-4 text-slate-900">Assets & Integrations</h2>
                           <div className="space-y-4">
                             <div className="p-5 border border-slate-100 rounded-2xl bg-white shadow-sm">
-                              <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document Link *</label>
-                              <p className="text-xs text-slate-500 mb-4">Paste a link to the PDF or DOCX listing required fields for your site's contact form.</p>
-                              <input type="url" {...register("formRequirementsDocUrl")} className={getInputClass("formRequirementsDocUrl")} placeholder="https://docs.google.com/document/d/..." />
+                              <label className="block text-sm font-semibold text-slate-800 mb-1">Form Requirements Document *</label>
+                              <p className="text-xs text-slate-500 mb-4">Upload a PDF or DOCX listing required fields for your site's contact form.</p>
+                              
+                              <div className="space-y-3">
+                                <label className={`flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${errors.formRequirementsDocUrl ? 'border-red-400 bg-red-50/10' : 'border-slate-300 hover:border-[#4400AF] bg-slate-50 hover:bg-[#4400AF]/5'}`}>
+                                  <UploadCloud className={`w-8 h-8 mb-2 ${errors.formRequirementsDocUrl ? 'text-red-400' : 'text-slate-400'}`} />
+                                  <span className="text-sm font-medium text-slate-600">Click to upload document</span>
+                                  <input type="file" accept=".pdf,.doc,.docx,.txt" className="hidden" onChange={(e) => {
+                                    const file = e.target.files[0];
+                                    if (file) {
+                                      const reader = new FileReader();
+                                      reader.onloadend = () => {
+                                        setValue("formRequirementsDocUrl", [{ name: file.name, size: file.size, data: reader.result }], { shouldValidate: true });
+                                      };
+                                      reader.readAsDataURL(file);
+                                    }
+                                  }} />
+                                </label>
+                                
+                                {Array.isArray(formData.formRequirementsDocUrl) && formData.formRequirementsDocUrl.map((file, idx) => (
+                                  <div key={idx} className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-lg shadow-sm">
+                                    <div className="flex items-center gap-3 overflow-hidden">
+                                      <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><Zap className="w-4 h-4" /></div>
+                                      <div className="truncate">
+                                        <p className="text-sm font-semibold text-slate-700 truncate">{file.name}</p>
+                                        <p className="text-xs text-slate-500">{(file.size / 1024).toFixed(1)} KB</p>
+                                      </div>
+                                    </div>
+                                    <button type="button" onClick={() => setValue("formRequirementsDocUrl", null, { shouldValidate: true })} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors">
+                                      ✕
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
                               {renderError("formRequirementsDocUrl")}
                               
                               <div className="mt-8 pt-6 border-t border-slate-100">
-                                <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents Link (Optional)</label>
-                                <p className="text-xs text-slate-500 mb-4">Provide a link to a folder containing images or extra files.</p>
-                                <input type="url" {...register("mediaFilesUrl")} className={getInputClass("mediaFilesUrl")} placeholder="https://drive.google.com/drive/folders/..." />
+                                <label className="block text-sm font-semibold text-slate-800 mb-1">Additional Media & Documents (Optional)</label>
+                                <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
+                                
+                                <div className="space-y-3">
+                                  <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all border-slate-300 hover:border-[#4400AF] bg-slate-50 hover:bg-[#4400AF]/5">
+                                    <UploadCloud className="w-8 h-8 mb-2 text-slate-400" />
+                                    <span className="text-sm font-medium text-slate-600">Click to upload files</span>
+                                    <input type="file" multiple className="hidden" onChange={(e) => {
+                                      const files = Array.from(e.target.files);
+                                      const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
+                                      
+                                      Promise.all(files.map(file => new Promise(resolve => {
+                                        const reader = new FileReader();
+                                        reader.onloadend = () => resolve({ name: file.name, size: file.size, data: reader.result });
+                                        reader.readAsDataURL(file);
+                                      }))).then(newFiles => {
+                                        setValue("mediaFilesUrl", [...currentFiles, ...newFiles], { shouldValidate: true });
+                                      });
+                                    }} />
+                                  </label>
+                                  
+                                  {Array.isArray(formData.mediaFilesUrl) && formData.mediaFilesUrl.length > 0 && (
+                                    <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
+                                      {formData.mediaFilesUrl.map((file, idx) => (
+                                        <div key={idx} className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-lg shadow-sm">
+                                          <div className="flex items-center gap-3 overflow-hidden">
+                                            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-lg"><Zap className="w-4 h-4" /></div>
+                                            <div className="truncate">
+                                              <p className="text-sm font-semibold text-slate-700 truncate">{file.name}</p>
+                                              <p className="text-xs text-slate-500">{(file.size / 1024).toFixed(1)} KB</p>
+                                            </div>
+                                          </div>
+                                          <button type="button" onClick={() => {
+                                            const newFiles = [...formData.mediaFilesUrl];
+                                            newFiles.splice(idx, 1);
+                                            setValue("mediaFilesUrl", newFiles.length ? newFiles : null, { shouldValidate: true });
+                                          }} className="p-1.5 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-md transition-colors">
+                                            ✕
+                                          </button>
+                                        </div>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
                               </div>
                             </div>
 
