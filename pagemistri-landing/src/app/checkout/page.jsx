@@ -36,7 +36,7 @@ const baseSchema = z.object({
   socialLinkedIn: z.string().optional(),
   logoUrl: z.string().min(1, "Please upload a logo before proceeding"),
   brandColor: z.string().min(1, "Select or enter a brand color"),
-  aboutBusiness: z.string().refine(val => val && val.trim().split(/\s+/).length >= 20, "Please provide at least 20 words about your business"),
+  aboutBusiness: z.string().min(1, "Please provide a description about your business").max(500, "Description cannot exceed 500 characters"),
   
   targetOffering: z.string().min(3, "Please specify your main product or service"),
   offeringDetails: z.string().min(10, "Please describe your product/service details"),
@@ -463,11 +463,11 @@ export default function CheckoutPage() {
                             <div>
                               <label className="flex justify-between items-end mb-1">
                                 <span className="block text-sm font-semibold text-slate-700">About Your Business *</span>
-                                <span className={`text-xs font-semibold px-2 py-1 rounded-full ${getWordCount(formData.aboutBusiness) < 20 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
-                                  {getWordCount(formData.aboutBusiness)} / 20+ words
+                                <span className={`text-xs font-semibold px-2 py-1 rounded-full ${(formData.aboutBusiness || "").length >= 500 ? "bg-red-100 text-red-600" : "bg-slate-100 text-slate-500"}`}>
+                                  {(formData.aboutBusiness || "").length} / 500 characters
                                 </span>
                               </label>
-                              <textarea {...register("aboutBusiness")} className={`${getInputClass("aboutBusiness")} min-h-[120px] resize-y`} placeholder="Provide at least 20 words describing what your business does..." />
+                              <textarea {...register("aboutBusiness")} maxLength={500} className={`${getInputClass("aboutBusiness")} min-h-[120px] resize-y`} placeholder="Describe what your business does..." />
                               {renderError("aboutBusiness")}
                             </div>
                             
