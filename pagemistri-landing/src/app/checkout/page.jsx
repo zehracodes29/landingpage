@@ -8,6 +8,8 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { UploadDropzone, UploadButton } from "../../utils/uploadthing";
+import "@uploadthing/react/styles.css";
 
 const PHP_API_URL = "https://pagemistri.in/api/submit-form.php";
 
@@ -414,23 +416,32 @@ export default function CheckoutPage() {
                               <label className="block text-sm font-semibold text-slate-700 mb-1">Upload Logo *</label>
                               <p className="text-xs text-slate-500 mb-2">Upload a local image file for your brand logo.</p>
                               <div className="flex items-center gap-4">
-                                <label className={`flex-1 flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${errors.logoUrl ? 'border-red-400 bg-red-50/10' : 'border-slate-300 hover:border-[#4400AF] bg-slate-50 hover:bg-[#4400AF]/5'}`}>
-                                  <UploadCloud className={`w-8 h-8 mb-2 ${errors.logoUrl ? 'text-red-400' : 'text-slate-400'}`} />
-                                  <span className="text-sm font-medium text-slate-600">Click to upload logo</span>
-                                  <input type="file" accept="image/*" className="hidden" onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                      const reader = new FileReader();
-                                      reader.onloadend = () => {
-                                        setValue("logoUrl", reader.result, { shouldValidate: true });
-                                      };
-                                      reader.readAsDataURL(file);
-                                    }
-                                  }} />
-                                </label>
-                                {formData.logoUrl && formData.logoUrl.startsWith('data:image') && (
-                                  <div className="w-24 h-24 rounded-xl border border-slate-200 overflow-hidden bg-white flex-shrink-0 flex items-center justify-center">
-                                    <img src={formData.logoUrl} alt="Logo preview" className="max-w-full max-h-full object-contain p-2" />
+                                {!formData.logoUrl ? (
+                                  <div className={`flex-1 ${errors.logoUrl ? 'border-red-400 bg-red-50/10 rounded-xl p-2 border-2 dashed' : ''}`}>
+                                    <UploadDropzone
+                                      endpoint="imageUploader"
+                                      onClientUploadComplete={(res) => {
+                                        if (res && res.length > 0) {
+                                          setValue("logoUrl", res[0].url, { shouldValidate: true });
+                                        }
+                                      }}
+                                      onUploadError={(error) => {
+                                        alert(`ERROR! ${error.message}`);
+                                      }}
+                                    />
+                                  </div>
+                                ) : (
+                                  <div className="flex-1 flex flex-col items-center justify-center gap-2">
+                                    <div className="w-24 h-24 rounded-xl border border-slate-200 overflow-hidden bg-white flex-shrink-0 flex items-center justify-center">
+                                      <img src={formData.logoUrl} alt="Logo preview" className="max-w-full max-h-full object-contain p-2" />
+                                    </div>
+                                    <button 
+                                      type="button" 
+                                      onClick={() => setValue("logoUrl", "", { shouldValidate: true })} 
+                                      className="text-xs text-red-500 font-semibold hover:underline"
+                                    >
+                                      Remove / Change Logo
+                                    </button>
                                   </div>
                                 )}
                               </div>
@@ -543,20 +554,21 @@ export default function CheckoutPage() {
                               <p className="text-xs text-slate-500 mb-4">Upload a PDF or DOCX listing required fields for your site's contact form.</p>
                               
                               <div className="space-y-3">
-                                <label className={`flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all ${errors.formRequirementsDocUrl ? 'border-red-400 bg-red-50/10' : 'border-slate-300 hover:border-[#4400AF] bg-slate-50 hover:bg-[#4400AF]/5'}`}>
-                                  <UploadCloud className={`w-8 h-8 mb-2 ${errors.formRequirementsDocUrl ? 'text-red-400' : 'text-slate-400'}`} />
-                                  <span className="text-sm font-medium text-slate-600">Click to upload document</span>
-                                  <input type="file" accept=".pdf,.doc,.docx,.txt" className="hidden" onChange={(e) => {
-                                    const file = e.target.files[0];
-                                    if (file) {
-                                      const reader = new FileReader();
-                                      reader.onloadend = () => {
-                                        setValue("formRequirementsDocUrl", [{ name: file.name, size: file.size, data: reader.result }], { shouldValidate: true });
-                                      };
-                                      reader.readAsDataURL(file);
-                                    }
-                                  }} />
-                                </label>
+                                {(!formData.formRequirementsDocUrl || formData.formRequirementsDocUrl.length === 0) && (
+                                  <div className={`${errors.formRequirementsDocUrl ? 'border-red-400 bg-red-50/10 rounded-xl p-2 border-2 dashed' : ''}`}>
+                                    <UploadDropzone
+                                      endpoint="docUploader"
+                                      onClientUploadComplete={(res) => {
+                                        if (res && res.length > 0) {
+                                          setValue("formRequirementsDocUrl", [{ name: res[0].name, size: res[0].size, data: res[0].url }], { shouldValidate: true });
+                                        }
+                                      }}
+                                      onUploadError={(error) => {
+                                        alert(`ERROR! ${error.message}`);
+                                      }}
+                                    />
+                                  </div>
+                                )}
                                 
                                 {Array.isArray(formData.formRequirementsDocUrl) && formData.formRequirementsDocUrl.map((file, idx) => (
                                   <div key={idx} className="flex items-center justify-between p-3 bg-white border border-slate-200 rounded-lg shadow-sm">
@@ -580,22 +592,19 @@ export default function CheckoutPage() {
                                 <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
                                 
                                 <div className="space-y-3">
-                                  <label className="flex flex-col items-center justify-center p-6 border-2 border-dashed rounded-xl cursor-pointer transition-all border-slate-300 hover:border-[#4400AF] bg-slate-50 hover:bg-[#4400AF]/5">
-                                    <UploadCloud className="w-8 h-8 mb-2 text-slate-400" />
-                                    <span className="text-sm font-medium text-slate-600">Click to upload files</span>
-                                    <input type="file" multiple className="hidden" onChange={(e) => {
-                                      const files = Array.from(e.target.files);
-                                      const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
-                                      
-                                      Promise.all(files.map(file => new Promise(resolve => {
-                                        const reader = new FileReader();
-                                        reader.onloadend = () => resolve({ name: file.name, size: file.size, data: reader.result });
-                                        reader.readAsDataURL(file);
-                                      }))).then(newFiles => {
+                                  <UploadDropzone
+                                    endpoint="mediaUploader"
+                                    onClientUploadComplete={(res) => {
+                                      if (res && res.length > 0) {
+                                        const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
+                                        const newFiles = res.map(r => ({ name: r.name, size: r.size, data: r.url }));
                                         setValue("mediaFilesUrl", [...currentFiles, ...newFiles], { shouldValidate: true });
-                                      });
-                                    }} />
-                                  </label>
+                                      }
+                                    }}
+                                    onUploadError={(error) => {
+                                      alert(`ERROR! ${error.message}`);
+                                    }}
+                                  />
                                   
                                   {Array.isArray(formData.mediaFilesUrl) && formData.mediaFilesUrl.length > 0 && (
                                     <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
