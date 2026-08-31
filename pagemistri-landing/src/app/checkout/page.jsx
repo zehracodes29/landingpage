@@ -180,7 +180,7 @@ export default function CheckoutPage() {
 
       if (result.status === "success") {
         localStorage.clear();
-        router.push("/thank-you");
+        router.push(paymentId ? `/thank-you?payment_id=${paymentId}` : "/thank-you");
       } else {
         console.error("Submission error:", result.message);
         alert(`Error saving form: ${result.message}`);
