@@ -8,8 +8,7 @@ import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { UploadDropzone, UploadButton } from "../../utils/uploadthing";
-import "@uploadthing/react/styles.css";
+import { uploadToCloudinary } from "../../utils/cloudinary";
 
 const PHP_API_URL = "https://pagemistri.in/api/submit-form.php";
 
@@ -418,17 +417,28 @@ export default function CheckoutPage() {
                               <div className="flex items-center gap-4">
                                 {!formData.logoUrl ? (
                                   <div className={`flex-1 ${errors.logoUrl ? 'border-red-400 bg-red-50/10 rounded-xl p-2 border-2 dashed' : ''}`}>
-                                    <UploadDropzone
-                                      endpoint="imageUploader"
-                                      onClientUploadComplete={(res) => {
-                                        if (res && res.length > 0) {
-                                          setValue("logoUrl", res[0].url, { shouldValidate: true });
-                                        }
-                                      }}
-                                      onUploadError={(error) => {
-                                        alert(`ERROR! ${error.message}`);
-                                      }}
-                                    />
+                                    <div className="w-full flex items-center justify-center p-6 border-2 border-dashed border-slate-300 rounded-xl hover:border-[#4400AF] transition-colors cursor-pointer bg-white relative">
+                                      <input
+                                        type="file"
+                                        accept="image/*"
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        onChange={async (e) => {
+                                          const file = e.target.files?.[0];
+                                          if (file) {
+                                            try {
+                                              const url = await uploadToCloudinary(file);
+                                              setValue("logoUrl", url, { shouldValidate: true });
+                                            } catch (error) {
+                                              alert(`ERROR! ${error.message}`);
+                                            }
+                                          }
+                                        }}
+                                      />
+                                      <div className="text-center">
+                                        <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                        <p className="text-sm font-semibold text-slate-700">Click to upload logo</p>
+                                      </div>
+                                    </div>
                                   </div>
                                 ) : (
                                   <div className="flex-1 flex flex-col items-center justify-center gap-2">
@@ -556,17 +566,27 @@ export default function CheckoutPage() {
                               <div className="space-y-3">
                                 {(!formData.formRequirementsDocUrl || formData.formRequirementsDocUrl.length === 0) && (
                                   <div className={`${errors.formRequirementsDocUrl ? 'border-red-400 bg-red-50/10 rounded-xl p-2 border-2 dashed' : ''}`}>
-                                    <UploadDropzone
-                                      endpoint="docUploader"
-                                      onClientUploadComplete={(res) => {
-                                        if (res && res.length > 0) {
-                                          setValue("formRequirementsDocUrl", [{ name: res[0].name, size: res[0].size, data: res[0].url }], { shouldValidate: true });
-                                        }
-                                      }}
-                                      onUploadError={(error) => {
-                                        alert(`ERROR! ${error.message}`);
-                                      }}
-                                    />
+                                    <div className="w-full flex items-center justify-center p-6 border-2 border-dashed border-slate-300 rounded-xl hover:border-[#4400AF] transition-colors cursor-pointer bg-white relative">
+                                      <input
+                                        type="file"
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        onChange={async (e) => {
+                                          const file = e.target.files?.[0];
+                                          if (file) {
+                                            try {
+                                              const url = await uploadToCloudinary(file);
+                                              setValue("formRequirementsDocUrl", [{ name: file.name, size: file.size, data: url }], { shouldValidate: true });
+                                            } catch (error) {
+                                              alert(`ERROR! ${error.message}`);
+                                            }
+                                          }
+                                        }}
+                                      />
+                                      <div className="text-center">
+                                        <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                        <p className="text-sm font-semibold text-slate-700">Click to upload document</p>
+                                      </div>
+                                    </div>
                                   </div>
                                 )}
                                 
@@ -592,19 +612,34 @@ export default function CheckoutPage() {
                                 <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
                                 
                                 <div className="space-y-3">
-                                  <UploadDropzone
-                                    endpoint="mediaUploader"
-                                    onClientUploadComplete={(res) => {
-                                      if (res && res.length > 0) {
-                                        const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
-                                        const newFiles = res.map(r => ({ name: r.name, size: r.size, data: r.url }));
-                                        setValue("mediaFilesUrl", [...currentFiles, ...newFiles], { shouldValidate: true });
-                                      }
-                                    }}
-                                    onUploadError={(error) => {
-                                      alert(`ERROR! ${error.message}`);
-                                    }}
-                                  />
+                                  <div className="w-full flex items-center justify-center p-6 border-2 border-dashed border-slate-300 rounded-xl hover:border-[#4400AF] transition-colors cursor-pointer bg-white relative">
+                                    <input
+                                      type="file"
+                                      multiple
+                                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                      onChange={async (e) => {
+                                        const files = Array.from(e.target.files || []);
+                                        if (files.length > 0) {
+                                          try {
+                                            const newFiles = await Promise.all(
+                                              files.map(async (file) => {
+                                                const url = await uploadToCloudinary(file);
+                                                return { name: file.name, size: file.size, data: url };
+                                              })
+                                            );
+                                            const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
+                                            setValue("mediaFilesUrl", [...currentFiles, ...newFiles], { shouldValidate: true });
+                                          } catch (error) {
+                                            alert(`ERROR! ${error.message}`);
+                                          }
+                                        }
+                                      }}
+                                    />
+                                    <div className="text-center">
+                                      <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                      <p className="text-sm font-semibold text-slate-700">Click to upload media</p>
+                                    </div>
+                                  </div>
                                   
                                   {Array.isArray(formData.mediaFilesUrl) && formData.mediaFilesUrl.length > 0 && (
                                     <div className="space-y-2 max-h-40 overflow-y-auto pr-2">
