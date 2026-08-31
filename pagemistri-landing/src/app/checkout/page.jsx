@@ -214,7 +214,7 @@ export default function CheckoutPage() {
 
     const options = {
       key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-      amount: 100, // ₹1 in paise
+      amount: 500000, // ₹5,000 in paise
       currency: "INR",
       name: "Pagemistri",
       description: "Website Setup & Onboarding",
@@ -863,7 +863,7 @@ export default function CheckoutPage() {
                 <div className="bg-slate-50 p-5 rounded-2xl border border-slate-100 mb-6 mt-auto">
                   <div className="flex justify-between items-center mb-2">
                     <span className="text-slate-600 font-medium">Setup Package</span>
-                    <span className="text-slate-900 font-bold">₹1</span>
+                    <span className="text-slate-900 font-bold">₹5,000</span>
                   </div>
                   <div className="flex justify-between items-center text-sm">
                     <span className="text-slate-500">Taxes & Fees</span>
@@ -871,7 +871,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="border-t border-slate-200 mt-4 pt-4 flex justify-between items-center">
                     <span className="text-lg font-bold text-slate-900">Total Due Today</span>
-                    <span className="text-3xl font-black text-[#4400AF]">₹1</span>
+                    <span className="text-3xl font-black text-[#4400AF]">₹5,000</span>
                   </div>
                 </div>
                 
@@ -883,7 +883,7 @@ export default function CheckoutPage() {
                 >
                   <Lock className="w-4 h-4 group-hover:hidden" />
                   <Zap className="w-5 h-5 hidden group-hover:block text-yellow-300" />
-                  Pay ₹1 & Complete Setup
+                  Pay ₹5,000 & Complete Setup
                 </motion.button>
 
                 <div className="mt-6 flex items-center justify-center gap-4 text-xs text-slate-400">
