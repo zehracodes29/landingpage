@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Link from "next/link";
 import { CheckCircle } from "lucide-react";
 import { useSearchParams } from "next/navigation";
 import Navbar from "../../components/Navbar";
 
-export default function ThankYouPage() {
+function ThankYouContent() {
   const searchParams = useSearchParams();
   const paymentId = searchParams.get("payment_id");
 
@@ -46,5 +46,13 @@ export default function ThankYouPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-50 text-slate-500 font-medium">Loading...</div>}>
+      <ThankYouContent />
+    </Suspense>
   );
 }
