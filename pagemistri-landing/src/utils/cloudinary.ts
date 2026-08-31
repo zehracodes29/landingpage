@@ -1,4 +1,4 @@
-export const uploadToCloudinary = async (file: File): Promise<string> => {
+export const uploadToCloudinary = async (file: File, folderPath?: string): Promise<string> => {
   const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
   const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
 
@@ -9,6 +9,9 @@ export const uploadToCloudinary = async (file: File): Promise<string> => {
   const formData = new FormData();
   formData.append("file", file);
   formData.append("upload_preset", uploadPreset);
+  if (folderPath) {
+    formData.append("folder", folderPath);
+  }
 
   // Determines resource_type ('image' or 'raw' for documents/pdfs)
   const resourceType = file.type.startsWith("image/") ? "image" : "raw";

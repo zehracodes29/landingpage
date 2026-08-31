@@ -431,7 +431,7 @@ export default function CheckoutPage() {
                                             if (file) {
                                               setIsUploadingLogo(true);
                                               try {
-                                                const url = await uploadToCloudinary(file);
+                                                const url = await uploadToCloudinary(file, `checkout/${formData.phone || 'guest'}`);
                                                 setValue("logoUrl", url, { shouldValidate: true });
                                               } catch (error) {
                                                 alert(`ERROR! ${error.message}`);
@@ -594,7 +594,7 @@ export default function CheckoutPage() {
                                             if (file) {
                                               setIsUploadingDoc(true);
                                               try {
-                                                const url = await uploadToCloudinary(file);
+                                                const url = await uploadToCloudinary(file, `checkout/${formData.phone || 'guest'}`);
                                                 setValue("formRequirementsDocUrl", [{ name: file.name, size: file.size, data: url }], { shouldValidate: true });
                                               } catch (error) {
                                                 alert(`ERROR! ${error.message}`);
@@ -658,7 +658,7 @@ export default function CheckoutPage() {
                                             try {
                                               const newFiles = await Promise.all(
                                                 files.map(async (file) => {
-                                                  const url = await uploadToCloudinary(file);
+                                                  const url = await uploadToCloudinary(file, `checkout/${formData.phone || 'guest'}`);
                                                   return { name: file.name, size: file.size, data: url };
                                                 })
                                               );
