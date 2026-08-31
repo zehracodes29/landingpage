@@ -55,6 +55,9 @@ export default function CheckoutPage() {
   const [currentStep, setCurrentStep] = useState(1);
   const [isClient, setIsClient] = useState(false);
   const [openAccordion, setOpenAccordion] = useState(null);
+  const [isUploadingLogo, setIsUploadingLogo] = useState(false);
+  const [isUploadingDoc, setIsUploadingDoc] = useState(false);
+  const [isUploadingMedia, setIsUploadingMedia] = useState(false);
   
   const { register, trigger, watch, setValue, formState: { errors }, reset } = useForm({
     resolver: zodResolver(baseSchema),
@@ -417,26 +420,40 @@ export default function CheckoutPage() {
                               <div className="flex items-center gap-4">
                                 {!formData.logoUrl ? (
                                   <div className={`flex-1 ${errors.logoUrl ? 'border-red-400 bg-red-50/10 rounded-xl p-2 border-2 dashed' : ''}`}>
-                                    <div className="w-full flex items-center justify-center p-6 border-2 border-dashed border-slate-300 rounded-xl hover:border-[#4400AF] transition-colors cursor-pointer bg-white relative">
-                                      <input
-                                        type="file"
-                                        accept="image/*"
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                        onChange={async (e) => {
-                                          const file = e.target.files?.[0];
-                                          if (file) {
-                                            try {
-                                              const url = await uploadToCloudinary(file);
-                                              setValue("logoUrl", url, { shouldValidate: true });
-                                            } catch (error) {
-                                              alert(`ERROR! ${error.message}`);
+                                    <div className={`w-full flex items-center justify-center p-6 border-2 border-dashed ${isUploadingLogo ? 'border-[#4400AF] bg-[#4400AF]/5' : 'border-slate-300 hover:border-[#4400AF] bg-white'} rounded-xl transition-colors ${!isUploadingLogo && 'cursor-pointer'} relative`}>
+                                      {!isUploadingLogo && (
+                                        <input
+                                          type="file"
+                                          accept="image/*"
+                                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                          onChange={async (e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                              setIsUploadingLogo(true);
+                                              try {
+                                                const url = await uploadToCloudinary(file);
+                                                setValue("logoUrl", url, { shouldValidate: true });
+                                              } catch (error) {
+                                                alert(`ERROR! ${error.message}`);
+                                              } finally {
+                                                setIsUploadingLogo(false);
+                                              }
                                             }
-                                          }
-                                        }}
-                                      />
+                                          }}
+                                        />
+                                      )}
                                       <div className="text-center">
-                                        <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                                        <p className="text-sm font-semibold text-slate-700">Click to upload logo</p>
+                                        {isUploadingLogo ? (
+                                          <>
+                                            <div className="animate-spin w-8 h-8 border-4 border-[#4400AF] border-t-transparent rounded-full mx-auto mb-2"></div>
+                                            <p className="text-sm font-semibold text-slate-700">Uploading logo...</p>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                            <p className="text-sm font-semibold text-slate-700">Click to upload logo</p>
+                                          </>
+                                        )}
                                       </div>
                                     </div>
                                   </div>
@@ -566,25 +583,40 @@ export default function CheckoutPage() {
                               <div className="space-y-3">
                                 {(!formData.formRequirementsDocUrl || formData.formRequirementsDocUrl.length === 0) && (
                                   <div className={`${errors.formRequirementsDocUrl ? 'border-red-400 bg-red-50/10 rounded-xl p-2 border-2 dashed' : ''}`}>
-                                    <div className="w-full flex items-center justify-center p-6 border-2 border-dashed border-slate-300 rounded-xl hover:border-[#4400AF] transition-colors cursor-pointer bg-white relative">
-                                      <input
-                                        type="file"
-                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                        onChange={async (e) => {
-                                          const file = e.target.files?.[0];
-                                          if (file) {
-                                            try {
-                                              const url = await uploadToCloudinary(file);
-                                              setValue("formRequirementsDocUrl", [{ name: file.name, size: file.size, data: url }], { shouldValidate: true });
-                                            } catch (error) {
-                                              alert(`ERROR! ${error.message}`);
+                                    <div className={`w-full flex items-center justify-center p-6 border-2 border-dashed ${isUploadingDoc ? 'border-[#4400AF] bg-[#4400AF]/5' : 'border-slate-300 hover:border-[#4400AF] bg-white'} rounded-xl transition-colors ${!isUploadingDoc && 'cursor-pointer'} relative`}>
+                                      {!isUploadingDoc && (
+                                        <input
+                                          type="file"
+                                          accept=".pdf,.doc,.docx,.txt"
+                                          className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                          onChange={async (e) => {
+                                            const file = e.target.files?.[0];
+                                            if (file) {
+                                              setIsUploadingDoc(true);
+                                              try {
+                                                const url = await uploadToCloudinary(file);
+                                                setValue("formRequirementsDocUrl", [{ name: file.name, size: file.size, data: url }], { shouldValidate: true });
+                                              } catch (error) {
+                                                alert(`ERROR! ${error.message}`);
+                                              } finally {
+                                                setIsUploadingDoc(false);
+                                              }
                                             }
-                                          }
-                                        }}
-                                      />
+                                          }}
+                                        />
+                                      )}
                                       <div className="text-center">
-                                        <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                                        <p className="text-sm font-semibold text-slate-700">Click to upload document</p>
+                                        {isUploadingDoc ? (
+                                          <>
+                                            <div className="animate-spin w-8 h-8 border-4 border-[#4400AF] border-t-transparent rounded-full mx-auto mb-2"></div>
+                                            <p className="text-sm font-semibold text-slate-700">Uploading document...</p>
+                                          </>
+                                        ) : (
+                                          <>
+                                            <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                            <p className="text-sm font-semibold text-slate-700">Click to upload document</p>
+                                          </>
+                                        )}
                                       </div>
                                     </div>
                                   </div>
@@ -612,32 +644,47 @@ export default function CheckoutPage() {
                                 <p className="text-xs text-slate-500 mb-4">Upload images or extra files.</p>
                                 
                                 <div className="space-y-3">
-                                  <div className="w-full flex items-center justify-center p-6 border-2 border-dashed border-slate-300 rounded-xl hover:border-[#4400AF] transition-colors cursor-pointer bg-white relative">
-                                    <input
-                                      type="file"
-                                      multiple
-                                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                                      onChange={async (e) => {
-                                        const files = Array.from(e.target.files || []);
-                                        if (files.length > 0) {
-                                          try {
-                                            const newFiles = await Promise.all(
-                                              files.map(async (file) => {
-                                                const url = await uploadToCloudinary(file);
-                                                return { name: file.name, size: file.size, data: url };
-                                              })
-                                            );
-                                            const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
-                                            setValue("mediaFilesUrl", [...currentFiles, ...newFiles], { shouldValidate: true });
-                                          } catch (error) {
-                                            alert(`ERROR! ${error.message}`);
+                                  <div className={`w-full flex items-center justify-center p-6 border-2 border-dashed ${isUploadingMedia ? 'border-[#4400AF] bg-[#4400AF]/5' : 'border-slate-300 hover:border-[#4400AF] bg-white'} rounded-xl transition-colors ${!isUploadingMedia && 'cursor-pointer'} relative`}>
+                                    {!isUploadingMedia && (
+                                      <input
+                                        type="file"
+                                        multiple
+                                        accept=".pdf,.doc,.docx,.zip,.png,.jpg,.jpeg"
+                                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                                        onChange={async (e) => {
+                                          const files = Array.from(e.target.files || []);
+                                          if (files.length > 0) {
+                                            setIsUploadingMedia(true);
+                                            try {
+                                              const newFiles = await Promise.all(
+                                                files.map(async (file) => {
+                                                  const url = await uploadToCloudinary(file);
+                                                  return { name: file.name, size: file.size, data: url };
+                                                })
+                                              );
+                                              const currentFiles = Array.isArray(formData.mediaFilesUrl) ? formData.mediaFilesUrl : [];
+                                              setValue("mediaFilesUrl", [...currentFiles, ...newFiles], { shouldValidate: true });
+                                            } catch (error) {
+                                              alert(`ERROR! ${error.message}`);
+                                            } finally {
+                                              setIsUploadingMedia(false);
+                                            }
                                           }
-                                        }
-                                      }}
-                                    />
+                                        }}
+                                      />
+                                    )}
                                     <div className="text-center">
-                                      <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
-                                      <p className="text-sm font-semibold text-slate-700">Click to upload media</p>
+                                      {isUploadingMedia ? (
+                                        <>
+                                          <div className="animate-spin w-8 h-8 border-4 border-[#4400AF] border-t-transparent rounded-full mx-auto mb-2"></div>
+                                          <p className="text-sm font-semibold text-slate-700">Uploading media...</p>
+                                        </>
+                                      ) : (
+                                        <>
+                                          <UploadCloud className="w-8 h-8 text-slate-400 mx-auto mb-2" />
+                                          <p className="text-sm font-semibold text-slate-700">Click to upload media</p>
+                                        </>
+                                      )}
                                     </div>
                                   </div>
                                   
@@ -694,7 +741,7 @@ export default function CheckoutPage() {
                           ← Back
                         </button>
                         
-                        <button type="submit" className="px-6 py-2.5 bg-[#4400AF] text-white font-medium text-sm rounded-lg hover:bg-[#310080] transition-all">
+                        <button type="submit" disabled={isUploadingLogo || isUploadingDoc || isUploadingMedia} className={`px-6 py-2.5 ${isUploadingLogo || isUploadingDoc || isUploadingMedia ? 'bg-slate-300 cursor-not-allowed' : 'bg-[#4400AF] hover:bg-[#310080]'} text-white font-medium text-sm rounded-lg transition-all`}>
                           Next Step →
                         </button>
                       </div>
