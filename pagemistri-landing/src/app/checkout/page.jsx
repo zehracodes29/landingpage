@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { uploadToCloudinary } from "../../utils/cloudinary";
+import { sendConfirmationEmail } from "../../utils/sendConfirmationEmail";
 
 const PHP_API_URL = "https://pagemistri.in/api/submit-form.php";
 
@@ -226,8 +227,13 @@ export default function CheckoutPage() {
       theme: {
         color: "#6366F1",
       },
-      handler: function (response) {
+      handler: async function (response) {
         console.log("Payment Successful ID:", response.razorpay_payment_id);
+        await sendConfirmationEmail({
+          userEmail: formData.email,
+          userName: formData.fullName,
+          paymentId: response.razorpay_payment_id,
+        });
         handleFormFinalSubmit(response.razorpay_payment_id);
       },
       modal: {
