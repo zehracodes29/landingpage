@@ -34,7 +34,7 @@ export const sendConfirmationEmail = async ({ userEmail, userName, paymentId }) 
               <!-- Email Body -->
               <h2 style="color: #111827; font-size: 20px; margin-bottom: 16px;">Thank You for Your Payment!</h2>
               <p style="color: #4b5563; font-size: 15px; line-height: 1.6; margin-bottom: 12px;">
-                Hi <strong>${userName || "Valued Customer"}</strong>,
+                Hi <strong>${userName}</strong>,
               </p>
               <p style="color: #4b5563; font-size: 15px; line-height: 1.6; margin-bottom: 20px;">
                 We have successfully received your payment of <strong>₹5,000</strong> for your website project.
