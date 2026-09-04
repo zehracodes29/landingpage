@@ -115,9 +115,4 @@ Access `/admin.php` on the production server to:
 
 ---
 
-## 👥 Leadership & Support
 
-For project inquiries, access requests, or code reviews:
-
-* **Bharvi Sharma** — bharvi.sharma810@gmail.com | +91 8565860872
-* **Zaid Kamil** — xaidmetamorphosis@gmail.com | +91 7860380291
