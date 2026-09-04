@@ -414,9 +414,9 @@ try {
                             <td class="p-4"><a href="mailto:<?= htmlspecialchars($intake['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($intake['email'] ?? 'N/A') ?></a></td>
                             <td class="p-4 text-slate-500 dark:text-slate-400"><?= htmlspecialchars($intake['razorpay_payment_id'] ?: 'N/A') ?></td>
                             <td class="p-4">
-                                <button onclick='openModal(<?= json_encode($intake, JSON_HEX_APOS | JSON_HEX_QUOT) ?>)' class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">
+                                <a href="submission-details.php?id=<?= $intake['id'] ?>" class="inline-block bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">
                                     View Details
-                                </button>
+                                </a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
