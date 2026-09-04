@@ -11,7 +11,7 @@ import * as z from "zod";
 import { uploadToCloudinary } from "../../utils/cloudinary";
 import { sendConfirmationEmail } from "../../utils/sendConfirmationEmail";
 
-const PHP_API_URL = "https://pagemistri.in/api/submit-form.php";
+const PHP_API_URL = "/submit.php";
 
 const STEPS = [
   { num: 1, title: "Basics" },

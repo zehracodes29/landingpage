@@ -111,22 +111,30 @@ try {
             $rows = $stmt->fetchAll();
             if (!empty($rows)) fputcsv($output, array_keys($rows[0]));
             foreach ($rows as $row) fputcsv($output, $row);
+        } elseif ($type === 'intakes') {
+            $stmt = $pdo->query("SELECT * FROM intake_submissions ORDER BY created_at DESC");
+            $rows = $stmt->fetchAll();
+            if (!empty($rows)) fputcsv($output, array_keys($rows[0]));
+            foreach ($rows as $row) fputcsv($output, $row);
         }
         fclose($output);
         exit();
     }
 
-    // FETCH LEADS & SURVEYS
+    // FETCH LEADS & SURVEYS & INTAKES
     $leads = $pdo->query("SELECT * FROM leads ORDER BY created_at DESC")->fetchAll();
     $surveys = $pdo->query("SELECT * FROM survey_responses ORDER BY submitted_at DESC")->fetchAll();
+    $intakes = $pdo->query("SELECT * FROM intake_submissions ORDER BY created_at DESC")->fetchAll();
 
     $totalLeads = count($leads);
     $totalSurveys = count($surveys);
+    $totalIntakes = count($intakes);
     $todayDate = date('Y-m-d');
     
     $todayLeads = count(array_filter($leads, fn($l) => strpos($l['created_at'], $todayDate) === 0));
     $todaySurveys = count(array_filter($surveys, fn($s) => strpos($s['submitted_at'], $todayDate) === 0));
-    $todayTotal = $todayLeads + $todaySurveys;
+    $todayIntakes = count(array_filter($intakes, fn($i) => strpos($i['created_at'], $todayDate) === 0));
+    $todayTotal = $todayLeads + $todaySurveys + $todayIntakes;
 
 } catch (PDOException $e) {
     die("Database Connection Error: " . $e->getMessage());
@@ -188,12 +196,19 @@ try {
         function openModal(data) {
             const container = document.getElementById('modal-content');
             container.innerHTML = '';
+            const linkFields = ['logo_url', 'form_requirements_doc_url', 'extra_docs_url', 'media_files_url'];
             for (const [key, value] of Object.entries(data)) {
                 const formattedKey = key.replace(/_/g, ' ');
+                let displayValue = value ? value : '<em class="text-slate-400 dark:text-slate-600">N/A</em>';
+                
+                if (value && linkFields.includes(key)) {
+                    displayValue = `<a href="${value}" target="_blank" class="text-blue-600 hover:underline break-all">${value}</a>`;
+                }
+
                 container.innerHTML += `
                     <div class="bg-slate-50 dark:bg-slate-950 p-3 rounded-lg border border-slate-200 dark:border-slate-800/80">
                         <span class="text-[10px] uppercase font-bold tracking-wider text-blue-600 dark:text-blue-400 block mb-1">${formattedKey}</span>
-                        <span class="text-sm text-slate-800 dark:text-slate-200 leading-relaxed">${value ? value : '<em class="text-slate-400 dark:text-slate-600">N/A</em>'}</span>
+                        <span class="text-sm text-slate-800 dark:text-slate-200 leading-relaxed">${displayValue}</span>
                     </div>
                 `;
             }
@@ -257,12 +272,15 @@ try {
 
         <!-- Tab Controls -->
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div class="flex gap-3 bg-slate-200 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800">
+            <div class="flex gap-3 bg-slate-200 dark:bg-slate-950 p-1 rounded-xl border border-slate-200 dark:border-slate-800 flex-wrap">
                 <button id="leads-btn" onclick="switchTab('leads')" class="tab-btn bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold text-xs transition">
                     Landing Page Leads (<?= $totalLeads ?>)
                 </button>
                 <button id="surveys-btn" onclick="switchTab('surveys')" class="tab-btn bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 px-5 py-2.5 rounded-lg font-semibold text-xs transition">
                     Visibility Surveys (<?= $totalSurveys ?>)
+                </button>
+                <button id="intakes-btn" onclick="switchTab('intakes')" class="tab-btn bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 px-5 py-2.5 rounded-lg font-semibold text-xs transition">
+                    Intake Submissions (<?= $totalIntakes ?>)
                 </button>
             </div>
         </div>
@@ -362,6 +380,53 @@ try {
         </div>
 
     </main>
+
+    <!-- INTAKES TABLE CONTAINER -->
+    <div id="intakes" class="tab-content hidden max-w-7xl mx-auto mt-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800/80 overflow-hidden shadow-sm dark:shadow-xl">
+        <div class="p-4 border-b border-slate-200 dark:border-slate-800/80 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50 dark:bg-slate-900">
+            <input type="text" id="intakes-search" onkeyup="filterTable('intakes')" placeholder="Search intakes by name, business, phone, email..." 
+                   class="w-full md:w-80 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <a href="?export=intakes" class="bg-white dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 transition font-medium flex items-center gap-2 shadow-sm">
+                <span>↓</span> Export Intakes CSV
+            </a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+                <thead class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase font-bold border-b border-slate-200 dark:border-slate-800/80">
+                    <tr>
+                        <th class="p-4">Date</th>
+                        <th class="p-4">Full Name</th>
+                        <th class="p-4">Business Name</th>
+                        <th class="p-4">Phone</th>
+                        <th class="p-4">Email</th>
+                        <th class="p-4">Payment ID</th>
+                        <th class="p-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
+                    <?php foreach ($intakes as $intake): ?>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                            <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= htmlspecialchars($intake['created_at'] ?? 'N/A') ?></td>
+                            <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($intake['full_name'] ?? 'N/A') ?></td>
+                            <td class="p-4 text-slate-700 dark:text-slate-300"><?= htmlspecialchars($intake['business_name'] ?? 'N/A') ?></td>
+                            <td class="p-4"><a href="tel:<?= htmlspecialchars($intake['phone'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($intake['phone'] ?? 'N/A') ?></a></td>
+                            <td class="p-4"><a href="mailto:<?= htmlspecialchars($intake['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($intake['email'] ?? 'N/A') ?></a></td>
+                            <td class="p-4 text-slate-500 dark:text-slate-400"><?= htmlspecialchars($intake['razorpay_payment_id'] ?: 'N/A') ?></td>
+                            <td class="p-4">
+                                <button onclick='openModal(<?= json_encode($intake, JSON_HEX_APOS | JSON_HEX_QUOT) ?>)' class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">
+                                    View Details
+                                </button>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <?php if (empty($intakes)): ?>
+                        <tr><td colspan="7" class="p-8 text-center text-slate-400 dark:text-slate-500">No intake submissions recorded yet.</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
     <!-- FULL DETAILS MODAL -->
     <div id="details-modal" class="hidden fixed inset-0 bg-slate-900/60 dark:bg-slate-950/80 backdrop-blur-sm flex items-center justify-center p-4 z-50">
