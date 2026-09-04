@@ -2,7 +2,7 @@
 session_start();
 
 // 1. ADMIN CONFIGURATION
-define('ADMIN_PASSWORD', 'PageMistri@2026!'); 
+define('ADMIN_PASSWORD', 'pmadmin'); 
 
 // Handle Logout
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
