@@ -1,4 +1,8 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 session_start();
 
 define('ADMIN_PASSWORD', 'pmadmin');
@@ -45,7 +49,7 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
             <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Admin Dashboard Portal</p>
         </div>
         <?php if ($login_error): ?>
-            <div class="bg-rose-50 border border-rose-200 text-rose-600 dark:bg-rose-500/10 dark:border-rose-500/20 dark:text-rose-400 p-3 rounded-lg text-sm mb-6 text-center"><?= htmlspecialchars($login_error) ?></div>
+            <div class="bg-rose-50 border border-rose-200 text-rose-600 dark:bg-rose-500/10 dark:border-rose-500/20 dark:text-rose-400 p-3 rounded-lg text-sm mb-6 text-center"><?= he($login_error) ?></div>
         <?php endif; ?>
         <form method="POST" class="space-y-5">
             <div>
@@ -66,6 +70,7 @@ $db_name = 'iqwdcffu_pmindb';
 $db_user = 'iqwdcffu_pagemistri_user';
 $db_pass = 'xFJd?#6lwY4vfi?W';
 
+$pdo = null;
 try {
     $pdo = new PDO("mysql:host=$db_host;port=$db_port;dbname=$db_name;charset=utf8mb4", $db_user, $db_pass, [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -73,6 +78,72 @@ try {
     ]);
 } catch (PDOException $e) {
     die("Database Connection Error: " . $e->getMessage());
+}
+
+// ── SAFE QUERY HELPERS ──
+function safeQuery($pdo, $sql, $default = []) {
+    try {
+        return $pdo->query($sql)->fetchAll();
+    } catch (PDOException $e) {
+        return $default;
+    }
+}
+
+function safeColumn($pdo, $sql, $default = 0) {
+    try {
+        return $pdo->query($sql)->fetchColumn();
+    } catch (PDOException $e) {
+        return $default;
+    }
+}
+
+function safeRow($pdo, $sql, $default = null) {
+    try {
+        return $pdo->query($sql)->fetch();
+    } catch (PDOException $e) {
+        return $default;
+    }
+}
+
+function safePrepare($pdo, $sql, $params, $default = null) {
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetch();
+    } catch (PDOException $e) {
+        return $default;
+    }
+}
+
+function safePrepareAll($pdo, $sql, $params, $default = []) {
+    try {
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        return $stmt->fetchAll();
+    } catch (PDOException $e) {
+        return $default;
+    }
+}
+
+// ── DETECT TABLE NAMES (fallback if names differ) ──
+function tableExists($pdo, $name) {
+    try {
+        $pdo->query("SELECT 1 FROM `$name` LIMIT 1");
+        return true;
+    } catch (PDOException $e) {
+        return false;
+    }
+}
+
+$tblLeads   = 'leads';
+$tblSurveys = 'survey_responses';
+$tblIntakes = 'intake_submissions';
+
+if (!tableExists($pdo, $tblLeads)) {
+    if (tableExists($pdo, 'landing_page_leads')) $tblLeads = 'landing_page_leads';
+}
+if (!tableExists($pdo, $tblSurveys)) {
+    if (tableExists($pdo, 'visibility_surveys')) $tblSurveys = 'visibility_surveys';
 }
 
 // ── CSV EXPORT ──
@@ -84,14 +155,14 @@ if (isset($_GET['export'])) {
     $output = fopen('php://output', 'w');
 
     $exports = [
-        'leads'        => "SELECT * FROM leads ORDER BY created_at DESC",
-        'surveys'      => "SELECT * FROM survey_responses ORDER BY submitted_at DESC",
-        'intakes'      => "SELECT * FROM intake_submissions ORDER BY created_at DESC",
-        'transactions' => "SELECT full_name, email, phone, razorpay_payment_id, razorpay_order_id, amount, payment_status, created_at FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' ORDER BY created_at DESC",
+        'leads'        => "SELECT * FROM `$tblLeads` ORDER BY created_at DESC",
+        'surveys'      => "SELECT * FROM `$tblSurveys` ORDER BY submitted_at DESC",
+        'intakes'      => "SELECT * FROM `$tblIntakes` ORDER BY created_at DESC",
+        'transactions' => "SELECT full_name, email, phone, razorpay_payment_id, razorpay_order_id, amount, payment_status, created_at FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' ORDER BY created_at DESC",
     ];
 
     if (isset($exports[$type])) {
-        $rows = $pdo->query($exports[$type])->fetchAll();
+        $rows = safeQuery($pdo, $exports[$type]);
         if (!empty($rows)) fputcsv($output, array_keys($rows[0]));
         foreach ($rows as $row) fputcsv($output, $row);
     }
@@ -100,68 +171,63 @@ if (isset($_GET['export'])) {
 }
 
 // ── DATA ──
-$leads        = $pdo->query("SELECT * FROM leads ORDER BY created_at DESC")->fetchAll();
-$surveys      = $pdo->query("SELECT * FROM survey_responses ORDER BY submitted_at DESC")->fetchAll();
-$intakes      = $pdo->query("SELECT * FROM intake_submissions ORDER BY created_at DESC")->fetchAll();
-$transactions = $pdo->query("SELECT full_name, email, phone, razorpay_payment_id, razorpay_order_id, amount, payment_status, created_at, id FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' ORDER BY created_at DESC")->fetchAll();
+$leads        = safeQuery($pdo, "SELECT * FROM `$tblLeads` ORDER BY created_at DESC");
+$surveys      = safeQuery($pdo, "SELECT * FROM `$tblSurveys` ORDER BY submitted_at DESC");
+$intakes      = safeQuery($pdo, "SELECT * FROM `$tblIntakes` ORDER BY created_at DESC");
+$transactions = safeQuery($pdo, "SELECT full_name, email, phone, razorpay_payment_id, razorpay_order_id, amount, payment_status, created_at, id FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' ORDER BY created_at DESC");
 
 $totalLeads        = count($leads);
 $totalSurveys      = count($surveys);
 $totalIntakes      = count($intakes);
 $totalTransactions = count($transactions);
 $todayDate         = date('Y-m-d');
-$todayLeads        = count(array_filter($leads, fn($l) => strpos($l['created_at'], $todayDate) === 0));
-$todaySurveys      = count(array_filter($surveys, fn($s) => strpos($s['submitted_at'], $todayDate) === 0));
-$todayIntakes      = count(array_filter($intakes, fn($i) => strpos($i['created_at'], $todayDate) === 0));
+$todayLeads        = count(array_filter($leads, fn($l) => isset($l['created_at']) && strpos($l['created_at'], $todayDate) === 0));
+$todaySurveys      = count(array_filter($surveys, fn($s) => isset($s['submitted_at']) && strpos($s['submitted_at'], $todayDate) === 0));
+$todayIntakes      = count(array_filter($intakes, fn($i) => isset($i['created_at']) && strpos($i['created_at'], $todayDate) === 0));
 $todayTotal        = $todayLeads + $todaySurveys + $todayIntakes;
 
 // ── INTAKE DETAIL ──
 $page = $_GET['page'] ?? 'overview';
 $intakeDetail = null;
 if ($page === 'intake-detail' && isset($_GET['id'])) {
-    $stmt = $pdo->prepare("SELECT * FROM intake_submissions WHERE id = ?");
-    $stmt->execute([$_GET['id']]);
-    $intakeDetail = $stmt->fetch();
+    $intakeDetail = safePrepare($pdo, "SELECT * FROM `$tblIntakes` WHERE id = ?", [$_GET['id']]);
     if (!$intakeDetail) { $page = 'intake'; }
 }
 
 // ── LEAD DETAIL ──
 $leadDetail = null;
 if ($page === 'lead-detail' && isset($_GET['id'])) {
-    $stmt = $pdo->prepare("SELECT * FROM leads WHERE id = ?");
-    $stmt->execute([$_GET['id']]);
-    $leadDetail = $stmt->fetch();
+    $leadDetail = safePrepare($pdo, "SELECT * FROM `$tblLeads` WHERE id = ?", [$_GET['id']]);
     if (!$leadDetail) { $page = 'leads'; }
 }
 
 // ── SURVEY DETAIL ──
 $surveyDetail = null;
 if ($page === 'survey-detail' && isset($_GET['id'])) {
-    $stmt = $pdo->prepare("SELECT * FROM survey_responses WHERE id = ?");
-    $stmt->execute([$_GET['id']]);
-    $surveyDetail = $stmt->fetch();
+    $surveyDetail = safePrepare($pdo, "SELECT * FROM `$tblSurveys` WHERE id = ?", [$_GET['id']]);
     if (!$surveyDetail) { $page = 'surveys'; }
 }
 
 // ── LEADS INSIGHTS ──
-$leadsTopCategory = null;
+$leadsTopCategory = 'N/A';
 $leadsTodayCount = $todayLeads;
 $leadsStep2Rate = 0;
 if ($totalLeads > 0) {
-    $row = $pdo->query("SELECT business_category, COUNT(*) AS cnt FROM leads GROUP BY business_category ORDER BY cnt DESC LIMIT 1")->fetch();
-    $leadsTopCategory = $row ? $row['business_category'] : 'N/A';
-    $step2Done = $pdo->query("SELECT COUNT(*) FROM leads WHERE project_budget IS NOT NULL AND project_budget != '' AND primary_goals IS NOT NULL AND primary_goals != ''")->fetchColumn();
-    $leadsStep2Rate = round(($step2Done / $totalLeads) * 100);
+    $row = safeRow($pdo, "SELECT business_category, COUNT(*) AS cnt FROM `$tblLeads` GROUP BY business_category ORDER BY cnt DESC LIMIT 1");
+    $leadsTopCategory = (!empty($row) && !empty($row['business_category'])) ? $row['business_category'] : 'N/A';
+    $step2Done = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblLeads` WHERE project_budget IS NOT NULL AND project_budget != '' AND primary_goals IS NOT NULL AND primary_goals != ''");
+    $leadsStep2Rate = round(($step2Done / max($totalLeads, 1)) * 100);
 }
 
 // ── SURVEYS INSIGHTS ──
 $surveysAvgRating = 0;
-$surveysTopChallenge = null;
+$surveysTopChallenge = 'N/A';
 $surveysTodayCount = $todaySurveys;
 if ($totalSurveys > 0) {
-    $surveysAvgRating = round((float)$pdo->query("SELECT AVG(CAST(online_presence_rating AS DECIMAL(10,2))) FROM survey_responses WHERE online_presence_rating IS NOT NULL AND online_presence_rating != ''")->fetchColumn(), 1);
-    $row = $pdo->query("SELECT biggest_challenge, COUNT(*) AS cnt FROM survey_responses WHERE biggest_challenge IS NOT NULL AND biggest_challenge != '' GROUP BY biggest_challenge ORDER BY cnt DESC LIMIT 1")->fetch();
-    $surveysTopChallenge = $row ? $row['biggest_challenge'] : 'N/A';
+    $avgVal = safeColumn($pdo, "SELECT AVG(CAST(online_presence_rating AS DECIMAL(10,2))) FROM `$tblSurveys` WHERE online_presence_rating IS NOT NULL AND online_presence_rating != ''");
+    $surveysAvgRating = round((float)($avgVal ?? 0), 1);
+    $row = safeRow($pdo, "SELECT biggest_challenge, COUNT(*) AS cnt FROM `$tblSurveys` WHERE biggest_challenge IS NOT NULL AND biggest_challenge != '' GROUP BY biggest_challenge ORDER BY cnt DESC LIMIT 1");
+    $surveysTopChallenge = (!empty($row) && !empty($row['biggest_challenge'])) ? $row['biggest_challenge'] : 'N/A';
 }
 
 // ── INTAKE INSIGHTS ──
@@ -170,10 +236,11 @@ $intakeWithPayment = 0;
 $intakeWithoutPayment = 0;
 $intakeAvgAmount = 0;
 if ($totalIntakes > 0) {
-    $intakeMonthCount = (int)$pdo->query("SELECT COUNT(*) FROM intake_submissions WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE())")->fetchColumn();
-    $intakeWithPayment = (int)$pdo->query("SELECT COUNT(*) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != ''")->fetchColumn();
+    $intakeMonthCount = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblIntakes` WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE())");
+    $intakeWithPayment = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != ''");
     $intakeWithoutPayment = $totalIntakes - $intakeWithPayment;
-    $intakeAvgAmount = round((float)$pdo->query("SELECT AVG(amount) FROM intake_submissions WHERE amount IS NOT NULL AND amount > 0")->fetchColumn(), 0);
+    $avgAmt = safeColumn($pdo, "SELECT AVG(amount) FROM `$tblIntakes` WHERE amount IS NOT NULL AND amount > 0");
+    $intakeAvgAmount = round((float)($avgAmt ?? 0), 0);
 }
 
 // ── TRANSACTIONS INSIGHTS ──
@@ -183,10 +250,10 @@ $txFailedCount = 0;
 $txTodayRevenue = 0;
 $txAvgOrder = 0;
 if ($totalTransactions > 0) {
-    $txTotalRevenue = (float)$pdo->query("SELECT COALESCE(SUM(amount),0) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid')")->fetchColumn();
-    $txSuccessCount = (int)$pdo->query("SELECT COUNT(*) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid')")->fetchColumn();
+    $txTotalRevenue = (float)safeColumn($pdo, "SELECT COALESCE(SUM(amount),0) FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid')");
+    $txSuccessCount = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid')");
     $txFailedCount = $totalTransactions - $txSuccessCount;
-    $txTodayRevenue = (float)$pdo->query("SELECT COALESCE(SUM(amount),0) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid') AND DATE(created_at) = CURDATE()")->fetchColumn();
+    $txTodayRevenue = (float)safeColumn($pdo, "SELECT COALESCE(SUM(amount),0) FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid') AND DATE(created_at) = CURDATE()");
     $txAvgOrder = round($txTotalRevenue / max($txSuccessCount, 1), 0);
 }
 
@@ -198,16 +265,20 @@ function parseLinks($value) {
     $html = '<div class="flex flex-col gap-2">';
     foreach ($urls as $url) {
         if (!empty($url) && is_string($url)) {
-            $html .= '<a href="' . htmlspecialchars($url) . '" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg> Open Document / Media</a>';
+            $html .= '<a href="' . he($url) . '" target="_blank" rel="noopener noreferrer" class="text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg> Open Document / Media</a>';
         }
     }
     $html .= '</div>';
     return $html;
 }
 
+function he($value) {
+    return htmlspecialchars((string)($value ?? ''), ENT_QUOTES, 'UTF-8');
+}
+
 function renderValue($value) {
     if (empty($value)) return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
-    return htmlspecialchars($value);
+    return he($value);
 }
 
 $navItems = [
@@ -387,10 +458,10 @@ $pageTitles = [
                 <?php foreach (array_slice($leads, 0, 5) as $l): ?>
                 <div class="px-4 py-3 flex items-center justify-between">
                     <div>
-                        <p class="text-xs font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($l['full_name']) ?></p>
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400"><?= htmlspecialchars($l['business_name']) ?></p>
+                        <p class="text-xs font-semibold text-slate-900 dark:text-white"><?= he($l['full_name']) ?></p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400"><?= he($l['business_name']) ?></p>
                     </div>
-                    <span class="text-[10px] text-slate-400 dark:text-slate-500 whitespace-nowrap"><?= htmlspecialchars($l['created_at']) ?></span>
+                    <span class="text-[10px] text-slate-400 dark:text-slate-500 whitespace-nowrap"><?= he($l['created_at']) ?></span>
                 </div>
                 <?php endforeach; ?>
                 <?php if (empty($leads)): ?><p class="p-6 text-center text-xs text-slate-400">No leads yet.</p><?php endif; ?>
@@ -407,8 +478,8 @@ $pageTitles = [
                 <?php foreach (array_slice($transactions, 0, 5) as $tx): ?>
                 <div class="px-4 py-3 flex items-center justify-between">
                     <div>
-                        <p class="text-xs font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($tx['full_name']) ?></p>
-                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono tx-word-break"><?= htmlspecialchars($tx['razorpay_payment_id']) ?></p>
+                        <p class="text-xs font-semibold text-slate-900 dark:text-white"><?= he($tx['full_name']) ?></p>
+                        <p class="text-[10px] text-slate-500 dark:text-slate-400 font-mono tx-word-break"><?= he($tx['razorpay_payment_id']) ?></p>
                     </div>
                     <div class="text-right">
                         <p class="text-xs font-bold text-slate-900 dark:text-white"><?= ($tx['amount'] != null) ? '&#8377;'.number_format((float)$tx['amount'],0) : 'N/A' ?></p>
@@ -418,7 +489,7 @@ $pageTitles = [
                         <?php elseif ($st==='pending'||$st==='created'): ?>
                             <span class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold">Pending</span>
                         <?php else: ?>
-                            <span class="text-[10px] text-rose-600 dark:text-rose-400 font-semibold"><?= htmlspecialchars($tx['payment_status'] ?? 'Unknown') ?></span>
+                            <span class="text-[10px] text-rose-600 dark:text-rose-400 font-semibold"><?= he($tx['payment_status'] ?? 'Unknown') ?></span>
                         <?php endif; ?>
                     </div>
                 </div>
@@ -441,7 +512,7 @@ $pageTitles = [
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Top Category</p>
-            <span class="text-sm font-bold text-emerald-600 dark:text-emerald-400 detail-text"><?= htmlspecialchars($leadsTopCategory) ?></span>
+            <span class="text-sm font-bold text-emerald-600 dark:text-emerald-400 detail-text"><?= he($leadsTopCategory) ?></span>
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Step 2 Complete</p>
@@ -463,12 +534,12 @@ $pageTitles = [
                 <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
                     <?php foreach ($leads as $lead): ?>
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= htmlspecialchars($lead['created_at']) ?></td>
-                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($lead['full_name']) ?></td>
-                        <td class="p-4"><?= htmlspecialchars($lead['business_name']) ?></td>
-                        <td class="p-4"><a href="mailto:<?= htmlspecialchars($lead['email']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($lead['email']) ?></a></td>
-                        <td class="p-4"><a href="tel:<?= htmlspecialchars($lead['phone_number']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($lead['phone_number']) ?></a></td>
-                        <td class="p-4"><span class="bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded text-[10px] font-medium border border-blue-200 dark:border-blue-500/20"><?= htmlspecialchars($lead['business_category']) ?></span></td>
+                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= he($lead['created_at']) ?></td>
+                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= he($lead['full_name']) ?></td>
+                        <td class="p-4"><?= he($lead['business_name']) ?></td>
+                        <td class="p-4"><a href="mailto:<?= he($lead['email']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= he($lead['email']) ?></a></td>
+                        <td class="p-4"><a href="tel:<?= he($lead['phone_number']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= he($lead['phone_number']) ?></a></td>
+                        <td class="p-4"><span class="bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded text-[10px] font-medium border border-blue-200 dark:border-blue-500/20"><?= he($lead['business_category']) ?></span></td>
                         <td class="p-4"><a href="?page=lead-detail&id=<?= $lead['id'] ?>" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">View Details</a></td>
                     </tr>
                     <?php endforeach; ?>
@@ -495,7 +566,7 @@ $pageTitles = [
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Top Challenge</p>
-            <span class="text-sm font-bold text-rose-600 dark:text-rose-400 detail-text"><?= htmlspecialchars(mb_strimwidth($surveysTopChallenge, 0, 50, '...')) ?></span>
+            <span class="text-sm font-bold text-rose-600 dark:text-rose-400 detail-text"><?= he(mb_strimwidth((string)($surveysTopChallenge ?? 'N/A'), 0, 50, '...')) ?></span>
         </div>
     </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
@@ -513,12 +584,12 @@ $pageTitles = [
                 <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
                     <?php foreach ($surveys as $survey): ?>
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= htmlspecialchars($survey['submitted_at']) ?></td>
-                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($survey['full_name']) ?></td>
-                        <td class="p-4"><?= htmlspecialchars($survey['business_name']) ?></td>
-                        <td class="p-4"><a href="tel:<?= htmlspecialchars($survey['phone_number']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($survey['phone_number']) ?></a></td>
-                        <td class="p-4"><span class="bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded text-[10px] font-medium border border-emerald-200 dark:border-emerald-500/20"><?= htmlspecialchars($survey['business_type']) ?></span></td>
-                        <td class="p-4 text-amber-500 dark:text-amber-400 font-semibold"><?= htmlspecialchars($survey['online_presence_rating']) ?></td>
+                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= he($survey['submitted_at']) ?></td>
+                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= he($survey['full_name']) ?></td>
+                        <td class="p-4"><?= he($survey['business_name']) ?></td>
+                        <td class="p-4"><a href="tel:<?= he($survey['phone_number']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= he($survey['phone_number']) ?></a></td>
+                        <td class="p-4"><span class="bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded text-[10px] font-medium border border-emerald-200 dark:border-emerald-500/20"><?= he($survey['business_type']) ?></span></td>
+                        <td class="p-4 text-amber-500 dark:text-amber-400 font-semibold"><?= he($survey['online_presence_rating']) ?></td>
                         <td class="p-4"><a href="?page=survey-detail&id=<?= $survey['id'] ?>" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">View Details</a></td>
                     </tr>
                     <?php endforeach; ?>
@@ -563,12 +634,12 @@ $pageTitles = [
                 <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
                     <?php foreach ($intakes as $intake): ?>
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= htmlspecialchars($intake['created_at'] ?? 'N/A') ?></td>
-                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($intake['full_name'] ?? 'N/A') ?></td>
-                        <td class="p-4"><?= htmlspecialchars($intake['business_name'] ?? 'N/A') ?></td>
-                        <td class="p-4"><a href="tel:<?= htmlspecialchars($intake['phone'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($intake['phone'] ?? 'N/A') ?></a></td>
-                        <td class="p-4"><a href="mailto:<?= htmlspecialchars($intake['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline tx-word-break"><?= htmlspecialchars($intake['email'] ?? 'N/A') ?></a></td>
-                        <td class="p-4 tx-word-break font-mono text-slate-500 dark:text-slate-400"><?= htmlspecialchars($intake['razorpay_payment_id'] ?: 'N/A') ?></td>
+                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= he($intake['created_at'] ?? 'N/A') ?></td>
+                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= he($intake['full_name'] ?? 'N/A') ?></td>
+                        <td class="p-4"><?= he($intake['business_name'] ?? 'N/A') ?></td>
+                        <td class="p-4"><a href="tel:<?= he($intake['phone'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= he($intake['phone'] ?? 'N/A') ?></a></td>
+                        <td class="p-4"><a href="mailto:<?= he($intake['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline tx-word-break"><?= he($intake['email'] ?? 'N/A') ?></a></td>
+                        <td class="p-4 tx-word-break font-mono text-slate-500 dark:text-slate-400"><?= he($intake['razorpay_payment_id'] ?: 'N/A') ?></td>
                         <td class="p-4"><a href="?page=intake-detail&id=<?= $intake['id'] ?>" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">View Details</a></td>
                     </tr>
                     <?php endforeach; ?>
@@ -613,12 +684,12 @@ $pageTitles = [
                 <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
                     <?php foreach ($transactions as $tx): ?>
                     <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
-                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= htmlspecialchars($tx['created_at'] ?? 'N/A') ?></td>
-                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($tx['full_name'] ?? 'N/A') ?></td>
-                        <td class="p-4"><a href="mailto:<?= htmlspecialchars($tx['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline tx-word-break"><?= htmlspecialchars($tx['email'] ?? 'N/A') ?></a></td>
-                        <td class="p-4"><a href="tel:<?= htmlspecialchars($tx['phone'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($tx['phone'] ?? 'N/A') ?></a></td>
-                        <td class="p-4 tx-word-break font-mono text-slate-600 dark:text-slate-400"><?= htmlspecialchars($tx['razorpay_payment_id'] ?? 'N/A') ?></td>
-                        <td class="p-4 tx-word-break font-mono text-slate-600 dark:text-slate-400"><?= htmlspecialchars($tx['razorpay_order_id'] ?? 'N/A') ?></td>
+                        <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= he($tx['created_at'] ?? 'N/A') ?></td>
+                        <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= he($tx['full_name'] ?? 'N/A') ?></td>
+                        <td class="p-4"><a href="mailto:<?= he($tx['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline tx-word-break"><?= he($tx['email'] ?? 'N/A') ?></a></td>
+                        <td class="p-4"><a href="tel:<?= he($tx['phone'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= he($tx['phone'] ?? 'N/A') ?></a></td>
+                        <td class="p-4 tx-word-break font-mono text-slate-600 dark:text-slate-400"><?= he($tx['razorpay_payment_id'] ?? 'N/A') ?></td>
+                        <td class="p-4 tx-word-break font-mono text-slate-600 dark:text-slate-400"><?= he($tx['razorpay_order_id'] ?? 'N/A') ?></td>
                         <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= ($tx['amount'] != null) ? '&#8377;'.number_format((float)$tx['amount'],0) : 'N/A' ?></td>
                         <td class="p-4">
                             <?php $st = strtolower(trim($tx['payment_status'] ?? '')); ?>
@@ -627,7 +698,7 @@ $pageTitles = [
                             <?php elseif ($st==='pending'||$st==='created'): ?>
                                 <span class="bg-amber-100 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-md text-[11px] font-semibold border border-amber-200 dark:border-amber-500/20">Pending</span>
                             <?php else: ?>
-                                <span class="bg-rose-100 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 px-2.5 py-1 rounded-md text-[11px] font-semibold border border-rose-200 dark:border-rose-500/20"><?= htmlspecialchars($tx['payment_status'] ?? 'Unknown') ?></span>
+                                <span class="bg-rose-100 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 px-2.5 py-1 rounded-md text-[11px] font-semibold border border-rose-200 dark:border-rose-500/20"><?= he($tx['payment_status'] ?? 'Unknown') ?></span>
                             <?php endif; ?>
                         </td>
                         <td class="p-4"><a href="?page=intake-detail&id=<?= $tx['id'] ?>" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">View Details</a></td>
@@ -682,7 +753,7 @@ $pageTitles = [
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Social Links</span><div class="text-sm font-medium detail-text"><?= renderValue($intakeDetail['social_links']) ?></div></div>
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Brand Color</span>
                     <div class="flex items-center gap-2">
-                        <div class="w-6 h-6 rounded-md shadow-sm border border-slate-200" style="background-color: <?= htmlspecialchars($intakeDetail['brand_color'] ?? '#000') ?>"></div>
+                        <div class="w-6 h-6 rounded-md shadow-sm border border-slate-200" style="background-color: <?= he($intakeDetail['brand_color'] ?? '#000') ?>"></div>
                         <span class="text-sm font-medium uppercase font-mono"><?= renderValue($intakeDetail['brand_color']) ?></span>
                     </div>
                 </div>
@@ -765,8 +836,8 @@ $pageTitles = [
             </div>
             <div class="p-5 space-y-4">
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Full Name</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['full_name']) ?></div></div>
-                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email</span><div class="text-sm font-medium detail-text"><a href="mailto:<?= htmlspecialchars($leadDetail['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($leadDetail['email']) ?></a></div></div>
-                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Phone Number</span><div class="text-sm font-medium detail-text"><a href="tel:<?= htmlspecialchars($leadDetail['phone_number'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($leadDetail['phone_number']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email</span><div class="text-sm font-medium detail-text"><a href="mailto:<?= he($leadDetail['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($leadDetail['email']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Phone Number</span><div class="text-sm font-medium detail-text"><a href="tel:<?= he($leadDetail['phone_number'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($leadDetail['phone_number']) ?></a></div></div>
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Name</span><div class="text-sm font-bold detail-text text-blue-600 dark:text-blue-400"><?= renderValue($leadDetail['business_name']) ?></div></div>
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Category</span>
                     <span class="inline-block bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded text-xs font-medium border border-blue-200 dark:border-blue-500/20"><?= renderValue($leadDetail['business_category']) ?></span>
@@ -809,8 +880,8 @@ $pageTitles = [
             </div>
             <div class="p-5 space-y-4">
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Full Name</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['full_name']) ?></div></div>
-                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email</span><div class="text-sm font-medium detail-text"><a href="mailto:<?= htmlspecialchars($surveyDetail['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($surveyDetail['email']) ?></a></div></div>
-                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Phone Number</span><div class="text-sm font-medium detail-text"><a href="tel:<?= htmlspecialchars($surveyDetail['phone_number'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($surveyDetail['phone_number']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email</span><div class="text-sm font-medium detail-text"><a href="mailto:<?= he($surveyDetail['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($surveyDetail['email']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Phone Number</span><div class="text-sm font-medium detail-text"><a href="tel:<?= he($surveyDetail['phone_number'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($surveyDetail['phone_number']) ?></a></div></div>
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Name</span><div class="text-sm font-bold detail-text text-blue-600 dark:text-blue-400"><?= renderValue($surveyDetail['business_name']) ?></div></div>
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Type</span>
                     <span class="inline-block bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded text-xs font-medium border border-emerald-200 dark:border-emerald-500/20"><?= renderValue($surveyDetail['business_type']) ?></span>
