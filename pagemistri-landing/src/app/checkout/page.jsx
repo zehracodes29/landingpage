@@ -123,6 +123,13 @@ export default function CheckoutPage() {
     });
   }, [reset]);
 
+  const handleStepClick = (targetStep) => {
+    if (targetStep < currentStep) {
+      setCurrentStep(targetStep);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
   const stepFields = {
     1: ["fullName", "email", "businessName", "phone", "businessAddress", "domainDetails"],
     2: ["logoUrl", "brandColor", "aboutBusiness"],
@@ -317,18 +324,20 @@ export default function CheckoutPage() {
               {STEPS.map((step, index) => {
                 const isCompleted = currentStep > index + 1;
                 const isActive = currentStep === index + 1;
+                const isClickable = index + 1 < currentStep;
 
                 return (
                   <div key={step.num} className="flex flex-col items-center">
                     {/* Centered Circle */}
                     <div
+                      onClick={() => handleStepClick(index + 1)}
                       className={`w-9 h-9 rounded-full flex items-center justify-center font-semibold text-xs transition-all bg-white border-2 ${
                         isCompleted
-                          ? "border-emerald-500 text-emerald-500"
+                          ? "border-emerald-500 text-emerald-500 hover:scale-110 hover:shadow-md"
                           : isActive
                           ? "border-[#4400AF] text-[#4400AF] shadow-md ring-4 ring-[#4400AF]/10"
                           : "border-slate-200 text-slate-400"
-                      }`}
+                      } ${isClickable ? "cursor-pointer" : "cursor-default"}`}
                     >
                       {isCompleted ? <Check className="w-4 h-4 text-emerald-500"/> : index + 1}
                     </div>
