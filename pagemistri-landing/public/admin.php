@@ -236,15 +236,10 @@ if ($totalSurveys > 0) {
 
 // ── INTAKE INSIGHTS ──
 $intakeMonthCount = 0;
-$intakeWithPayment = 0;
-$intakeWithoutPayment = 0;
-$intakeAvgAmount = 0;
+$intakeTotalRevenue = 0;
 if ($totalIntakes > 0) {
     $intakeMonthCount = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblIntakes` WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE())");
-    $intakeWithPayment = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblIntakes` WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != ''");
-    $intakeWithoutPayment = $totalIntakes - $intakeWithPayment;
-    $avgAmt = safeColumn($pdo, "SELECT AVG(amount) FROM `$tblIntakes` WHERE amount IS NOT NULL AND amount > 0");
-    $intakeAvgAmount = round((float)($avgAmt ?? 0), 0);
+    $intakeTotalRevenue = (float)safeColumn($pdo, "SELECT COALESCE(SUM(amount), 0) FROM `$tblIntakes`");
 }
 
 // ── TRANSACTIONS INSIGHTS ──
@@ -622,22 +617,18 @@ $pageTitles = [
 
     <?php elseif ($page === 'intake'): ?>
     <!-- ═══ INTAKES PAGE ═══ -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Submissions</p>
             <span class="text-3xl font-extrabold text-slate-900 dark:text-white"><?= $totalIntakes ?></span>
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">This Month</p>
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Submissions This Month</p>
             <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400"><?= $intakeMonthCount ?></span>
         </div>
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Paid / Unpaid</p>
-            <span class="text-2xl font-extrabold"><span class="text-emerald-600 dark:text-emerald-400"><?= $intakeWithPayment ?></span><span class="text-slate-300 dark:text-slate-600 mx-1">/</span><span class="text-rose-500 dark:text-rose-400"><?= $intakeWithoutPayment ?></span></span>
-        </div>
-        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Avg. Amount</p>
-            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400">&#8377;<?= number_format($intakeAvgAmount, 0) ?></span>
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Revenue Made</p>
+            <span class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">&#8377;<?= number_format($intakeTotalRevenue, 0) ?></span>
         </div>
     </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
