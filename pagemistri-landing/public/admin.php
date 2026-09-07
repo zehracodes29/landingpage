@@ -143,6 +143,53 @@ if ($page === 'survey-detail' && isset($_GET['id'])) {
     if (!$surveyDetail) { $page = 'surveys'; }
 }
 
+// ── LEADS INSIGHTS ──
+$leadsTopCategory = null;
+$leadsTodayCount = $todayLeads;
+$leadsStep2Rate = 0;
+if ($totalLeads > 0) {
+    $row = $pdo->query("SELECT business_category, COUNT(*) AS cnt FROM leads GROUP BY business_category ORDER BY cnt DESC LIMIT 1")->fetch();
+    $leadsTopCategory = $row ? $row['business_category'] : 'N/A';
+    $step2Done = $pdo->query("SELECT COUNT(*) FROM leads WHERE project_budget IS NOT NULL AND project_budget != '' AND primary_goals IS NOT NULL AND primary_goals != ''")->fetchColumn();
+    $leadsStep2Rate = round(($step2Done / $totalLeads) * 100);
+}
+
+// ── SURVEYS INSIGHTS ──
+$surveysAvgRating = 0;
+$surveysTopChallenge = null;
+$surveysTodayCount = $todaySurveys;
+if ($totalSurveys > 0) {
+    $surveysAvgRating = round((float)$pdo->query("SELECT AVG(CAST(online_presence_rating AS DECIMAL(10,2))) FROM survey_responses WHERE online_presence_rating IS NOT NULL AND online_presence_rating != ''")->fetchColumn(), 1);
+    $row = $pdo->query("SELECT biggest_challenge, COUNT(*) AS cnt FROM survey_responses WHERE biggest_challenge IS NOT NULL AND biggest_challenge != '' GROUP BY biggest_challenge ORDER BY cnt DESC LIMIT 1")->fetch();
+    $surveysTopChallenge = $row ? $row['biggest_challenge'] : 'N/A';
+}
+
+// ── INTAKE INSIGHTS ──
+$intakeMonthCount = 0;
+$intakeWithPayment = 0;
+$intakeWithoutPayment = 0;
+$intakeAvgAmount = 0;
+if ($totalIntakes > 0) {
+    $intakeMonthCount = (int)$pdo->query("SELECT COUNT(*) FROM intake_submissions WHERE YEAR(created_at) = YEAR(CURDATE()) AND MONTH(created_at) = MONTH(CURDATE())")->fetchColumn();
+    $intakeWithPayment = (int)$pdo->query("SELECT COUNT(*) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != ''")->fetchColumn();
+    $intakeWithoutPayment = $totalIntakes - $intakeWithPayment;
+    $intakeAvgAmount = round((float)$pdo->query("SELECT AVG(amount) FROM intake_submissions WHERE amount IS NOT NULL AND amount > 0")->fetchColumn(), 0);
+}
+
+// ── TRANSACTIONS INSIGHTS ──
+$txTotalRevenue = 0;
+$txSuccessCount = 0;
+$txFailedCount = 0;
+$txTodayRevenue = 0;
+$txAvgOrder = 0;
+if ($totalTransactions > 0) {
+    $txTotalRevenue = (float)$pdo->query("SELECT COALESCE(SUM(amount),0) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid')")->fetchColumn();
+    $txSuccessCount = (int)$pdo->query("SELECT COUNT(*) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid')")->fetchColumn();
+    $txFailedCount = $totalTransactions - $txSuccessCount;
+    $txTodayRevenue = (float)$pdo->query("SELECT COALESCE(SUM(amount),0) FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' AND LOWER(payment_status) IN ('success','captured','paid') AND DATE(created_at) = CURDATE()")->fetchColumn();
+    $txAvgOrder = round($txTotalRevenue / max($txSuccessCount, 1), 0);
+}
+
 function parseLinks($value) {
     if (empty($value)) return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
     if ($value === 'Array' || $value === '[]') return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
@@ -383,6 +430,24 @@ $pageTitles = [
 
     <?php elseif ($page === 'leads'): ?>
     <!-- ═══ LEADS PAGE ═══ -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Leads</p>
+            <span class="text-3xl font-extrabold text-slate-900 dark:text-white"><?= $totalLeads ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Leads Today</p>
+            <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400"><?= $leadsTodayCount ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Top Category</p>
+            <span class="text-sm font-bold text-emerald-600 dark:text-emerald-400 detail-text"><?= htmlspecialchars($leadsTopCategory) ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Step 2 Complete</p>
+            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400"><?= $leadsStep2Rate ?>%</span>
+        </div>
+    </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
         <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3 bg-slate-50 dark:bg-slate-950">
             <input type="text" id="leads-search" onkeyup="filterTable('leads')" placeholder="Search by name, email, phone..." class="w-full sm:w-72 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
@@ -415,6 +480,24 @@ $pageTitles = [
 
     <?php elseif ($page === 'surveys'): ?>
     <!-- ═══ SURVEYS PAGE ═══ -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Surveys</p>
+            <span class="text-3xl font-extrabold text-slate-900 dark:text-white"><?= $totalSurveys ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Surveys Today</p>
+            <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400"><?= $surveysTodayCount ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Avg. Rating</p>
+            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400"><?= $surveysAvgRating ?><span class="text-sm text-slate-400">/5</span></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Top Challenge</p>
+            <span class="text-sm font-bold text-rose-600 dark:text-rose-400 detail-text"><?= htmlspecialchars(mb_strimwidth($surveysTopChallenge, 0, 50, '...')) ?></span>
+        </div>
+    </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
         <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3 bg-slate-50 dark:bg-slate-950">
             <input type="text" id="surveys-search" onkeyup="filterTable('surveys')" placeholder="Search by name, business, phone..." class="w-full sm:w-72 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
@@ -447,6 +530,24 @@ $pageTitles = [
 
     <?php elseif ($page === 'intake'): ?>
     <!-- ═══ INTAKES PAGE ═══ -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Submissions</p>
+            <span class="text-3xl font-extrabold text-slate-900 dark:text-white"><?= $totalIntakes ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">This Month</p>
+            <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400"><?= $intakeMonthCount ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Paid / Unpaid</p>
+            <span class="text-2xl font-extrabold"><span class="text-emerald-600 dark:text-emerald-400"><?= $intakeWithPayment ?></span><span class="text-slate-300 dark:text-slate-600 mx-1">/</span><span class="text-rose-500 dark:text-rose-400"><?= $intakeWithoutPayment ?></span></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Avg. Amount</p>
+            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400">&#8377;<?= number_format($intakeAvgAmount, 0) ?></span>
+        </div>
+    </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
         <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3 bg-slate-50 dark:bg-slate-950">
             <input type="text" id="intake-search" onkeyup="filterTable('intake')" placeholder="Search by name, business, phone, email..." class="w-full sm:w-72 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
@@ -479,6 +580,24 @@ $pageTitles = [
 
     <?php elseif ($page === 'transactions'): ?>
     <!-- ═══ TRANSACTIONS PAGE ═══ -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Revenue</p>
+            <span class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">&#8377;<?= number_format($txTotalRevenue, 0) ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Successful / Failed</p>
+            <span class="text-2xl font-extrabold"><span class="text-emerald-600 dark:text-emerald-400"><?= $txSuccessCount ?></span><span class="text-slate-300 dark:text-slate-600 mx-1">/</span><span class="text-rose-500 dark:text-rose-400"><?= $txFailedCount ?></span></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Today's Revenue</p>
+            <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400">&#8377;<?= number_format($txTodayRevenue, 0) ?></span>
+        </div>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Avg. Order Value</p>
+            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400">&#8377;<?= number_format($txAvgOrder, 0) ?></span>
+        </div>
+    </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
         <div class="p-4 border-b border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-3 bg-slate-50 dark:bg-slate-950">
             <input type="text" id="transactions-search" onkeyup="filterTable('transactions')" placeholder="Search by name, email, payment ID..." class="w-full sm:w-72 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
