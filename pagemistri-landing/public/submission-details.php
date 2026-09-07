@@ -11,7 +11,8 @@ if (!isset($_GET['id'])) {
     die("Submission ID is missing.");
 }
 
-$id = $_GET['id'];
+header("Location: admin.php?page=intake-detail&id=" . intval($_GET['id']));
+exit();
 
 // Database Connection
 $db_host = 'localhost';
