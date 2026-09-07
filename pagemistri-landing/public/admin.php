@@ -209,14 +209,18 @@ if ($page === 'survey-detail' && isset($_GET['id'])) {
 }
 
 // ── LEADS INSIGHTS ──
-$leadsTopCategory = 'N/A';
 $leadsTodayCount = $todayLeads;
-$leadsStep2Rate = 0;
+$leadsCategoryBreakdown = [];
 if ($totalLeads > 0) {
-    $row = safeRow($pdo, "SELECT business_category, COUNT(*) AS cnt FROM `$tblLeads` GROUP BY business_category ORDER BY cnt DESC LIMIT 1");
-    $leadsTopCategory = (!empty($row) && !empty($row['business_category'])) ? $row['business_category'] : 'N/A';
-    $step2Done = (int)safeColumn($pdo, "SELECT COUNT(*) FROM `$tblLeads` WHERE project_budget IS NOT NULL AND project_budget != '' AND primary_goals IS NOT NULL AND primary_goals != ''");
-    $leadsStep2Rate = round(($step2Done / max($totalLeads, 1)) * 100);
+    $catRows = safeQuery($pdo, "SELECT COALESCE(NULLIF(Business_Category, ''), 'Uncategorized') AS cat, COUNT(*) AS cnt FROM `$tblLeads` GROUP BY cat ORDER BY cnt DESC");
+    foreach ($catRows as $cr) {
+        $catCount = (int)$cr['cnt'];
+        $leadsCategoryBreakdown[] = [
+            'name'  => $cr['cat'],
+            'count' => $catCount,
+            'pct'   => round(($catCount / $totalLeads) * 100, 1),
+        ];
+    }
 }
 
 // ── SURVEYS INSIGHTS ──
@@ -501,7 +505,7 @@ $pageTitles = [
 
     <?php elseif ($page === 'leads'): ?>
     <!-- ═══ LEADS PAGE ═══ -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Leads</p>
             <span class="text-3xl font-extrabold text-slate-900 dark:text-white"><?= $totalLeads ?></span>
@@ -510,13 +514,30 @@ $pageTitles = [
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Leads Today</p>
             <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400"><?= $leadsTodayCount ?></span>
         </div>
-        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Top Category</p>
-            <span class="text-sm font-bold text-emerald-600 dark:text-emerald-400 detail-text"><?= he($leadsTopCategory) ?></span>
-        </div>
-        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Step 2 Complete</p>
-            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400"><?= $leadsStep2Rate ?>%</span>
+        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm sm:col-span-2 lg:col-span-1">
+            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-3">Category Breakdown</p>
+            <?php if (!empty($leadsCategoryBreakdown)): ?>
+                <div class="space-y-2.5">
+                <?php
+                    $barColors = ['bg-blue-500','bg-emerald-500','bg-amber-500','bg-rose-500','bg-violet-500','bg-cyan-500','bg-indigo-500','bg-pink-500'];
+                    $ci = 0;
+                ?>
+                <?php foreach ($leadsCategoryBreakdown as $cat): ?>
+                    <div>
+                        <div class="flex items-center justify-between mb-1">
+                            <span class="text-[11px] font-semibold text-slate-700 dark:text-slate-300 truncate max-w-[140px]" title="<?= he($cat['name']) ?>"><?= he($cat['name']) ?></span>
+                            <span class="text-[10px] font-bold text-slate-500 dark:text-slate-400 ml-2 whitespace-nowrap"><?= $cat['count'] ?> &middot; <?= $cat['pct'] ?>%</span>
+                        </div>
+                        <div class="w-full h-1.5 bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden">
+                            <div class="h-full <?= $barColors[$ci % count($barColors)] ?> rounded-full transition-all duration-500" style="width: <?= $cat['pct'] ?>%"></div>
+                        </div>
+                    </div>
+                    <?php $ci++; ?>
+                <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <p class="text-xs text-slate-400 dark:text-slate-500 italic">No data</p>
+            <?php endif; ?>
         </div>
     </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
