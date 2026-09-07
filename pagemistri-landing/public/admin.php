@@ -116,6 +116,11 @@ try {
             $rows = $stmt->fetchAll();
             if (!empty($rows)) fputcsv($output, array_keys($rows[0]));
             foreach ($rows as $row) fputcsv($output, $row);
+        } elseif ($type === 'transactions') {
+            $stmt = $pdo->query("SELECT full_name, email, phone, razorpay_payment_id, razorpay_order_id, amount, payment_status, created_at FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' ORDER BY created_at DESC");
+            $rows = $stmt->fetchAll();
+            if (!empty($rows)) fputcsv($output, array_keys($rows[0]));
+            foreach ($rows as $row) fputcsv($output, $row);
         }
         fclose($output);
         exit();
@@ -125,10 +130,12 @@ try {
     $leads = $pdo->query("SELECT * FROM leads ORDER BY created_at DESC")->fetchAll();
     $surveys = $pdo->query("SELECT * FROM survey_responses ORDER BY submitted_at DESC")->fetchAll();
     $intakes = $pdo->query("SELECT * FROM intake_submissions ORDER BY created_at DESC")->fetchAll();
+    $transactions = $pdo->query("SELECT full_name, email, phone, razorpay_payment_id, razorpay_order_id, amount, payment_status, created_at, id FROM intake_submissions WHERE razorpay_payment_id IS NOT NULL AND razorpay_payment_id != '' ORDER BY created_at DESC")->fetchAll();
 
     $totalLeads = count($leads);
     $totalSurveys = count($surveys);
     $totalIntakes = count($intakes);
+    $totalTransactions = count($transactions);
     $todayDate = date('Y-m-d');
     
     $todayLeads = count(array_filter($leads, fn($l) => strpos($l['created_at'], $todayDate) === 0));
@@ -152,7 +159,9 @@ try {
         tailwind.config = { darkMode: 'class' }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
+    <style>body { font-family: 'Inter', sans-serif; }
+        .tx-word-break { word-break: break-word; overflow-wrap: anywhere; }
+    </style>
     <script>
         // Set theme from localStorage or default to Light Mode
         if (localStorage.getItem('theme') === 'dark') {
@@ -182,6 +191,9 @@ try {
             document.getElementById(tabName).classList.remove('hidden');
             document.getElementById(tabName + '-btn').classList.add('bg-blue-600', 'text-white');
             document.getElementById(tabName + '-btn').classList.remove('bg-white', 'dark:bg-slate-900', 'text-slate-600', 'dark:text-slate-400');
+            var url = new URL(window.location);
+            url.searchParams.set('tab', tabName);
+            history.replaceState(null, '', url);
         }
 
         function filterTable(tab) {
@@ -218,6 +230,15 @@ try {
         function closeModal() {
             document.getElementById('details-modal').classList.add('hidden');
         }
+
+        // Apply URL-based tab on load
+        document.addEventListener('DOMContentLoaded', function() {
+            var params = new URLSearchParams(window.location.search);
+            var tab = params.get('tab');
+            if (tab && document.getElementById(tab)) {
+                switchTab(tab);
+            }
+        });
     </script>
 </head>
 <body class="bg-slate-100 dark:bg-slate-950 text-slate-800 dark:text-slate-100 min-h-screen p-4 md:p-8 transition-colors">
@@ -281,6 +302,9 @@ try {
                 </button>
                 <button id="intakes-btn" onclick="switchTab('intakes')" class="tab-btn bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 px-5 py-2.5 rounded-lg font-semibold text-xs transition">
                     Intake Submissions (<?= $totalIntakes ?>)
+                </button>
+                <button id="transactions-btn" onclick="switchTab('transactions')" class="tab-btn bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 px-5 py-2.5 rounded-lg font-semibold text-xs transition">
+                    Transactions (<?= $totalTransactions ?>)
                 </button>
             </div>
         </div>
@@ -422,6 +446,68 @@ try {
                     <?php endforeach; ?>
                     <?php if (empty($intakes)): ?>
                         <tr><td colspan="7" class="p-8 text-center text-slate-400 dark:text-slate-500">No intake submissions recorded yet.</td></tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- TRANSACTIONS TABLE CONTAINER -->
+    <div id="transactions" class="tab-content hidden max-w-7xl mx-auto mt-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800/80 overflow-hidden shadow-sm dark:shadow-xl">
+        <div class="p-4 border-b border-slate-200 dark:border-slate-800/80 flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-50 dark:bg-slate-900">
+            <input type="text" id="transactions-search" onkeyup="filterTable('transactions')" placeholder="Search transactions by name, email, payment ID..." 
+                   class="w-full md:w-80 bg-white dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-lg px-4 py-2 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-blue-500">
+            <a href="?export=transactions" class="bg-white dark:bg-slate-950 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 text-xs px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 transition font-medium flex items-center gap-2 shadow-sm">
+                <span>↓</span> Download CSV
+            </a>
+        </div>
+
+        <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
+                <thead class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase font-bold border-b border-slate-200 dark:border-slate-800/80">
+                    <tr>
+                        <th class="p-4">Date</th>
+                        <th class="p-4">Customer Name</th>
+                        <th class="p-4">Email</th>
+                        <th class="p-4">Phone</th>
+                        <th class="p-4">Payment ID</th>
+                        <th class="p-4">Order ID</th>
+                        <th class="p-4">Amount</th>
+                        <th class="p-4">Status</th>
+                        <th class="p-4">Action</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
+                    <?php foreach ($transactions as $tx): ?>
+                        <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
+                            <td class="p-4 whitespace-nowrap text-slate-500 dark:text-slate-400"><?= htmlspecialchars($tx['created_at'] ?? 'N/A') ?></td>
+                            <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= htmlspecialchars($tx['full_name'] ?? 'N/A') ?></td>
+                            <td class="p-4"><a href="mailto:<?= htmlspecialchars($tx['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline tx-word-break"><?= htmlspecialchars($tx['email'] ?? 'N/A') ?></a></td>
+                            <td class="p-4"><a href="tel:<?= htmlspecialchars($tx['phone'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($tx['phone'] ?? 'N/A') ?></a></td>
+                            <td class="p-4 tx-word-break font-mono text-slate-600 dark:text-slate-400"><?= htmlspecialchars($tx['razorpay_payment_id'] ?? 'N/A') ?></td>
+                            <td class="p-4 tx-word-break font-mono text-slate-600 dark:text-slate-400"><?= htmlspecialchars($tx['razorpay_order_id'] ?? 'N/A') ?></td>
+                            <td class="p-4 font-semibold text-slate-900 dark:text-white"><?= ($tx['amount'] != null) ? '₹' . number_format((float)$tx['amount'], 0) : 'N/A' ?></td>
+                            <td class="p-4">
+                                <?php
+                                    $status = strtolower(trim($tx['payment_status'] ?? ''));
+                                    if ($status === 'success' || $status === 'captured' || $status === 'paid'):
+                                ?>
+                                    <span class="bg-emerald-100 dark:bg-emerald-500/15 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-md text-[11px] font-semibold border border-emerald-200 dark:border-emerald-500/20">Success</span>
+                                <?php elseif ($status === 'pending' || $status === 'created'): ?>
+                                    <span class="bg-amber-100 dark:bg-amber-500/15 text-amber-700 dark:text-amber-400 px-2.5 py-1 rounded-md text-[11px] font-semibold border border-amber-200 dark:border-amber-500/20">Pending</span>
+                                <?php else: ?>
+                                    <span class="bg-rose-100 dark:bg-rose-500/15 text-rose-700 dark:text-rose-400 px-2.5 py-1 rounded-md text-[11px] font-semibold border border-rose-200 dark:border-rose-500/20"><?= htmlspecialchars($tx['payment_status'] ?? 'Unknown') ?></span>
+                                <?php endif; ?>
+                            </td>
+                            <td class="p-4">
+                                <a href="submission-details.php?id=<?= $tx['id'] ?>" class="inline-block bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">
+                                    View Details
+                                </a>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                    <?php if (empty($transactions)): ?>
+                        <tr><td colspan="9" class="p-8 text-center text-slate-400 dark:text-slate-500">No payment transactions recorded yet.</td></tr>
                     <?php endif; ?>
                 </tbody>
             </table>
