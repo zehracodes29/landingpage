@@ -125,6 +125,15 @@ if ($page === 'intake-detail' && isset($_GET['id'])) {
     if (!$intakeDetail) { $page = 'intake'; }
 }
 
+// ── LEAD DETAIL ──
+$leadDetail = null;
+if ($page === 'lead-detail' && isset($_GET['id'])) {
+    $stmt = $pdo->prepare("SELECT * FROM leads WHERE id = ?");
+    $stmt->execute([$_GET['id']]);
+    $leadDetail = $stmt->fetch();
+    if (!$leadDetail) { $page = 'leads'; }
+}
+
 function parseLinks($value) {
     if (empty($value)) return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
     if ($value === 'Array' || $value === '[]') return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
@@ -156,6 +165,7 @@ $navItems = [
 $pageTitles = [
     'overview' => 'Dashboard Overview',
     'leads' => 'Landing Page Leads',
+    'lead-detail' => 'Lead Details',
     'surveys' => 'Visibility Surveys',
     'intake' => 'Intake Submissions',
     'transactions' => 'Transactions',
@@ -236,7 +246,7 @@ $pageTitles = [
     <nav class="flex-1 overflow-y-auto p-3 space-y-1">
         <?php foreach ($navItems as $item): ?>
             <?php
-                $active = ($page === $item['key']) || ($page === 'intake-detail' && $item['key'] === 'intake');
+                $active = ($page === $item['key']) || ($page === 'intake-detail' && $item['key'] === 'intake') || ($page === 'lead-detail' && $item['key'] === 'leads');
                 $activeClass = $active ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 border border-transparent';
             ?>
             <a href="?page=<?= $item['key'] ?>" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition <?= $activeClass ?>">
@@ -372,7 +382,7 @@ $pageTitles = [
             <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
                 <thead class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase font-bold border-b border-slate-200 dark:border-slate-800">
                     <tr>
-                        <th class="p-4">Date</th><th class="p-4">Full Name</th><th class="p-4">Business</th><th class="p-4">Email</th><th class="p-4">Phone</th><th class="p-4">Category</th>
+                        <th class="p-4">Date</th><th class="p-4">Full Name</th><th class="p-4">Business</th><th class="p-4">Email</th><th class="p-4">Phone</th><th class="p-4">Category</th><th class="p-4">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
@@ -384,9 +394,10 @@ $pageTitles = [
                         <td class="p-4"><a href="mailto:<?= htmlspecialchars($lead['email']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($lead['email']) ?></a></td>
                         <td class="p-4"><a href="tel:<?= htmlspecialchars($lead['phone_number']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($lead['phone_number']) ?></a></td>
                         <td class="p-4"><span class="bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2 py-0.5 rounded text-[10px] font-medium border border-blue-200 dark:border-blue-500/20"><?= htmlspecialchars($lead['business_category']) ?></span></td>
+                        <td class="p-4"><a href="?page=lead-detail&id=<?= $lead['id'] ?>" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">View Details</a></td>
                     </tr>
                     <?php endforeach; ?>
-                    <?php if (empty($leads)): ?><tr><td colspan="6" class="p-8 text-center text-slate-400">No leads recorded yet.</td></tr><?php endif; ?>
+                    <?php if (empty($leads)): ?><tr><td colspan="7" class="p-8 text-center text-slate-400">No leads recorded yet.</td></tr><?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -599,6 +610,50 @@ $pageTitles = [
                     <span class="block text-[10px] uppercase font-bold text-slate-500 dark:text-slate-400 mb-3">Media Files</span>
                     <?= parseLinks($intakeDetail['media_files_url']) ?>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <?php elseif ($page === 'lead-detail' && $leadDetail): ?>
+    <!-- ═══ LEAD DETAIL ═══ -->
+    <div class="mb-6">
+        <a href="?page=leads" class="inline-flex items-center gap-2 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 transition font-medium text-sm shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Back to Leads
+        </a>
+    </div>
+    <div class="mb-8">
+        <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Lead Details</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Full record for <strong><?= renderValue($leadDetail['full_name']) ?></strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Step 1: Contact & Business Info -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-slate-50 dark:bg-slate-950/50 p-4 border-b border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-xs">Step 1 &mdash; Contact & Business Info</h2>
+            </div>
+            <div class="p-5 space-y-4">
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Full Name</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['full_name']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email</span><div class="text-sm font-medium detail-text"><a href="mailto:<?= htmlspecialchars($leadDetail['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($leadDetail['email']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Phone Number</span><div class="text-sm font-medium detail-text"><a href="tel:<?= htmlspecialchars($leadDetail['phone_number'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($leadDetail['phone_number']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Name</span><div class="text-sm font-bold detail-text text-blue-600 dark:text-blue-400"><?= renderValue($leadDetail['business_name']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Category</span>
+                    <span class="inline-block bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 px-2.5 py-1 rounded text-xs font-medium border border-blue-200 dark:border-blue-500/20"><?= renderValue($leadDetail['business_category']) ?></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Project Details -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-slate-50 dark:bg-slate-950/50 p-4 border-b border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-xs">Step 2 &mdash; Project Details</h2>
+            </div>
+            <div class="p-5 space-y-4">
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Project Budget</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['project_budget']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Primary Goals</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['primary_goals']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Additional Requirements / Notes</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['additional_requirements']) ?></div></div>
+                <div class="pt-2 border-t border-slate-100 dark:border-slate-800/50"><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Submitted At</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['created_at']) ?></div></div>
             </div>
         </div>
     </div>
