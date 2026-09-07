@@ -134,6 +134,15 @@ if ($page === 'lead-detail' && isset($_GET['id'])) {
     if (!$leadDetail) { $page = 'leads'; }
 }
 
+// ── SURVEY DETAIL ──
+$surveyDetail = null;
+if ($page === 'survey-detail' && isset($_GET['id'])) {
+    $stmt = $pdo->prepare("SELECT * FROM survey_responses WHERE id = ?");
+    $stmt->execute([$_GET['id']]);
+    $surveyDetail = $stmt->fetch();
+    if (!$surveyDetail) { $page = 'surveys'; }
+}
+
 function parseLinks($value) {
     if (empty($value)) return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
     if ($value === 'Array' || $value === '[]') return '<span class="text-slate-400 dark:text-slate-500 italic">N/A</span>';
@@ -167,6 +176,7 @@ $pageTitles = [
     'leads' => 'Landing Page Leads',
     'lead-detail' => 'Lead Details',
     'surveys' => 'Visibility Surveys',
+    'survey-detail' => 'Survey Details',
     'intake' => 'Intake Submissions',
     'transactions' => 'Transactions',
     'intake-detail' => 'Submission Details',
@@ -246,7 +256,7 @@ $pageTitles = [
     <nav class="flex-1 overflow-y-auto p-3 space-y-1">
         <?php foreach ($navItems as $item): ?>
             <?php
-                $active = ($page === $item['key']) || ($page === 'intake-detail' && $item['key'] === 'intake') || ($page === 'lead-detail' && $item['key'] === 'leads');
+                $active = ($page === $item['key']) || ($page === 'intake-detail' && $item['key'] === 'intake') || ($page === 'lead-detail' && $item['key'] === 'leads') || ($page === 'survey-detail' && $item['key'] === 'surveys');
                 $activeClass = $active ? 'bg-blue-50 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 font-semibold border border-blue-200 dark:border-blue-500/20' : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800/60 border border-transparent';
             ?>
             <a href="?page=<?= $item['key'] ?>" class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-xs transition <?= $activeClass ?>">
@@ -414,7 +424,7 @@ $pageTitles = [
             <table class="w-full text-left text-xs text-slate-700 dark:text-slate-300">
                 <thead class="bg-slate-100 dark:bg-slate-950 text-slate-500 dark:text-slate-400 uppercase font-bold border-b border-slate-200 dark:border-slate-800">
                     <tr>
-                        <th class="p-4">Date</th><th class="p-4">Full Name</th><th class="p-4">Business</th><th class="p-4">Phone</th><th class="p-4">Type</th><th class="p-4">Rating</th>
+                        <th class="p-4">Date</th><th class="p-4">Full Name</th><th class="p-4">Business</th><th class="p-4">Phone</th><th class="p-4">Type</th><th class="p-4">Rating</th><th class="p-4">Action</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-200 dark:divide-slate-800/50">
@@ -426,9 +436,10 @@ $pageTitles = [
                         <td class="p-4"><a href="tel:<?= htmlspecialchars($survey['phone_number']) ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= htmlspecialchars($survey['phone_number']) ?></a></td>
                         <td class="p-4"><span class="bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2 py-0.5 rounded text-[10px] font-medium border border-emerald-200 dark:border-emerald-500/20"><?= htmlspecialchars($survey['business_type']) ?></span></td>
                         <td class="p-4 text-amber-500 dark:text-amber-400 font-semibold"><?= htmlspecialchars($survey['online_presence_rating']) ?></td>
+                        <td class="p-4"><a href="?page=survey-detail&id=<?= $survey['id'] ?>" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-white px-3 py-1.5 rounded-md transition text-[11px] font-semibold border border-slate-300 dark:border-slate-700">View Details</a></td>
                     </tr>
                     <?php endforeach; ?>
-                    <?php if (empty($surveys)): ?><tr><td colspan="6" class="p-8 text-center text-slate-400">No survey submissions recorded yet.</td></tr><?php endif; ?>
+                    <?php if (empty($surveys)): ?><tr><td colspan="7" class="p-8 text-center text-slate-400">No survey submissions recorded yet.</td></tr><?php endif; ?>
                 </tbody>
             </table>
         </div>
@@ -654,6 +665,89 @@ $pageTitles = [
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Primary Goals</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['primary_goals']) ?></div></div>
                 <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Additional Requirements / Notes</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['additional_requirements']) ?></div></div>
                 <div class="pt-2 border-t border-slate-100 dark:border-slate-800/50"><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Submitted At</span><div class="text-sm font-medium detail-text"><?= renderValue($leadDetail['created_at']) ?></div></div>
+            </div>
+        </div>
+    </div>
+
+    <?php elseif ($page === 'survey-detail' && $surveyDetail): ?>
+    <!-- ═══ SURVEY DETAIL ═══ -->
+    <div class="mb-6">
+        <a href="?page=surveys" class="inline-flex items-center gap-2 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 px-4 py-2 rounded-lg border border-slate-200 dark:border-slate-800 transition font-medium text-sm shadow-sm">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+            Back to Visibility Surveys
+        </a>
+    </div>
+    <div class="mb-8">
+        <h1 class="text-2xl font-extrabold text-slate-900 dark:text-white tracking-tight">Survey Details</h1>
+        <p class="text-sm text-slate-500 dark:text-slate-400 mt-1">Full response from <strong><?= renderValue($surveyDetail['full_name']) ?></strong> &mdash; <strong><?= renderValue($surveyDetail['business_name']) ?></strong></p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Contact & Business Info -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-slate-50 dark:bg-slate-950/50 p-4 border-b border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-xs">Contact & Business Info</h2>
+            </div>
+            <div class="p-5 space-y-4">
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Full Name</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['full_name']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Email</span><div class="text-sm font-medium detail-text"><a href="mailto:<?= htmlspecialchars($surveyDetail['email'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($surveyDetail['email']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Phone Number</span><div class="text-sm font-medium detail-text"><a href="tel:<?= htmlspecialchars($surveyDetail['phone_number'] ?? '') ?>" class="text-blue-600 dark:text-blue-400 hover:underline"><?= renderValue($surveyDetail['phone_number']) ?></a></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Name</span><div class="text-sm font-bold detail-text text-blue-600 dark:text-blue-400"><?= renderValue($surveyDetail['business_name']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Business Type</span>
+                    <span class="inline-block bg-emerald-50 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded text-xs font-medium border border-emerald-200 dark:border-emerald-500/20"><?= renderValue($surveyDetail['business_type']) ?></span>
+                </div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">City</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['city']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Years in Business</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['years_in_business']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Employees</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['employees']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Monthly Enquiries</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['monthly_enquiries']) ?></div></div>
+            </div>
+        </div>
+
+        <!-- Step 1 & 2: Online Visibility & Marketing -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden">
+            <div class="bg-slate-50 dark:bg-slate-950/50 p-4 border-b border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-xs">Online Visibility & Marketing</h2>
+            </div>
+            <div class="p-5 space-y-4">
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Active Platforms</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['active_platforms']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Customer Source</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['customer_source']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Lead Importance</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['lead_importance']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Paid Ads</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['paid_ads']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Has Website</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['has_website']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Website Use</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['website_use']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Website Satisfaction</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['website_satisfaction']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">No Website Reason</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['no_website_reason']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Enquiry Process</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['enquiry_process']) ?></div></div>
+                <div><span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Response Speed</span><div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['response_speed']) ?></div></div>
+            </div>
+        </div>
+
+        <!-- Step 3 & 4: Challenges, Preferences & Feedback -->
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-sm overflow-hidden lg:col-span-2">
+            <div class="bg-slate-50 dark:bg-slate-950/50 p-4 border-b border-slate-200 dark:border-slate-800">
+                <h2 class="font-bold text-slate-800 dark:text-slate-200 uppercase tracking-wider text-xs">Challenges, Preferences & Feedback</h2>
+            </div>
+            <div class="p-5 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-slate-50/50 dark:bg-slate-950/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                    <span class="block text-[10px] uppercase font-bold text-blue-600 dark:text-blue-500 mb-2">Biggest Challenge</span>
+                    <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed detail-text"><?= renderValue($surveyDetail['biggest_challenge']) ?></div>
+                </div>
+                <div class="bg-slate-50/50 dark:bg-slate-950/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                    <span class="block text-[10px] uppercase font-bold text-blue-600 dark:text-blue-500 mb-2">Improvements</span>
+                    <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed detail-text"><?= renderValue($surveyDetail['improvements']) ?></div>
+                </div>
+                <div class="bg-slate-50/50 dark:bg-slate-950/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                    <span class="block text-[10px] uppercase font-bold text-blue-600 dark:text-blue-500 mb-2">Online Presence Rating</span>
+                    <div class="text-lg font-bold text-amber-500 dark:text-amber-400 detail-text"><?= renderValue($surveyDetail['online_presence_rating']) ?></div>
+                </div>
+                <div class="bg-slate-50/50 dark:bg-slate-950/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800/50">
+                    <span class="block text-[10px] uppercase font-bold text-blue-600 dark:text-blue-500 mb-2">Additional Feedback</span>
+                    <div class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed detail-text"><?= renderValue($surveyDetail['additional_feedback']) ?></div>
+                </div>
+                <div class="md:col-span-2 pt-2 border-t border-slate-100 dark:border-slate-800/50">
+                    <span class="block text-[10px] uppercase font-bold text-slate-400 mb-1">Submitted At</span>
+                    <div class="text-sm font-medium detail-text"><?= renderValue($surveyDetail['submitted_at']) ?></div>
+                </div>
             </div>
         </div>
     </div>
