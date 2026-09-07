@@ -10,7 +10,7 @@ define('ADMIN_PASSWORD', 'pmadmin');
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
     unset($_SESSION['admin_logged_in']);
     session_destroy();
-    header("Location: admin.php");
+    header("Location: padmin");
     exit();
 }
 
@@ -18,7 +18,7 @@ $login_error = '';
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['password'])) {
     if ($_POST['password'] === ADMIN_PASSWORD) {
         $_SESSION['admin_logged_in'] = true;
-        header("Location: admin.php");
+        header("Location: padmin");
         exit();
     } else {
         $login_error = 'Invalid password provided.';
