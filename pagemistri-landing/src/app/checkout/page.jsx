@@ -93,24 +93,35 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     setIsClient(true);
-    const saved = localStorage.getItem("pagemistri_onboarding");
-    if (saved) {
-      try {
-        reset(JSON.parse(saved));
-      } catch (e) {
-        console.error("Failed to parse saved form data", e);
-      }
-    }
+    localStorage.removeItem("pagemistri_onboarding");
+    sessionStorage.removeItem("pagemistri_onboarding");
+    localStorage.removeItem("checkout_form_data");
+    sessionStorage.removeItem("checkout_form_data");
+    reset({
+      fullName: "",
+      email: "",
+      businessName: "",
+      hasDomain: "No",
+      domainDetails: "",
+      countryCode: "+91",
+      phone: "",
+      businessAddress: "",
+      socialInstagram: "",
+      socialFacebook: "",
+      socialLinkedIn: "",
+      brandColor: "#4400AF",
+      aboutBusiness: "",
+      targetOffering: "",
+      offeringDetails: "",
+      uspBenefits: "",
+      testimonialsPricing: "",
+      logoUrl: "",
+      formRequirementsDocUrl: "",
+      extraDocsUrl: "",
+      mediaFilesUrl: "",
+      paymentGatewayRequested: "No",
+    });
   }, [reset]);
-
-  useEffect(() => {
-    if (isClient) {
-      const subscription = watch((value) => {
-        localStorage.setItem("pagemistri_onboarding", JSON.stringify(value));
-      });
-      return () => subscription.unsubscribe();
-    }
-  }, [watch, isClient]);
 
   const stepFields = {
     1: ["fullName", "email", "businessName", "phone", "businessAddress", "domainDetails"],
@@ -343,7 +354,7 @@ export default function CheckoutPage() {
               <div className="bg-white rounded-xl border border-slate-200 shadow-sm p-4 sm:p-6 relative overflow-hidden">
                 <AnimatePresence mode="wait">
                   <motion.div key={currentStep} variants={formVariants} initial="initial" animate="animate" exit="exit" transition={{ duration: 0.3 }} className="w-full">
-                    <form className="flex flex-col relative" onSubmit={handleNext}>
+                    <form className="flex flex-col relative" onSubmit={handleNext} autoComplete="off">
                       
                       {currentStep === 1 && (
                         <div className="w-full block">
@@ -356,19 +367,19 @@ export default function CheckoutPage() {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                               <div>
                                 <label className="block text-sm font-semibold text-slate-700 mb-1">Full Name *</label>
-                                <input type="text" {...register("fullName")} className={getInputClass("fullName")} placeholder="John Doe" />
+                                <input type="text" {...register("fullName")} autoComplete="off" className={getInputClass("fullName")} placeholder="John Doe" />
                                 {renderError("fullName")}
                               </div>
                               <div>
                                 <label className="block text-sm font-semibold text-slate-700 mb-1">Email Address *</label>
-                                <input type="email" {...register("email")} className={getInputClass("email")} placeholder="john@example.com" />
+                                <input type="email" {...register("email")} autoComplete="off" className={getInputClass("email")} placeholder="john@example.com" />
                                 {renderError("email")}
                               </div>
                             </div>
 
                             <div>
                               <label className="block text-sm font-semibold text-slate-700 mb-1">Business Name *</label>
-                              <input type="text" {...register("businessName")} className={getInputClass("businessName")} placeholder="e.g. Acme Corp" />
+                                <input type="text" {...register("businessName")} autoComplete="off" className={getInputClass("businessName")} placeholder="e.g. Acme Corp" />
                               {renderError("businessName")}
                             </div>
 
@@ -384,7 +395,7 @@ export default function CheckoutPage() {
                                   <span className="text-sm font-semibold text-slate-700">I don't have one</span>
                                 </label>
                               </div>
-                              <input type="text" {...register("domainDetails")} className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "No" ? "Enter preferred domain name, e.g., mybusiness.com" : "e.g., mybusiness.com"} />
+                              <input type="text" {...register("domainDetails")} autoComplete="off" className={getInputClass("domainDetails")} placeholder={formData.hasDomain === "No" ? "Enter preferred domain name, e.g., mybusiness.com" : "e.g., mybusiness.com"} />
                               {renderError("domainDetails")}
                             </div>
 
@@ -402,13 +413,13 @@ export default function CheckoutPage() {
                                     <option value="+971">🇦🇪 +971</option>
                                     <option value="+61">🇦🇺 +61</option>
                                   </select>
-                                  <input type="tel" {...register("phone")} onInput={(e) => { e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10); }} className="w-full px-4 py-3.5 bg-transparent focus:outline-none" placeholder="9876543210" />
+                                  <input type="tel" {...register("phone")} autoComplete="off" onInput={(e) => { e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 10); }} className="w-full px-4 py-3.5 bg-transparent focus:outline-none" placeholder="9876543210" />
                                 </div>
                                 {renderError("phone")}
                               </div>
                               <div>
                                 <label className="block text-sm font-semibold text-slate-700 mb-1">Business Address *</label>
-                                <input type="text" {...register("businessAddress")} className={getInputClass("businessAddress")} placeholder="City, State" />
+                                <input type="text" {...register("businessAddress")} autoComplete="off" className={getInputClass("businessAddress")} placeholder="City, State" />
                                 {renderError("businessAddress")}
                               </div>
                             </div>
