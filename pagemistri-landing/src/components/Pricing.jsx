@@ -159,6 +159,7 @@ const Pricing = () => {
                     ))}
                   </ul>
                 </div>
+                
      </motion.div>
 
               {/* Card 2: Hosted on Your Brand */}
@@ -194,6 +195,7 @@ const Pricing = () => {
                     ))}
                   </ul>
                 </div>
+
 </motion.div>
             </div>
 
