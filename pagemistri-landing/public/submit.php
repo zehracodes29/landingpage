@@ -39,26 +39,39 @@ $fields = [
     'social_links', 'logo_url', 'brand_color', 'about_business', 'target_offering',
     'offering_details', 'usp_benefits', 'testimonials_pricing', 'form_requirements_doc_url',
     'extra_docs_url', 'media_files_url', 'payment_gateway_requested', 'razorpay_order_id',
-    'razorpay_payment_id', 'payment_status'
+    'razorpay_payment_id', 'payment_status', 'amount'
 ];
 
 $insertFields = implode(", ", $fields);
 $placeholders = implode(", ", array_map(function($f) { return ":$f"; }, $fields));
 
-$sql = "INSERT INTO intake_submissions ($insertFields) VALUES ($placeholders)";
+$sql = "INSERT INTO intake_submissions ($insertFields, created_at) VALUES ($placeholders, NOW())";
 
 try {
     $stmt = $pdo->prepare($sql);
-    
+
     $params = [];
     foreach ($fields as $field) {
         $params[":$field"] = $data[$field] ?? null;
     }
-    
+
+    if (!empty($data['razorpay_payment_id'])) {
+        $params[':payment_status'] = 'Success';
+    }
+    if (!isset($data['amount']) || $data['amount'] === null || $data['amount'] === '') {
+        $params[':amount'] = 5000.00;
+    }
+
     $stmt->execute($params);
-    
+
+    $transactionId = $data['razorpay_payment_id'] ?? null;
+
     http_response_code(200);
-    echo json_encode(["status" => "success", "message" => "Data saved successfully"]);
+    echo json_encode([
+        "status" => "success",
+        "message" => "Data saved successfully",
+        "transaction_id" => $transactionId
+    ]);
 } catch (PDOException $e) {
     http_response_code(500);
     echo json_encode(["status" => "error", "message" => "Insertion failed: " . $e->getMessage()]);

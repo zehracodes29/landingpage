@@ -39,8 +39,8 @@ $stmt = $conn->prepare("INSERT INTO intake_submissions (
     social_links, logo_url, brand_color, about_business, target_offering,
     offering_details, usp_benefits, testimonials_pricing, form_requirements_doc_url,
     extra_docs_url, media_files_url, payment_gateway_requested, razorpay_order_id,
-    razorpay_payment_id, payment_status
-) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    razorpay_payment_id, payment_status, amount, created_at
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())");
 
 $full_name = $data['full_name'] ?? '';
 $business_name = $data['business_name'] ?? '';
@@ -62,19 +62,25 @@ $media_files_url = $data['media_files_url'] ?? '';
 $payment_gateway_requested = $data['payment_gateway_requested'] ?? 'No';
 $razorpay_order_id = $data['razorpay_order_id'] ?? '';
 $razorpay_payment_id = $data['razorpay_payment_id'] ?? '';
-$payment_status = $data['payment_status'] ?? 'Completed';
+$payment_status = !empty($razorpay_payment_id) ? 'Success' : ($data['payment_status'] ?? 'Pending');
+$amount = $data['amount'] ?? 5000.00;
 
 $stmt->bind_param(
-    "sssssssssssssssssssss",
+    "sssssssssssssssssssssss",
     $full_name, $business_name, $phone, $email, $business_address, $domain_details,
     $social_links, $logo_url, $brand_color, $about_business, $target_offering,
     $offering_details, $usp_benefits, $testimonials_pricing, $form_requirements_doc_url,
     $extra_docs_url, $media_files_url, $payment_gateway_requested, $razorpay_order_id,
-    $razorpay_payment_id, $payment_status
+    $razorpay_payment_id, $payment_status, $amount
 );
 
 if ($stmt->execute()) {
-    echo json_encode(["status" => "success", "message" => "Data saved successfully!"]);
+    $transactionId = !empty($razorpay_payment_id) ? $razorpay_payment_id : null;
+    echo json_encode([
+        "status" => "success",
+        "message" => "Data saved successfully!",
+        "transaction_id" => $transactionId
+    ]);
 } else {
     echo json_encode(["status" => "error", "message" => "Execute failed: " . $stmt->error]);
 }
