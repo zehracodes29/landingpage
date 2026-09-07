@@ -663,7 +663,7 @@ $pageTitles = [
 
     <?php elseif ($page === 'transactions'): ?>
     <!-- ═══ TRANSACTIONS PAGE ═══ -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Total Revenue</p>
             <span class="text-3xl font-extrabold text-emerald-600 dark:text-emerald-400">&#8377;<?= number_format($txTotalRevenue, 0) ?></span>
@@ -675,10 +675,6 @@ $pageTitles = [
         <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Today's Revenue</p>
             <span class="text-3xl font-extrabold text-blue-600 dark:text-blue-400">&#8377;<?= number_format($txTodayRevenue, 0) ?></span>
-        </div>
-        <div class="bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
-            <p class="text-[10px] font-semibold text-slate-500 dark:text-slate-400 uppercase tracking-wider mb-2">Avg. Order Value</p>
-            <span class="text-3xl font-extrabold text-amber-500 dark:text-amber-400">&#8377;<?= number_format($txAvgOrder, 0) ?></span>
         </div>
     </div>
     <div class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
