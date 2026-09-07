@@ -159,16 +159,7 @@ const Pricing = () => {
                     ))}
                   </ul>
                 </div>
-
-                <a 
-                  href="https://pagemistri.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full mt-4 border-2 border-[#4400AF] text-[#4400AF] font-bold py-2.5 text-sm rounded-2xl hover:bg-[rgba(68,0,175,0.05)] transition-all active:scale-95 block text-center"
-                >
-                  Get started
-                </a>
-              </motion.div>
+     </motion.div>
 
               {/* Card 2: Hosted on Your Brand */}
               <motion.div 
@@ -203,16 +194,7 @@ const Pricing = () => {
                     ))}
                   </ul>
                 </div>
-
-                <a 
-                  href="https://pagemistri.com/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full mt-4 bg-[#4400AF] hover:bg-[#310080] text-white font-bold py-2.5 text-sm rounded-2xl shadow-md transition-all active:scale-95 block text-center"
-                >
-                  Get started
-                </a>
-              </motion.div>
+</motion.div>
             </div>
 
             {/* Bottom Help Link */}
