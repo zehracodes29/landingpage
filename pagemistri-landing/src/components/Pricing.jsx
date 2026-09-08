@@ -101,6 +101,8 @@ const Pricing = () => {
               Don't want to pay this much?{' '}
               <a 
                 href="https://pagemistri.com/" 
+                target="_blank"
+                rel="noopener noreferrer"
                 className="text-[#4400AF] font-bold underline underline-offset-4 hover:text-[#4400AF] dark:hover:text-[#4400AF] transition-colors"
               >
                 Do it yourself →
