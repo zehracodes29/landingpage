@@ -100,7 +100,7 @@ const Pricing = () => {
             <div className="mt-3 pt-2 border-t border-slate-200/60 dark:border-slate-800/60 text-center text-xs text-[#6B7280] dark:text-slate-400">
               Don't want to pay this much?{' '}
               <a 
-                href="#step-2-pricing" 
+                href="https://pagemistri.com/" 
                 className="text-[#4400AF] font-bold underline underline-offset-4 hover:text-[#4400AF] dark:hover:text-[#4400AF] transition-colors"
               >
                 Do it yourself →
